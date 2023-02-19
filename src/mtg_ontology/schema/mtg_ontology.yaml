@@ -47,6 +47,7 @@ classes:
       - card_type
       - card_subtype
       - card_supertype
+      - rarity
 
   Spell:
     is_a: NamedThing
@@ -196,7 +197,6 @@ slots:
   rarity:
     description: An ability associated with a card.
     range: Rarity
-    required: true
   artist:
     range: string
     description: The artist who drew a card's illustration.
