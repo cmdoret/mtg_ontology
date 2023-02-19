@@ -4,7 +4,7 @@ An ontology describing Magic: The Gathering.
 
 ## Website
 
-* [https://cmdoret.github.io/mtg-ontology](https://cmdoret.github.io/mtg-ontology)
+* [https://cmdoret.net/mtg_ontology](https://cmdoret.net/mtg_ontology)
 
 ## Repository Structure
 
