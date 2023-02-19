@@ -1,0 +1,1445 @@
+{
+    "$defs": {
+        "Ability": {
+            "additionalProperties": false,
+            "description": "A card ability, activated, triggered or static.",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "rules_text": {
+                    "description": "The text describing what an ability does.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "Ability",
+            "type": "object"
+        },
+        "Action": {
+            "description": "An action taken by a player or card.",
+            "enum": [
+                "discard",
+                "draw",
+                "sacrifice",
+                "exile",
+                "fight",
+                "deal_damage"
+            ],
+            "title": "Action",
+            "type": "string"
+        },
+        "ActivatedAbility": {
+            "additionalProperties": false,
+            "description": "A card ability which can be activated for a cost.",
+            "properties": {
+                "additional_cost": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "An additional cost to play a card or ability."
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "rules_text": {
+                    "description": "The text describing what an ability does.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "ActivatedAbility",
+            "type": "object"
+        },
+        "Artifact": {
+            "additionalProperties": false,
+            "description": "A permanent representing a magical item, animated construct, or other objects and devices.",
+            "properties": {
+                "ability": {
+                    "description": "An ability associated with a card.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "additional_cost": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "An additional cost to play a card or ability."
+                },
+                "artist": {
+                    "description": "The artist who drew a card's illustration.",
+                    "type": "string"
+                },
+                "card_set": {
+                    "description": "A pool of cards released together and designed for the same play environment.",
+                    "type": "string"
+                },
+                "card_subtype": {
+                    "description": "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "card_supertype": {
+                    "description": "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "card_type": {
+                    "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
+                    "type": "string"
+                },
+                "color": {
+                    "description": "The color of a card.",
+                    "items": {
+                        "$ref": "#/$defs/Color"
+                    },
+                    "type": "array"
+                },
+                "converted_mana_cost": {
+                    "description": "The total mana cost for a card or ability, summed across all colors.",
+                    "type": "integer"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "flavor_text": {
+                    "description": "The lore text at the bottom of a card.",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "mana_cost": {
+                    "description": "A mana cost for a card or ability.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "type_line": {
+                    "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "color",
+                "type_line",
+                "card_type",
+                "id",
+                "name"
+            ],
+            "title": "Artifact",
+            "type": "object"
+        },
+        "Card": {
+            "additionalProperties": false,
+            "description": "A card in the Magic The Gathering game.",
+            "properties": {
+                "ability": {
+                    "description": "An ability associated with a card.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "additional_cost": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "An additional cost to play a card or ability."
+                },
+                "artist": {
+                    "description": "The artist who drew a card's illustration.",
+                    "type": "string"
+                },
+                "card_set": {
+                    "description": "A pool of cards released together and designed for the same play environment.",
+                    "type": "string"
+                },
+                "card_subtype": {
+                    "description": "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "card_supertype": {
+                    "description": "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "card_type": {
+                    "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
+                    "type": "string"
+                },
+                "color": {
+                    "description": "The color of a card.",
+                    "items": {
+                        "$ref": "#/$defs/Color"
+                    },
+                    "type": "array"
+                },
+                "converted_mana_cost": {
+                    "description": "The total mana cost for a card or ability, summed across all colors.",
+                    "type": "integer"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "flavor_text": {
+                    "description": "The lore text at the bottom of a card.",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "mana_cost": {
+                    "description": "A mana cost for a card or ability.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "type_line": {
+                    "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "color",
+                "type_line",
+                "card_type",
+                "id",
+                "name"
+            ],
+            "title": "Card",
+            "type": "object"
+        },
+        "CardCollection": {
+            "additionalProperties": false,
+            "description": "A collection of Cards, such as a Deck or cards set.",
+            "properties": {
+                "entries": {
+                    "additionalProperties": {
+                        "$ref": "#/$defs/Card__identifier_optional"
+                    },
+                    "description": "Members of the card collection.",
+                    "type": "object"
+                }
+            },
+            "title": "CardCollection",
+            "type": "object"
+        },
+        "Card__identifier_optional": {
+            "additionalProperties": false,
+            "description": "A card in the Magic The Gathering game.",
+            "properties": {
+                "ability": {
+                    "description": "An ability associated with a card.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "additional_cost": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "An additional cost to play a card or ability."
+                },
+                "artist": {
+                    "description": "The artist who drew a card's illustration.",
+                    "type": "string"
+                },
+                "card_set": {
+                    "description": "A pool of cards released together and designed for the same play environment.",
+                    "type": "string"
+                },
+                "card_subtype": {
+                    "description": "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "card_supertype": {
+                    "description": "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "card_type": {
+                    "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
+                    "type": "string"
+                },
+                "color": {
+                    "description": "The color of a card.",
+                    "items": {
+                        "$ref": "#/$defs/Color"
+                    },
+                    "type": "array"
+                },
+                "converted_mana_cost": {
+                    "description": "The total mana cost for a card or ability, summed across all colors.",
+                    "type": "integer"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "flavor_text": {
+                    "description": "The lore text at the bottom of a card.",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "mana_cost": {
+                    "description": "A mana cost for a card or ability.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "type_line": {
+                    "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "color",
+                "type_line",
+                "card_type",
+                "name"
+            ],
+            "title": "Card",
+            "type": "object"
+        },
+        "Color": {
+            "description": "A color, such as Black, Blue, Red, Green, White or Colorless.",
+            "enum": [
+                "black",
+                "blue",
+                "green",
+                "red",
+                "white",
+                "colorless"
+            ],
+            "title": "Color",
+            "type": "string"
+        },
+        "Cost": {
+            "additionalProperties": false,
+            "description": "The cost of a card or ability.",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "The numeric part of a quantitative value.",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "Cost",
+            "type": "object"
+        },
+        "Creature": {
+            "additionalProperties": false,
+            "description": "A card that represents a creature that can be summoned to the battlefield.",
+            "properties": {
+                "ability": {
+                    "description": "An ability associated with a card.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "additional_cost": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "An additional cost to play a card or ability."
+                },
+                "artist": {
+                    "description": "The artist who drew a card's illustration.",
+                    "type": "string"
+                },
+                "card_set": {
+                    "description": "A pool of cards released together and designed for the same play environment.",
+                    "type": "string"
+                },
+                "card_subtype": {
+                    "description": "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "card_supertype": {
+                    "description": "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "card_type": {
+                    "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
+                    "type": "string"
+                },
+                "color": {
+                    "description": "The color of a card.",
+                    "items": {
+                        "$ref": "#/$defs/Color"
+                    },
+                    "type": "array"
+                },
+                "converted_mana_cost": {
+                    "description": "The total mana cost for a card or ability, summed across all colors.",
+                    "type": "integer"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "flavor_text": {
+                    "description": "The lore text at the bottom of a card.",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "mana_cost": {
+                    "description": "A mana cost for a card or ability.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "power": {
+                    "description": "The amount of damage dealt in combat. This is the first number in the lower right corner of a creature card.",
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "toughness": {
+                    "description": "The amount of damage needed to destroy a creature. This is the second number in the lower right corner of a creature card.",
+                    "minimum": 0,
+                    "type": "integer"
+                },
+                "type_line": {
+                    "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "power",
+                "toughness",
+                "color",
+                "type_line",
+                "card_type",
+                "id",
+                "name"
+            ],
+            "title": "Creature",
+            "type": "object"
+        },
+        "Enchantment": {
+            "additionalProperties": false,
+            "description": "A permanent which applies persistent magical effects.",
+            "properties": {
+                "ability": {
+                    "description": "An ability associated with a card.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "additional_cost": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "An additional cost to play a card or ability."
+                },
+                "artist": {
+                    "description": "The artist who drew a card's illustration.",
+                    "type": "string"
+                },
+                "card_set": {
+                    "description": "A pool of cards released together and designed for the same play environment.",
+                    "type": "string"
+                },
+                "card_subtype": {
+                    "description": "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "card_supertype": {
+                    "description": "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "card_type": {
+                    "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
+                    "type": "string"
+                },
+                "color": {
+                    "description": "The color of a card.",
+                    "items": {
+                        "$ref": "#/$defs/Color"
+                    },
+                    "type": "array"
+                },
+                "converted_mana_cost": {
+                    "description": "The total mana cost for a card or ability, summed across all colors.",
+                    "type": "integer"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "flavor_text": {
+                    "description": "The lore text at the bottom of a card.",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "mana_cost": {
+                    "description": "A mana cost for a card or ability.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "type_line": {
+                    "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "color",
+                "type_line",
+                "card_type",
+                "id",
+                "name"
+            ],
+            "title": "Enchantment",
+            "type": "object"
+        },
+        "Event": {
+            "additionalProperties": false,
+            "description": "A combination of circumstances during a game.",
+            "properties": {
+                "action": {
+                    "$ref": "#/$defs/Action",
+                    "description": "An action taken by a player or card."
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "source": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Player"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "The entity responsible for an action."
+                },
+                "target": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Player"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "The entity targeted by an action."
+                }
+            },
+            "required": [
+                "action",
+                "id",
+                "name"
+            ],
+            "title": "Event",
+            "type": "object"
+        },
+        "Instant": {
+            "additionalProperties": false,
+            "description": "A card that represents an instant spell that can be cast.",
+            "properties": {
+                "ability": {
+                    "description": "An ability associated with a card.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "additional_cost": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "An additional cost to play a card or ability."
+                },
+                "artist": {
+                    "description": "The artist who drew a card's illustration.",
+                    "type": "string"
+                },
+                "card_set": {
+                    "description": "A pool of cards released together and designed for the same play environment.",
+                    "type": "string"
+                },
+                "card_subtype": {
+                    "description": "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "card_supertype": {
+                    "description": "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "card_type": {
+                    "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
+                    "type": "string"
+                },
+                "color": {
+                    "description": "The color of a card.",
+                    "items": {
+                        "$ref": "#/$defs/Color"
+                    },
+                    "type": "array"
+                },
+                "converted_mana_cost": {
+                    "description": "The total mana cost for a card or ability, summed across all colors.",
+                    "type": "integer"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "flavor_text": {
+                    "description": "The lore text at the bottom of a card.",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "mana_cost": {
+                    "description": "A mana cost for a card or ability.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "type_line": {
+                    "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "color",
+                "type_line",
+                "card_type",
+                "id",
+                "name"
+            ],
+            "title": "Instant",
+            "type": "object"
+        },
+        "KeywordAbility": {
+            "additionalProperties": false,
+            "description": "A passive ability represented by word that substitutes for a piece of rules text, such as deathtouch or flying.",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "rules_text": {
+                    "description": "The text describing what an ability does.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name",
+                "id"
+            ],
+            "title": "KeywordAbility",
+            "type": "object"
+        },
+        "Land": {
+            "additionalProperties": false,
+            "description": "A card that represents a land that can be tapped for mana.",
+            "properties": {
+                "ability": {
+                    "description": "An ability associated with a card.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "additional_cost": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "An additional cost to play a card or ability."
+                },
+                "artist": {
+                    "description": "The artist who drew a card's illustration.",
+                    "type": "string"
+                },
+                "card_set": {
+                    "description": "A pool of cards released together and designed for the same play environment.",
+                    "type": "string"
+                },
+                "card_subtype": {
+                    "description": "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "card_supertype": {
+                    "description": "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "card_type": {
+                    "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
+                    "type": "string"
+                },
+                "color": {
+                    "description": "The color of a card.",
+                    "items": {
+                        "$ref": "#/$defs/Color"
+                    },
+                    "type": "array"
+                },
+                "converted_mana_cost": {
+                    "description": "The total mana cost for a card or ability, summed across all colors.",
+                    "type": "integer"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "flavor_text": {
+                    "description": "The lore text at the bottom of a card.",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "mana_cost": {
+                    "description": "A mana cost for a card or ability.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "type_line": {
+                    "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "color",
+                "type_line",
+                "card_type",
+                "id",
+                "name"
+            ],
+            "title": "Land",
+            "type": "object"
+        },
+        "LifeCost": {
+            "additionalProperties": false,
+            "description": "The life cost of a card or ability.",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "The numeric part of a quantitative value.",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "LifeCost",
+            "type": "object"
+        },
+        "ManaCost": {
+            "additionalProperties": false,
+            "description": "The mana cost of a card or ability.",
+            "properties": {
+                "color": {
+                    "description": "The color of a card.",
+                    "items": {
+                        "$ref": "#/$defs/Color"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "The numeric part of a quantitative value.",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "color",
+                "id",
+                "name"
+            ],
+            "title": "ManaCost",
+            "type": "object"
+        },
+        "NamedThing": {
+            "additionalProperties": false,
+            "description": "A generic grouping for any identifiable entity",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "NamedThing",
+            "type": "object"
+        },
+        "Permanent": {
+            "additionalProperties": false,
+            "description": "A card or token that can be put onto the battlefield.",
+            "properties": {
+                "ability": {
+                    "description": "An ability associated with a card.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "additional_cost": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "An additional cost to play a card or ability."
+                },
+                "artist": {
+                    "description": "The artist who drew a card's illustration.",
+                    "type": "string"
+                },
+                "card_set": {
+                    "description": "A pool of cards released together and designed for the same play environment.",
+                    "type": "string"
+                },
+                "card_subtype": {
+                    "description": "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "card_supertype": {
+                    "description": "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "card_type": {
+                    "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
+                    "type": "string"
+                },
+                "color": {
+                    "description": "The color of a card.",
+                    "items": {
+                        "$ref": "#/$defs/Color"
+                    },
+                    "type": "array"
+                },
+                "converted_mana_cost": {
+                    "description": "The total mana cost for a card or ability, summed across all colors.",
+                    "type": "integer"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "flavor_text": {
+                    "description": "The lore text at the bottom of a card.",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "mana_cost": {
+                    "description": "A mana cost for a card or ability.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "type_line": {
+                    "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "color",
+                "type_line",
+                "card_type",
+                "id",
+                "name"
+            ],
+            "title": "Permanent",
+            "type": "object"
+        },
+        "Player": {
+            "description": "One or more human players.",
+            "enum": [
+                "you",
+                "owner",
+                "controller",
+                "opponent",
+                "opponents",
+                "players"
+            ],
+            "title": "Player",
+            "type": "string"
+        },
+        "Rarity": {
+            "description": "The rarity of the card, may be one of Common, Uncommon, Rare or Mythic.",
+            "enum": [
+                "common",
+                "uncommon",
+                "rare",
+                "mythic"
+            ],
+            "title": "Rarity",
+            "type": "string"
+        },
+        "Sorcery": {
+            "additionalProperties": false,
+            "description": "A card that represents a sorcery spell that can be cast.",
+            "properties": {
+                "ability": {
+                    "description": "An ability associated with a card.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "additional_cost": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "An additional cost to play a card or ability."
+                },
+                "artist": {
+                    "description": "The artist who drew a card's illustration.",
+                    "type": "string"
+                },
+                "card_set": {
+                    "description": "A pool of cards released together and designed for the same play environment.",
+                    "type": "string"
+                },
+                "card_subtype": {
+                    "description": "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "card_supertype": {
+                    "description": "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "card_type": {
+                    "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
+                    "type": "string"
+                },
+                "color": {
+                    "description": "The color of a card.",
+                    "items": {
+                        "$ref": "#/$defs/Color"
+                    },
+                    "type": "array"
+                },
+                "converted_mana_cost": {
+                    "description": "The total mana cost for a card or ability, summed across all colors.",
+                    "type": "integer"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "flavor_text": {
+                    "description": "The lore text at the bottom of a card.",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "mana_cost": {
+                    "description": "A mana cost for a card or ability.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "type_line": {
+                    "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "color",
+                "type_line",
+                "card_type",
+                "id",
+                "name"
+            ],
+            "title": "Sorcery",
+            "type": "object"
+        },
+        "Spell": {
+            "additionalProperties": false,
+            "description": "An object on the stack. Either a card that has been cast, or a copy.",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "Spell",
+            "type": "object"
+        },
+        "StaticAbility": {
+            "additionalProperties": false,
+            "description": "A card ability which remains active until endgame once put into effect.",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "rules_text": {
+                    "description": "The text describing what an ability does.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "StaticAbility",
+            "type": "object"
+        },
+        "Token": {
+            "additionalProperties": false,
+            "description": "A permanent that is not represented by a regular card and does not have a casting cost.",
+            "properties": {
+                "ability": {
+                    "description": "An ability associated with a card.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "additional_cost": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "An additional cost to play a card or ability."
+                },
+                "artist": {
+                    "description": "The artist who drew a card's illustration.",
+                    "type": "string"
+                },
+                "card_set": {
+                    "description": "A pool of cards released together and designed for the same play environment.",
+                    "type": "string"
+                },
+                "card_subtype": {
+                    "description": "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "card_supertype": {
+                    "description": "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "card_type": {
+                    "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
+                    "type": "string"
+                },
+                "color": {
+                    "description": "The color of a card.",
+                    "items": {
+                        "$ref": "#/$defs/Color"
+                    },
+                    "type": "array"
+                },
+                "converted_mana_cost": {
+                    "description": "The total mana cost for a card or ability, summed across all colors.",
+                    "type": "integer"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "flavor_text": {
+                    "description": "The lore text at the bottom of a card.",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "mana_cost": {
+                    "description": "A mana cost for a card or ability.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "type_line": {
+                    "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "color",
+                "type_line",
+                "card_type",
+                "id",
+                "name"
+            ],
+            "title": "Token",
+            "type": "object"
+        },
+        "TriggeredAbility": {
+            "additionalProperties": false,
+            "description": "A card ability, triggered by an event.",
+            "properties": {
+                "condition": {
+                    "description": "A condition required for an activation.",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "rules_text": {
+                    "description": "The text describing what an ability does.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "TriggeredAbility",
+            "type": "object"
+        }
+    },
+    "$id": "https://w3id.org/cmdoret/mtg-ontology",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "additionalProperties": true,
+    "metamodel_version": "1.7.0",
+    "properties": {
+        "entries": {
+            "additionalProperties": {
+                "$ref": "#/$defs/Card__identifier_optional"
+            },
+            "description": "Members of the card collection.",
+            "type": "object"
+        }
+    },
+    "title": "mtg-ontology",
+    "type": "object",
+    "version": null
+}

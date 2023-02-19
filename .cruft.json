@@ -1,0 +1,27 @@
+{
+  "template": "https://github.com/linkml/linkml-project-cookiecutter",
+  "commit": "cb2bc691e458ff89c2330d83c753d0044fa6bd4d",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "project_name": "mtg-ontology",
+      "__project_slug": "mtg_ontology",
+      "github_org": "cmdoret",
+      "__source_path": "src/mtg_ontology/schema/mtg_ontology.yaml",
+      "project_description": "An ontology describing Magic: The Gathering.",
+      "full_name": "Cyril Matthey-Doret",
+      "email": "cmdoret@mailbox.org",
+      "__author": "Cyril Matthey-Doret <cmdoret@mailbox.org>",
+      "license": "GNU GPL v3.0",
+      "main_schema_class": "Card",
+      "create_python_classes": "Yes",
+      "use_schemasheets": "No",
+      "google_sheet_id": "1wVoaiFg47aT9YWNeRfTZ8tYHN8s8PAuDx5i2HUcDpvQ",
+      "google_sheet_tabs": "personinfo enums",
+      "__google_sheet_module": "personinfo_enums",
+      "github_token_for_pypi_deployment": "PYPI_PASSWORD",
+      "_template": "https://github.com/linkml/linkml-project-cookiecutter"
+    }
+  },
+  "directory": null
+}

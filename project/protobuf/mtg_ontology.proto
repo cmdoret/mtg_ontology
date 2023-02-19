@@ -1,0 +1,269 @@
+// A card ability, activated, triggered or static.
+message Ability
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  string rulesText = 0
+ }
+// A card ability which can be activated for a cost.
+message ActivatedAbility
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  string rulesText = 0
+  string additionalCost = 0
+ }
+// A permanent representing a magical item, animated construct, or other objects and devices.
+message Artifact
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ repeated  ability ability = 0
+  string additionalCost = 0
+ repeated  manaCost manaCost = 0
+  integer convertedManaCost = 0
+ repeated  color color = 0
+  string cardSet = 0
+  string artist = 0
+  string flavorText = 0
+  string typeLine = 0
+  string cardType = 0
+ repeated  string cardSubtype = 0
+ repeated  string cardSupertype = 0
+ }
+// A card in the Magic The Gathering game.
+message Card
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ repeated  ability ability = 0
+  string additionalCost = 0
+ repeated  manaCost manaCost = 0
+  integer convertedManaCost = 0
+ repeated  color color = 0
+  string cardSet = 0
+  string artist = 0
+  string flavorText = 0
+  string typeLine = 0
+  string cardType = 0
+ repeated  string cardSubtype = 0
+ repeated  string cardSupertype = 0
+ }
+// A collection of Cards, such as a Deck or cards set.
+message CardCollection
+ {
+ repeated  card entries = 0
+ }
+// The cost of a card or ability.
+message Cost
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  integer value = 0
+ }
+// A card that represents a creature that can be summoned to the battlefield.
+message Creature
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ repeated  ability ability = 0
+  string additionalCost = 0
+ repeated  manaCost manaCost = 0
+  integer convertedManaCost = 0
+ repeated  color color = 0
+  string cardSet = 0
+  string artist = 0
+  string flavorText = 0
+  string typeLine = 0
+  string cardType = 0
+ repeated  string cardSubtype = 0
+ repeated  string cardSupertype = 0
+  integer power = 0
+  integer toughness = 0
+ }
+// A permanent which applies persistent magical effects.
+message Enchantment
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ repeated  ability ability = 0
+  string additionalCost = 0
+ repeated  manaCost manaCost = 0
+  integer convertedManaCost = 0
+ repeated  color color = 0
+  string cardSet = 0
+  string artist = 0
+  string flavorText = 0
+  string typeLine = 0
+  string cardType = 0
+ repeated  string cardSubtype = 0
+ repeated  string cardSupertype = 0
+ }
+// A combination of circumstances during a game.
+message Event
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  string source = 0
+  action action = 0
+  string target = 0
+ }
+// A card that represents an instant spell that can be cast.
+message Instant
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ repeated  ability ability = 0
+  string additionalCost = 0
+ repeated  manaCost manaCost = 0
+  integer convertedManaCost = 0
+ repeated  color color = 0
+  string cardSet = 0
+  string artist = 0
+  string flavorText = 0
+  string typeLine = 0
+  string cardType = 0
+ repeated  string cardSubtype = 0
+ repeated  string cardSupertype = 0
+ }
+// A passive ability represented by word that substitutes for a piece of rules text, such as deathtouch or flying.
+message KeywordAbility
+ {
+  uriorcurie id = 0
+  string description = 0
+  string rulesText = 0
+  string name = 0
+ }
+// A card that represents a land that can be tapped for mana.
+message Land
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ repeated  ability ability = 0
+  string additionalCost = 0
+ repeated  manaCost manaCost = 0
+  integer convertedManaCost = 0
+ repeated  color color = 0
+  string cardSet = 0
+  string artist = 0
+  string flavorText = 0
+  string typeLine = 0
+  string cardType = 0
+ repeated  string cardSubtype = 0
+ repeated  string cardSupertype = 0
+ }
+// The life cost of a card or ability.
+message LifeCost
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  integer value = 0
+ }
+// The mana cost of a card or ability.
+message ManaCost
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  integer value = 0
+ repeated  color color = 0
+ }
+// A generic grouping for any identifiable entity
+message NamedThing
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ }
+// A card or token that can be put onto the battlefield.
+message Permanent
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ repeated  ability ability = 0
+  string additionalCost = 0
+ repeated  manaCost manaCost = 0
+  integer convertedManaCost = 0
+ repeated  color color = 0
+  string cardSet = 0
+  string artist = 0
+  string flavorText = 0
+  string typeLine = 0
+  string cardType = 0
+ repeated  string cardSubtype = 0
+ repeated  string cardSupertype = 0
+ }
+// A card that represents a sorcery spell that can be cast.
+message Sorcery
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ repeated  ability ability = 0
+  string additionalCost = 0
+ repeated  manaCost manaCost = 0
+  integer convertedManaCost = 0
+ repeated  color color = 0
+  string cardSet = 0
+  string artist = 0
+  string flavorText = 0
+  string typeLine = 0
+  string cardType = 0
+ repeated  string cardSubtype = 0
+ repeated  string cardSupertype = 0
+ }
+// An object on the stack. Either a card that has been cast, or a copy.
+message Spell
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ }
+// A card ability which remains active until endgame once put into effect.
+message StaticAbility
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  string rulesText = 0
+ }
+// A permanent that is not represented by a regular card and does not have a casting cost.
+message Token
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ repeated  ability ability = 0
+  string additionalCost = 0
+ repeated  manaCost manaCost = 0
+  integer convertedManaCost = 0
+ repeated  color color = 0
+  string cardSet = 0
+  string artist = 0
+  string flavorText = 0
+  string typeLine = 0
+  string cardType = 0
+ repeated  string cardSubtype = 0
+ repeated  string cardSupertype = 0
+ }
+// A card ability, triggered by an event.
+message TriggeredAbility
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  string rulesText = 0
+  event condition = 0
+ }

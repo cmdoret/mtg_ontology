@@ -1,0 +1,269 @@
+type Ability
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+    rulesText: String
+  }
+
+type ActivatedAbility
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+    rulesText: String
+    additionalCost: String
+  }
+
+type Artifact
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+    ability: [Ability]
+    additionalCost: String
+    manaCost: [ManaCost]
+    convertedManaCost: Integer
+    color: [Color]!
+    cardSet: String
+    artist: String
+    flavorText: String
+    typeLine: String!
+    cardType: String!
+    cardSubtype: [String]
+    cardSupertype: [String]
+  }
+
+type Card
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+    ability: [Ability]
+    additionalCost: String
+    manaCost: [ManaCost]
+    convertedManaCost: Integer
+    color: [Color]!
+    cardSet: String
+    artist: String
+    flavorText: String
+    typeLine: String!
+    cardType: String!
+    cardSubtype: [String]
+    cardSupertype: [String]
+  }
+
+type CardCollection
+  {
+    entries: [Card]
+  }
+
+type Cost
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+    value: Integer
+  }
+
+type Creature
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+    ability: [Ability]
+    additionalCost: String
+    manaCost: [ManaCost]
+    convertedManaCost: Integer
+    color: [Color]!
+    cardSet: String
+    artist: String
+    flavorText: String
+    typeLine: String!
+    cardType: String!
+    cardSubtype: [String]
+    cardSupertype: [String]
+    power: Integer!
+    toughness: Integer!
+  }
+
+type Enchantment
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+    ability: [Ability]
+    additionalCost: String
+    manaCost: [ManaCost]
+    convertedManaCost: Integer
+    color: [Color]!
+    cardSet: String
+    artist: String
+    flavorText: String
+    typeLine: String!
+    cardType: String!
+    cardSubtype: [String]
+    cardSupertype: [String]
+  }
+
+type Event
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+    source: String
+    action: Action!
+    target: String
+  }
+
+type Instant
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+    ability: [Ability]
+    additionalCost: String
+    manaCost: [ManaCost]
+    convertedManaCost: Integer
+    color: [Color]!
+    cardSet: String
+    artist: String
+    flavorText: String
+    typeLine: String!
+    cardType: String!
+    cardSubtype: [String]
+    cardSupertype: [String]
+  }
+
+type KeywordAbility
+  {
+    id: Uriorcurie!
+    description: String
+    rulesText: String
+    name: String!
+  }
+
+type Land
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+    ability: [Ability]
+    additionalCost: String
+    manaCost: [ManaCost]
+    convertedManaCost: Integer
+    color: [Color]!
+    cardSet: String
+    artist: String
+    flavorText: String
+    typeLine: String!
+    cardType: String!
+    cardSubtype: [String]
+    cardSupertype: [String]
+  }
+
+type LifeCost
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+    value: Integer
+  }
+
+type ManaCost
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+    value: Integer
+    color: [Color]!
+  }
+
+type NamedThing
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+  }
+
+type Permanent
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+    ability: [Ability]
+    additionalCost: String
+    manaCost: [ManaCost]
+    convertedManaCost: Integer
+    color: [Color]!
+    cardSet: String
+    artist: String
+    flavorText: String
+    typeLine: String!
+    cardType: String!
+    cardSubtype: [String]
+    cardSupertype: [String]
+  }
+
+type Sorcery
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+    ability: [Ability]
+    additionalCost: String
+    manaCost: [ManaCost]
+    convertedManaCost: Integer
+    color: [Color]!
+    cardSet: String
+    artist: String
+    flavorText: String
+    typeLine: String!
+    cardType: String!
+    cardSubtype: [String]
+    cardSupertype: [String]
+  }
+
+type Spell
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+  }
+
+type StaticAbility
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+    rulesText: String
+  }
+
+type Token
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+    ability: [Ability]
+    additionalCost: String
+    manaCost: [ManaCost]
+    convertedManaCost: Integer
+    color: [Color]!
+    cardSet: String
+    artist: String
+    flavorText: String
+    typeLine: String!
+    cardType: String!
+    cardSubtype: [String]
+    cardSupertype: [String]
+  }
+
+type TriggeredAbility
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+    rulesText: String
+    condition: Event
+  }
+

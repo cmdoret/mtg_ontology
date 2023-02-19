@@ -1,0 +1,238 @@
+BASE <https://w3id.org/cmdoret/mtg-ontology/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX linkml: <https://w3id.org/linkml/>
+PREFIX schema: <http://schema.org/>
+
+
+linkml:String xsd:string
+
+linkml:Integer xsd:integer
+
+linkml:Boolean xsd:boolean
+
+linkml:Float xsd:float
+
+linkml:Double xsd:double
+
+linkml:Decimal xsd:decimal
+
+linkml:Time xsd:dateTime
+
+linkml:Date xsd:date
+
+linkml:Datetime xsd:dateTime
+
+linkml:DateOrDatetime linkml:DateOrDatetime
+
+linkml:Uriorcurie IRI
+
+linkml:Curie xsd:string
+
+linkml:Uri IRI
+
+linkml:Ncname xsd:string
+
+linkml:Objectidentifier IRI
+
+linkml:Nodeidentifier NONLITERAL
+
+<Ability>  (
+    CLOSED {
+       (  $<Ability_tes> (  &<NamedThing_tes> ;
+             rdf:type [ schema:Thing ] ? ;
+             <rules_text> @linkml:String ?
+          ) ;
+          rdf:type [ <Ability> ]
+       )
+    } OR @<ActivatedAbility> OR @<KeywordAbility> OR @<StaticAbility> OR @<TriggeredAbility>
+)
+
+<ActivatedAbility> CLOSED {
+    (  $<ActivatedAbility_tes> (  &<Ability_tes> ;
+          rdf:type [ <Ability> ] ? ;
+          <additional_cost> @linkml:String ?
+       ) ;
+       rdf:type [ <ActivatedAbility> ]
+    )
+}
+
+<Artifact> CLOSED {
+    (  $<Artifact_tes> (  &<Permanent_tes> ;
+          rdf:type [ <Permanent> ] ?
+       ) ;
+       rdf:type [ <Artifact> ]
+    )
+}
+
+<Card>  (
+    CLOSED {
+       (  $<Card_tes> (  &<NamedThing_tes> ;
+             rdf:type [ schema:Thing ] ? ;
+             <ability> @<Ability> * ;
+             <additional_cost> @linkml:String ? ;
+             <mana_cost> @<ManaCost> * ;
+             <converted_mana_cost> @linkml:Integer ? ;
+             <color> @<Color> + ;
+             <card_set> @linkml:String ? ;
+             <artist> @linkml:String ? ;
+             <flavor_text> @linkml:String ? ;
+             <type_line> @linkml:String ;
+             <card_type> @linkml:String ;
+             <card_subtype> @linkml:String * ;
+             <card_supertype> @linkml:String *
+          ) ;
+          rdf:type [ <Card> ]
+       )
+    } OR @<Instant> OR @<Permanent> OR @<Sorcery> OR @<Token>
+)
+
+<CardCollection> CLOSED {
+    (  $<CardCollection_tes> <entries> @<Card> * ;
+       rdf:type [ <CardCollection> ] ?
+    )
+}
+
+<Cost>  (
+    CLOSED {
+       (  $<Cost_tes> (  &<NamedThing_tes> ;
+             rdf:type [ schema:Thing ] ? ;
+             <value> @linkml:Integer ?
+          ) ;
+          rdf:type [ <Cost> ]
+       )
+    } OR @<LifeCost> OR @<ManaCost>
+)
+
+<Creature> CLOSED {
+    (  $<Creature_tes> (  &<Permanent_tes> ;
+          rdf:type [ <Permanent> ] ? ;
+          <power> @linkml:Integer ;
+          <toughness> @linkml:Integer
+       ) ;
+       rdf:type [ <Creature> ]
+    )
+}
+
+<Enchantment> CLOSED {
+    (  $<Enchantment_tes> (  &<Permanent_tes> ;
+          rdf:type [ <Permanent> ] ?
+       ) ;
+       rdf:type [ <Enchantment> ]
+    )
+}
+
+<Event> CLOSED {
+    (  $<Event_tes> (  &<NamedThing_tes> ;
+          rdf:type [ schema:Thing ] ? ;
+          <source> @linkml:String ? ;
+          <action> @<Action> ;
+          <target> @linkml:String ?
+       ) ;
+       rdf:type [ <Event> ]
+    )
+}
+
+<Instant> CLOSED {
+    (  $<Instant_tes> (  &<Card_tes> ;
+          rdf:type [ <Card> ] ?
+       ) ;
+       rdf:type [ <Instant> ]
+    )
+}
+
+<KeywordAbility> CLOSED {
+    (  $<KeywordAbility_tes> (  &<Ability_tes> ;
+          rdf:type [ <Ability> ] ?
+       ) ;
+       rdf:type [ <KeywordAbility> ]
+    )
+}
+
+<Land> CLOSED {
+    (  $<Land_tes> (  &<Permanent_tes> ;
+          rdf:type [ <Permanent> ] ?
+       ) ;
+       rdf:type [ <Land> ]
+    )
+}
+
+<LifeCost> CLOSED {
+    (  $<LifeCost_tes> (  &<Cost_tes> ;
+          rdf:type [ <Cost> ] ?
+       ) ;
+       rdf:type [ <LifeCost> ]
+    )
+}
+
+<ManaCost> CLOSED {
+    (  $<ManaCost_tes> (  &<Cost_tes> ;
+          rdf:type [ <Cost> ] ? ;
+          <color> @<Color> +
+       ) ;
+       rdf:type [ <ManaCost> ]
+    )
+}
+
+<NamedThing>  (
+    CLOSED {
+       (  $<NamedThing_tes> (  schema:name @linkml:String ;
+             schema:description @linkml:String ?
+          ) ;
+          rdf:type [ schema:Thing ]
+       )
+    } OR @<Ability> OR @<Card> OR @<Cost> OR @<Event> OR @<Spell>
+)
+
+<Permanent>  (
+    CLOSED {
+       (  $<Permanent_tes> (  &<Card_tes> ;
+             rdf:type [ <Card> ] ?
+          ) ;
+          rdf:type [ <Permanent> ]
+       )
+    } OR @<Artifact> OR @<Creature> OR @<Enchantment> OR @<Land>
+)
+
+<Sorcery> CLOSED {
+    (  $<Sorcery_tes> (  &<Card_tes> ;
+          rdf:type [ <Card> ] ?
+       ) ;
+       rdf:type [ <Sorcery> ]
+    )
+}
+
+<Spell> CLOSED {
+    (  $<Spell_tes> (  &<NamedThing_tes> ;
+          rdf:type [ schema:Thing ] ?
+       ) ;
+       rdf:type [ <Spell> ]
+    )
+}
+
+<StaticAbility> CLOSED {
+    (  $<StaticAbility_tes> (  &<Ability_tes> ;
+          rdf:type [ <Ability> ] ?
+       ) ;
+       rdf:type [ <StaticAbility> ]
+    )
+}
+
+<Token> CLOSED {
+    (  $<Token_tes> (  &<Card_tes> ;
+          rdf:type [ <Card> ] ?
+       ) ;
+       rdf:type [ <Token> ]
+    )
+}
+
+<TriggeredAbility> CLOSED {
+    (  $<TriggeredAbility_tes> (  &<Ability_tes> ;
+          rdf:type [ <Ability> ] ? ;
+          <condition> @<Event> ?
+       ) ;
+       rdf:type [ <TriggeredAbility> ]
+    )
+}
+
+

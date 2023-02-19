@@ -1,0 +1,10 @@
+{
+   "example": "http://www.example.org/rdf#",
+   "linkml": "https://w3id.org/linkml/",
+   "mtgo": "https://w3id.org/cmdoret/mtg-ontology/",
+   "schema": "http://schema.org/",
+   "wiki": "http://en.wikipedia.org/wiki/",
+   "NamedThing": {
+      "@id": "schema:Thing"
+   }
+}

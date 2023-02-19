@@ -1,0 +1,6 @@
+name: mtg_ontology
+author: Cyril Matthey-Doret <cmdoret@mailbox.org>
+description: An ontology describing Magic: The Gathering.
+source_schema_path: src/mtg_ontology/schema/mtg_ontology.yaml
+google_sheet_id: 1wVoaiFg47aT9YWNeRfTZ8tYHN8s8PAuDx5i2HUcDpvQ
+google_sheet_tabs: personinfo enums
