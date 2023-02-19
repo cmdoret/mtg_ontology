@@ -540,8 +540,11 @@
       "description": "An ability associated with a card.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology",
       "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/rarity",
+      "owner": "Card",
+      "domain_of": [
+        "Card"
+      ],
       "range": "Rarity",
-      "required": true,
       "@type": "SlotDefinition"
     },
     {
@@ -810,7 +813,8 @@
         "type_line",
         "card_type",
         "card_subtype",
-        "card_supertype"
+        "card_supertype",
+        "rarity"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/cmdoret/mtg-ontology/Card",
@@ -852,7 +856,8 @@
         "type_line",
         "card_type",
         "card_subtype",
-        "card_supertype"
+        "card_supertype",
+        "rarity"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/cmdoret/mtg-ontology/Permanent",
@@ -879,7 +884,8 @@
         "type_line",
         "card_type",
         "card_subtype",
-        "card_supertype"
+        "card_supertype",
+        "rarity"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/cmdoret/mtg-ontology/Token",
@@ -906,7 +912,8 @@
         "type_line",
         "card_type",
         "card_subtype",
-        "card_supertype"
+        "card_supertype",
+        "rarity"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/cmdoret/mtg-ontology/Sorcery",
@@ -933,7 +940,8 @@
         "type_line",
         "card_type",
         "card_subtype",
-        "card_supertype"
+        "card_supertype",
+        "rarity"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/cmdoret/mtg-ontology/Instant",
@@ -960,7 +968,8 @@
         "type_line",
         "card_type",
         "card_subtype",
-        "card_supertype"
+        "card_supertype",
+        "rarity"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/cmdoret/mtg-ontology/Enchantment",
@@ -987,7 +996,8 @@
         "type_line",
         "card_type",
         "card_subtype",
-        "card_supertype"
+        "card_supertype",
+        "rarity"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/cmdoret/mtg-ontology/Artifact",
@@ -1015,6 +1025,7 @@
         "card_type",
         "card_subtype",
         "card_supertype",
+        "rarity",
         "power",
         "toughness"
       ],
@@ -1043,7 +1054,8 @@
         "type_line",
         "card_type",
         "card_subtype",
-        "card_supertype"
+        "card_supertype",
+        "rarity"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/cmdoret/mtg-ontology/Land",
@@ -1224,9 +1236,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "mtg_ontology.yaml",
-  "source_file_date": "2023-02-19T14:29:08",
-  "source_file_size": 9106,
-  "generation_date": "2023-02-19T14:29:50",
+  "source_file_date": "2023-02-19T18:23:38",
+  "source_file_size": 9102,
+  "generation_date": "2023-02-19T19:00:51",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/mtg_ontology.context.jsonld",

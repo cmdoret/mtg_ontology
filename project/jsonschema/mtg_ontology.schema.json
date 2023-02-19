@@ -168,6 +168,10 @@
                     "description": "A human-readable name for a thing",
                     "type": "string"
                 },
+                "rarity": {
+                    "$ref": "#/$defs/Rarity",
+                    "description": "An ability associated with a card."
+                },
                 "type_line": {
                     "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
                     "type": "string"
@@ -267,6 +271,10 @@
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
+                },
+                "rarity": {
+                    "$ref": "#/$defs/Rarity",
+                    "description": "An ability associated with a card."
                 },
                 "type_line": {
                     "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
@@ -382,6 +390,10 @@
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
+                },
+                "rarity": {
+                    "$ref": "#/$defs/Rarity",
+                    "description": "An ability associated with a card."
                 },
                 "type_line": {
                     "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
@@ -528,6 +540,10 @@
                     "minimum": 0,
                     "type": "integer"
                 },
+                "rarity": {
+                    "$ref": "#/$defs/Rarity",
+                    "description": "An ability associated with a card."
+                },
                 "toughness": {
                     "description": "The amount of damage needed to destroy a creature. This is the second number in the lower right corner of a creature card.",
                     "minimum": 0,
@@ -634,6 +650,10 @@
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
+                },
+                "rarity": {
+                    "$ref": "#/$defs/Rarity",
+                    "description": "An ability associated with a card."
                 },
                 "type_line": {
                     "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
@@ -786,6 +806,10 @@
                     "description": "A human-readable name for a thing",
                     "type": "string"
                 },
+                "rarity": {
+                    "$ref": "#/$defs/Rarity",
+                    "description": "An ability associated with a card."
+                },
                 "type_line": {
                     "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
                     "type": "string"
@@ -913,6 +937,10 @@
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
+                },
+                "rarity": {
+                    "$ref": "#/$defs/Rarity",
+                    "description": "An ability associated with a card."
                 },
                 "type_line": {
                     "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
@@ -1102,6 +1130,10 @@
                     "description": "A human-readable name for a thing",
                     "type": "string"
                 },
+                "rarity": {
+                    "$ref": "#/$defs/Rarity",
+                    "description": "An ability associated with a card."
+                },
                 "type_line": {
                     "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
                     "type": "string"
@@ -1225,6 +1257,10 @@
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
+                },
+                "rarity": {
+                    "$ref": "#/$defs/Rarity",
+                    "description": "An ability associated with a card."
                 },
                 "type_line": {
                     "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
@@ -1377,6 +1413,10 @@
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
+                },
+                "rarity": {
+                    "$ref": "#/$defs/Rarity",
+                    "description": "An ability associated with a card."
                 },
                 "type_line": {
                     "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",

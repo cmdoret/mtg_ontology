@@ -32,6 +32,7 @@ type Artifact
     cardType: String!
     cardSubtype: [String]
     cardSupertype: [String]
+    rarity: Rarity
   }
 
 type Card
@@ -51,6 +52,7 @@ type Card
     cardType: String!
     cardSubtype: [String]
     cardSupertype: [String]
+    rarity: Rarity
   }
 
 type CardCollection
@@ -83,6 +85,7 @@ type Creature
     cardType: String!
     cardSubtype: [String]
     cardSupertype: [String]
+    rarity: Rarity
     power: Integer!
     toughness: Integer!
   }
@@ -104,6 +107,7 @@ type Enchantment
     cardType: String!
     cardSubtype: [String]
     cardSupertype: [String]
+    rarity: Rarity
   }
 
 type Event
@@ -133,6 +137,7 @@ type Instant
     cardType: String!
     cardSubtype: [String]
     cardSupertype: [String]
+    rarity: Rarity
   }
 
 type KeywordAbility
@@ -160,6 +165,7 @@ type Land
     cardType: String!
     cardSubtype: [String]
     cardSupertype: [String]
+    rarity: Rarity
   }
 
 type LifeCost
@@ -203,6 +209,7 @@ type Permanent
     cardType: String!
     cardSubtype: [String]
     cardSupertype: [String]
+    rarity: Rarity
   }
 
 type Sorcery
@@ -222,6 +229,7 @@ type Sorcery
     cardType: String!
     cardSubtype: [String]
     cardSupertype: [String]
+    rarity: Rarity
   }
 
 type Spell
@@ -256,6 +264,7 @@ type Token
     cardType: String!
     cardSubtype: [String]
     cardSupertype: [String]
+    rarity: Rarity
   }
 
 type TriggeredAbility

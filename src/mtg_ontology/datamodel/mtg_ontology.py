@@ -1,5 +1,5 @@
 # Auto generated from mtg_ontology.yaml by pythongen.py version: 0.9.0
-# Generation date: 2023-02-19T14:30:05
+# Generation date: 2023-02-19T19:01:06
 # Schema: mtg-ontology
 #
 # id: https://w3id.org/cmdoret/mtg-ontology
@@ -182,6 +182,7 @@ class Card(NamedThing):
     flavor_text: Optional[str] = None
     card_subtype: Optional[Union[str, List[str]]] = empty_list()
     card_supertype: Optional[Union[str, List[str]]] = empty_list()
+    rarity: Optional[Union[str, "Rarity"]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -235,6 +236,9 @@ class Card(NamedThing):
         if not isinstance(self.card_supertype, list):
             self.card_supertype = [self.card_supertype] if self.card_supertype is not None else []
         self.card_supertype = [v if isinstance(v, str) else str(v) for v in self.card_supertype]
+
+        if self.rarity is not None and not isinstance(self.rarity, Rarity):
+            self.rarity = Rarity(self.rarity)
 
         super().__post_init__(**kwargs)
 
@@ -892,7 +896,7 @@ slots.ability = Slot(uri=MTGO.ability, name="ability", curie=MTGO.curie('ability
                    model_uri=MTGO.ability, domain=None, range=Optional[Union[Union[str, AbilityId], List[Union[str, AbilityId]]]])
 
 slots.rarity = Slot(uri=MTGO.rarity, name="rarity", curie=MTGO.curie('rarity'),
-                   model_uri=MTGO.rarity, domain=None, range=Union[str, "Rarity"])
+                   model_uri=MTGO.rarity, domain=None, range=Optional[Union[str, "Rarity"]])
 
 slots.artist = Slot(uri=MTGO.artist, name="artist", curie=MTGO.curie('artist'),
                    model_uri=MTGO.artist, domain=None, range=Optional[str])

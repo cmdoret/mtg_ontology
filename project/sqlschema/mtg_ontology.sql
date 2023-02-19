@@ -30,6 +30,7 @@ CREATE TABLE "Artifact" (
 	flavor_text TEXT, 
 	type_line TEXT NOT NULL, 
 	card_type TEXT NOT NULL, 
+	rarity VARCHAR(8), 
 	PRIMARY KEY (id)
 );
 
@@ -46,6 +47,7 @@ CREATE TABLE "Card" (
 	flavor_text TEXT, 
 	type_line TEXT NOT NULL, 
 	card_type TEXT NOT NULL, 
+	rarity VARCHAR(8), 
 	PRIMARY KEY (id)
 );
 
@@ -75,6 +77,7 @@ CREATE TABLE "Creature" (
 	flavor_text TEXT, 
 	type_line TEXT NOT NULL, 
 	card_type TEXT NOT NULL, 
+	rarity VARCHAR(8), 
 	power INTEGER NOT NULL, 
 	toughness INTEGER NOT NULL, 
 	PRIMARY KEY (id)
@@ -93,6 +96,7 @@ CREATE TABLE "Enchantment" (
 	flavor_text TEXT, 
 	type_line TEXT NOT NULL, 
 	card_type TEXT NOT NULL, 
+	rarity VARCHAR(8), 
 	PRIMARY KEY (id)
 );
 
@@ -119,6 +123,7 @@ CREATE TABLE "Instant" (
 	flavor_text TEXT, 
 	type_line TEXT NOT NULL, 
 	card_type TEXT NOT NULL, 
+	rarity VARCHAR(8), 
 	PRIMARY KEY (id)
 );
 
@@ -143,6 +148,7 @@ CREATE TABLE "Land" (
 	flavor_text TEXT, 
 	type_line TEXT NOT NULL, 
 	card_type TEXT NOT NULL, 
+	rarity VARCHAR(8), 
 	PRIMARY KEY (id)
 );
 
@@ -182,6 +188,7 @@ CREATE TABLE "Permanent" (
 	flavor_text TEXT, 
 	type_line TEXT NOT NULL, 
 	card_type TEXT NOT NULL, 
+	rarity VARCHAR(8), 
 	PRIMARY KEY (id)
 );
 
@@ -198,6 +205,7 @@ CREATE TABLE "Sorcery" (
 	flavor_text TEXT, 
 	type_line TEXT NOT NULL, 
 	card_type TEXT NOT NULL, 
+	rarity VARCHAR(8), 
 	PRIMARY KEY (id)
 );
 
@@ -229,6 +237,7 @@ CREATE TABLE "Token" (
 	flavor_text TEXT, 
 	type_line TEXT NOT NULL, 
 	card_type TEXT NOT NULL, 
+	rarity VARCHAR(8), 
 	PRIMARY KEY (id)
 );
 

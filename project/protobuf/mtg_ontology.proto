@@ -33,6 +33,7 @@ message Artifact
   string cardType = 0
  repeated  string cardSubtype = 0
  repeated  string cardSupertype = 0
+  rarity rarity = 0
  }
 // A card in the Magic The Gathering game.
 message Card
@@ -52,6 +53,7 @@ message Card
   string cardType = 0
  repeated  string cardSubtype = 0
  repeated  string cardSupertype = 0
+  rarity rarity = 0
  }
 // A collection of Cards, such as a Deck or cards set.
 message CardCollection
@@ -84,6 +86,7 @@ message Creature
   string cardType = 0
  repeated  string cardSubtype = 0
  repeated  string cardSupertype = 0
+  rarity rarity = 0
   integer power = 0
   integer toughness = 0
  }
@@ -105,6 +108,7 @@ message Enchantment
   string cardType = 0
  repeated  string cardSubtype = 0
  repeated  string cardSupertype = 0
+  rarity rarity = 0
  }
 // A combination of circumstances during a game.
 message Event
@@ -134,6 +138,7 @@ message Instant
   string cardType = 0
  repeated  string cardSubtype = 0
  repeated  string cardSupertype = 0
+  rarity rarity = 0
  }
 // A passive ability represented by word that substitutes for a piece of rules text, such as deathtouch or flying.
 message KeywordAbility
@@ -161,6 +166,7 @@ message Land
   string cardType = 0
  repeated  string cardSubtype = 0
  repeated  string cardSupertype = 0
+  rarity rarity = 0
  }
 // The life cost of a card or ability.
 message LifeCost
@@ -204,6 +210,7 @@ message Permanent
   string cardType = 0
  repeated  string cardSubtype = 0
  repeated  string cardSupertype = 0
+  rarity rarity = 0
  }
 // A card that represents a sorcery spell that can be cast.
 message Sorcery
@@ -223,6 +230,7 @@ message Sorcery
   string cardType = 0
  repeated  string cardSubtype = 0
  repeated  string cardSupertype = 0
+  rarity rarity = 0
  }
 // An object on the stack. Either a card that has been cast, or a copy.
 message Spell
@@ -257,6 +265,7 @@ message Token
   string cardType = 0
  repeated  string cardSubtype = 0
  repeated  string cardSupertype = 0
+  rarity rarity = 0
  }
 // A card ability, triggered by an event.
 message TriggeredAbility

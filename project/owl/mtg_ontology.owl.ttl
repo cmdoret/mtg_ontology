@@ -17,11 +17,11 @@
     dcterms:license "GNU GPL v3.0" ;
     dcterms:title "mtg-ontology" ;
     rdfs:seeAlso "https://cmdoret.github.io/mtg-ontology" ;
-    linkml:generation_date "2023-02-19T14:30:02" ;
+    linkml:generation_date "2023-02-19T19:01:02" ;
     linkml:metamodel_version "1.7.0" ;
     linkml:source_file "mtg_ontology.yaml" ;
-    linkml:source_file_date "2023-02-19T14:29:08" ;
-    linkml:source_file_size 9106 .
+    linkml:source_file_date "2023-02-19T18:23:38" ;
+    linkml:source_file_size 9102 .
 
 mtgo:ActivatedAbility a owl:Class,
         linkml:ClassDefinition ;
@@ -44,11 +44,11 @@ mtgo:Creature a owl:Class,
     rdfs:label "Creature" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onClass linkml:Integer ;
-            owl:onProperty mtgo:toughness ;
+            owl:onProperty mtgo:power ;
             owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
             owl:onClass linkml:Integer ;
-            owl:onProperty mtgo:power ;
+            owl:onProperty mtgo:toughness ;
             owl:qualifiedCardinality 1 ],
         mtgo:Permanent ;
     skos:definition "A card that represents a creature that can be summoned to the battlefield." .
@@ -116,12 +116,6 @@ mtgo:TriggeredAbility a owl:Class,
             owl:onProperty mtgo:condition ],
         mtgo:Ability ;
     skos:definition "A card ability, triggered by an event." .
-
-mtgo:rarity a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "rarity" ;
-    rdfs:range mtgo:Rarity ;
-    skos:definition "An ability associated with a card." .
 
 linkml:SubsetDefinition a owl:Class ;
     rdfs:label "subset_definition" .
@@ -217,6 +211,12 @@ mtgo:power a owl:ObjectProperty,
     rdfs:label "power" ;
     rdfs:range linkml:Integer ;
     skos:definition "The amount of damage dealt in combat. This is the first number in the lower right corner of a creature card." .
+
+mtgo:rarity a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "rarity" ;
+    rdfs:range mtgo:Rarity ;
+    skos:definition "An ability associated with a card." .
 
 mtgo:rules_text a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -337,6 +337,10 @@ mtgo:Event a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "Event" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty mtgo:source ],
+        [ a owl:Restriction ;
             owl:onClass mtgo:Action ;
             owl:onProperty mtgo:action ;
             owl:qualifiedCardinality 1 ],
@@ -344,10 +348,6 @@ mtgo:Event a owl:Class,
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
             owl:onProperty mtgo:target ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgo:source ],
         mtgo:NamedThing ;
     skos:definition "A combination of circumstances during a game." .
 
@@ -421,15 +421,6 @@ mtgo:color a owl:ObjectProperty,
     rdfs:range mtgo:Color ;
     skos:definition "The color of a card." .
 
-mtgo:Rarity a owl:Class,
-        linkml:EnumDefinition ;
-    rdfs:label "Rarity" ;
-    owl:unionOf ( <https://w3id.org/cmdoret/mtg-ontology/Rarity#common> <https://w3id.org/cmdoret/mtg-ontology/Rarity#uncommon> <https://w3id.org/cmdoret/mtg-ontology/Rarity#rare> <https://w3id.org/cmdoret/mtg-ontology/Rarity#mythic> ) ;
-    linkml:permissible_values <https://w3id.org/cmdoret/mtg-ontology/Rarity#common>,
-        <https://w3id.org/cmdoret/mtg-ontology/Rarity#mythic>,
-        <https://w3id.org/cmdoret/mtg-ontology/Rarity#rare>,
-        <https://w3id.org/cmdoret/mtg-ontology/Rarity#uncommon> .
-
 mtgo:Ability a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "Ability" ;
@@ -445,19 +436,11 @@ mtgo:Card a owl:Class,
     rdfs:label "Card" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
-            owl:onProperty mtgo:card_subtype ],
+            owl:onProperty mtgo:card_supertype ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
-            owl:onProperty mtgo:flavor_text ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgo:additional_cost ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Integer ;
-            owl:onProperty mtgo:converted_mana_cost ],
+            owl:onProperty mtgo:artist ],
         [ a owl:Class ;
             owl:intersectionOf ( [ a owl:Restriction ;
                         owl:allValuesFrom mtgo:Color ;
@@ -465,16 +448,17 @@ mtgo:Card a owl:Class,
                         owl:onProperty mtgo:color ;
                         owl:someValuesFrom mtgo:Color ] ) ],
         [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgo:artist ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom mtgo:ManaCost ;
-            owl:onProperty mtgo:mana_cost ],
-        [ a owl:Restriction ;
             owl:onClass linkml:String ;
             owl:onProperty mtgo:type_line ;
             owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty mtgo:additional_cost ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass mtgo:Rarity ;
+            owl:onProperty mtgo:rarity ],
         [ a owl:Restriction ;
             owl:allValuesFrom mtgo:Ability ;
             owl:onProperty mtgo:ability ],
@@ -483,12 +467,23 @@ mtgo:Card a owl:Class,
             owl:onClass linkml:String ;
             owl:onProperty mtgo:card_set ],
         [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Integer ;
+            owl:onProperty mtgo:converted_mana_cost ],
+        [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
-            owl:onProperty mtgo:card_supertype ],
+            owl:onProperty mtgo:card_subtype ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty mtgo:flavor_text ],
         [ a owl:Restriction ;
             owl:onClass linkml:String ;
             owl:onProperty mtgo:card_type ;
             owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mtgo:ManaCost ;
+            owl:onProperty mtgo:mana_cost ],
         mtgo:NamedThing ;
     skos:definition "A card in the Magic The Gathering game." .
 
@@ -520,6 +515,15 @@ mtgo:Player a owl:Class,
         <https://w3id.org/cmdoret/mtg-ontology/Player#owner>,
         <https://w3id.org/cmdoret/mtg-ontology/Player#players>,
         <https://w3id.org/cmdoret/mtg-ontology/Player#you> .
+
+mtgo:Rarity a owl:Class,
+        linkml:EnumDefinition ;
+    rdfs:label "Rarity" ;
+    owl:unionOf ( <https://w3id.org/cmdoret/mtg-ontology/Rarity#common> <https://w3id.org/cmdoret/mtg-ontology/Rarity#uncommon> <https://w3id.org/cmdoret/mtg-ontology/Rarity#rare> <https://w3id.org/cmdoret/mtg-ontology/Rarity#mythic> ) ;
+    linkml:permissible_values <https://w3id.org/cmdoret/mtg-ontology/Rarity#common>,
+        <https://w3id.org/cmdoret/mtg-ontology/Rarity#mythic>,
+        <https://w3id.org/cmdoret/mtg-ontology/Rarity#rare>,
+        <https://w3id.org/cmdoret/mtg-ontology/Rarity#uncommon> .
 
 mtgo:Action a owl:Class,
         linkml:EnumDefinition ;
