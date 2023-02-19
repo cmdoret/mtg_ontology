@@ -1,21 +1,22 @@
 """Data test."""
 import os
+import json
 import glob
 import unittest
+from pathlib import Path
 
-from linkml_runtime.loaders import yaml_loader
-from mtg_ontology.datamodel import Card
+from linkml_runtime.loaders import rdf_loader, yaml_loader
+from mtg_ontology.datamodel import Card, Creature
 
-ROOT = os.path.join(os.path.dirname(__file__), '..')
-DATA_DIR = os.path.join(ROOT, "src", "data", "examples")
+ROOT = Path(os.path.join(os.path.dirname(__file__), '..'))
 
-EXAMPLE_FILES = glob.glob(os.path.join(DATA_DIR, '*.yaml'))
+DATA_DIR =  Path(ROOT) / 'src' / 'data' / 'examples'
 
 class TestData(unittest.TestCase):
     """Test data and datamodel."""
 
-    def test_data(self):
-        """Date test."""
-        for path in EXAMPLE_FILES:
-            obj = yaml_loader.load(path, target_class=Card)
+    def test_yaml_cards(self):
+        """Data test."""
+        for path in DATA_DIR.glob('Card*.yaml'):
+            obj = yaml_loader.load(str(path), target_class=Card)
             assert obj
