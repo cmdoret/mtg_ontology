@@ -1,0 +1,31 @@
+@prefix example: <http://www.example.org/rdf#> .
+@prefix mtgo: <https://w3id.org/cmdoret/mtg-ontology/> .
+@prefix schema: <http://schema.org/> .
+@prefix wiki: <http://en.wikipedia.org/wiki/> .
+
+example:peg a mtgo:Creature ;
+    schema:name "Park Heights Pegasus" ;
+    mtgo:color "green", "white" ;
+    mtgo:mana_cost example:peg-c1, example:peg-c2 ;
+    mtgo:converted_mana_cost 2 ;
+    mtgo:type_line "Creature - Pegasus" ;
+    mtgo:card_type "Creature" ;
+    mtgo:card_subtype "Pegasus" ;
+    mtgo:flavor_text "The burglar turned, bowed, and dropped from the ledge onto her waiting mount." ;
+    mtgo:artist "Randy Gallegos" ;
+    mtgo:card_set "Streets of New Capenna" ;
+    mtgo:rarity "rare" ;
+    mtgo:power 2 ;
+    mtgo:toughness 1 ;
+    mtgo:ability example:peg-ab1 .
+
+example:peg-c1 a mtgo:ManaCost ;
+       mtgo:color "white" ;
+       mtgo:value 1 .
+
+example:peg-c2 a mtgo:ManaCost ;
+       mtgo:color "green" ;
+       mtgo:value 1 .
+
+example:peg-ab1 a mtgo:TriggeredAbility ;
+    mtgo:rules_text "Whenever Park Heights Pegasus deals combat damage to a player, draw a card if you had two or more creatures enter the battlefield under your control this turn."  .
