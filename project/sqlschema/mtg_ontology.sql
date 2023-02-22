@@ -21,7 +21,6 @@ CREATE TABLE "Artifact" (
 	id TEXT NOT NULL, 
 	name TEXT NOT NULL, 
 	description TEXT, 
-	ability TEXT, 
 	additional_cost TEXT, 
 	mana_cost TEXT, 
 	converted_mana_cost INTEGER, 
@@ -38,7 +37,6 @@ CREATE TABLE "Card" (
 	id TEXT NOT NULL, 
 	name TEXT NOT NULL, 
 	description TEXT, 
-	ability TEXT, 
 	additional_cost TEXT, 
 	mana_cost TEXT, 
 	converted_mana_cost INTEGER, 
@@ -68,7 +66,6 @@ CREATE TABLE "Creature" (
 	id TEXT NOT NULL, 
 	name TEXT NOT NULL, 
 	description TEXT, 
-	ability TEXT, 
 	additional_cost TEXT, 
 	mana_cost TEXT, 
 	converted_mana_cost INTEGER, 
@@ -87,7 +84,6 @@ CREATE TABLE "Enchantment" (
 	id TEXT NOT NULL, 
 	name TEXT NOT NULL, 
 	description TEXT, 
-	ability TEXT, 
 	additional_cost TEXT, 
 	mana_cost TEXT, 
 	converted_mana_cost INTEGER, 
@@ -114,7 +110,6 @@ CREATE TABLE "Instant" (
 	id TEXT NOT NULL, 
 	name TEXT NOT NULL, 
 	description TEXT, 
-	ability TEXT, 
 	additional_cost TEXT, 
 	mana_cost TEXT, 
 	converted_mana_cost INTEGER, 
@@ -139,7 +134,6 @@ CREATE TABLE "Land" (
 	id TEXT NOT NULL, 
 	name TEXT NOT NULL, 
 	description TEXT, 
-	ability TEXT, 
 	additional_cost TEXT, 
 	mana_cost TEXT, 
 	converted_mana_cost INTEGER, 
@@ -179,7 +173,6 @@ CREATE TABLE "Permanent" (
 	id TEXT NOT NULL, 
 	name TEXT NOT NULL, 
 	description TEXT, 
-	ability TEXT, 
 	additional_cost TEXT, 
 	mana_cost TEXT, 
 	converted_mana_cost INTEGER, 
@@ -192,11 +185,17 @@ CREATE TABLE "Permanent" (
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE "Property" (
+	id TEXT NOT NULL, 
+	name TEXT NOT NULL, 
+	description TEXT, 
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE "Sorcery" (
 	id TEXT NOT NULL, 
 	name TEXT NOT NULL, 
 	description TEXT, 
-	ability TEXT, 
 	additional_cost TEXT, 
 	mana_cost TEXT, 
 	converted_mana_cost INTEGER, 
@@ -228,7 +227,6 @@ CREATE TABLE "Token" (
 	id TEXT NOT NULL, 
 	name TEXT NOT NULL, 
 	description TEXT, 
-	ability TEXT, 
 	additional_cost TEXT, 
 	mana_cost TEXT, 
 	converted_mana_cost INTEGER, 
@@ -239,6 +237,17 @@ CREATE TABLE "Token" (
 	card_type TEXT NOT NULL, 
 	rarity VARCHAR(8), 
 	PRIMARY KEY (id)
+);
+
+CREATE TABLE "Condition" (
+	id TEXT NOT NULL, 
+	name TEXT NOT NULL, 
+	description TEXT, 
+	target TEXT, 
+	property TEXT, 
+	value_constraint VARCHAR(21), 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(property) REFERENCES "Property" (id)
 );
 
 CREATE TABLE "TriggeredAbility" (

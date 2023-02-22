@@ -41,6 +41,17 @@
             "title": "Action",
             "type": "string"
         },
+        "ActionConstraint": {
+            "description": "",
+            "enum": [
+                "must",
+                "may",
+                "must_not",
+                "may_not"
+            ],
+            "title": "ActionConstraint",
+            "type": "string"
+        },
         "ActivatedAbility": {
             "additionalProperties": false,
             "description": "A card ability which can be activated for a cost.",
@@ -87,13 +98,6 @@
             "additionalProperties": false,
             "description": "A permanent representing a magical item, animated construct, or other objects and devices.",
             "properties": {
-                "ability": {
-                    "description": "An ability associated with a card.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
                 "additional_cost": {
                     "anyOf": [
                         {
@@ -191,13 +195,6 @@
             "additionalProperties": false,
             "description": "A card in the Magic The Gathering game.",
             "properties": {
-                "ability": {
-                    "description": "An ability associated with a card.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
                 "additional_cost": {
                     "anyOf": [
                         {
@@ -310,13 +307,6 @@
             "additionalProperties": false,
             "description": "A card in the Magic The Gathering game.",
             "properties": {
-                "ability": {
-                    "description": "An ability associated with a card.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
                 "additional_cost": {
                     "anyOf": [
                         {
@@ -422,6 +412,49 @@
             "title": "Color",
             "type": "string"
         },
+        "Condition": {
+            "additionalProperties": false,
+            "description": "A condition expressed as a constraint on a property.",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "property": {
+                    "description": "A property of an entity.",
+                    "type": "string"
+                },
+                "target": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Player"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "The entity targeted by an action or constraint."
+                },
+                "value_constraint": {
+                    "$ref": "#/$defs/ValueConstraint",
+                    "description": "A constraint on the value of a property."
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "Condition",
+            "type": "object"
+        },
         "Cost": {
             "additionalProperties": false,
             "description": "The cost of a card or ability.",
@@ -454,13 +487,6 @@
             "additionalProperties": false,
             "description": "A card that represents a creature that can be summoned to the battlefield.",
             "properties": {
-                "ability": {
-                    "description": "An ability associated with a card.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
                 "additional_cost": {
                     "anyOf": [
                         {
@@ -570,13 +596,6 @@
             "additionalProperties": false,
             "description": "A permanent which applies persistent magical effects.",
             "properties": {
-                "ability": {
-                    "description": "An ability associated with a card.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
                 "additional_cost": {
                     "anyOf": [
                         {
@@ -710,7 +729,7 @@
                             "type": "string"
                         }
                     ],
-                    "description": "The entity targeted by an action."
+                    "description": "The entity targeted by an action or constraint."
                 }
             },
             "required": [
@@ -725,13 +744,6 @@
             "additionalProperties": false,
             "description": "A card that represents an instant spell that can be cast.",
             "properties": {
-                "ability": {
-                    "description": "An ability associated with a card.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
                 "additional_cost": {
                     "anyOf": [
                         {
@@ -857,13 +869,6 @@
             "additionalProperties": false,
             "description": "A card that represents a land that can be tapped for mana.",
             "properties": {
-                "ability": {
-                    "description": "An ability associated with a card.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
                 "additional_cost": {
                     "anyOf": [
                         {
@@ -1049,13 +1054,6 @@
             "additionalProperties": false,
             "description": "A card or token that can be put onto the battlefield.",
             "properties": {
-                "ability": {
-                    "description": "An ability associated with a card.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
                 "additional_cost": {
                     "anyOf": [
                         {
@@ -1162,6 +1160,30 @@
             "title": "Player",
             "type": "string"
         },
+        "Property": {
+            "additionalProperties": false,
+            "description": "A property of an entity.",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "name"
+            ],
+            "title": "Property",
+            "type": "object"
+        },
         "Rarity": {
             "description": "The rarity of the card, may be one of Common, Uncommon, Rare or Mythic.",
             "enum": [
@@ -1177,13 +1199,6 @@
             "additionalProperties": false,
             "description": "A card that represents a sorcery spell that can be cast.",
             "properties": {
-                "ability": {
-                    "description": "An ability associated with a card.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
                 "additional_cost": {
                     "anyOf": [
                         {
@@ -1333,13 +1348,6 @@
             "additionalProperties": false,
             "description": "A permanent that is not represented by a regular card and does not have a casting cost.",
             "properties": {
-                "ability": {
-                    "description": "An ability associated with a card.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
                 "additional_cost": {
                     "anyOf": [
                         {
@@ -1464,9 +1472,28 @@
             ],
             "title": "TriggeredAbility",
             "type": "object"
+        },
+        "ValueConstraint": {
+            "description": "",
+            "enum": [
+                "equal",
+                "greater_than",
+                "less_than",
+                "greater_than_or_equal",
+                "less_than_or_equal",
+                "not_equal",
+                "between",
+                "not_between",
+                "is",
+                "is_not",
+                "is_one_of",
+                "is_not_one_of"
+            ],
+            "title": "ValueConstraint",
+            "type": "string"
         }
     },
-    "$id": "https://w3id.org/cmdoret/mtg-ontology",
+    "$id": "https://w3id.org/cmdoret/mtg-ontology/",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "additionalProperties": true,
     "metamodel_version": "1.7.0",
@@ -1479,7 +1506,7 @@
             "type": "object"
         }
     },
-    "title": "mtg-ontology",
+    "title": "mtgo",
     "type": "object",
     "version": null
 }

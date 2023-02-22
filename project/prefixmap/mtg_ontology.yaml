@@ -2,9 +2,78 @@
    "example": "http://www.example.org/rdf#",
    "linkml": "https://w3id.org/linkml/",
    "mtgo": "https://w3id.org/cmdoret/mtg-ontology/",
+   "mtgoa": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+   "mtgoc": "https://w3id.org/cmdoret/mtg-ontology/cards/",
+   "rdf": "http://example.org/UNKNOWN/rdf/",
    "schema": "http://schema.org/",
    "wiki": "http://en.wikipedia.org/wiki/",
+   "Ability": {
+      "@id": "mtgoa:Ability"
+   },
+   "ActivatedAbility": {
+      "@id": "mtgoa:ActivatedAbility"
+   },
+   "Artifact": {
+      "@id": "mtgoc:Artifact"
+   },
+   "Card": {
+      "@id": "mtgoc:Card"
+   },
+   "CardCollection": {
+      "@id": "mtgoc:CardCollection"
+   },
+   "Condition": {
+      "@id": "mtgoa:Condition"
+   },
+   "Cost": {
+      "@id": "mtgoc:Cost"
+   },
+   "Creature": {
+      "@id": "mtgoc:Creature"
+   },
+   "Enchantment": {
+      "@id": "mtgoc:Enchantment"
+   },
+   "Event": {
+      "@id": "mtgoa:Event"
+   },
+   "Instant": {
+      "@id": "mtgoc:Instant"
+   },
+   "KeywordAbility": {
+      "@id": "mtgoa:KeywordAbility"
+   },
+   "Land": {
+      "@id": "mtgoc:Land"
+   },
+   "LifeCost": {
+      "@id": "mtgoc:LifeCost"
+   },
+   "ManaCost": {
+      "@id": "mtgoc:ManaCost"
+   },
    "NamedThing": {
       "@id": "schema:Thing"
+   },
+   "Permanent": {
+      "@id": "mtgoc:Permanent"
+   },
+   "Property": {
+      "@id": "rdf:predicate"
+   },
+   "Sorcery": {
+      "@id": "mtgoc:Sorcery"
+   },
+   "Spell": {
+      "@id": "mtgoc:Spell"
+   },
+   "StaticAbility": {
+      "@id": "mtgoa:StaticAbility"
+   },
+   "Token": {
+      "@id": "mtgoc:Token"
+   },
+   "TriggeredAbility": {
+      "@id": "mtgoa:TriggeredAbility"
    }
 }

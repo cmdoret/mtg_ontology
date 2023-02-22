@@ -20,7 +20,6 @@ type Artifact
     id: Uriorcurie!
     name: String!
     description: String
-    ability: [Ability]
     additionalCost: String
     manaCost: [ManaCost]
     convertedManaCost: Integer
@@ -40,7 +39,6 @@ type Card
     id: Uriorcurie!
     name: String!
     description: String
-    ability: [Ability]
     additionalCost: String
     manaCost: [ManaCost]
     convertedManaCost: Integer
@@ -60,6 +58,16 @@ type CardCollection
     entries: [Card]
   }
 
+type Condition
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+    target: String
+    property: Property
+    valueConstraint: ValueConstraint
+  }
+
 type Cost
   {
     id: Uriorcurie!
@@ -73,7 +81,6 @@ type Creature
     id: Uriorcurie!
     name: String!
     description: String
-    ability: [Ability]
     additionalCost: String
     manaCost: [ManaCost]
     convertedManaCost: Integer
@@ -95,7 +102,6 @@ type Enchantment
     id: Uriorcurie!
     name: String!
     description: String
-    ability: [Ability]
     additionalCost: String
     manaCost: [ManaCost]
     convertedManaCost: Integer
@@ -125,7 +131,6 @@ type Instant
     id: Uriorcurie!
     name: String!
     description: String
-    ability: [Ability]
     additionalCost: String
     manaCost: [ManaCost]
     convertedManaCost: Integer
@@ -153,7 +158,6 @@ type Land
     id: Uriorcurie!
     name: String!
     description: String
-    ability: [Ability]
     additionalCost: String
     manaCost: [ManaCost]
     convertedManaCost: Integer
@@ -197,7 +201,6 @@ type Permanent
     id: Uriorcurie!
     name: String!
     description: String
-    ability: [Ability]
     additionalCost: String
     manaCost: [ManaCost]
     convertedManaCost: Integer
@@ -212,12 +215,18 @@ type Permanent
     rarity: Rarity
   }
 
+type Property
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+  }
+
 type Sorcery
   {
     id: Uriorcurie!
     name: String!
     description: String
-    ability: [Ability]
     additionalCost: String
     manaCost: [ManaCost]
     convertedManaCost: Integer
@@ -252,7 +261,6 @@ type Token
     id: Uriorcurie!
     name: String!
     description: String
-    ability: [Ability]
     additionalCost: String
     manaCost: [ManaCost]
     convertedManaCost: Integer
