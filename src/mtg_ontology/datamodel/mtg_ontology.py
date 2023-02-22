@@ -1,9 +1,10 @@
 # Auto generated from mtg_ontology.yaml by pythongen.py version: 0.9.0
-# Generation date: 2023-02-19T19:01:06
-# Schema: mtg-ontology
+# Generation date: 2023-02-23T00:53:30
+# Schema: mtgo
 #
-# id: https://w3id.org/cmdoret/mtg-ontology
-# description: An ontology describing Magic: The Gathering.
+# id: https://w3id.org/cmdoret/mtg-ontology/
+# description: An ontology describing Magic: The Gathering. It provides the basic features needed to describe
+#              cards.
 # license: GNU GPL v3.0
 
 import dataclasses
@@ -35,6 +36,9 @@ dataclasses._init_fn = dataclasses_init_fn_with_kwargs
 EXAMPLE = CurieNamespace('example', 'http://www.example.org/rdf#')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
 MTGO = CurieNamespace('mtgo', 'https://w3id.org/cmdoret/mtg-ontology/')
+MTGOA = CurieNamespace('mtgoa', 'https://w3id.org/cmdoret/mtg-ontology/abilities/')
+MTGOC = CurieNamespace('mtgoc', 'https://w3id.org/cmdoret/mtg-ontology/cards/')
+RDF = CurieNamespace('rdf', 'http://example.org/UNKNOWN/rdf/')
 SCHEMA = CurieNamespace('schema', 'http://schema.org/')
 WIKI = CurieNamespace('wiki', 'http://en.wikipedia.org/wiki/')
 DEFAULT_ = MTGO
@@ -123,6 +127,14 @@ class EventId(NamedThingId):
     pass
 
 
+class ConditionId(NamedThingId):
+    pass
+
+
+class PropertyId(NamedThingId):
+    pass
+
+
 @dataclass
 class NamedThing(YAMLRoot):
     """
@@ -163,8 +175,8 @@ class Card(NamedThing):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGO.Card
-    class_class_curie: ClassVar[str] = "mtgo:Card"
+    class_class_uri: ClassVar[URIRef] = MTGOC.Card
+    class_class_curie: ClassVar[str] = "mtgoc:Card"
     class_name: ClassVar[str] = "Card"
     class_model_uri: ClassVar[URIRef] = MTGO.Card
 
@@ -173,7 +185,6 @@ class Card(NamedThing):
     color: Union[Union[str, "Color"], List[Union[str, "Color"]]] = None
     type_line: str = None
     card_type: str = None
-    ability: Optional[Union[Union[str, AbilityId], List[Union[str, AbilityId]]]] = empty_list()
     additional_cost: Optional[str] = None
     mana_cost: Optional[Union[Union[str, ManaCostId], List[Union[str, ManaCostId]]]] = empty_list()
     converted_mana_cost: Optional[int] = None
@@ -205,10 +216,6 @@ class Card(NamedThing):
             self.MissingRequiredField("card_type")
         if not isinstance(self.card_type, str):
             self.card_type = str(self.card_type)
-
-        if not isinstance(self.ability, list):
-            self.ability = [self.ability] if self.ability is not None else []
-        self.ability = [v if isinstance(v, AbilityId) else AbilityId(v) for v in self.ability]
 
         if self.additional_cost is not None and not isinstance(self.additional_cost, str):
             self.additional_cost = str(self.additional_cost)
@@ -250,8 +257,8 @@ class Spell(NamedThing):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGO.Spell
-    class_class_curie: ClassVar[str] = "mtgo:Spell"
+    class_class_uri: ClassVar[URIRef] = MTGOC.Spell
+    class_class_curie: ClassVar[str] = "mtgoc:Spell"
     class_name: ClassVar[str] = "Spell"
     class_model_uri: ClassVar[URIRef] = MTGO.Spell
 
@@ -274,8 +281,8 @@ class Permanent(Card):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGO.Permanent
-    class_class_curie: ClassVar[str] = "mtgo:Permanent"
+    class_class_uri: ClassVar[URIRef] = MTGOC.Permanent
+    class_class_curie: ClassVar[str] = "mtgoc:Permanent"
     class_name: ClassVar[str] = "Permanent"
     class_model_uri: ClassVar[URIRef] = MTGO.Permanent
 
@@ -301,8 +308,8 @@ class Token(Card):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGO.Token
-    class_class_curie: ClassVar[str] = "mtgo:Token"
+    class_class_uri: ClassVar[URIRef] = MTGOC.Token
+    class_class_curie: ClassVar[str] = "mtgoc:Token"
     class_name: ClassVar[str] = "Token"
     class_model_uri: ClassVar[URIRef] = MTGO.Token
 
@@ -328,8 +335,8 @@ class Sorcery(Card):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGO.Sorcery
-    class_class_curie: ClassVar[str] = "mtgo:Sorcery"
+    class_class_uri: ClassVar[URIRef] = MTGOC.Sorcery
+    class_class_curie: ClassVar[str] = "mtgoc:Sorcery"
     class_name: ClassVar[str] = "Sorcery"
     class_model_uri: ClassVar[URIRef] = MTGO.Sorcery
 
@@ -355,8 +362,8 @@ class Instant(Card):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGO.Instant
-    class_class_curie: ClassVar[str] = "mtgo:Instant"
+    class_class_uri: ClassVar[URIRef] = MTGOC.Instant
+    class_class_curie: ClassVar[str] = "mtgoc:Instant"
     class_name: ClassVar[str] = "Instant"
     class_model_uri: ClassVar[URIRef] = MTGO.Instant
 
@@ -382,8 +389,8 @@ class Enchantment(Permanent):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGO.Enchantment
-    class_class_curie: ClassVar[str] = "mtgo:Enchantment"
+    class_class_uri: ClassVar[URIRef] = MTGOC.Enchantment
+    class_class_curie: ClassVar[str] = "mtgoc:Enchantment"
     class_name: ClassVar[str] = "Enchantment"
     class_model_uri: ClassVar[URIRef] = MTGO.Enchantment
 
@@ -409,8 +416,8 @@ class Artifact(Permanent):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGO.Artifact
-    class_class_curie: ClassVar[str] = "mtgo:Artifact"
+    class_class_uri: ClassVar[URIRef] = MTGOC.Artifact
+    class_class_curie: ClassVar[str] = "mtgoc:Artifact"
     class_name: ClassVar[str] = "Artifact"
     class_model_uri: ClassVar[URIRef] = MTGO.Artifact
 
@@ -436,8 +443,8 @@ class Creature(Permanent):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGO.Creature
-    class_class_curie: ClassVar[str] = "mtgo:Creature"
+    class_class_uri: ClassVar[URIRef] = MTGOC.Creature
+    class_class_curie: ClassVar[str] = "mtgoc:Creature"
     class_name: ClassVar[str] = "Creature"
     class_model_uri: ClassVar[URIRef] = MTGO.Creature
 
@@ -475,8 +482,8 @@ class Land(Permanent):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGO.Land
-    class_class_curie: ClassVar[str] = "mtgo:Land"
+    class_class_uri: ClassVar[URIRef] = MTGOC.Land
+    class_class_curie: ClassVar[str] = "mtgoc:Land"
     class_name: ClassVar[str] = "Land"
     class_model_uri: ClassVar[URIRef] = MTGO.Land
 
@@ -502,8 +509,8 @@ class Cost(NamedThing):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGO.Cost
-    class_class_curie: ClassVar[str] = "mtgo:Cost"
+    class_class_uri: ClassVar[URIRef] = MTGOC.Cost
+    class_class_curie: ClassVar[str] = "mtgoc:Cost"
     class_name: ClassVar[str] = "Cost"
     class_model_uri: ClassVar[URIRef] = MTGO.Cost
 
@@ -530,8 +537,8 @@ class ManaCost(Cost):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGO.ManaCost
-    class_class_curie: ClassVar[str] = "mtgo:ManaCost"
+    class_class_uri: ClassVar[URIRef] = MTGOC.ManaCost
+    class_class_curie: ClassVar[str] = "mtgoc:ManaCost"
     class_name: ClassVar[str] = "ManaCost"
     class_model_uri: ClassVar[URIRef] = MTGO.ManaCost
 
@@ -561,8 +568,8 @@ class LifeCost(Cost):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGO.LifeCost
-    class_class_curie: ClassVar[str] = "mtgo:LifeCost"
+    class_class_uri: ClassVar[URIRef] = MTGOC.LifeCost
+    class_class_curie: ClassVar[str] = "mtgoc:LifeCost"
     class_name: ClassVar[str] = "LifeCost"
     class_model_uri: ClassVar[URIRef] = MTGO.LifeCost
 
@@ -579,14 +586,34 @@ class LifeCost(Cost):
 
 
 @dataclass
+class CardCollection(YAMLRoot):
+    """
+    A collection of Cards, such as a Deck or cards set.
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = MTGOC.CardCollection
+    class_class_curie: ClassVar[str] = "mtgoc:CardCollection"
+    class_name: ClassVar[str] = "CardCollection"
+    class_model_uri: ClassVar[URIRef] = MTGO.CardCollection
+
+    entries: Optional[Union[Dict[Union[str, CardId], Union[dict, Card]], List[Union[dict, Card]]]] = empty_dict()
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        self._normalize_inlined_as_dict(slot_name="entries", slot_type=Card, key_name="id", keyed=True)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
 class Ability(NamedThing):
     """
     A card ability, activated, triggered or static.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGO.Ability
-    class_class_curie: ClassVar[str] = "mtgo:Ability"
+    class_class_uri: ClassVar[URIRef] = MTGOA.Ability
+    class_class_curie: ClassVar[str] = "mtgoa:Ability"
     class_name: ClassVar[str] = "Ability"
     class_model_uri: ClassVar[URIRef] = MTGO.Ability
 
@@ -613,8 +640,8 @@ class ActivatedAbility(Ability):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGO.ActivatedAbility
-    class_class_curie: ClassVar[str] = "mtgo:ActivatedAbility"
+    class_class_uri: ClassVar[URIRef] = MTGOA.ActivatedAbility
+    class_class_curie: ClassVar[str] = "mtgoa:ActivatedAbility"
     class_name: ClassVar[str] = "ActivatedAbility"
     class_model_uri: ClassVar[URIRef] = MTGO.ActivatedAbility
 
@@ -641,8 +668,8 @@ class KeywordAbility(Ability):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGO.KeywordAbility
-    class_class_curie: ClassVar[str] = "mtgo:KeywordAbility"
+    class_class_uri: ClassVar[URIRef] = MTGOA.KeywordAbility
+    class_class_curie: ClassVar[str] = "mtgoa:KeywordAbility"
     class_name: ClassVar[str] = "KeywordAbility"
     class_model_uri: ClassVar[URIRef] = MTGO.KeywordAbility
 
@@ -670,8 +697,8 @@ class StaticAbility(Ability):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGO.StaticAbility
-    class_class_curie: ClassVar[str] = "mtgo:StaticAbility"
+    class_class_uri: ClassVar[URIRef] = MTGOA.StaticAbility
+    class_class_curie: ClassVar[str] = "mtgoa:StaticAbility"
     class_name: ClassVar[str] = "StaticAbility"
     class_model_uri: ClassVar[URIRef] = MTGO.StaticAbility
 
@@ -694,8 +721,8 @@ class TriggeredAbility(Ability):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGO.TriggeredAbility
-    class_class_curie: ClassVar[str] = "mtgo:TriggeredAbility"
+    class_class_uri: ClassVar[URIRef] = MTGOA.TriggeredAbility
+    class_class_curie: ClassVar[str] = "mtgoa:TriggeredAbility"
     class_name: ClassVar[str] = "TriggeredAbility"
     class_model_uri: ClassVar[URIRef] = MTGO.TriggeredAbility
 
@@ -722,8 +749,8 @@ class Event(NamedThing):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGO.Event
-    class_class_curie: ClassVar[str] = "mtgo:Event"
+    class_class_uri: ClassVar[URIRef] = MTGOA.Event
+    class_class_curie: ClassVar[str] = "mtgoa:Event"
     class_name: ClassVar[str] = "Event"
     class_model_uri: ClassVar[URIRef] = MTGO.Event
 
@@ -754,21 +781,61 @@ class Event(NamedThing):
 
 
 @dataclass
-class CardCollection(YAMLRoot):
+class Condition(NamedThing):
     """
-    A collection of Cards, such as a Deck or cards set.
+    A condition expressed as a constraint on a property.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGO.CardCollection
-    class_class_curie: ClassVar[str] = "mtgo:CardCollection"
-    class_name: ClassVar[str] = "CardCollection"
-    class_model_uri: ClassVar[URIRef] = MTGO.CardCollection
+    class_class_uri: ClassVar[URIRef] = MTGOA.Condition
+    class_class_curie: ClassVar[str] = "mtgoa:Condition"
+    class_name: ClassVar[str] = "Condition"
+    class_model_uri: ClassVar[URIRef] = MTGO.Condition
 
-    entries: Optional[Union[Dict[Union[str, CardId], Union[dict, Card]], List[Union[dict, Card]]]] = empty_dict()
+    id: Union[str, ConditionId] = None
+    name: str = None
+    target: Optional[str] = None
+    property: Optional[Union[str, PropertyId]] = None
+    value_constraint: Optional[Union[str, "ValueConstraint"]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        self._normalize_inlined_as_dict(slot_name="entries", slot_type=Card, key_name="id", keyed=True)
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, ConditionId):
+            self.id = ConditionId(self.id)
+
+        if self.target is not None and not isinstance(self.target, str):
+            self.target = str(self.target)
+
+        if self.property is not None and not isinstance(self.property, PropertyId):
+            self.property = PropertyId(self.property)
+
+        if self.value_constraint is not None and not isinstance(self.value_constraint, ValueConstraint):
+            self.value_constraint = ValueConstraint(self.value_constraint)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class Property(NamedThing):
+    """
+    A property of an entity.
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = RDF.predicate
+    class_class_curie: ClassVar[str] = "rdf:predicate"
+    class_name: ClassVar[str] = "Property"
+    class_model_uri: ClassVar[URIRef] = MTGO.Property
+
+    id: Union[str, PropertyId] = None
+    name: str = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, PropertyId):
+            self.id = PropertyId(self.id)
 
         super().__post_init__(**kwargs)
 
@@ -864,6 +931,56 @@ class Action(EnumDefinitionImpl):
         description="An action taken by a player or card.",
     )
 
+class ActionConstraint(EnumDefinitionImpl):
+
+    must = PermissibleValue(text="must",
+                               description="The constraint must be met.")
+    may = PermissibleValue(text="may",
+                             description="The constraint may be met.")
+    must_not = PermissibleValue(text="must_not",
+                                       description="The constraint must not be met.")
+    may_not = PermissibleValue(text="may_not",
+                                     description="The constraint may not be met.")
+
+    _defn = EnumDefinition(
+        name="ActionConstraint",
+    )
+
+class ValueConstraint(EnumDefinitionImpl):
+
+    equal = PermissibleValue(text="equal",
+                                 description="The value must be equal to the target.")
+    greater_than = PermissibleValue(text="greater_than",
+                                               description="The value must be greater than the target.")
+    less_than = PermissibleValue(text="less_than",
+                                         description="The value must be less than the target.")
+    greater_than_or_equal = PermissibleValue(text="greater_than_or_equal",
+                                                                 description="The value must be greater than or equal to the target.")
+    less_than_or_equal = PermissibleValue(text="less_than_or_equal",
+                                                           description="The value must be less than or equal to the target.")
+    not_equal = PermissibleValue(text="not_equal",
+                                         description="The value must not be equal to the target.")
+    between = PermissibleValue(text="between",
+                                     description="The value must be between the target and the target2.")
+    not_between = PermissibleValue(text="not_between",
+                                             description="The value must not be between the target and the target2.")
+    is_not = PermissibleValue(text="is_not",
+                                   description="The value must not be equivalent to the target.")
+    is_one_of = PermissibleValue(text="is_one_of",
+                                         description="The value must be one of the target list.")
+    is_not_one_of = PermissibleValue(text="is_not_one_of",
+                                                 description="The value must not be one of the target list.")
+
+    _defn = EnumDefinition(
+        name="ValueConstraint",
+    )
+
+    @classmethod
+    def _addvals(cls):
+        setattr(cls, "is",
+                PermissibleValue(text="is",
+                                 description="The value must be equivalent to the target.") )
+
 # Slots
 class slots:
     pass
@@ -877,68 +994,74 @@ slots.name = Slot(uri=SCHEMA.name, name="name", curie=SCHEMA.curie('name'),
 slots.description = Slot(uri=SCHEMA.description, name="description", curie=SCHEMA.curie('description'),
                    model_uri=MTGO.description, domain=None, range=Optional[str])
 
-slots.additional_cost = Slot(uri=MTGO.additional_cost, name="additional_cost", curie=MTGO.curie('additional_cost'),
+slots.additional_cost = Slot(uri=MTGOC.additional_cost, name="additional_cost", curie=MTGOC.curie('additional_cost'),
                    model_uri=MTGO.additional_cost, domain=None, range=Optional[str])
 
-slots.mana_cost = Slot(uri=MTGO.mana_cost, name="mana_cost", curie=MTGO.curie('mana_cost'),
+slots.mana_cost = Slot(uri=MTGOC.mana_cost, name="mana_cost", curie=MTGOC.curie('mana_cost'),
                    model_uri=MTGO.mana_cost, domain=None, range=Optional[Union[Union[str, ManaCostId], List[Union[str, ManaCostId]]]])
 
-slots.card_set = Slot(uri=MTGO.card_set, name="card_set", curie=MTGO.curie('card_set'),
+slots.card_set = Slot(uri=MTGOC.card_set, name="card_set", curie=MTGOC.curie('card_set'),
                    model_uri=MTGO.card_set, domain=None, range=Optional[str])
 
-slots.converted_mana_cost = Slot(uri=MTGO.converted_mana_cost, name="converted_mana_cost", curie=MTGO.curie('converted_mana_cost'),
+slots.converted_mana_cost = Slot(uri=MTGOC.converted_mana_cost, name="converted_mana_cost", curie=MTGOC.curie('converted_mana_cost'),
                    model_uri=MTGO.converted_mana_cost, domain=None, range=Optional[int])
 
-slots.color = Slot(uri=MTGO.color, name="color", curie=MTGO.curie('color'),
+slots.color = Slot(uri=MTGOC.color, name="color", curie=MTGOC.curie('color'),
                    model_uri=MTGO.color, domain=None, range=Union[Union[str, "Color"], List[Union[str, "Color"]]])
 
-slots.ability = Slot(uri=MTGO.ability, name="ability", curie=MTGO.curie('ability'),
-                   model_uri=MTGO.ability, domain=None, range=Optional[Union[Union[str, AbilityId], List[Union[str, AbilityId]]]])
-
-slots.rarity = Slot(uri=MTGO.rarity, name="rarity", curie=MTGO.curie('rarity'),
+slots.rarity = Slot(uri=MTGOC.rarity, name="rarity", curie=MTGOC.curie('rarity'),
                    model_uri=MTGO.rarity, domain=None, range=Optional[Union[str, "Rarity"]])
 
-slots.artist = Slot(uri=MTGO.artist, name="artist", curie=MTGO.curie('artist'),
+slots.artist = Slot(uri=MTGOC.artist, name="artist", curie=MTGOC.curie('artist'),
                    model_uri=MTGO.artist, domain=None, range=Optional[str])
 
-slots.flavor_text = Slot(uri=MTGO.flavor_text, name="flavor_text", curie=MTGO.curie('flavor_text'),
+slots.flavor_text = Slot(uri=MTGOC.flavor_text, name="flavor_text", curie=MTGOC.curie('flavor_text'),
                    model_uri=MTGO.flavor_text, domain=None, range=Optional[str])
 
-slots.rules_text = Slot(uri=MTGO.rules_text, name="rules_text", curie=MTGO.curie('rules_text'),
-                   model_uri=MTGO.rules_text, domain=None, range=Optional[str])
-
-slots.power = Slot(uri=MTGO.power, name="power", curie=MTGO.curie('power'),
+slots.power = Slot(uri=MTGOC.power, name="power", curie=MTGOC.curie('power'),
                    model_uri=MTGO.power, domain=None, range=int)
 
-slots.toughness = Slot(uri=MTGO.toughness, name="toughness", curie=MTGO.curie('toughness'),
+slots.toughness = Slot(uri=MTGOC.toughness, name="toughness", curie=MTGOC.curie('toughness'),
                    model_uri=MTGO.toughness, domain=None, range=int)
 
-slots.type_line = Slot(uri=MTGO.type_line, name="type_line", curie=MTGO.curie('type_line'),
+slots.type_line = Slot(uri=MTGOC.type_line, name="type_line", curie=MTGOC.curie('type_line'),
                    model_uri=MTGO.type_line, domain=None, range=str)
 
-slots.card_subtype = Slot(uri=MTGO.card_subtype, name="card_subtype", curie=MTGO.curie('card_subtype'),
+slots.card_subtype = Slot(uri=MTGOC.card_subtype, name="card_subtype", curie=MTGOC.curie('card_subtype'),
                    model_uri=MTGO.card_subtype, domain=None, range=Optional[Union[str, List[str]]])
 
-slots.card_supertype = Slot(uri=MTGO.card_supertype, name="card_supertype", curie=MTGO.curie('card_supertype'),
+slots.card_supertype = Slot(uri=MTGOC.card_supertype, name="card_supertype", curie=MTGOC.curie('card_supertype'),
                    model_uri=MTGO.card_supertype, domain=None, range=Optional[Union[str, List[str]]])
 
-slots.card_type = Slot(uri=MTGO.card_type, name="card_type", curie=MTGO.curie('card_type'),
+slots.card_type = Slot(uri=MTGOC.card_type, name="card_type", curie=MTGOC.curie('card_type'),
                    model_uri=MTGO.card_type, domain=None, range=str)
 
-slots.value = Slot(uri=MTGO.value, name="value", curie=MTGO.curie('value'),
+slots.value = Slot(uri=MTGOC.value, name="value", curie=MTGOC.curie('value'),
                    model_uri=MTGO.value, domain=None, range=Optional[int])
 
-slots.action = Slot(uri=MTGO.action, name="action", curie=MTGO.curie('action'),
+slots.ability = Slot(uri=MTGOA.ability, name="ability", curie=MTGOA.curie('ability'),
+                   model_uri=MTGO.ability, domain=Card, range=Optional[Union[Union[str, AbilityId], List[Union[str, AbilityId]]]])
+
+slots.rules_text = Slot(uri=MTGOA.rules_text, name="rules_text", curie=MTGOA.curie('rules_text'),
+                   model_uri=MTGO.rules_text, domain=None, range=Optional[str])
+
+slots.action = Slot(uri=MTGOA.action, name="action", curie=MTGOA.curie('action'),
                    model_uri=MTGO.action, domain=None, range=Union[str, "Action"])
 
-slots.source = Slot(uri=MTGO.source, name="source", curie=MTGO.curie('source'),
+slots.source = Slot(uri=MTGOA.source, name="source", curie=MTGOA.curie('source'),
                    model_uri=MTGO.source, domain=None, range=Optional[str])
 
-slots.target = Slot(uri=MTGO.target, name="target", curie=MTGO.curie('target'),
+slots.target = Slot(uri=MTGOA.target, name="target", curie=MTGOA.curie('target'),
                    model_uri=MTGO.target, domain=None, range=Optional[str])
 
-slots.condition = Slot(uri=MTGO.condition, name="condition", curie=MTGO.curie('condition'),
+slots.condition = Slot(uri=MTGOA.condition, name="condition", curie=MTGOA.curie('condition'),
                    model_uri=MTGO.condition, domain=None, range=Optional[Union[str, EventId]])
 
-slots.cardCollection__entries = Slot(uri=MTGO.entries, name="cardCollection__entries", curie=MTGO.curie('entries'),
+slots.property = Slot(uri=MTGOA.property, name="property", curie=MTGOA.curie('property'),
+                   model_uri=MTGO.property, domain=None, range=Optional[Union[str, PropertyId]])
+
+slots.value_constraint = Slot(uri=MTGOA.value_constraint, name="value_constraint", curie=MTGOA.curie('value_constraint'),
+                   model_uri=MTGO.value_constraint, domain=None, range=Optional[Union[str, "ValueConstraint"]])
+
+slots.cardCollection__entries = Slot(uri=MTGOC.entries, name="cardCollection__entries", curie=MTGOC.curie('entries'),
                    model_uri=MTGO.cardCollection__entries, domain=None, range=Optional[Union[Dict[Union[str, CardId], Union[dict, Card]], List[Union[dict, Card]]]])

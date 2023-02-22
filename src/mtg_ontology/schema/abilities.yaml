@@ -1,0 +1,183 @@
+id: https://w3id.org/cmdoret/mtg-ontology/abilities/
+name: mtgo-abilities
+title: Magic The Gathering Ontology for Abilities
+description: |-
+  An ontology describing Magic: The Gathering abilities.
+  It aims to formalize the freetext description of card
+  abilities and effects.
+license: GNU GPL v3.0
+see_also:
+  - https://cmdoret.github.io/mtg-ontology
+
+prefixes:
+  mtgoa: https://w3id.org/cmdoret/mtg-ontology/abilities/
+  mtgoc: https://w3id.org/cmdoret/mtg-ontology/cards/
+  mtgo: https://w3id.org/cmdoret/mtg-ontology/
+  linkml: https://w3id.org/linkml/
+  schema: http://schema.org/
+  wiki: http://en.wikipedia.org/wiki/
+  example: http://www.example.org/rdf#
+default_prefix: mtgoa
+default_range: string
+
+imports:
+  - linkml:types
+  - mtg_ontology
+  - cards
+
+classes:
+
+  Ability:
+    is_a: NamedThing
+    description: >-
+      A card ability, activated, triggered or static.
+    slots:
+      - rules_text
+  ActivatedAbility:
+    is_a: Ability
+    description: >-
+      A card ability which can be activated for a cost.
+    slots:
+      - additional_cost
+  KeywordAbility:
+    is_a: Ability
+    description: >-
+      A passive ability represented by word that substitutes for a piece of rules text, such as deathtouch or flying.
+    slots:
+      - name
+  StaticAbility:
+    is_a: Ability
+    description: >-
+      A card ability which remains active until endgame once put into effect.
+  TriggeredAbility:
+    is_a: Ability
+    description: >-
+      A card ability, triggered by an event.
+    slots:
+      - condition
+
+  Event:
+    is_a: NamedThing
+    description: A combination of circumstances during a game.
+    slots:
+      - source
+      - action
+      - target
+
+  Condition:
+    is_a: NamedThing
+    description: A condition expressed as a constraint on a property.
+    slots:
+      - target
+      - property
+      - value_constraint
+  
+  Property:
+    is_a: NamedThing
+    description: A property of an entity.
+    class_uri: rdf:predicate
+
+slots:
+  ability:
+    description: An ability associated with a card.
+    range: Ability
+    domain: Card
+    multivalued: true
+  rules_text:
+    range: string
+    description: The text describing what an ability does.
+  action:
+    range: Action
+    required: true
+    description: An action taken by a player or card.
+  source:
+    any_of:
+      - range: Player
+      - range: Card
+    description: The entity responsible for an action.
+  target:
+    any_of:
+      - range: Player
+      - range: Card
+    description: The entity targeted by an action or constraint.
+  condition:
+    range: Event
+    description: A condition required for an activation.
+  property:
+    range: Property
+    description: A property of an entity.
+  value_constraint:
+    range: ValueConstraint
+    description: A constraint on the value of a property.
+    
+enums:
+
+  Player:
+    description: One or more human players.
+    permissible_values:
+      you:
+        description: The focal human player.
+      owner:
+        description: The human player who owns a card.
+      controller:
+        description: The human player who controls an object on the stack.
+      opponent:
+        description: A human player playing against the focal player.
+      opponents:
+        description: All human players playing against the focal player.
+      players:
+        description: All players taking part in the game.
+
+  Action:
+    description: An action taken by a player or card.
+    permissible_values:
+      discard:
+        description: Transfer one or more cards from the hand to the graveyard.
+      draw:
+        description: Transfer one or more cards from the library to the hand.
+      sacrifice:
+        description: Transfer one or more cards from the battlefield to the graveyard.
+      exile:
+        description: Remove one or more cards from game.
+      fight:
+        description: Two cards fight each other.
+      deal_damage:
+        description: Something deals damage to something else.
+
+  ActionConstraint:
+    permissible_values:
+      must:
+        description: The constraint must be met.
+      may:
+        description: The constraint may be met.
+      must_not:
+        description: The constraint must not be met.
+      may_not:
+        description: The constraint may not be met.
+  
+  ValueConstraint:
+    permissible_values:
+      equal:
+        description: The value must be equal to the target.
+      greater_than:
+        description: The value must be greater than the target.
+      less_than:
+        description: The value must be less than the target.
+      greater_than_or_equal:
+        description: The value must be greater than or equal to the target.
+      less_than_or_equal:
+        description: The value must be less than or equal to the target.
+      not_equal:
+        description: The value must not be equal to the target.
+      between:
+        description: The value must be between the target and the target2.
+      not_between:
+        description: The value must not be between the target and the target2.
+      is:
+        description: The value must be equivalent to the target.
+      is_not:
+        description: The value must not be equivalent to the target.
+      is_one_of:
+        description: The value must be one of the target list.
+      is_not_one_of:
+        description: The value must not be one of the target list.
