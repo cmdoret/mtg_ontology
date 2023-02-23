@@ -106,11 +106,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://cmdoret.github.io/mtg-ontology/PersonStatus/</loc>
-         <lastmod>2023-02-23</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://cmdoret.github.io/mtg-ontology/Player/</loc>
          <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
@@ -161,11 +156,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://cmdoret.github.io/mtg-ontology/about/</loc>
-         <lastmod>2023-02-23</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://cmdoret.github.io/mtg-ontology/action/</loc>
          <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
@@ -176,17 +166,7 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://cmdoret.github.io/mtg-ontology/age_in_years/</loc>
-         <lastmod>2023-02-23</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://cmdoret.github.io/mtg-ontology/artist/</loc>
-         <lastmod>2023-02-23</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://cmdoret.github.io/mtg-ontology/birth_date/</loc>
          <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -251,11 +231,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://cmdoret.github.io/mtg-ontology/mtg-ontology/</loc>
-         <lastmod>2023-02-23</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://cmdoret.github.io/mtg-ontology/mtgo-abilities/</loc>
          <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
@@ -277,11 +252,6 @@
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/power/</loc>
-         <lastmod>2023-02-23</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://cmdoret.github.io/mtg-ontology/primary_email/</loc>
          <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -332,11 +302,6 @@
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/value_constraint/</loc>
-         <lastmod>2023-02-23</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://cmdoret.github.io/mtg-ontology/vital_status/</loc>
          <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
