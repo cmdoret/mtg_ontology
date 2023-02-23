@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://cmdoret.github.io/mtg-ontology/type_line/">
+        <link rel="canonical" href="https://cmdoret.github.io/mtg-ontology/ValueConstraint/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
     
     
       
-        <title>Slot: type_line - mtg-ontology</title>
+        <title>Enum: ValueConstraint - mtg-ontology</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-type_line" class="md-skip">
+        <a href="#enum-valueconstraint" class="md-skip">
           Skip to content
         </a>
       
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: type_line
+              Enum: ValueConstraint
             
           </span>
         </div>
@@ -256,15 +256,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#applicable-classes" class="md-nav__link">
-    Applicable Classes
+  <a href="#permissible-values" class="md-nav__link">
+    Permissible Values
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
+  <a href="#slots" class="md-nav__link">
+    Slots
   </a>
   
 </li>
@@ -310,18 +310,87 @@
                 
                   
 
-  <a href="https://github.com/cmdoret/mtg-ontology/edit/master/docs/type_line.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/cmdoret/mtg-ontology/edit/master/docs/ValueConstraint.md" title="Edit this page" class="md-content__button md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
-<h1 id="slot-type_line">Slot: type_line</h1>
-<p><em>The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).</em></p>
-<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/cards/type_line">mtgoc:type_line</a></p>
-<!-- no inheritance hierarchy -->
-
-<h2 id="applicable-classes">Applicable Classes</h2>
+<h1 id="enum-valueconstraint">Enum: ValueConstraint</h1>
+<p>URI: <a href="ValueConstraint">ValueConstraint</a></p>
+<h2 id="permissible-values">Permissible Values</h2>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Meaning</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>equal</td>
+<td>None</td>
+<td>The value must be equal to the target</td>
+</tr>
+<tr>
+<td>greater_than</td>
+<td>None</td>
+<td>The value must be greater than the target</td>
+</tr>
+<tr>
+<td>less_than</td>
+<td>None</td>
+<td>The value must be less than the target</td>
+</tr>
+<tr>
+<td>greater_than_or_equal</td>
+<td>None</td>
+<td>The value must be greater than or equal to the target</td>
+</tr>
+<tr>
+<td>less_than_or_equal</td>
+<td>None</td>
+<td>The value must be less than or equal to the target</td>
+</tr>
+<tr>
+<td>not_equal</td>
+<td>None</td>
+<td>The value must not be equal to the target</td>
+</tr>
+<tr>
+<td>between</td>
+<td>None</td>
+<td>The value must be between the target and the target2</td>
+</tr>
+<tr>
+<td>not_between</td>
+<td>None</td>
+<td>The value must not be between the target and the target2</td>
+</tr>
+<tr>
+<td>is</td>
+<td>None</td>
+<td>The value must be equivalent to the target</td>
+</tr>
+<tr>
+<td>is_not</td>
+<td>None</td>
+<td>The value must not be equivalent to the target</td>
+</tr>
+<tr>
+<td>is_one_of</td>
+<td>None</td>
+<td>The value must be one of the target list</td>
+</tr>
+<tr>
+<td>is_not_one_of</td>
+<td>None</td>
+<td>The value must not be one of the target list</td>
+</tr>
+</tbody>
+</table>
+<h2 id="slots">Slots</h2>
 <table>
 <thead>
 <tr>
@@ -331,66 +400,59 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../Card/">Card</a></td>
-<td>A card in the Magic The Gathering game</td>
-</tr>
-<tr>
-<td><a href="../Permanent/">Permanent</a></td>
-<td>A card or token that can be put onto the battlefield</td>
-</tr>
-<tr>
-<td><a href="../Token/">Token</a></td>
-<td>A permanent that is not represented by a regular card and does not have a cas...</td>
-</tr>
-<tr>
-<td><a href="../Sorcery/">Sorcery</a></td>
-<td>A card that represents a sorcery spell that can be cast</td>
-</tr>
-<tr>
-<td><a href="../Instant/">Instant</a></td>
-<td>A card that represents an instant spell that can be cast</td>
-</tr>
-<tr>
-<td><a href="../Enchantment/">Enchantment</a></td>
-<td>A permanent which applies persistent magical effects</td>
-</tr>
-<tr>
-<td><a href="../Artifact/">Artifact</a></td>
-<td>A permanent representing a magical item, animated construct, or other objects...</td>
-</tr>
-<tr>
-<td><a href="../Creature/">Creature</a></td>
-<td>A card that represents a creature that can be summoned to the battlefield</td>
-</tr>
-<tr>
-<td><a href="../Land/">Land</a></td>
-<td>A card that represents a land that can be tapped for mana</td>
+<td><a href="../value_constraint/">value_constraint</a></td>
+<td>A constraint on the value of a property</td>
 </tr>
 </tbody>
 </table>
-<h2 id="properties">Properties</h2>
-<ul>
-<li>Range: <a href="xsd:string">xsd:string</a></li>
-<li>Required: True</li>
-</ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://w3id.org/cmdoret/mtg-ontology/cards</li>
+<li>from schema: https://w3id.org/cmdoret/mtg-ontology/abilities/</li>
 </ul>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: type_line
-description: The text line below a card's illustration containing the card's type,
-  subtype and supertype (if applicable).
-from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
+<pre><code class="language-yaml">name: ValueConstraint
+from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
-alias: type_line
-domain_of:
-- Card
-range: string
-required: true
+permissible_values:
+  equal:
+    text: equal
+    description: The value must be equal to the target.
+  greater_than:
+    text: greater_than
+    description: The value must be greater than the target.
+  less_than:
+    text: less_than
+    description: The value must be less than the target.
+  greater_than_or_equal:
+    text: greater_than_or_equal
+    description: The value must be greater than or equal to the target.
+  less_than_or_equal:
+    text: less_than_or_equal
+    description: The value must be less than or equal to the target.
+  not_equal:
+    text: not_equal
+    description: The value must not be equal to the target.
+  between:
+    text: between
+    description: The value must be between the target and the target2.
+  not_between:
+    text: not_between
+    description: The value must not be between the target and the target2.
+  is:
+    text: is
+    description: The value must be equivalent to the target.
+  is_not:
+    text: is_not
+    description: The value must not be equivalent to the target.
+  is_one_of:
+    text: is_one_of
+    description: The value must be one of the target list.
+  is_not_one_of:
+    text: is_not_one_of
+    description: The value must not be one of the target list.
 
 </code></pre>
 

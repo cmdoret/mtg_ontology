@@ -201,12 +201,11 @@
 </a>
 <h1 id="class-token">Class: Token</h1>
 <p><em>A permanent that is not represented by a regular card and does not have a casting cost.</em></p>
-<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/Token">mtgo:Token</a></p>
+<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/cards/Token">mtgoc:Token</a></p>
 <div class="mermaid"> classDiagram
     class Token
       Card &lt;|-- Token
 
-      Token : ability
       Token : additional_cost
       Token : artist
       Token : card_set
@@ -245,12 +244,6 @@
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><a href="../ability/">ability</a></td>
-<td>0..* <br/> <a href="../Ability/">Ability</a></td>
-<td>An ability associated with a card</td>
-<td><a href="../Card/">Card</a></td>
-</tr>
 <tr>
 <td><a href="../additional_cost/">additional_cost</a></td>
 <td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
@@ -346,7 +339,7 @@
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://w3id.org/cmdoret/mtg-ontology</li>
+<li>from schema: https://w3id.org/cmdoret/mtg-ontology/cards</li>
 </ul>
 <h2 id="mappings">Mappings</h2>
 <table>
@@ -359,11 +352,11 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>mtgo:Token</td>
+<td>mtgoc:Token</td>
 </tr>
 <tr>
 <td>native</td>
-<td>mtgo:Token</td>
+<td>mtgoc:Token</td>
 </tr>
 </tbody>
 </table>
@@ -374,7 +367,7 @@
 <pre><code class="language-yaml">name: Token
 description: A permanent that is not represented by a regular card and does not have
   a casting cost.
-from_schema: https://w3id.org/cmdoret/mtg-ontology
+from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
 rank: 1000
 is_a: Card
 
@@ -385,40 +378,29 @@ is_a: Card
 <pre><code class="language-yaml">name: Token
 description: A permanent that is not represented by a regular card and does not have
   a casting cost.
-from_schema: https://w3id.org/cmdoret/mtg-ontology
+from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
 rank: 1000
 is_a: Card
 attributes:
-  ability:
-    name: ability
-    description: An ability associated with a card.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
-    rank: 1000
-    multivalued: true
-    alias: ability
-    owner: Token
-    domain_of:
-    - Card
-    range: Ability
   additional_cost:
     name: additional_cost
     description: An additional cost to play a card or ability.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
     rank: 1000
     alias: additional_cost
     owner: Token
     domain_of:
-    - Card
     - ActivatedAbility
+    - Card
     range: string
     any_of:
     - range: ManaCost
     - range: LifeCost
-    - range: Event
+    - range: mtgoa:Event
   mana_cost:
     name: mana_cost
     description: A mana cost for a card or ability.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
     rank: 1000
     multivalued: true
     alias: mana_cost
@@ -429,7 +411,7 @@ attributes:
   converted_mana_cost:
     name: converted_mana_cost
     description: The total mana cost for a card or ability, summed across all colors.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
     rank: 1000
     alias: converted_mana_cost
     owner: Token
@@ -439,7 +421,7 @@ attributes:
   color:
     name: color
     description: The color of a card.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
     rank: 1000
     multivalued: true
     alias: color
@@ -453,7 +435,7 @@ attributes:
     name: card_set
     description: A pool of cards released together and designed for the same play
       environment.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
     rank: 1000
     alias: card_set
     owner: Token
@@ -463,7 +445,7 @@ attributes:
   artist:
     name: artist
     description: The artist who drew a card's illustration.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
     rank: 1000
     alias: artist
     owner: Token
@@ -473,7 +455,7 @@ attributes:
   flavor_text:
     name: flavor_text
     description: The lore text at the bottom of a card.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
     rank: 1000
     alias: flavor_text
     owner: Token
@@ -484,7 +466,7 @@ attributes:
     name: type_line
     description: The text line below a card's illustration containing the card's type,
       subtype and supertype (if applicable).
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
     rank: 1000
     alias: type_line
     owner: Token
@@ -496,7 +478,7 @@ attributes:
     name: card_type
     description: The text line below a card's illustration containing the card's type,
       subtype and supertype (if applicable).
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
     rank: 1000
     alias: card_type
     owner: Token
@@ -508,7 +490,7 @@ attributes:
     name: card_subtype
     description: The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears
       on the right of the type line.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
     rank: 1000
     multivalued: true
     alias: card_subtype
@@ -520,7 +502,7 @@ attributes:
     name: card_supertype
     description: The supertype(s) of a card, such as Basic, Legendary or Snow. Appears
       on the left of the type line, before the type.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
     rank: 1000
     multivalued: true
     alias: card_supertype
@@ -531,7 +513,7 @@ attributes:
   rarity:
     name: rarity
     description: An ability associated with a card.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
     rank: 1000
     alias: rarity
     owner: Token
@@ -541,7 +523,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/
     rank: 1000
     slot_uri: schema:identifier
     identifier: true
@@ -553,7 +535,7 @@ attributes:
   name:
     name: name
     description: A human-readable name for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/
     rank: 1000
     slot_uri: schema:name
     alias: name
@@ -566,7 +548,7 @@ attributes:
   description:
     name: description
     description: A human-readable description for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/
     rank: 1000
     slot_uri: schema:description
     alias: description

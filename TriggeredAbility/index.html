@@ -201,7 +201,7 @@
 </a>
 <h1 id="class-triggeredability">Class: TriggeredAbility</h1>
 <p><em>A card ability, triggered by an event.</em></p>
-<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/TriggeredAbility">mtgo:TriggeredAbility</a></p>
+<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/abilities/TriggeredAbility">mtgoa:TriggeredAbility</a></p>
 <div class="mermaid"> classDiagram
     class TriggeredAbility
       Ability &lt;|-- TriggeredAbility
@@ -269,7 +269,7 @@
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://w3id.org/cmdoret/mtg-ontology</li>
+<li>from schema: https://w3id.org/cmdoret/mtg-ontology/abilities/</li>
 </ul>
 <h2 id="mappings">Mappings</h2>
 <table>
@@ -282,11 +282,11 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>mtgo:TriggeredAbility</td>
+<td>mtgoa:TriggeredAbility</td>
 </tr>
 <tr>
 <td>native</td>
-<td>mtgo:TriggeredAbility</td>
+<td>mtgoa:TriggeredAbility</td>
 </tr>
 </tbody>
 </table>
@@ -296,7 +296,7 @@
 <details>
 <pre><code class="language-yaml">name: TriggeredAbility
 description: A card ability, triggered by an event.
-from_schema: https://w3id.org/cmdoret/mtg-ontology
+from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
 is_a: Ability
 slots:
@@ -308,14 +308,14 @@ slots:
 <details>
 <pre><code class="language-yaml">name: TriggeredAbility
 description: A card ability, triggered by an event.
-from_schema: https://w3id.org/cmdoret/mtg-ontology
+from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
 is_a: Ability
 attributes:
   condition:
     name: condition
     description: A condition required for an activation.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
     rank: 1000
     alias: condition
     owner: TriggeredAbility
@@ -325,7 +325,7 @@ attributes:
   rules_text:
     name: rules_text
     description: The text describing what an ability does.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
     rank: 1000
     alias: rules_text
     owner: TriggeredAbility
@@ -335,7 +335,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/
     rank: 1000
     slot_uri: schema:identifier
     identifier: true
@@ -347,7 +347,7 @@ attributes:
   name:
     name: name
     description: A human-readable name for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/
     rank: 1000
     slot_uri: schema:name
     alias: name
@@ -360,7 +360,7 @@ attributes:
   description:
     name: description
     description: A human-readable description for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/
     rank: 1000
     slot_uri: schema:description
     alias: description

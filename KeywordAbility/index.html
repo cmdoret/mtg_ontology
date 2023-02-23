@@ -201,7 +201,7 @@
 </a>
 <h1 id="class-keywordability">Class: KeywordAbility</h1>
 <p><em>A passive ability represented by word that substitutes for a piece of rules text, such as deathtouch or flying.</em></p>
-<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/KeywordAbility">mtgo:KeywordAbility</a></p>
+<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/abilities/KeywordAbility">mtgoa:KeywordAbility</a></p>
 <div class="mermaid"> classDiagram
     class KeywordAbility
       Ability &lt;|-- KeywordAbility
@@ -262,7 +262,7 @@
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://w3id.org/cmdoret/mtg-ontology</li>
+<li>from schema: https://w3id.org/cmdoret/mtg-ontology/abilities/</li>
 </ul>
 <h2 id="mappings">Mappings</h2>
 <table>
@@ -275,11 +275,11 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>mtgo:KeywordAbility</td>
+<td>mtgoa:KeywordAbility</td>
 </tr>
 <tr>
 <td>native</td>
-<td>mtgo:KeywordAbility</td>
+<td>mtgoa:KeywordAbility</td>
 </tr>
 </tbody>
 </table>
@@ -290,7 +290,7 @@
 <pre><code class="language-yaml">name: KeywordAbility
 description: A passive ability represented by word that substitutes for a piece of
   rules text, such as deathtouch or flying.
-from_schema: https://w3id.org/cmdoret/mtg-ontology
+from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
 is_a: Ability
 slots:
@@ -303,14 +303,14 @@ slots:
 <pre><code class="language-yaml">name: KeywordAbility
 description: A passive ability represented by word that substitutes for a piece of
   rules text, such as deathtouch or flying.
-from_schema: https://w3id.org/cmdoret/mtg-ontology
+from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
 is_a: Ability
 attributes:
   name:
     name: name
     description: A human-readable name for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/
     rank: 1000
     slot_uri: schema:name
     alias: name
@@ -323,7 +323,7 @@ attributes:
   rules_text:
     name: rules_text
     description: The text describing what an ability does.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
     rank: 1000
     alias: rules_text
     owner: KeywordAbility
@@ -333,7 +333,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/
     rank: 1000
     slot_uri: schema:identifier
     identifier: true
@@ -345,7 +345,7 @@ attributes:
   description:
     name: description
     description: A human-readable description for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/
     rank: 1000
     slot_uri: schema:description
     alias: description

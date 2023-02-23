@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#mtg-ontology" class="md-skip">
+        <a href="#magic-the-gathering-ontology" class="md-skip">
           Skip to content
         </a>
       
@@ -379,10 +379,11 @@
   </a>
 
 
-<h1 id="mtg-ontology">mtg-ontology</h1>
-<p>An ontology describing Magic: The Gathering.</p>
-<p>URI: https://w3id.org/cmdoret/mtg-ontology
-Name: mtg-ontology</p>
+<h1 id="magic-the-gathering-ontology">Magic The Gathering Ontology</h1>
+<p>An ontology describing Magic: The Gathering. It provides
+the basic features needed to describe cards.</p>
+<p>URI: https://w3id.org/cmdoret/mtg-ontology/
+Name: mtgo</p>
 <h2 id="classes">Classes</h2>
 <table>
 <thead>
@@ -411,6 +412,10 @@ Name: mtg-ontology</p>
 <tr>
 <td><a href="CardCollection/">CardCollection</a></td>
 <td>A collection of Cards, such as a Deck or cards set</td>
+</tr>
+<tr>
+<td><a href="Condition/">Condition</a></td>
+<td>A condition expressed as a constraint on a property</td>
 </tr>
 <tr>
 <td><a href="Cost/">Cost</a></td>
@@ -455,6 +460,10 @@ Name: mtg-ontology</p>
 <tr>
 <td><a href="Permanent/">Permanent</a></td>
 <td>A card or token that can be put onto the battlefield</td>
+</tr>
+<tr>
+<td><a href="Property/">Property</a></td>
+<td>A property of an entity</td>
 </tr>
 <tr>
 <td><a href="Sorcery/">Sorcery</a></td>
@@ -560,6 +569,10 @@ Name: mtg-ontology</p>
 <td>The amount of damage dealt in combat</td>
 </tr>
 <tr>
+<td><a href="property/">property</a></td>
+<td>A property of an entity</td>
+</tr>
+<tr>
 <td><a href="rarity/">rarity</a></td>
 <td>An ability associated with a card</td>
 </tr>
@@ -573,7 +586,7 @@ Name: mtg-ontology</p>
 </tr>
 <tr>
 <td><a href="target/">target</a></td>
-<td>The entity targeted by an action</td>
+<td>The entity targeted by an action or constraint</td>
 </tr>
 <tr>
 <td><a href="toughness/">toughness</a></td>
@@ -586,6 +599,10 @@ Name: mtg-ontology</p>
 <tr>
 <td><a href="value/">value</a></td>
 <td>The numeric part of a quantitative value</td>
+</tr>
+<tr>
+<td><a href="value_constraint/">value_constraint</a></td>
+<td>A constraint on the value of a property</td>
 </tr>
 </tbody>
 </table>
@@ -603,6 +620,10 @@ Name: mtg-ontology</p>
 <td>An action taken by a player or card</td>
 </tr>
 <tr>
+<td><a href="ActionConstraint/">ActionConstraint</a></td>
+<td></td>
+</tr>
+<tr>
 <td><a href="Color/">Color</a></td>
 <td>A color, such as Black, Blue, Red, Green, White or Colorless</td>
 </tr>
@@ -613,6 +634,10 @@ Name: mtg-ontology</p>
 <tr>
 <td><a href="Rarity/">Rarity</a></td>
 <td>The rarity of the card, may be one of Common, Uncommon, Rare or Mythic</td>
+</tr>
+<tr>
+<td><a href="ValueConstraint/">ValueConstraint</a></td>
+<td></td>
 </tr>
 </tbody>
 </table>

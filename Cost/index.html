@@ -201,7 +201,7 @@
 </a>
 <h1 id="class-cost">Class: Cost</h1>
 <p><em>The cost of a card or ability.</em></p>
-<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/Cost">mtgo:Cost</a></p>
+<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/cards/Cost">mtgoc:Cost</a></p>
 <div class="mermaid"> classDiagram
     class Cost
       NamedThing &lt;|-- Cost
@@ -272,7 +272,7 @@
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://w3id.org/cmdoret/mtg-ontology</li>
+<li>from schema: https://w3id.org/cmdoret/mtg-ontology/cards</li>
 </ul>
 <h2 id="mappings">Mappings</h2>
 <table>
@@ -285,11 +285,11 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>mtgo:Cost</td>
+<td>mtgoc:Cost</td>
 </tr>
 <tr>
 <td>native</td>
-<td>mtgo:Cost</td>
+<td>mtgoc:Cost</td>
 </tr>
 </tbody>
 </table>
@@ -299,7 +299,7 @@
 <details>
 <pre><code class="language-yaml">name: Cost
 description: The cost of a card or ability.
-from_schema: https://w3id.org/cmdoret/mtg-ontology
+from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
 rank: 1000
 is_a: NamedThing
 slots:
@@ -311,14 +311,14 @@ slots:
 <details>
 <pre><code class="language-yaml">name: Cost
 description: The cost of a card or ability.
-from_schema: https://w3id.org/cmdoret/mtg-ontology
+from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
 rank: 1000
 is_a: NamedThing
 attributes:
   value:
     name: value
     description: The numeric part of a quantitative value.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
     rank: 1000
     alias: value
     owner: Cost
@@ -328,7 +328,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/
     rank: 1000
     slot_uri: schema:identifier
     identifier: true
@@ -340,7 +340,7 @@ attributes:
   name:
     name: name
     description: A human-readable name for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/
     rank: 1000
     slot_uri: schema:name
     alias: name
@@ -353,7 +353,7 @@ attributes:
   description:
     name: description
     description: A human-readable description for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/
     rank: 1000
     slot_uri: schema:description
     alias: description

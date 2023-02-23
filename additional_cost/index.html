@@ -318,7 +318,7 @@
 
 <h1 id="slot-additional_cost">Slot: additional_cost</h1>
 <p><em>An additional cost to play a card or ability.</em></p>
-<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/additional_cost">mtgo:additional_cost</a></p>
+<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/cards/additional_cost">mtgoc:additional_cost</a></p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -331,12 +331,12 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../Card/">Card</a></td>
-<td>A card in the Magic The Gathering game</td>
-</tr>
-<tr>
 <td><a href="../ActivatedAbility/">ActivatedAbility</a></td>
 <td>A card ability which can be activated for a cost</td>
+</tr>
+<tr>
+<td><a href="../Card/">Card</a></td>
+<td>A card in the Magic The Gathering game</td>
 </tr>
 <tr>
 <td><a href="../Permanent/">Permanent</a></td>
@@ -379,24 +379,24 @@
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://w3id.org/cmdoret/mtg-ontology</li>
+<li>from schema: https://w3id.org/cmdoret/mtg-ontology/cards</li>
 </ul>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
 <pre><code class="language-yaml">name: additional_cost
 description: An additional cost to play a card or ability.
-from_schema: https://w3id.org/cmdoret/mtg-ontology
+from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
 rank: 1000
 alias: additional_cost
 domain_of:
-- Card
 - ActivatedAbility
+- Card
 range: string
 any_of:
 - range: ManaCost
 - range: LifeCost
-- range: Event
+- range: mtgoa:Event
 
 </code></pre>
 

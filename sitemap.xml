@@ -2,297 +2,342 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/Ability/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/Action/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://cmdoret.github.io/mtg-ontology/ActionConstraint/</loc>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/ActivatedAbility/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/Artifact/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/Card/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/CardCollection/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/Color/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://cmdoret.github.io/mtg-ontology/Condition/</loc>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/Cost/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/Creature/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/Enchantment/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/Event/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/Instant/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/KeywordAbility/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/Land/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/LifeCost/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/ManaCost/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/NamedThing/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/Permanent/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/PersonStatus/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/Player/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://cmdoret.github.io/mtg-ontology/Property/</loc>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/Rarity/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/Sorcery/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/Spell/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/StaticAbility/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/Token/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/TriggeredAbility/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://cmdoret.github.io/mtg-ontology/ValueConstraint/</loc>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/ability/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/about/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/action/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/additional_cost/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/age_in_years/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/artist/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/birth_date/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/card_set/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/card_subtype/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/card_supertype/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/card_type/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/color/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/condition/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/converted_mana_cost/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/description/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/entries/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/flavor_text/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/id/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/mana_cost/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/mtg-ontology/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://cmdoret.github.io/mtg-ontology/mtgo-abilities/</loc>
+         <lastmod>2023-02-23</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://cmdoret.github.io/mtg-ontology/mtgo-cards/</loc>
+         <lastmod>2023-02-23</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://cmdoret.github.io/mtg-ontology/mtgo/</loc>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/name/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/power/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/primary_email/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://cmdoret.github.io/mtg-ontology/property/</loc>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/rarity/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/rules_text/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/source/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/target/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/toughness/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/type_line/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/types/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/value/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://cmdoret.github.io/mtg-ontology/value_constraint/</loc>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/vital_status/</loc>
-         <lastmod>2023-02-19</lastmod>
+         <lastmod>2023-02-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

@@ -206,7 +206,7 @@
 </a>
 <h1 id="class-event">Class: Event</h1>
 <p><em>A combination of circumstances during a game.</em></p>
-<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/Event">mtgo:Event</a></p>
+<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/abilities/Event">mtgoa:Event</a></p>
 <div class="mermaid"> classDiagram
     class Event
       NamedThing &lt;|-- Event
@@ -252,7 +252,7 @@
 <tr>
 <td><a href="../target/">target</a></td>
 <td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td>The entity targeted by an action</td>
+<td>The entity targeted by an action or constraint</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -297,7 +297,7 @@
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://w3id.org/cmdoret/mtg-ontology</li>
+<li>from schema: https://w3id.org/cmdoret/mtg-ontology/abilities/</li>
 </ul>
 <h2 id="mappings">Mappings</h2>
 <table>
@@ -310,11 +310,11 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>mtgo:Event</td>
+<td>mtgoa:Event</td>
 </tr>
 <tr>
 <td>native</td>
-<td>mtgo:Event</td>
+<td>mtgoa:Event</td>
 </tr>
 </tbody>
 </table>
@@ -324,7 +324,7 @@
 <details>
 <pre><code class="language-yaml">name: Event
 description: A combination of circumstances during a game.
-from_schema: https://w3id.org/cmdoret/mtg-ontology
+from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
 is_a: NamedThing
 slots:
@@ -338,14 +338,14 @@ slots:
 <details>
 <pre><code class="language-yaml">name: Event
 description: A combination of circumstances during a game.
-from_schema: https://w3id.org/cmdoret/mtg-ontology
+from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
 is_a: NamedThing
 attributes:
   source:
     name: source
     description: The entity responsible for an action.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
     rank: 1000
     alias: source
     owner: Event
@@ -358,7 +358,7 @@ attributes:
   action:
     name: action
     description: An action taken by a player or card.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
     rank: 1000
     alias: action
     owner: Event
@@ -368,13 +368,14 @@ attributes:
     required: true
   target:
     name: target
-    description: The entity targeted by an action.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    description: The entity targeted by an action or constraint.
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
     rank: 1000
     alias: target
     owner: Event
     domain_of:
     - Event
+    - Condition
     range: string
     any_of:
     - range: Player
@@ -382,7 +383,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/
     rank: 1000
     slot_uri: schema:identifier
     identifier: true
@@ -394,7 +395,7 @@ attributes:
   name:
     name: name
     description: A human-readable name for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/
     rank: 1000
     slot_uri: schema:name
     alias: name
@@ -407,7 +408,7 @@ attributes:
   description:
     name: description
     description: A human-readable description for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/
     rank: 1000
     slot_uri: schema:description
     alias: description

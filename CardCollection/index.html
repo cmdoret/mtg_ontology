@@ -196,7 +196,7 @@
 </a>
 <h1 id="class-cardcollection">Class: CardCollection</h1>
 <p><em>A collection of Cards, such as a Deck or cards set.</em></p>
-<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/CardCollection">mtgo:CardCollection</a></p>
+<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/cards/CardCollection">mtgoc:CardCollection</a></p>
 <div class="mermaid"> classDiagram
     class CardCollection
       CardCollection : entries
@@ -225,7 +225,7 @@
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://w3id.org/cmdoret/mtg-ontology</li>
+<li>from schema: https://w3id.org/cmdoret/mtg-ontology/cards</li>
 </ul>
 <h2 id="mappings">Mappings</h2>
 <table>
@@ -238,11 +238,11 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>mtgo:CardCollection</td>
+<td>mtgoc:CardCollection</td>
 </tr>
 <tr>
 <td>native</td>
-<td>mtgo:CardCollection</td>
+<td>mtgoc:CardCollection</td>
 </tr>
 </tbody>
 </table>
@@ -252,13 +252,13 @@
 <details>
 <pre><code class="language-yaml">name: CardCollection
 description: A collection of Cards, such as a Deck or cards set.
-from_schema: https://w3id.org/cmdoret/mtg-ontology
+from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
 rank: 1000
 attributes:
   entries:
     name: entries
     description: Members of the card collection.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
     rank: 1000
     multivalued: true
     range: Card
@@ -271,13 +271,13 @@ tree_root: true
 <details>
 <pre><code class="language-yaml">name: CardCollection
 description: A collection of Cards, such as a Deck or cards set.
-from_schema: https://w3id.org/cmdoret/mtg-ontology
+from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
 rank: 1000
 attributes:
   entries:
     name: entries
     description: Members of the card collection.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
     rank: 1000
     multivalued: true
     alias: entries

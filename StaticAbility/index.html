@@ -201,7 +201,7 @@
 </a>
 <h1 id="class-staticability">Class: StaticAbility</h1>
 <p><em>A card ability which remains active until endgame once put into effect.</em></p>
-<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/StaticAbility">mtgo:StaticAbility</a></p>
+<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/abilities/StaticAbility">mtgoa:StaticAbility</a></p>
 <div class="mermaid"> classDiagram
     class StaticAbility
       Ability &lt;|-- StaticAbility
@@ -262,7 +262,7 @@
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://w3id.org/cmdoret/mtg-ontology</li>
+<li>from schema: https://w3id.org/cmdoret/mtg-ontology/abilities/</li>
 </ul>
 <h2 id="mappings">Mappings</h2>
 <table>
@@ -275,11 +275,11 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>mtgo:StaticAbility</td>
+<td>mtgoa:StaticAbility</td>
 </tr>
 <tr>
 <td>native</td>
-<td>mtgo:StaticAbility</td>
+<td>mtgoa:StaticAbility</td>
 </tr>
 </tbody>
 </table>
@@ -289,7 +289,7 @@
 <details>
 <pre><code class="language-yaml">name: StaticAbility
 description: A card ability which remains active until endgame once put into effect.
-from_schema: https://w3id.org/cmdoret/mtg-ontology
+from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
 is_a: Ability
 
@@ -299,14 +299,14 @@ is_a: Ability
 <details>
 <pre><code class="language-yaml">name: StaticAbility
 description: A card ability which remains active until endgame once put into effect.
-from_schema: https://w3id.org/cmdoret/mtg-ontology
+from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
 is_a: Ability
 attributes:
   rules_text:
     name: rules_text
     description: The text describing what an ability does.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
     rank: 1000
     alias: rules_text
     owner: StaticAbility
@@ -316,7 +316,7 @@ attributes:
   id:
     name: id
     description: A unique identifier for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/
     rank: 1000
     slot_uri: schema:identifier
     identifier: true
@@ -328,7 +328,7 @@ attributes:
   name:
     name: name
     description: A human-readable name for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/
     rank: 1000
     slot_uri: schema:name
     alias: name
@@ -341,7 +341,7 @@ attributes:
   description:
     name: description
     description: A human-readable description for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/
     rank: 1000
     slot_uri: schema:description
     alias: description
