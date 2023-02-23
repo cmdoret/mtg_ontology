@@ -1,14 +1,17 @@
-id: https://w3id.org/cmdoret/mtg-ontology
-name: mtg-ontology
-title: mtg-ontology
+id: https://w3id.org/cmdoret/mtg-ontology/
+name: mtgo
+title: Magic The Gathering Ontology
 description: |-
-  An ontology describing Magic: The Gathering.
+  An ontology describing Magic: The Gathering. It provides
+  the basic features needed to describe cards.
 license: GNU GPL v3.0
 see_also:
-  - https://cmdoret.github.io/mtg-ontology
+  - https://cmdoret.github.io/mtg-ontology/abilities
 
 prefixes:
   mtgo: https://w3id.org/cmdoret/mtg-ontology/
+  mtgoa: https://w3id.org/cmdoret/mtg-ontology/abilities/
+  mtgoc: https://w3id.org/cmdoret/mtg-ontology/cards/
   linkml: https://w3id.org/linkml/
   schema: http://schema.org/
   wiki: http://en.wikipedia.org/wiki/
@@ -18,6 +21,8 @@ default_range: string
 
 imports:
   - linkml:types
+  - cards
+  - abilities
 
 classes:
 
@@ -30,133 +35,8 @@ classes:
       - description
     class_uri: schema:Thing
 
-  Card:
-    is_a: NamedThing
-    description: >-
-      A card in the Magic The Gathering game.
-    slots:
-      - ability
-      - additional_cost
-      - mana_cost
-      - converted_mana_cost
-      - color
-      - card_set
-      - artist
-      - flavor_text
-      - type_line
-      - card_type
-      - card_subtype
-      - card_supertype
-      - rarity
-
-  Spell:
-    is_a: NamedThing
-    description: >-
-      An object on the stack. Either a card that has been cast, or a copy.
-
-  Permanent:
-    is_a: Card
-    description: >-
-      A card or token that can be put onto the battlefield.
-  Token:
-    is_a: Card
-    description: >-
-      A permanent that is not represented by a regular card and does not have a casting cost.
-
-  Sorcery:
-    is_a: Card
-    description: >-
-      A card that represents a sorcery spell that can be cast.
-  Instant:
-    is_a: Card
-    description: >-
-      A card that represents an instant spell that can be cast.
-  Enchantment:
-    is_a: Permanent
-    description: >-
-      A permanent which applies persistent magical effects.
-  Artifact:
-    is_a: Permanent
-    description: >-
-      A permanent representing a magical item, animated construct, or other objects and devices.
-  Creature:
-    is_a: Permanent
-    description: >-
-      A card that represents a creature that can be summoned to the battlefield.
-    slots:
-      - power
-      - toughness
-  Land:
-    is_a: Permanent
-    description: >-
-      A card that represents a land that can be tapped for mana.
-
-  Cost:
-    is_a: NamedThing
-    description: >-
-      The cost of a card or ability.
-    slots:
-      - value
-  ManaCost:
-    is_a: Cost
-    description: >-
-      The mana cost of a card or ability.
-    slots:
-      - color
-  LifeCost:
-    is_a: Cost
-    description: >-
-      The life cost of a card or ability.
-
-  Ability:
-    is_a: NamedThing
-    description: >-
-      A card ability, activated, triggered or static.
-    slots:
-      - rules_text
-  ActivatedAbility:
-    is_a: Ability
-    description: >-
-      A card ability which can be activated for a cost.
-    slots:
-      - additional_cost
-  KeywordAbility:
-    is_a: Ability
-    description: >-
-      A passive ability represented by word that substitutes for a piece of rules text, such as deathtouch or flying.
-    slots:
-      - name
-  StaticAbility:
-    is_a: Ability
-    description: >-
-      A card ability which remains active until endgame once put into effect.
-  TriggeredAbility:
-    is_a: Ability
-    description: >-
-      A card ability, triggered by an event.
-    slots:
-      - condition
-
-  Event:
-    is_a: NamedThing
-    description: A combination of circumstances during a game.
-    slots:
-      - source
-      - action
-      - target
-
-  CardCollection:
-    tree_root: true
-    description: >-
-      A collection of Cards, such as a Deck or cards set.
-    attributes:
-      entries:
-        description: Members of the card collection.
-        range: Card
-        multivalued: true
-        inlined: true
-
 slots:
+
   id:
     identifier: true
     slot_uri: schema:identifier
@@ -169,156 +49,3 @@ slots:
   description:
     slot_uri: schema:description
     description: A human-readable description for a thing
-  additional_cost:
-    description: An additional cost to play a card or ability.
-    any_of:
-      - range: ManaCost
-      - range: LifeCost
-      - range: Event
-  mana_cost:
-    description: A mana cost for a card or ability.
-    range: ManaCost
-    multivalued: true
-  card_set:
-    description: A pool of cards released together and designed for the same play environment.
-    range: string
-  converted_mana_cost:
-    description: The total mana cost for a card or ability, summed across all colors.
-    range: integer
-  color:
-    description: The color of a card.
-    range: Color
-    multivalued: true
-    required: true
-  ability:
-    description: An ability associated with a card.
-    range: Ability
-    multivalued: true
-  rarity:
-    description: An ability associated with a card.
-    range: Rarity
-  artist:
-    range: string
-    description: The artist who drew a card's illustration.
-  flavor_text:
-    range: string
-    description: The lore text at the bottom of a card.
-  rules_text:
-    range: string
-    description: The text describing what an ability does.
-  power:
-    range: integer
-    minimum_value: 0
-    description: The amount of damage dealt in combat. This is the first number in the lower right corner of a creature card. 
-    required: true
-  toughness:
-    range: integer
-    minimum_value: 0
-    description: The amount of damage needed to destroy a creature. This is the second number in the lower right corner of a creature card. 
-    required: true
-  type_line:
-    range: string
-    description: The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).
-    required: true
-  card_subtype:
-    range: string
-    description: The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line.
-    multivalued: true
-  card_supertype:
-    range: string
-    description: The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type.
-    multivalued: true
-  card_type:
-    range: string
-    description: The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).
-    required: true
-  value:
-    range: integer
-    description: The numeric part of a quantitative value.
-  action:
-    range: Action
-    required: true
-    description: An action taken by a player or card.
-  source:
-    any_of:
-      - range: Player
-      - range: Card
-    description: The entity responsible for an action.
-  target:
-    any_of:
-      - range: Player
-      - range: Card
-    description: The entity targeted by an action.
-  condition:
-    range: Event
-    description: A condition required for an activation.
-    
-enums:
-
-  Color:
-    description: >-
-      A color, such as Black, Blue, Red, Green, White or Colorless.
-    permissible_values:
-      black:
-        description: The color black, associated with darkness.
-        meaning: wiki:Q23445
-      blue:
-        description: The color blue, associated with water.
-        meaning: wiki:Q1088
-      green:
-        description: The color green, associated with nature.
-        meaning: wiki:Q3133
-      red:
-        description: The color red, associated with fire.
-        meaning: wiki:Q3142
-      white:
-        description: The color white, associated with light.
-        meaning: wiki:Q23444
-      colorless:
-        description: Absence of color.
-        meaning: wiki:Q1396399
-
-  Rarity:
-    description: >-
-      The rarity of the card, may be one of Common, Uncommon, Rare or Mythic.
-    permissible_values:
-      common:
-        description: The lowest rarity level, identified by a black set image.
-      uncommon:
-        description: The second lowest rarity level, identified by a silver set image.
-      rare:
-        description: The second highest rarity level, identified by a golden set image.
-      mythic:
-        description: The highest rarity level, identified by a red set image.
-
-  Player:
-    description: One or more human players.
-    permissible_values:
-      you:
-        description: The focal human player.
-      owner:
-        description: The human player who owns a card.
-      controller:
-        description: The human player who controls an object on the stack.
-      opponent:
-        description: A human player playing against the focal player.
-      opponents:
-        description: All human players playing against the focal player.
-      players:
-        description: All players taking part in the game.
-
-  Action:
-    description: An action taken by a player or card.
-    permissible_values:
-      discard:
-        description: Transfer one or more cards from the hand to the graveyard.
-      draw:
-        description: Transfer one or more cards from the library to the hand.
-      sacrifice:
-        description: Transfer one or more cards from the battlefield to the graveyard.
-      exile:
-        description: Remove one or more cards from game.
-      fight:
-        description: Two cards fight each other.
-      deal_damage:
-        description: Something deals damage to something else.

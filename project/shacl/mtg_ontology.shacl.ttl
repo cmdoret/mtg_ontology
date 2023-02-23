@@ -1,4 +1,5 @@
-@prefix mtgo: <https://w3id.org/cmdoret/mtg-ontology/> .
+@prefix mtgoa: <https://w3id.org/cmdoret/mtg-ontology/abilities/> .
+@prefix mtgoc: <https://w3id.org/cmdoret/mtg-ontology/cards/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix schema: <http://schema.org/> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
@@ -9,11 +10,7 @@ schema:Thing a sh:NodeShape ;
     sh:closed true ;
     sh:description "A generic grouping for any identifiable entity" ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "A unique identifier for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path schema:identifier ],
-        [ sh:description "A human-readable description for a thing" ;
+    sh:property [ sh:description "A human-readable description for a thing" ;
             sh:maxCount 1 ;
             sh:order 2 ;
             sh:path schema:description ],
@@ -21,654 +18,732 @@ schema:Thing a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:order 1 ;
-            sh:path schema:name ] ;
+            sh:path schema:name ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path schema:identifier ] ;
     sh:targetClass schema:Thing .
 
-mtgo:ActivatedAbility a sh:NodeShape ;
+mtgoa:Ability a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A card ability, activated, triggered or static." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path schema:description ],
+        [ sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 2 ;
+            sh:path schema:name ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path schema:identifier ],
+        [ sh:description "The text describing what an ability does." ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path mtgoa:rules_text ] ;
+    sh:targetClass mtgoa:Ability .
+
+mtgoa:ActivatedAbility a sh:NodeShape ;
     sh:closed true ;
     sh:description "A card ability which can be activated for a cost." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "The text describing what an ability does." ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path mtgoa:rules_text ],
+        [ sh:description "An additional cost to play a card or ability." ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path mtgoc:additional_cost ],
+        [ sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 3 ;
+            sh:path schema:name ],
+        [ sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path schema:description ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path schema:identifier ] ;
+    sh:targetClass mtgoa:ActivatedAbility .
+
+mtgoa:Condition a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A condition expressed as a constraint on a property." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class <rdf:predicate> ;
+            sh:description "A property of an entity." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path mtgoa:property ],
+        [ sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 4 ;
+            sh:path schema:name ],
+        [ sh:description "A constraint on the value of a property." ;
+            sh:in ( "equal" "greater_than" "less_than" "greater_than_or_equal" "less_than_or_equal" "not_equal" "between" "not_between" "is" "is_not" "is_one_of" "is_not_one_of" ) ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path mtgoa:value_constraint ],
+        [ sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path schema:description ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path schema:identifier ],
+        [ sh:description "The entity targeted by an action or constraint." ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path mtgoa:target ] ;
+    sh:targetClass mtgoa:Condition .
+
+mtgoa:KeywordAbility a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A passive ability represented by word that substitutes for a piece of rules text, such as deathtouch or flying." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "The text describing what an ability does." ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path mtgoa:rules_text ],
+        [ sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path schema:name ],
+        [ sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path schema:description ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path schema:identifier ] ;
+    sh:targetClass mtgoa:KeywordAbility .
+
+mtgoa:StaticAbility a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A card ability which remains active until endgame once put into effect." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "The text describing what an ability does." ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path mtgoa:rules_text ],
+        [ sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path schema:description ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path schema:identifier ],
+        [ sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 2 ;
+            sh:path schema:name ] ;
+    sh:targetClass mtgoa:StaticAbility .
+
+mtgoa:TriggeredAbility a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A card ability, triggered by an event." ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:description "A human-readable description for a thing" ;
             sh:maxCount 1 ;
             sh:order 4 ;
             sh:path schema:description ],
-        [ sh:description "A unique identifier for a thing" ;
+        [ sh:class mtgoa:Event ;
+            sh:description "A condition required for an activation." ;
             sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path schema:identifier ],
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path mtgoa:condition ],
         [ sh:description "The text describing what an ability does." ;
             sh:maxCount 1 ;
             sh:order 1 ;
-            sh:path mtgo:rules_text ],
-        [ sh:description "An additional cost to play a card or ability." ;
-            sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path mtgo:additional_cost ],
+            sh:path mtgoa:rules_text ],
         [ sh:description "A human-readable name for a thing" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:order 3 ;
-            sh:path schema:name ] ;
-    sh:targetClass mtgo:ActivatedAbility .
+            sh:path schema:name ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path schema:identifier ] ;
+    sh:targetClass mtgoa:TriggeredAbility .
 
-mtgo:Artifact a sh:NodeShape ;
+mtgoc:Artifact a sh:NodeShape ;
     sh:closed true ;
     sh:description "A permanent representing a magical item, animated construct, or other objects and devices." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "A unique identifier for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 13 ;
-            sh:path schema:identifier ],
-        [ sh:class mtgo:Ability ;
-            sh:description "An ability associated with a card." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 0 ;
-            sh:path mtgo:ability ],
-        [ sh:description "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type." ;
-            sh:order 11 ;
-            sh:path mtgo:card_supertype ],
-        [ sh:description "An additional cost to play a card or ability." ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path mtgo:additional_cost ],
-        [ sh:description "The total mana cost for a card or ability, summed across all colors." ;
-            sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path mtgo:converted_mana_cost ],
-        [ sh:description "A human-readable description for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 15 ;
-            sh:path schema:description ],
-        [ sh:description "A human-readable name for a thing" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 14 ;
-            sh:path schema:name ],
-        [ sh:description "The artist who drew a card's illustration." ;
-            sh:maxCount 1 ;
-            sh:order 6 ;
-            sh:path mtgo:artist ],
-        [ sh:class mtgo:ManaCost ;
-            sh:description "A mana cost for a card or ability." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 2 ;
-            sh:path mtgo:mana_cost ],
-        [ sh:description "The lore text at the bottom of a card." ;
-            sh:maxCount 1 ;
-            sh:order 7 ;
-            sh:path mtgo:flavor_text ],
-        [ sh:description "The color of a card." ;
-            sh:in ( wiki:Q23445 wiki:Q1088 wiki:Q3133 wiki:Q3142 wiki:Q23444 wiki:Q1396399 ) ;
-            sh:minCount 1 ;
-            sh:order 4 ;
-            sh:path mtgo:color ],
-        [ sh:description "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." ;
+    sh:property [ sh:description "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:order 8 ;
-            sh:path mtgo:type_line ],
-        [ sh:description "A pool of cards released together and designed for the same play environment." ;
+            sh:path mtgoc:card_type ],
+        [ sh:description "The artist who drew a card's illustration." ;
             sh:maxCount 1 ;
             sh:order 5 ;
-            sh:path mtgo:card_set ],
+            sh:path mtgoc:artist ],
+        [ sh:description "The total mana cost for a card or ability, summed across all colors." ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path mtgoc:converted_mana_cost ],
+        [ sh:description "The lore text at the bottom of a card." ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path mtgoc:flavor_text ],
+        [ sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 13 ;
+            sh:path schema:name ],
+        [ sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 14 ;
+            sh:path schema:description ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 12 ;
+            sh:path schema:identifier ],
+        [ sh:description "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type." ;
+            sh:order 10 ;
+            sh:path mtgoc:card_supertype ],
+        [ sh:description "The color of a card." ;
+            sh:in ( wiki:Q23445 wiki:Q1088 wiki:Q3133 wiki:Q3142 wiki:Q23444 wiki:Q1396399 ) ;
+            sh:minCount 1 ;
+            sh:order 3 ;
+            sh:path mtgoc:color ],
+        [ sh:description "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 7 ;
+            sh:path mtgoc:type_line ],
+        [ sh:description "An ability associated with a card." ;
+            sh:in ( "common" "uncommon" "rare" "mythic" ) ;
+            sh:maxCount 1 ;
+            sh:order 11 ;
+            sh:path mtgoc:rarity ],
+        [ sh:description "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line." ;
+            sh:order 9 ;
+            sh:path mtgoc:card_subtype ],
+        [ sh:description "A pool of cards released together and designed for the same play environment." ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path mtgoc:card_set ],
+        [ sh:description "An additional cost to play a card or ability." ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path mtgoc:additional_cost ],
+        [ sh:class mtgoc:ManaCost ;
+            sh:description "A mana cost for a card or ability." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path mtgoc:mana_cost ] ;
+    sh:targetClass mtgoc:Artifact .
+
+mtgoc:CardCollection a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A collection of Cards, such as a Deck or cards set." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class mtgoc:Card ;
+            sh:description "Members of the card collection." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path mtgoc:entries ] ;
+    sh:targetClass mtgoc:CardCollection .
+
+mtgoc:Cost a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "The cost of a card or ability." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path schema:description ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path schema:identifier ],
+        [ sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 2 ;
+            sh:path schema:name ],
+        [ sh:description "The numeric part of a quantitative value." ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path mtgoc:value ] ;
+    sh:targetClass mtgoc:Cost .
+
+mtgoc:Creature a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A card that represents a creature that can be summoned to the battlefield." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "The color of a card." ;
+            sh:in ( wiki:Q23445 wiki:Q1088 wiki:Q3133 wiki:Q3142 wiki:Q23444 wiki:Q1396399 ) ;
+            sh:minCount 1 ;
+            sh:order 5 ;
+            sh:path mtgoc:color ],
         [ sh:description "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:order 9 ;
-            sh:path mtgo:card_type ],
-        [ sh:description "An ability associated with a card." ;
-            sh:in ( "common" "uncommon" "rare" "mythic" ) ;
+            sh:path mtgoc:type_line ],
+        [ sh:description "A pool of cards released together and designed for the same play environment." ;
             sh:maxCount 1 ;
-            sh:order 12 ;
-            sh:path mtgo:rarity ],
-        [ sh:description "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line." ;
-            sh:order 10 ;
-            sh:path mtgo:card_subtype ] ;
-    sh:targetClass mtgo:Artifact .
-
-mtgo:CardCollection a sh:NodeShape ;
-    sh:closed true ;
-    sh:description "A collection of Cards, such as a Deck or cards set." ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:class mtgo:Card ;
-            sh:description "Members of the card collection." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 0 ;
-            sh:path mtgo:entries ] ;
-    sh:targetClass mtgo:CardCollection .
-
-mtgo:Cost a sh:NodeShape ;
-    sh:closed true ;
-    sh:description "The cost of a card or ability." ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "A unique identifier for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path schema:identifier ],
+            sh:order 6 ;
+            sh:path mtgoc:card_set ],
         [ sh:description "A human-readable description for a thing" ;
             sh:maxCount 1 ;
-            sh:order 3 ;
+            sh:order 16 ;
             sh:path schema:description ],
-        [ sh:description "The numeric part of a quantitative value." ;
+        [ sh:description "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." ;
             sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path mtgo:value ],
+            sh:minCount 1 ;
+            sh:order 10 ;
+            sh:path mtgoc:card_type ],
+        [ sh:description "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line." ;
+            sh:order 11 ;
+            sh:path mtgoc:card_subtype ],
         [ sh:description "A human-readable name for a thing" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:order 2 ;
-            sh:path schema:name ] ;
-    sh:targetClass mtgo:Cost .
-
-mtgo:Creature a sh:NodeShape ;
-    sh:closed true ;
-    sh:description "A card that represents a creature that can be summoned to the battlefield." ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "The amount of damage needed to destroy a creature. This is the second number in the lower right corner of a creature card." ;
+            sh:order 15 ;
+            sh:path schema:name ],
+        [ sh:class mtgoc:ManaCost ;
+            sh:description "A mana cost for a card or ability." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 3 ;
+            sh:path mtgoc:mana_cost ],
+        [ sh:description "The amount of damage needed to destroy a creature. This is the second number in the lower right corner of a creature card." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:minInclusive 0 ;
             sh:order 1 ;
-            sh:path mtgo:toughness ],
-        [ sh:description "The color of a card." ;
-            sh:in ( wiki:Q23445 wiki:Q1088 wiki:Q3133 wiki:Q3142 wiki:Q23444 wiki:Q1396399 ) ;
-            sh:minCount 1 ;
-            sh:order 6 ;
-            sh:path mtgo:color ],
-        [ sh:description "The lore text at the bottom of a card." ;
+            sh:path mtgoc:toughness ],
+        [ sh:description "An additional cost to play a card or ability." ;
             sh:maxCount 1 ;
-            sh:order 9 ;
-            sh:path mtgo:flavor_text ],
-        [ sh:description "A unique identifier for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 15 ;
-            sh:path schema:identifier ],
-        [ sh:description "A pool of cards released together and designed for the same play environment." ;
-            sh:maxCount 1 ;
-            sh:order 7 ;
-            sh:path mtgo:card_set ],
-        [ sh:description "The total mana cost for a card or ability, summed across all colors." ;
-            sh:maxCount 1 ;
-            sh:order 5 ;
-            sh:path mtgo:converted_mana_cost ],
-        [ sh:description "An ability associated with a card." ;
-            sh:in ( "common" "uncommon" "rare" "mythic" ) ;
-            sh:maxCount 1 ;
-            sh:order 14 ;
-            sh:path mtgo:rarity ],
-        [ sh:class mtgo:ManaCost ;
-            sh:description "A mana cost for a card or ability." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 4 ;
-            sh:path mtgo:mana_cost ],
-        [ sh:description "A human-readable name for a thing" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 16 ;
-            sh:path schema:name ],
+            sh:order 2 ;
+            sh:path mtgoc:additional_cost ],
         [ sh:description "The amount of damage dealt in combat. This is the first number in the lower right corner of a creature card." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:minInclusive 0 ;
             sh:order 0 ;
-            sh:path mtgo:power ],
-        [ sh:description "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 11 ;
-            sh:path mtgo:card_type ],
-        [ sh:description "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line." ;
-            sh:order 12 ;
-            sh:path mtgo:card_subtype ],
-        [ sh:description "An additional cost to play a card or ability." ;
-            sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path mtgo:additional_cost ],
-        [ sh:description "A human-readable description for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 17 ;
-            sh:path schema:description ],
+            sh:path mtgoc:power ],
         [ sh:description "The artist who drew a card's illustration." ;
             sh:maxCount 1 ;
-            sh:order 8 ;
-            sh:path mtgo:artist ],
-        [ sh:class mtgo:Ability ;
-            sh:description "An ability associated with a card." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 2 ;
-            sh:path mtgo:ability ],
-        [ sh:description "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type." ;
-            sh:order 13 ;
-            sh:path mtgo:card_supertype ],
-        [ sh:description "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." ;
+            sh:order 7 ;
+            sh:path mtgoc:artist ],
+        [ sh:description "An ability associated with a card." ;
+            sh:in ( "common" "uncommon" "rare" "mythic" ) ;
             sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 10 ;
-            sh:path mtgo:type_line ] ;
-    sh:targetClass mtgo:Creature .
+            sh:order 13 ;
+            sh:path mtgoc:rarity ],
+        [ sh:description "The lore text at the bottom of a card." ;
+            sh:maxCount 1 ;
+            sh:order 8 ;
+            sh:path mtgoc:flavor_text ],
+        [ sh:description "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type." ;
+            sh:order 12 ;
+            sh:path mtgoc:card_supertype ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 14 ;
+            sh:path schema:identifier ],
+        [ sh:description "The total mana cost for a card or ability, summed across all colors." ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path mtgoc:converted_mana_cost ] ;
+    sh:targetClass mtgoc:Creature .
 
-mtgo:Enchantment a sh:NodeShape ;
+mtgoc:Enchantment a sh:NodeShape ;
     sh:closed true ;
     sh:description "A permanent which applies persistent magical effects." ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:description "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:order 9 ;
-            sh:path mtgo:card_type ],
-        [ sh:description "A human-readable description for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 15 ;
-            sh:path schema:description ],
-        [ sh:description "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line." ;
-            sh:order 10 ;
-            sh:path mtgo:card_subtype ],
-        [ sh:description "An additional cost to play a card or ability." ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path mtgo:additional_cost ],
-        [ sh:description "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type." ;
-            sh:order 11 ;
-            sh:path mtgo:card_supertype ],
-        [ sh:description "The color of a card." ;
-            sh:in ( wiki:Q23445 wiki:Q1088 wiki:Q3133 wiki:Q3142 wiki:Q23444 wiki:Q1396399 ) ;
-            sh:minCount 1 ;
-            sh:order 4 ;
-            sh:path mtgo:color ],
-        [ sh:description "The lore text at the bottom of a card." ;
-            sh:maxCount 1 ;
             sh:order 7 ;
-            sh:path mtgo:flavor_text ],
+            sh:path mtgoc:type_line ],
+        [ sh:description "The total mana cost for a card or ability, summed across all colors." ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path mtgoc:converted_mana_cost ],
+        [ sh:class mtgoc:ManaCost ;
+            sh:description "A mana cost for a card or ability." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path mtgoc:mana_cost ],
         [ sh:description "A human-readable name for a thing" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:order 14 ;
+            sh:order 13 ;
             sh:path schema:name ],
+        [ sh:description "The lore text at the bottom of a card." ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path mtgoc:flavor_text ],
+        [ sh:description "A pool of cards released together and designed for the same play environment." ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path mtgoc:card_set ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 12 ;
+            sh:path schema:identifier ],
+        [ sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 14 ;
+            sh:path schema:description ],
+        [ sh:description "The artist who drew a card's illustration." ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path mtgoc:artist ],
         [ sh:description "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:order 8 ;
-            sh:path mtgo:type_line ],
-        [ sh:description "The total mana cost for a card or ability, summed across all colors." ;
-            sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path mtgo:converted_mana_cost ],
-        [ sh:description "A pool of cards released together and designed for the same play environment." ;
-            sh:maxCount 1 ;
-            sh:order 5 ;
-            sh:path mtgo:card_set ],
-        [ sh:description "A unique identifier for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 13 ;
-            sh:path schema:identifier ],
-        [ sh:class mtgo:Ability ;
-            sh:description "An ability associated with a card." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 0 ;
-            sh:path mtgo:ability ],
+            sh:path mtgoc:card_type ],
         [ sh:description "An ability associated with a card." ;
             sh:in ( "common" "uncommon" "rare" "mythic" ) ;
             sh:maxCount 1 ;
-            sh:order 12 ;
-            sh:path mtgo:rarity ],
-        [ sh:description "The artist who drew a card's illustration." ;
+            sh:order 11 ;
+            sh:path mtgoc:rarity ],
+        [ sh:description "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type." ;
+            sh:order 10 ;
+            sh:path mtgoc:card_supertype ],
+        [ sh:description "An additional cost to play a card or ability." ;
             sh:maxCount 1 ;
-            sh:order 6 ;
-            sh:path mtgo:artist ],
-        [ sh:class mtgo:ManaCost ;
-            sh:description "A mana cost for a card or ability." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 2 ;
-            sh:path mtgo:mana_cost ] ;
-    sh:targetClass mtgo:Enchantment .
+            sh:order 0 ;
+            sh:path mtgoc:additional_cost ],
+        [ sh:description "The color of a card." ;
+            sh:in ( wiki:Q23445 wiki:Q1088 wiki:Q3133 wiki:Q3142 wiki:Q23444 wiki:Q1396399 ) ;
+            sh:minCount 1 ;
+            sh:order 3 ;
+            sh:path mtgoc:color ],
+        [ sh:description "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line." ;
+            sh:order 9 ;
+            sh:path mtgoc:card_subtype ] ;
+    sh:targetClass mtgoc:Enchantment .
 
-mtgo:Instant a sh:NodeShape ;
+mtgoc:Instant a sh:NodeShape ;
     sh:closed true ;
     sh:description "A card that represents an instant spell that can be cast." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:class mtgo:ManaCost ;
+    sh:property [ sh:description "An ability associated with a card." ;
+            sh:in ( "common" "uncommon" "rare" "mythic" ) ;
+            sh:maxCount 1 ;
+            sh:order 11 ;
+            sh:path mtgoc:rarity ],
+        [ sh:description "An additional cost to play a card or ability." ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path mtgoc:additional_cost ],
+        [ sh:description "The color of a card." ;
+            sh:in ( wiki:Q23445 wiki:Q1088 wiki:Q3133 wiki:Q3142 wiki:Q23444 wiki:Q1396399 ) ;
+            sh:minCount 1 ;
+            sh:order 3 ;
+            sh:path mtgoc:color ],
+        [ sh:class mtgoc:ManaCost ;
             sh:description "A mana cost for a card or ability." ;
             sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path mtgoc:mana_cost ],
+        [ sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 13 ;
+            sh:path schema:name ],
+        [ sh:description "The lore text at the bottom of a card." ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path mtgoc:flavor_text ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 12 ;
+            sh:path schema:identifier ],
+        [ sh:description "A pool of cards released together and designed for the same play environment." ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path mtgoc:card_set ],
+        [ sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 14 ;
+            sh:path schema:description ],
+        [ sh:description "The total mana cost for a card or ability, summed across all colors." ;
+            sh:maxCount 1 ;
             sh:order 2 ;
-            sh:path mtgo:mana_cost ],
+            sh:path mtgoc:converted_mana_cost ],
+        [ sh:description "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line." ;
+            sh:order 9 ;
+            sh:path mtgoc:card_subtype ],
         [ sh:description "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:order 8 ;
-            sh:path mtgo:type_line ],
+            sh:path mtgoc:card_type ],
         [ sh:description "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:order 9 ;
-            sh:path mtgo:card_type ],
-        [ sh:description "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line." ;
+            sh:order 7 ;
+            sh:path mtgoc:type_line ],
+        [ sh:description "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type." ;
             sh:order 10 ;
-            sh:path mtgo:card_subtype ],
-        [ sh:class mtgo:Ability ;
-            sh:description "An ability associated with a card." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 0 ;
-            sh:path mtgo:ability ],
+            sh:path mtgoc:card_supertype ],
         [ sh:description "The artist who drew a card's illustration." ;
             sh:maxCount 1 ;
-            sh:order 6 ;
-            sh:path mtgo:artist ],
-        [ sh:description "A pool of cards released together and designed for the same play environment." ;
-            sh:maxCount 1 ;
             sh:order 5 ;
-            sh:path mtgo:card_set ],
-        [ sh:description "A human-readable name for a thing" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 14 ;
-            sh:path schema:name ],
-        [ sh:description "A human-readable description for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 15 ;
-            sh:path schema:description ],
-        [ sh:description "A unique identifier for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 13 ;
-            sh:path schema:identifier ],
-        [ sh:description "The color of a card." ;
-            sh:in ( wiki:Q23445 wiki:Q1088 wiki:Q3133 wiki:Q3142 wiki:Q23444 wiki:Q1396399 ) ;
-            sh:minCount 1 ;
-            sh:order 4 ;
-            sh:path mtgo:color ],
-        [ sh:description "An additional cost to play a card or ability." ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path mtgo:additional_cost ],
-        [ sh:description "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type." ;
-            sh:order 11 ;
-            sh:path mtgo:card_supertype ],
-        [ sh:description "The total mana cost for a card or ability, summed across all colors." ;
-            sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path mtgo:converted_mana_cost ],
-        [ sh:description "An ability associated with a card." ;
-            sh:in ( "common" "uncommon" "rare" "mythic" ) ;
-            sh:maxCount 1 ;
-            sh:order 12 ;
-            sh:path mtgo:rarity ],
-        [ sh:description "The lore text at the bottom of a card." ;
-            sh:maxCount 1 ;
-            sh:order 7 ;
-            sh:path mtgo:flavor_text ] ;
-    sh:targetClass mtgo:Instant .
+            sh:path mtgoc:artist ] ;
+    sh:targetClass mtgoc:Instant .
 
-mtgo:KeywordAbility a sh:NodeShape ;
-    sh:closed true ;
-    sh:description "A passive ability represented by word that substitutes for a piece of rules text, such as deathtouch or flying." ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "A unique identifier for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path schema:identifier ],
-        [ sh:description "A human-readable name for a thing" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 0 ;
-            sh:path schema:name ],
-        [ sh:description "The text describing what an ability does." ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path mtgo:rules_text ],
-        [ sh:description "A human-readable description for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path schema:description ] ;
-    sh:targetClass mtgo:KeywordAbility .
-
-mtgo:Land a sh:NodeShape ;
+mtgoc:Land a sh:NodeShape ;
     sh:closed true ;
     sh:description "A card that represents a land that can be tapped for mana." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "A unique identifier for a thing" ;
+    sh:property [ sh:description "The artist who drew a card's illustration." ;
             sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path mtgoc:artist ],
+        [ sh:description "The total mana cost for a card or ability, summed across all colors." ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path mtgoc:converted_mana_cost ],
+        [ sh:class mtgoc:ManaCost ;
+            sh:description "A mana cost for a card or ability." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path mtgoc:mana_cost ],
+        [ sh:description "A pool of cards released together and designed for the same play environment." ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path mtgoc:card_set ],
+        [ sh:description "An ability associated with a card." ;
+            sh:in ( "common" "uncommon" "rare" "mythic" ) ;
+            sh:maxCount 1 ;
+            sh:order 11 ;
+            sh:path mtgoc:rarity ],
+        [ sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
             sh:order 13 ;
-            sh:path schema:identifier ],
+            sh:path schema:name ],
+        [ sh:description "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 7 ;
+            sh:path mtgoc:type_line ],
         [ sh:description "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:order 8 ;
-            sh:path mtgo:type_line ],
-        [ sh:description "A human-readable name for a thing" ;
+            sh:path mtgoc:card_type ],
+        [ sh:description "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line." ;
+            sh:order 9 ;
+            sh:path mtgoc:card_subtype ],
+        [ sh:description "The lore text at the bottom of a card." ;
             sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 14 ;
-            sh:path schema:name ],
-        [ sh:description "The total mana cost for a card or ability, summed across all colors." ;
+            sh:order 6 ;
+            sh:path mtgoc:flavor_text ],
+        [ sh:description "An additional cost to play a card or ability." ;
             sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path mtgo:converted_mana_cost ],
-        [ sh:class mtgo:Ability ;
-            sh:description "An ability associated with a card." ;
-            sh:nodeKind sh:IRI ;
             sh:order 0 ;
-            sh:path mtgo:ability ],
+            sh:path mtgoc:additional_cost ],
+        [ sh:description "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type." ;
+            sh:order 10 ;
+            sh:path mtgoc:card_supertype ],
+        [ sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 14 ;
+            sh:path schema:description ],
         [ sh:description "The color of a card." ;
             sh:in ( wiki:Q23445 wiki:Q1088 wiki:Q3133 wiki:Q3142 wiki:Q23444 wiki:Q1396399 ) ;
             sh:minCount 1 ;
-            sh:order 4 ;
-            sh:path mtgo:color ],
-        [ sh:description "A human-readable description for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 15 ;
-            sh:path schema:description ],
-        [ sh:description "The lore text at the bottom of a card." ;
-            sh:maxCount 1 ;
-            sh:order 7 ;
-            sh:path mtgo:flavor_text ],
-        [ sh:description "An ability associated with a card." ;
-            sh:in ( "common" "uncommon" "rare" "mythic" ) ;
+            sh:order 3 ;
+            sh:path mtgoc:color ],
+        [ sh:description "A unique identifier for a thing" ;
             sh:maxCount 1 ;
             sh:order 12 ;
-            sh:path mtgo:rarity ],
-        [ sh:description "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 9 ;
-            sh:path mtgo:card_type ],
-        [ sh:description "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line." ;
-            sh:order 10 ;
-            sh:path mtgo:card_subtype ],
-        [ sh:class mtgo:ManaCost ;
-            sh:description "A mana cost for a card or ability." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 2 ;
-            sh:path mtgo:mana_cost ],
-        [ sh:description "The artist who drew a card's illustration." ;
-            sh:maxCount 1 ;
-            sh:order 6 ;
-            sh:path mtgo:artist ],
-        [ sh:description "An additional cost to play a card or ability." ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path mtgo:additional_cost ],
-        [ sh:description "A pool of cards released together and designed for the same play environment." ;
-            sh:maxCount 1 ;
-            sh:order 5 ;
-            sh:path mtgo:card_set ],
-        [ sh:description "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type." ;
-            sh:order 11 ;
-            sh:path mtgo:card_supertype ] ;
-    sh:targetClass mtgo:Land .
+            sh:path schema:identifier ] ;
+    sh:targetClass mtgoc:Land .
 
-mtgo:LifeCost a sh:NodeShape ;
+mtgoc:LifeCost a sh:NodeShape ;
     sh:closed true ;
     sh:description "The life cost of a card or ability." ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:description "The numeric part of a quantitative value." ;
             sh:maxCount 1 ;
             sh:order 0 ;
-            sh:path mtgo:value ],
+            sh:path mtgoc:value ],
         [ sh:description "A unique identifier for a thing" ;
             sh:maxCount 1 ;
             sh:order 1 ;
             sh:path schema:identifier ],
-        [ sh:description "A human-readable description for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path schema:description ],
         [ sh:description "A human-readable name for a thing" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:order 2 ;
-            sh:path schema:name ] ;
-    sh:targetClass mtgo:LifeCost .
+            sh:path schema:name ],
+        [ sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path schema:description ] ;
+    sh:targetClass mtgoc:LifeCost .
 
-mtgo:Permanent a sh:NodeShape ;
+mtgoc:Permanent a sh:NodeShape ;
     sh:closed true ;
     sh:description "A card or token that can be put onto the battlefield." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line." ;
-            sh:order 10 ;
-            sh:path mtgo:card_subtype ],
-        [ sh:description "An additional cost to play a card or ability." ;
+    sh:property [ sh:description "The total mana cost for a card or ability, summed across all colors." ;
             sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path mtgoc:converted_mana_cost ],
+        [ sh:description "An ability associated with a card." ;
+            sh:in ( "common" "uncommon" "rare" "mythic" ) ;
+            sh:maxCount 1 ;
+            sh:order 11 ;
+            sh:path mtgoc:rarity ],
+        [ sh:class mtgoc:ManaCost ;
+            sh:description "A mana cost for a card or ability." ;
+            sh:nodeKind sh:IRI ;
             sh:order 1 ;
-            sh:path mtgo:additional_cost ],
-        [ sh:description "The lore text at the bottom of a card." ;
-            sh:maxCount 1 ;
-            sh:order 7 ;
-            sh:path mtgo:flavor_text ],
-        [ sh:description "The artist who drew a card's illustration." ;
-            sh:maxCount 1 ;
-            sh:order 6 ;
-            sh:path mtgo:artist ],
+            sh:path mtgoc:mana_cost ],
         [ sh:description "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:order 8 ;
-            sh:path mtgo:type_line ],
-        [ sh:description "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type." ;
-            sh:order 11 ;
-            sh:path mtgo:card_supertype ],
-        [ sh:description "An ability associated with a card." ;
-            sh:in ( "common" "uncommon" "rare" "mythic" ) ;
+            sh:path mtgoc:card_type ],
+        [ sh:description "A human-readable description for a thing" ;
             sh:maxCount 1 ;
-            sh:order 12 ;
-            sh:path mtgo:rarity ],
-        [ sh:class mtgo:Ability ;
-            sh:description "An ability associated with a card." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 0 ;
-            sh:path mtgo:ability ],
-        [ sh:class mtgo:ManaCost ;
-            sh:description "A mana cost for a card or ability." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 2 ;
-            sh:path mtgo:mana_cost ],
-        [ sh:description "A pool of cards released together and designed for the same play environment." ;
-            sh:maxCount 1 ;
-            sh:order 5 ;
-            sh:path mtgo:card_set ],
-        [ sh:description "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 9 ;
-            sh:path mtgo:card_type ],
+            sh:order 14 ;
+            sh:path schema:description ],
         [ sh:description "The color of a card." ;
             sh:in ( wiki:Q23445 wiki:Q1088 wiki:Q3133 wiki:Q3142 wiki:Q23444 wiki:Q1396399 ) ;
             sh:minCount 1 ;
-            sh:order 4 ;
-            sh:path mtgo:color ],
+            sh:order 3 ;
+            sh:path mtgoc:color ],
+        [ sh:description "The artist who drew a card's illustration." ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path mtgoc:artist ],
+        [ sh:description "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 7 ;
+            sh:path mtgoc:type_line ],
+        [ sh:description "The lore text at the bottom of a card." ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path mtgoc:flavor_text ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 12 ;
+            sh:path schema:identifier ],
         [ sh:description "A human-readable name for a thing" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:order 14 ;
-            sh:path schema:name ],
-        [ sh:description "A unique identifier for a thing" ;
-            sh:maxCount 1 ;
             sh:order 13 ;
-            sh:path schema:identifier ],
-        [ sh:description "The total mana cost for a card or ability, summed across all colors." ;
+            sh:path schema:name ],
+        [ sh:description "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line." ;
+            sh:order 9 ;
+            sh:path mtgoc:card_subtype ],
+        [ sh:description "A pool of cards released together and designed for the same play environment." ;
             sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path mtgo:converted_mana_cost ],
-        [ sh:description "A human-readable description for a thing" ;
+            sh:order 4 ;
+            sh:path mtgoc:card_set ],
+        [ sh:description "An additional cost to play a card or ability." ;
             sh:maxCount 1 ;
-            sh:order 15 ;
-            sh:path schema:description ] ;
-    sh:targetClass mtgo:Permanent .
+            sh:order 0 ;
+            sh:path mtgoc:additional_cost ],
+        [ sh:description "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type." ;
+            sh:order 10 ;
+            sh:path mtgoc:card_supertype ] ;
+    sh:targetClass mtgoc:Permanent .
 
-mtgo:Sorcery a sh:NodeShape ;
+mtgoc:Sorcery a sh:NodeShape ;
     sh:closed true ;
     sh:description "A card that represents a sorcery spell that can be cast." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "An additional cost to play a card or ability." ;
-            sh:maxCount 1 ;
+    sh:property [ sh:class mtgoc:ManaCost ;
+            sh:description "A mana cost for a card or ability." ;
+            sh:nodeKind sh:IRI ;
             sh:order 1 ;
-            sh:path mtgo:additional_cost ],
-        [ sh:description "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line." ;
-            sh:order 10 ;
-            sh:path mtgo:card_subtype ],
-        [ sh:description "A human-readable name for a thing" ;
+            sh:path mtgoc:mana_cost ],
+        [ sh:description "The color of a card." ;
+            sh:in ( wiki:Q23445 wiki:Q1088 wiki:Q3133 wiki:Q3142 wiki:Q23444 wiki:Q1396399 ) ;
+            sh:minCount 1 ;
+            sh:order 3 ;
+            sh:path mtgoc:color ],
+        [ sh:description "The artist who drew a card's illustration." ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path mtgoc:artist ],
+        [ sh:description "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
+            sh:order 7 ;
+            sh:path mtgoc:type_line ],
+        [ sh:description "An additional cost to play a card or ability." ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path mtgoc:additional_cost ],
+        [ sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
             sh:order 14 ;
-            sh:path schema:name ],
+            sh:path schema:description ],
+        [ sh:description "A pool of cards released together and designed for the same play environment." ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path mtgoc:card_set ],
         [ sh:description "A unique identifier for a thing" ;
             sh:maxCount 1 ;
-            sh:order 13 ;
-            sh:path schema:identifier ],
-        [ sh:description "The total mana cost for a card or ability, summed across all colors." ;
-            sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path mtgo:converted_mana_cost ],
-        [ sh:description "An ability associated with a card." ;
-            sh:in ( "common" "uncommon" "rare" "mythic" ) ;
-            sh:maxCount 1 ;
             sh:order 12 ;
-            sh:path mtgo:rarity ],
+            sh:path schema:identifier ],
         [ sh:description "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:order 8 ;
-            sh:path mtgo:type_line ],
-        [ sh:description "A pool of cards released together and designed for the same play environment." ;
+            sh:path mtgoc:card_type ],
+        [ sh:description "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type." ;
+            sh:order 10 ;
+            sh:path mtgoc:card_supertype ],
+        [ sh:description "An ability associated with a card." ;
+            sh:in ( "common" "uncommon" "rare" "mythic" ) ;
             sh:maxCount 1 ;
-            sh:order 5 ;
-            sh:path mtgo:card_set ],
+            sh:order 11 ;
+            sh:path mtgoc:rarity ],
         [ sh:description "The lore text at the bottom of a card." ;
             sh:maxCount 1 ;
-            sh:order 7 ;
-            sh:path mtgo:flavor_text ],
-        [ sh:description "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type." ;
-            sh:order 11 ;
-            sh:path mtgo:card_supertype ],
-        [ sh:class mtgo:Ability ;
-            sh:description "An ability associated with a card." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 0 ;
-            sh:path mtgo:ability ],
-        [ sh:description "The color of a card." ;
-            sh:in ( wiki:Q23445 wiki:Q1088 wiki:Q3133 wiki:Q3142 wiki:Q23444 wiki:Q1396399 ) ;
-            sh:minCount 1 ;
-            sh:order 4 ;
-            sh:path mtgo:color ],
-        [ sh:description "A human-readable description for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 15 ;
-            sh:path schema:description ],
-        [ sh:description "The artist who drew a card's illustration." ;
-            sh:maxCount 1 ;
             sh:order 6 ;
-            sh:path mtgo:artist ],
-        [ sh:class mtgo:ManaCost ;
-            sh:description "A mana cost for a card or ability." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 2 ;
-            sh:path mtgo:mana_cost ],
-        [ sh:description "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." ;
+            sh:path mtgoc:flavor_text ],
+        [ sh:description "A human-readable name for a thing" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
+            sh:order 13 ;
+            sh:path schema:name ],
+        [ sh:description "The total mana cost for a card or ability, summed across all colors." ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path mtgoc:converted_mana_cost ],
+        [ sh:description "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line." ;
             sh:order 9 ;
-            sh:path mtgo:card_type ] ;
-    sh:targetClass mtgo:Sorcery .
+            sh:path mtgoc:card_subtype ] ;
+    sh:targetClass mtgoc:Sorcery .
 
-mtgo:Spell a sh:NodeShape ;
+mtgoc:Spell a sh:NodeShape ;
     sh:closed true ;
     sh:description "An object on the stack. Either a card that has been cast, or a copy." ;
     sh:ignoredProperties ( rdf:type ) ;
@@ -677,291 +752,225 @@ mtgo:Spell a sh:NodeShape ;
             sh:minCount 1 ;
             sh:order 1 ;
             sh:path schema:name ],
-        [ sh:description "A unique identifier for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path schema:identifier ],
         [ sh:description "A human-readable description for a thing" ;
             sh:maxCount 1 ;
             sh:order 2 ;
-            sh:path schema:description ] ;
-    sh:targetClass mtgo:Spell .
-
-mtgo:StaticAbility a sh:NodeShape ;
-    sh:closed true ;
-    sh:description "A card ability which remains active until endgame once put into effect." ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "A human-readable name for a thing" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 2 ;
-            sh:path schema:name ],
-        [ sh:description "A unique identifier for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path schema:identifier ],
-        [ sh:description "A human-readable description for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 3 ;
             sh:path schema:description ],
-        [ sh:description "The text describing what an ability does." ;
+        [ sh:description "A unique identifier for a thing" ;
             sh:maxCount 1 ;
             sh:order 0 ;
-            sh:path mtgo:rules_text ] ;
-    sh:targetClass mtgo:StaticAbility .
+            sh:path schema:identifier ] ;
+    sh:targetClass mtgoc:Spell .
 
-mtgo:Token a sh:NodeShape ;
+mtgoc:Token a sh:NodeShape ;
     sh:closed true ;
     sh:description "A permanent that is not represented by a regular card and does not have a casting cost." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "An additional cost to play a card or ability." ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path mtgo:additional_cost ],
-        [ sh:description "A unique identifier for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 13 ;
-            sh:path schema:identifier ],
-        [ sh:description "The color of a card." ;
-            sh:in ( wiki:Q23445 wiki:Q1088 wiki:Q3133 wiki:Q3142 wiki:Q23444 wiki:Q1396399 ) ;
-            sh:minCount 1 ;
-            sh:order 4 ;
-            sh:path mtgo:color ],
-        [ sh:description "A human-readable name for a thing" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 14 ;
-            sh:path schema:name ],
-        [ sh:description "An ability associated with a card." ;
-            sh:in ( "common" "uncommon" "rare" "mythic" ) ;
-            sh:maxCount 1 ;
-            sh:order 12 ;
-            sh:path mtgo:rarity ],
-        [ sh:description "A pool of cards released together and designed for the same play environment." ;
-            sh:maxCount 1 ;
-            sh:order 5 ;
-            sh:path mtgo:card_set ],
-        [ sh:class mtgo:Ability ;
-            sh:description "An ability associated with a card." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 0 ;
-            sh:path mtgo:ability ],
-        [ sh:description "The total mana cost for a card or ability, summed across all colors." ;
-            sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path mtgo:converted_mana_cost ],
-        [ sh:class mtgo:ManaCost ;
-            sh:description "A mana cost for a card or ability." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 2 ;
-            sh:path mtgo:mana_cost ],
-        [ sh:description "The lore text at the bottom of a card." ;
-            sh:maxCount 1 ;
-            sh:order 7 ;
-            sh:path mtgo:flavor_text ],
-        [ sh:description "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 8 ;
-            sh:path mtgo:type_line ],
-        [ sh:description "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type." ;
-            sh:order 11 ;
-            sh:path mtgo:card_supertype ],
-        [ sh:description "The artist who drew a card's illustration." ;
-            sh:maxCount 1 ;
-            sh:order 6 ;
-            sh:path mtgo:artist ],
+    sh:property [ sh:description "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line." ;
+            sh:order 9 ;
+            sh:path mtgoc:card_subtype ],
         [ sh:description "A human-readable description for a thing" ;
             sh:maxCount 1 ;
-            sh:order 15 ;
+            sh:order 14 ;
             sh:path schema:description ],
-        [ sh:description "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line." ;
-            sh:order 10 ;
-            sh:path mtgo:card_subtype ],
-        [ sh:description "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 9 ;
-            sh:path mtgo:card_type ] ;
-    sh:targetClass mtgo:Token .
-
-mtgo:TriggeredAbility a sh:NodeShape ;
-    sh:closed true ;
-    sh:description "A card ability, triggered by an event." ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "A human-readable description for a thing" ;
+        [ sh:description "A pool of cards released together and designed for the same play environment." ;
             sh:maxCount 1 ;
             sh:order 4 ;
-            sh:path schema:description ],
-        [ sh:description "A human-readable name for a thing" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 3 ;
-            sh:path schema:name ],
-        [ sh:description "A unique identifier for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path schema:identifier ],
-        [ sh:description "The text describing what an ability does." ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path mtgo:rules_text ],
-        [ sh:class mtgo:Event ;
-            sh:description "A condition required for an activation." ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:IRI ;
-            sh:order 0 ;
-            sh:path mtgo:condition ] ;
-    sh:targetClass mtgo:TriggeredAbility .
-
-mtgo:Card a sh:NodeShape ;
-    sh:closed true ;
-    sh:description "A card in the Magic The Gathering game." ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 8 ;
-            sh:path mtgo:type_line ],
-        [ sh:description "A unique identifier for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 13 ;
-            sh:path schema:identifier ],
-        [ sh:description "The color of a card." ;
-            sh:in ( wiki:Q23445 wiki:Q1088 wiki:Q3133 wiki:Q3142 wiki:Q23444 wiki:Q1396399 ) ;
-            sh:minCount 1 ;
-            sh:order 4 ;
-            sh:path mtgo:color ],
+            sh:path mtgoc:card_set ],
         [ sh:description "An ability associated with a card." ;
             sh:in ( "common" "uncommon" "rare" "mythic" ) ;
             sh:maxCount 1 ;
-            sh:order 12 ;
-            sh:path mtgo:rarity ],
-        [ sh:description "The lore text at the bottom of a card." ;
-            sh:maxCount 1 ;
-            sh:order 7 ;
-            sh:path mtgo:flavor_text ],
-        [ sh:class mtgo:ManaCost ;
-            sh:description "A mana cost for a card or ability." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 2 ;
-            sh:path mtgo:mana_cost ],
-        [ sh:description "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line." ;
-            sh:order 10 ;
-            sh:path mtgo:card_subtype ],
-        [ sh:description "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type." ;
             sh:order 11 ;
-            sh:path mtgo:card_supertype ],
-        [ sh:description "The artist who drew a card's illustration." ;
-            sh:maxCount 1 ;
-            sh:order 6 ;
-            sh:path mtgo:artist ],
-        [ sh:description "The total mana cost for a card or ability, summed across all colors." ;
-            sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path mtgo:converted_mana_cost ],
+            sh:path mtgoc:rarity ],
         [ sh:description "A human-readable name for a thing" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:order 14 ;
+            sh:order 13 ;
             sh:path schema:name ],
-        [ sh:class mtgo:Ability ;
-            sh:description "An ability associated with a card." ;
-            sh:nodeKind sh:IRI ;
-            sh:order 0 ;
-            sh:path mtgo:ability ],
+        [ sh:description "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type." ;
+            sh:order 10 ;
+            sh:path mtgoc:card_supertype ],
+        [ sh:description "The lore text at the bottom of a card." ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path mtgoc:flavor_text ],
+        [ sh:description "The color of a card." ;
+            sh:in ( wiki:Q23445 wiki:Q1088 wiki:Q3133 wiki:Q3142 wiki:Q23444 wiki:Q1396399 ) ;
+            sh:minCount 1 ;
+            sh:order 3 ;
+            sh:path mtgoc:color ],
+        [ sh:description "The total mana cost for a card or ability, summed across all colors." ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path mtgoc:converted_mana_cost ],
+        [ sh:description "The artist who drew a card's illustration." ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path mtgoc:artist ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 12 ;
+            sh:path schema:identifier ],
         [ sh:description "An additional cost to play a card or ability." ;
             sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path mtgo:additional_cost ],
+            sh:order 0 ;
+            sh:path mtgoc:additional_cost ],
         [ sh:description "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:order 9 ;
-            sh:path mtgo:card_type ],
-        [ sh:description "A human-readable description for a thing" ;
+            sh:order 7 ;
+            sh:path mtgoc:type_line ],
+        [ sh:description "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." ;
             sh:maxCount 1 ;
-            sh:order 15 ;
-            sh:path schema:description ],
-        [ sh:description "A pool of cards released together and designed for the same play environment." ;
-            sh:maxCount 1 ;
-            sh:order 5 ;
-            sh:path mtgo:card_set ] ;
-    sh:targetClass mtgo:Card .
+            sh:minCount 1 ;
+            sh:order 8 ;
+            sh:path mtgoc:card_type ],
+        [ sh:class mtgoc:ManaCost ;
+            sh:description "A mana cost for a card or ability." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path mtgoc:mana_cost ] ;
+    sh:targetClass mtgoc:Token .
 
-mtgo:Event a sh:NodeShape ;
+mtgoa:Event a sh:NodeShape ;
     sh:closed true ;
     sh:description "A combination of circumstances during a game." ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "A human-readable name for a thing" ;
-            sh:maxCount 1 ;
-            sh:minCount 1 ;
-            sh:order 4 ;
-            sh:path schema:name ],
-        [ sh:description "A unique identifier for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 3 ;
-            sh:path schema:identifier ],
-        [ sh:description "A human-readable description for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 5 ;
-            sh:path schema:description ],
-        [ sh:description "An action taken by a player or card." ;
+    sh:property [ sh:description "An action taken by a player or card." ;
             sh:in ( "discard" "draw" "sacrifice" "exile" "fight" "deal_damage" ) ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
             sh:order 1 ;
-            sh:path mtgo:action ],
-        [ sh:description "The entity targeted by an action." ;
-            sh:maxCount 1 ;
-            sh:order 2 ;
-            sh:path mtgo:target ],
-        [ sh:description "The entity responsible for an action." ;
-            sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path mtgo:source ] ;
-    sh:targetClass mtgo:Event .
-
-mtgo:Ability a sh:NodeShape ;
-    sh:closed true ;
-    sh:description "A card ability, activated, triggered or static." ;
-    sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "A unique identifier for a thing" ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path schema:identifier ],
-        [ sh:description "The text describing what an ability does." ;
-            sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path mtgo:rules_text ],
+            sh:path mtgoa:action ],
         [ sh:description "A human-readable name for a thing" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:order 2 ;
+            sh:order 4 ;
             sh:path schema:name ],
-        [ sh:description "A human-readable description for a thing" ;
+        [ sh:description "The entity responsible for an action." ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path mtgoa:source ],
+        [ sh:description "The entity targeted by an action or constraint." ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path mtgoa:target ],
+        [ sh:description "A unique identifier for a thing" ;
             sh:maxCount 1 ;
             sh:order 3 ;
+            sh:path schema:identifier ],
+        [ sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
             sh:path schema:description ] ;
-    sh:targetClass mtgo:Ability .
+    sh:targetClass mtgoa:Event .
 
-mtgo:ManaCost a sh:NodeShape ;
+mtgoc:Card a sh:NodeShape ;
     sh:closed true ;
-    sh:description "The mana cost of a card or ability." ;
+    sh:description "A card in the Magic The Gathering game." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 12 ;
+            sh:path schema:identifier ],
+        [ sh:description "An ability associated with a card." ;
+            sh:in ( "common" "uncommon" "rare" "mythic" ) ;
+            sh:maxCount 1 ;
+            sh:order 11 ;
+            sh:path mtgoc:rarity ],
+        [ sh:description "The lore text at the bottom of a card." ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path mtgoc:flavor_text ],
+        [ sh:description "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 7 ;
+            sh:path mtgoc:type_line ],
+        [ sh:description "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 8 ;
+            sh:path mtgoc:card_type ],
+        [ sh:class mtgoc:ManaCost ;
+            sh:description "A mana cost for a card or ability." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path mtgoc:mana_cost ],
+        [ sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 14 ;
+            sh:path schema:description ],
+        [ sh:description "The total mana cost for a card or ability, summed across all colors." ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path mtgoc:converted_mana_cost ],
+        [ sh:description "The color of a card." ;
+            sh:in ( wiki:Q23445 wiki:Q1088 wiki:Q3133 wiki:Q3142 wiki:Q23444 wiki:Q1396399 ) ;
+            sh:minCount 1 ;
+            sh:order 3 ;
+            sh:path mtgoc:color ],
+        [ sh:description "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line." ;
+            sh:order 9 ;
+            sh:path mtgoc:card_subtype ],
+        [ sh:description "A human-readable name for a thing" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 13 ;
+            sh:path schema:name ],
+        [ sh:description "A pool of cards released together and designed for the same play environment." ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path mtgoc:card_set ],
+        [ sh:description "An additional cost to play a card or ability." ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path mtgoc:additional_cost ],
+        [ sh:description "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type." ;
+            sh:order 10 ;
+            sh:path mtgoc:card_supertype ],
+        [ sh:description "The artist who drew a card's illustration." ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path mtgoc:artist ] ;
+    sh:targetClass mtgoc:Card .
+
+<rdf:predicate> a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A property of an entity." ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:description "A human-readable name for a thing" ;
             sh:maxCount 1 ;
             sh:minCount 1 ;
-            sh:order 3 ;
+            sh:order 1 ;
             sh:path schema:name ],
+        [ sh:description "A human-readable description for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path schema:description ],
+        [ sh:description "A unique identifier for a thing" ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path schema:identifier ] ;
+    sh:targetClass <rdf:predicate> .
+
+mtgoc:ManaCost a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "The mana cost of a card or ability." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "The numeric part of a quantitative value." ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path mtgoc:value ],
         [ sh:description "A human-readable description for a thing" ;
             sh:maxCount 1 ;
             sh:order 4 ;
             sh:path schema:description ],
-        [ sh:description "The numeric part of a quantitative value." ;
+        [ sh:description "A human-readable name for a thing" ;
             sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path mtgo:value ],
+            sh:minCount 1 ;
+            sh:order 3 ;
+            sh:path schema:name ],
         [ sh:description "A unique identifier for a thing" ;
             sh:maxCount 1 ;
             sh:order 2 ;
@@ -970,6 +979,6 @@ mtgo:ManaCost a sh:NodeShape ;
             sh:in ( wiki:Q23445 wiki:Q1088 wiki:Q3133 wiki:Q3142 wiki:Q23444 wiki:Q1396399 ) ;
             sh:minCount 1 ;
             sh:order 0 ;
-            sh:path mtgo:color ] ;
-    sh:targetClass mtgo:ManaCost .
+            sh:path mtgoc:color ] ;
+    sh:targetClass mtgoc:ManaCost .
 

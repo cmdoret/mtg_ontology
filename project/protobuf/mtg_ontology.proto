@@ -21,7 +21,6 @@ message Artifact
   uriorcurie id = 0
   string name = 0
   string description = 0
- repeated  ability ability = 0
   string additionalCost = 0
  repeated  manaCost manaCost = 0
   integer convertedManaCost = 0
@@ -41,7 +40,6 @@ message Card
   uriorcurie id = 0
   string name = 0
   string description = 0
- repeated  ability ability = 0
   string additionalCost = 0
  repeated  manaCost manaCost = 0
   integer convertedManaCost = 0
@@ -60,6 +58,16 @@ message CardCollection
  {
  repeated  card entries = 0
  }
+// A condition expressed as a constraint on a property.
+message Condition
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  string target = 0
+  property property = 0
+  valueConstraint valueConstraint = 0
+ }
 // The cost of a card or ability.
 message Cost
  {
@@ -74,7 +82,6 @@ message Creature
   uriorcurie id = 0
   string name = 0
   string description = 0
- repeated  ability ability = 0
   string additionalCost = 0
  repeated  manaCost manaCost = 0
   integer convertedManaCost = 0
@@ -96,7 +103,6 @@ message Enchantment
   uriorcurie id = 0
   string name = 0
   string description = 0
- repeated  ability ability = 0
   string additionalCost = 0
  repeated  manaCost manaCost = 0
   integer convertedManaCost = 0
@@ -126,7 +132,6 @@ message Instant
   uriorcurie id = 0
   string name = 0
   string description = 0
- repeated  ability ability = 0
   string additionalCost = 0
  repeated  manaCost manaCost = 0
   integer convertedManaCost = 0
@@ -154,7 +159,6 @@ message Land
   uriorcurie id = 0
   string name = 0
   string description = 0
- repeated  ability ability = 0
   string additionalCost = 0
  repeated  manaCost manaCost = 0
   integer convertedManaCost = 0
@@ -198,7 +202,6 @@ message Permanent
   uriorcurie id = 0
   string name = 0
   string description = 0
- repeated  ability ability = 0
   string additionalCost = 0
  repeated  manaCost manaCost = 0
   integer convertedManaCost = 0
@@ -212,13 +215,19 @@ message Permanent
  repeated  string cardSupertype = 0
   rarity rarity = 0
  }
+// A property of an entity.
+message Property
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ }
 // A card that represents a sorcery spell that can be cast.
 message Sorcery
  {
   uriorcurie id = 0
   string name = 0
   string description = 0
- repeated  ability ability = 0
   string additionalCost = 0
  repeated  manaCost manaCost = 0
   integer convertedManaCost = 0
@@ -253,7 +262,6 @@ message Token
   uriorcurie id = 0
   string name = 0
   string description = 0
- repeated  ability ability = 0
   string additionalCost = 0
  repeated  manaCost manaCost = 0
   integer convertedManaCost = 0
