@@ -5,10 +5,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://cmdoret.github.io/mtg-ontology/LifeCost/" rel="canonical"/>
+<link href="https://cmdoret.github.io/mtg-ontology/Specification/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.4.2, mkdocs-material-8.5.10" name="generator"/>
-<title>Class: LifeCost - mtg-ontology</title>
+<title>Class: Specification - mtg-ontology</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -21,7 +21,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-lifecost">
+<a class="md-skip" href="#class-specification">
           Skip to content
         </a>
 </div>
@@ -45,7 +45,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: LifeCost
+              Class: Specification
             
           </span>
 </div>
@@ -196,27 +196,41 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<a class="md-content__button md-icon" href="https://github.com/cmdoret/mtg-ontology/edit/master/docs/LifeCost.md" title="Edit this page">
+<a class="md-content__button md-icon" href="https://github.com/cmdoret/mtg-ontology/edit/master/docs/Specification.md" title="Edit this page">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"></path></svg>
 </a>
-<h1 id="class-lifecost">Class: LifeCost</h1>
-<p><em>The life cost of a card or ability.</em></p>
-<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/cards/LifeCost">mtgoc:LifeCost</a></p>
+<h1 id="class-specification">Class: Specification</h1>
+<p><em>A specification for a thing.</em></p>
+<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/abilities/Specification">mtgoa:Specification</a></p>
 <div class="mermaid"> classDiagram
-    class LifeCost
-      Cost &lt;|-- LifeCost
+    class Specification
+      NamedThing &lt;|-- Specification
 
-      LifeCost : description
-      LifeCost : id
-      LifeCost : name
-      LifeCost : value
+      Specification : and
+      Specification : constraint
+      Specification : description
+      Specification : id
+      Specification : name
+      Specification : or
+
+
+      Specification &lt;|-- ActionSpecification
+      Specification &lt;|-- ValueSpecification
+
+      Specification : and
+      Specification : constraint
+      Specification : description
+      Specification : id
+      Specification : name
+      Specification : or
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
 <li><a href="../NamedThing/">NamedThing</a><ul>
-<li><a href="../Cost/">Cost</a><ul>
-<li><strong>LifeCost</strong></li>
+<li><strong>Specification</strong><ul>
+<li><a href="../ActionSpecification/">ActionSpecification</a></li>
+<li><a href="../ValueSpecification/">ValueSpecification</a></li>
 </ul>
 </li>
 </ul>
@@ -234,10 +248,22 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../value/">value</a></td>
-<td>0..1 <br/> <a href="xsd:integer">xsd:integer</a></td>
-<td>The numeric part of a quantitative value</td>
-<td><a href="../Cost/">Cost</a></td>
+<td><a href="../constraint/">constraint</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td>A constraint on a time, quantity or action</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../and/">and</a></td>
+<td>0..1 <br/> <a href="../NamedThing/">NamedThing</a></td>
+<td>A conjunction of two objects</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../or/">or</a></td>
+<td>0..1 <br/> <a href="../NamedThing/">NamedThing</a></td>
+<td>A disjunction of two objects</td>
+<td>direct</td>
 </tr>
 <tr>
 <td><a href="../id/">id</a></td>
@@ -262,7 +288,7 @@
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://w3id.org/cmdoret/mtg-ontology/cards</li>
+<li>from schema: https://w3id.org/cmdoret/mtg-ontology/abilities/</li>
 </ul>
 <h2 id="mappings">Mappings</h2>
 <table>
@@ -275,11 +301,11 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>mtgoc:LifeCost</td>
+<td>mtgoa:Specification</td>
 </tr>
 <tr>
 <td>native</td>
-<td>mtgoc:LifeCost</td>
+<td>mtgoa:Specification</td>
 </tr>
 </tbody>
 </table>
@@ -287,33 +313,62 @@
 <!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
 <h3 id="direct">Direct</h3>
 <details>
-<pre><code class="language-yaml">name: LifeCost
-description: The life cost of a card or ability.
-from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
+<pre><code class="language-yaml">name: Specification
+description: A specification for a thing.
+from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
-is_a: Cost
+is_a: NamedThing
+slots:
+- constraint
+- and
+- or
 
 </code></pre>
 </details>
 <h3 id="induced">Induced</h3>
 <details>
-<pre><code class="language-yaml">name: LifeCost
-description: The life cost of a card or ability.
-from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
+<pre><code class="language-yaml">name: Specification
+description: A specification for a thing.
+from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
-is_a: Cost
+is_a: NamedThing
 attributes:
-  value:
-    name: value
-    description: The numeric part of a quantitative value.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
+  constraint:
+    name: constraint
+    description: A constraint on a time, quantity or action.
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
     rank: 1000
-    alias: value
-    owner: LifeCost
+    alias: constraint
+    owner: Specification
     domain_of:
-    - ValueSpecification
-    - Cost
-    range: integer
+    - Specification
+    range: string
+    any_of:
+    - range: ActionConstraint
+    - range: TimeConstraint
+    - range: ValueConstraint
+  and:
+    name: and
+    description: A conjunction of two objects.
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
+    rank: 1000
+    alias: and
+    owner: Specification
+    domain_of:
+    - Specification
+    symmetric: true
+    range: NamedThing
+  or:
+    name: or
+    description: A disjunction of two objects.
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
+    rank: 1000
+    alias: or
+    owner: Specification
+    domain_of:
+    - Specification
+    symmetric: true
+    range: NamedThing
   id:
     name: id
     description: A unique identifier for a thing
@@ -322,7 +377,7 @@ attributes:
     slot_uri: schema:identifier
     identifier: true
     alias: id
-    owner: LifeCost
+    owner: Specification
     domain_of:
     - NamedThing
     range: uriorcurie
@@ -333,7 +388,7 @@ attributes:
     rank: 1000
     slot_uri: schema:name
     alias: name
-    owner: LifeCost
+    owner: Specification
     domain_of:
     - NamedThing
     - KeywordAbility
@@ -346,7 +401,7 @@ attributes:
     rank: 1000
     slot_uri: schema:description
     alias: description
-    owner: LifeCost
+    owner: Specification
     domain_of:
     - NamedThing
     range: string

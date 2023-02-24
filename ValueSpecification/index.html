@@ -5,10 +5,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://cmdoret.github.io/mtg-ontology/Event/" rel="canonical"/>
+<link href="https://cmdoret.github.io/mtg-ontology/ValueSpecification/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.4.2, mkdocs-material-8.5.10" name="generator"/>
-<title>Class: Event - mtg-ontology</title>
+<title>Class: ValueSpecification - mtg-ontology</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -21,7 +21,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-event">
+<a class="md-skip" href="#class-valuespecification">
           Skip to content
         </a>
 </div>
@@ -45,7 +45,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: Event
+              Class: ValueSpecification
             
           </span>
 </div>
@@ -201,28 +201,32 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<a class="md-content__button md-icon" href="https://github.com/cmdoret/mtg-ontology/edit/master/docs/Event.md" title="Edit this page">
+<a class="md-content__button md-icon" href="https://github.com/cmdoret/mtg-ontology/edit/master/docs/ValueSpecification.md" title="Edit this page">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"></path></svg>
 </a>
-<h1 id="class-event">Class: Event</h1>
-<p><em>A combination of circumstances during a game.</em></p>
-<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/abilities/Event">mtgoa:Event</a></p>
+<h1 id="class-valuespecification">Class: ValueSpecification</h1>
+<p><em>A specification for a quantitative value.</em></p>
+<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/abilities/ValueSpecification">mtgoa:ValueSpecification</a></p>
 <div class="mermaid"> classDiagram
-    class Event
-      NamedThing &lt;|-- Event
+    class ValueSpecification
+      Specification &lt;|-- ValueSpecification
 
-      Event : action
-      Event : description
-      Event : id
-      Event : name
-      Event : source
-      Event : target
+      ValueSpecification : and
+      ValueSpecification : constraint
+      ValueSpecification : description
+      ValueSpecification : id
+      ValueSpecification : name
+      ValueSpecification : or
+      ValueSpecification : value
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
 <li><a href="../NamedThing/">NamedThing</a><ul>
-<li><strong>Event</strong></li>
+<li><a href="../Specification/">Specification</a><ul>
+<li><strong>ValueSpecification</strong></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -238,22 +242,28 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../source/">source</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td>The entity responsible for an action</td>
+<td><a href="../value/">value</a></td>
+<td>0..1 <br/> <a href="xsd:integer">xsd:integer</a></td>
+<td>The numeric part of a quantitative value</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../action/">action</a></td>
-<td>1..1 <br/> <a href="../Action/">Action</a></td>
-<td>An action taken by a player or card</td>
-<td>direct</td>
+<td><a href="../constraint/">constraint</a></td>
+<td>0..1 <br/> <a href="../ValueConstraint/">ValueConstraint</a></td>
+<td>A constraint on a time, quantity or action</td>
+<td><a href="../Specification/">Specification</a></td>
 </tr>
 <tr>
-<td><a href="../target/">target</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td>The entity targeted by an action or constraint</td>
-<td>direct</td>
+<td><a href="../and/">and</a></td>
+<td>0..1 <br/> <a href="./">ValueSpecification</a></td>
+<td>A conjunction of two objects</td>
+<td><a href="../Specification/">Specification</a></td>
+</tr>
+<tr>
+<td><a href="../or/">or</a></td>
+<td>0..1 <br/> <a href="./">ValueSpecification</a></td>
+<td>A disjunction of two objects</td>
+<td><a href="../Specification/">Specification</a></td>
 </tr>
 <tr>
 <td><a href="../id/">id</a></td>
@@ -287,10 +297,22 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../TriggeredAbility/">TriggeredAbility</a></td>
-<td><a href="../condition/">condition</a></td>
+<td><a href="../Condition/">Condition</a></td>
+<td><a href="../value_spec/">value_spec</a></td>
 <td>range</td>
-<td><a href="./">Event</a></td>
+<td><a href="./">ValueSpecification</a></td>
+</tr>
+<tr>
+<td><a href="./">ValueSpecification</a></td>
+<td><a href="../and/">and</a></td>
+<td>range</td>
+<td><a href="./">ValueSpecification</a></td>
+</tr>
+<tr>
+<td><a href="./">ValueSpecification</a></td>
+<td><a href="../or/">or</a></td>
+<td>range</td>
+<td><a href="./">ValueSpecification</a></td>
 </tr>
 </tbody>
 </table>
@@ -310,11 +332,11 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>mtgoa:Event</td>
+<td>mtgoa:ValueSpecification</td>
 </tr>
 <tr>
 <td>native</td>
-<td>mtgoa:Event</td>
+<td>mtgoa:ValueSpecification</td>
 </tr>
 </tbody>
 </table>
@@ -322,64 +344,114 @@
 <!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
 <h3 id="direct">Direct</h3>
 <details>
-<pre><code class="language-yaml">name: Event
-description: A combination of circumstances during a game.
+<pre><code class="language-yaml">name: ValueSpecification
+description: A specification for a quantitative value.
 from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
-is_a: NamedThing
+is_a: Specification
 slots:
-- source
-- action
-- target
+- value
+slot_usage:
+  and:
+    name: and
+    domain_of:
+    - Specification
+    - Specification
+    - Specification
+    range: ValueSpecification
+  or:
+    name: or
+    domain_of:
+    - Specification
+    - Specification
+    - Specification
+    range: ValueSpecification
+  constraint:
+    name: constraint
+    domain_of:
+    - Specification
+    - Specification
+    - Specification
+    range: ValueConstraint
 
 </code></pre>
 </details>
 <h3 id="induced">Induced</h3>
 <details>
-<pre><code class="language-yaml">name: Event
-description: A combination of circumstances during a game.
+<pre><code class="language-yaml">name: ValueSpecification
+description: A specification for a quantitative value.
 from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
-is_a: NamedThing
+is_a: Specification
+slot_usage:
+  and:
+    name: and
+    domain_of:
+    - Specification
+    - Specification
+    - Specification
+    range: ValueSpecification
+  or:
+    name: or
+    domain_of:
+    - Specification
+    - Specification
+    - Specification
+    range: ValueSpecification
+  constraint:
+    name: constraint
+    domain_of:
+    - Specification
+    - Specification
+    - Specification
+    range: ValueConstraint
 attributes:
-  source:
-    name: source
-    description: The entity responsible for an action.
+  value:
+    name: value
+    description: The numeric part of a quantitative value.
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
+    rank: 1000
+    alias: value
+    owner: ValueSpecification
+    domain_of:
+    - ValueSpecification
+    - Cost
+    range: integer
+  constraint:
+    name: constraint
+    description: A constraint on a time, quantity or action.
     from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
     rank: 1000
-    alias: source
-    owner: Event
+    alias: constraint
+    owner: ValueSpecification
     domain_of:
-    - Event
-    range: string
-    any_of:
-    - range: Player
-    - range: Card
-  action:
-    name: action
-    description: An action taken by a player or card.
+    - Specification
+    - Specification
+    range: ValueConstraint
+  and:
+    name: and
+    description: A conjunction of two objects.
     from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
     rank: 1000
-    alias: action
-    owner: Event
+    alias: and
+    owner: ValueSpecification
     domain_of:
-    - Event
-    range: Action
-    required: true
-  target:
-    name: target
-    description: The entity targeted by an action or constraint.
+    - Specification
+    - Specification
+    symmetric: true
+    range: ValueSpecification
+  or:
+    name: or
+    description: A disjunction of two objects.
     from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
     rank: 1000
-    alias: target
-    owner: Event
+    alias: or
+    owner: ValueSpecification
     domain_of:
-    - Event
-    - Condition
-    range: string
-    any_of:
-    - range: Player
-    - range: Card
+    - Specification
+    - Specification
+    symmetric: true
+    range: ValueSpecification
   id:
     name: id
     description: A unique identifier for a thing
@@ -388,7 +460,7 @@ attributes:
     slot_uri: schema:identifier
     identifier: true
     alias: id
-    owner: Event
+    owner: ValueSpecification
     domain_of:
     - NamedThing
     range: uriorcurie
@@ -399,7 +471,7 @@ attributes:
     rank: 1000
     slot_uri: schema:name
     alias: name
-    owner: Event
+    owner: ValueSpecification
     domain_of:
     - NamedThing
     - KeywordAbility
@@ -412,7 +484,7 @@ attributes:
     rank: 1000
     slot_uri: schema:description
     alias: description
-    owner: Event
+    owner: ValueSpecification
     domain_of:
     - NamedThing
     range: string

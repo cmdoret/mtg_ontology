@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://cmdoret.github.io/mtg-ontology/value/">
+        <link rel="canonical" href="https://cmdoret.github.io/mtg-ontology/TurnPhase/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
     
     
       
-        <title>Slot: value - mtg-ontology</title>
+        <title>Enum: TurnPhase - mtg-ontology</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-value" class="md-skip">
+        <a href="#enum-turnphase" class="md-skip">
           Skip to content
         </a>
       
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: value
+              Enum: TurnPhase
             
           </span>
         </div>
@@ -256,15 +256,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#applicable-classes" class="md-nav__link">
-    Applicable Classes
+  <a href="#permissible-values" class="md-nav__link">
+    Permissible Values
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
+  <a href="#slots" class="md-nav__link">
+    Slots
   </a>
   
 </li>
@@ -310,18 +310,83 @@
                 
                   
 
-  <a href="https://github.com/cmdoret/mtg-ontology/edit/master/docs/value.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/cmdoret/mtg-ontology/edit/master/docs/TurnPhase.md" title="Edit this page" class="md-content__button md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
-<h1 id="slot-value">Slot: value</h1>
-<p><em>The numeric part of a quantitative value.</em></p>
-<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/cards/value">mtgoc:value</a></p>
-<!-- no inheritance hierarchy -->
-
-<h2 id="applicable-classes">Applicable Classes</h2>
+<h1 id="enum-turnphase">Enum: TurnPhase</h1>
+<p><em>A phase of the turn.</em></p>
+<p>URI: <a href="TurnPhase">TurnPhase</a></p>
+<h2 id="permissible-values">Permissible Values</h2>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Meaning</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>untap</td>
+<td>None</td>
+<td>The untap step</td>
+</tr>
+<tr>
+<td>upkeep</td>
+<td>None</td>
+<td>The upkeep step</td>
+</tr>
+<tr>
+<td>draw</td>
+<td>None</td>
+<td>The draw step</td>
+</tr>
+<tr>
+<td>main</td>
+<td>None</td>
+<td>The main phase</td>
+</tr>
+<tr>
+<td>combat</td>
+<td>None</td>
+<td>The combat phase</td>
+</tr>
+<tr>
+<td>declare_attackers</td>
+<td>None</td>
+<td>The declare attackers step</td>
+</tr>
+<tr>
+<td>declare_blockers</td>
+<td>None</td>
+<td>The declare blockers step</td>
+</tr>
+<tr>
+<td>combat_damage</td>
+<td>None</td>
+<td>The combat damage step</td>
+</tr>
+<tr>
+<td>end_of_combat</td>
+<td>None</td>
+<td>The end of combat step</td>
+</tr>
+<tr>
+<td>end</td>
+<td>None</td>
+<td>The end step</td>
+</tr>
+<tr>
+<td>cleanup</td>
+<td>None</td>
+<td>The cleanup step</td>
+</tr>
+</tbody>
+</table>
+<h2 id="slots">Slots</h2>
 <table>
 <thead>
 <tr>
@@ -331,44 +396,57 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../ValueSpecification/">ValueSpecification</a></td>
-<td>A specification for a quantitative value</td>
-</tr>
-<tr>
-<td><a href="../Cost/">Cost</a></td>
-<td>The cost of a card or ability</td>
-</tr>
-<tr>
-<td><a href="../ManaCost/">ManaCost</a></td>
-<td>The mana cost of a card or ability</td>
-</tr>
-<tr>
-<td><a href="../LifeCost/">LifeCost</a></td>
-<td>The life cost of a card or ability</td>
+<td><a href="../phase/">phase</a></td>
+<td>A phase of the game</td>
 </tr>
 </tbody>
 </table>
-<h2 id="properties">Properties</h2>
-<ul>
-<li>Range: <a href="xsd:integer">xsd:integer</a></li>
-</ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://w3id.org/cmdoret/mtg-ontology/cards</li>
+<li>from schema: https://w3id.org/cmdoret/mtg-ontology/abilities/</li>
 </ul>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: value
-description: The numeric part of a quantitative value.
-from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
+<pre><code class="language-yaml">name: TurnPhase
+description: A phase of the turn.
+from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
-alias: value
-domain_of:
-- ValueSpecification
-- Cost
-range: integer
+permissible_values:
+  untap:
+    text: untap
+    description: The untap step.
+  upkeep:
+    text: upkeep
+    description: The upkeep step.
+  draw:
+    text: draw
+    description: The draw step.
+  main:
+    text: main
+    description: The main phase.
+  combat:
+    text: combat
+    description: The combat phase.
+  declare_attackers:
+    text: declare_attackers
+    description: The declare attackers step.
+  declare_blockers:
+    text: declare_blockers
+    description: The declare blockers step.
+  combat_damage:
+    text: combat_damage
+    description: The combat damage step.
+  end_of_combat:
+    text: end_of_combat
+    description: The end of combat step.
+  end:
+    text: end
+    description: The end step.
+  cleanup:
+    text: cleanup
+    description: The cleanup step.
 
 </code></pre>
 

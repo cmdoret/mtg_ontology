@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://cmdoret.github.io/mtg-ontology/value/">
+        <link rel="canonical" href="https://cmdoret.github.io/mtg-ontology/TimeConstraint/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
     
     
       
-        <title>Slot: value - mtg-ontology</title>
+        <title>Enum: TimeConstraint - mtg-ontology</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-value" class="md-skip">
+        <a href="#enum-timeconstraint" class="md-skip">
           Skip to content
         </a>
       
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: value
+              Enum: TimeConstraint
             
           </span>
         </div>
@@ -256,15 +256,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#applicable-classes" class="md-nav__link">
-    Applicable Classes
+  <a href="#permissible-values" class="md-nav__link">
+    Permissible Values
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    Properties
+  <a href="#slots" class="md-nav__link">
+    Slots
   </a>
   
 </li>
@@ -310,18 +310,63 @@
                 
                   
 
-  <a href="https://github.com/cmdoret/mtg-ontology/edit/master/docs/value.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/cmdoret/mtg-ontology/edit/master/docs/TimeConstraint.md" title="Edit this page" class="md-content__button md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
-<h1 id="slot-value">Slot: value</h1>
-<p><em>The numeric part of a quantitative value.</em></p>
-<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/cards/value">mtgoc:value</a></p>
-<!-- no inheritance hierarchy -->
-
-<h2 id="applicable-classes">Applicable Classes</h2>
+<h1 id="enum-timeconstraint">Enum: TimeConstraint</h1>
+<p><em>A constraint on the time of an event.</em></p>
+<p>URI: <a href="TimeConstraint">TimeConstraint</a></p>
+<h2 id="permissible-values">Permissible Values</h2>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Meaning</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>before</td>
+<td>None</td>
+<td>The event must occur before the target</td>
+</tr>
+<tr>
+<td>after</td>
+<td>None</td>
+<td>The event must occur after the target</td>
+</tr>
+<tr>
+<td>during</td>
+<td>None</td>
+<td>The event must occur during the target</td>
+</tr>
+<tr>
+<td>next</td>
+<td>None</td>
+<td>The event must occur next</td>
+</tr>
+<tr>
+<td>previous</td>
+<td>None</td>
+<td>The event must have occurred previously</td>
+</tr>
+<tr>
+<td>this</td>
+<td>None</td>
+<td>The event must occur this time</td>
+</tr>
+<tr>
+<td>each</td>
+<td>None</td>
+<td>The event must occur each time</td>
+</tr>
+</tbody>
+</table>
+<h2 id="slots">Slots</h2>
 <table>
 <thead>
 <tr>
@@ -331,44 +376,45 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../ValueSpecification/">ValueSpecification</a></td>
-<td>A specification for a quantitative value</td>
-</tr>
-<tr>
-<td><a href="../Cost/">Cost</a></td>
-<td>The cost of a card or ability</td>
-</tr>
-<tr>
-<td><a href="../ManaCost/">ManaCost</a></td>
-<td>The mana cost of a card or ability</td>
-</tr>
-<tr>
-<td><a href="../LifeCost/">LifeCost</a></td>
-<td>The life cost of a card or ability</td>
+<td><a href="../constraint/">constraint</a></td>
+<td></td>
 </tr>
 </tbody>
 </table>
-<h2 id="properties">Properties</h2>
-<ul>
-<li>Range: <a href="xsd:integer">xsd:integer</a></li>
-</ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://w3id.org/cmdoret/mtg-ontology/cards</li>
+<li>from schema: https://w3id.org/cmdoret/mtg-ontology/abilities/</li>
 </ul>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: value
-description: The numeric part of a quantitative value.
-from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
+<pre><code class="language-yaml">name: TimeConstraint
+description: A constraint on the time of an event.
+from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
-alias: value
-domain_of:
-- ValueSpecification
-- Cost
-range: integer
+permissible_values:
+  before:
+    text: before
+    description: The event must occur before the target.
+  after:
+    text: after
+    description: The event must occur after the target.
+  during:
+    text: during
+    description: The event must occur during the target.
+  next:
+    text: next
+    description: The event must occur next.
+  previous:
+    text: previous
+    description: The event must have occurred previously.
+  this:
+    text: this
+    description: The event must occur this time.
+  each:
+    text: each
+    description: The event must occur each time.
 
 </code></pre>
 

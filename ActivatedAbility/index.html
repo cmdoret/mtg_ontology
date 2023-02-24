@@ -208,6 +208,7 @@
 
       ActivatedAbility : additional_cost
       ActivatedAbility : description
+      ActivatedAbility : effect
       ActivatedAbility : id
       ActivatedAbility : name
       ActivatedAbility : rules_text
@@ -244,6 +245,12 @@
 <td><a href="../rules_text/">rules_text</a></td>
 <td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>The text describing what an ability does</td>
+<td><a href="../Ability/">Ability</a></td>
+</tr>
+<tr>
+<td><a href="../effect/">effect</a></td>
+<td>0..1 <br/> <a href="../ActionSpecification/">ActionSpecification</a></td>
+<td>The effect of an ability</td>
 <td><a href="../Ability/">Ability</a></td>
 </tr>
 <tr>
@@ -337,6 +344,16 @@ attributes:
     domain_of:
     - Ability
     range: string
+  effect:
+    name: effect
+    description: The effect of an ability.
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
+    rank: 1000
+    alias: effect
+    owner: ActivatedAbility
+    domain_of:
+    - Ability
+    range: ActionSpecification
   id:
     name: id
     description: A unique identifier for a thing
