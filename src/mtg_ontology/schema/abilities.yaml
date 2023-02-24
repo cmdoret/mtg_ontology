@@ -106,7 +106,7 @@ classes:
     is_a: NamedThing
     description: A specification for a time.
     slots:
-      - phase
+      - time 
       - player
     slot_usage:
       and:
@@ -168,8 +168,8 @@ slots:
   player:
     range: Player
     description: A player.
-  phase:
-    range: TurnPhase
+  time:
+    range: Time
     description: A phase of the game.
   constraint:
     any_of:
@@ -221,6 +221,12 @@ enums:
         description: Two cards fight each other.
       deal_damage:
         description: Something deals damage to something else.
+      cast:
+        description: A spell is cast.
+      activate:
+        description: An ability is activated.
+      place_creature:
+        description: One or more creatures are placed on the battlefield.
 
   ActionConstraint:
     permissible_values:
@@ -260,8 +266,8 @@ enums:
       is_not_one_of:
         description: The value must not be one of the target list.
 
-  TurnPhase:
-    description: A phase of the turn.
+  Time:
+    description: A time during the turn.
     permissible_values:
       untap:
         description: The untap step.
@@ -285,6 +291,8 @@ enums:
         description: The end step.
       cleanup:
         description: The cleanup step.
+      turn:
+        description: Any time during the turn.
   
   TimeConstraint:
     description: A constraint on the time of an event.

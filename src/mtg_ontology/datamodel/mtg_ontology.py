@@ -1,5 +1,5 @@
 # Auto generated from mtg_ontology.yaml by pythongen.py version: 0.9.0
-# Generation date: 2023-02-24T02:35:27
+# Generation date: 2023-02-24T02:59:19
 # Schema: mtgo
 #
 # id: https://w3id.org/cmdoret/mtg-ontology/
@@ -941,7 +941,7 @@ class TimeSpecification(NamedThing):
 
     id: Union[str, TimeSpecificationId] = None
     name: str = None
-    phase: Optional[Union[str, "TurnPhase"]] = None
+    time: Optional[Union[str, "Time"]] = None
     player: Optional[Union[str, "Player"]] = None
     and: Optional[Union[str, TimeSpecificationId]] = None
     or: Optional[Union[str, TimeSpecificationId]] = None
@@ -953,8 +953,8 @@ class TimeSpecification(NamedThing):
         if not isinstance(self.id, TimeSpecificationId):
             self.id = TimeSpecificationId(self.id)
 
-        if self.phase is not None and not isinstance(self.phase, TurnPhase):
-            self.phase = TurnPhase(self.phase)
+        if self.time is not None and not isinstance(self.time, Time):
+            self.time = Time(self.time)
 
         if self.player is not None and not isinstance(self.player, Player):
             self.player = Player(self.player)
@@ -1080,6 +1080,12 @@ class Action(EnumDefinitionImpl):
                                  description="Two cards fight each other.")
     deal_damage = PermissibleValue(text="deal_damage",
                                              description="Something deals damage to something else.")
+    cast = PermissibleValue(text="cast",
+                               description="A spell is cast.")
+    activate = PermissibleValue(text="activate",
+                                       description="An ability is activated.")
+    place_creature = PermissibleValue(text="place_creature",
+                                                   description="One or more creatures are placed on the battlefield.")
 
     _defn = EnumDefinition(
         name="Action",
@@ -1136,9 +1142,9 @@ class ValueConstraint(EnumDefinitionImpl):
                 PermissibleValue(text="is",
                                  description="The value must be equivalent to the target.") )
 
-class TurnPhase(EnumDefinitionImpl):
+class Time(EnumDefinitionImpl):
     """
-    A phase of the turn.
+    A time during the turn.
     """
     untap = PermissibleValue(text="untap",
                                  description="The untap step.")
@@ -1162,10 +1168,12 @@ class TurnPhase(EnumDefinitionImpl):
                              description="The end step.")
     cleanup = PermissibleValue(text="cleanup",
                                      description="The cleanup step.")
+    turn = PermissibleValue(text="turn",
+                               description="Any time during the turn.")
 
     _defn = EnumDefinition(
-        name="TurnPhase",
-        description="A phase of the turn.",
+        name="Time",
+        description="A time during the turn.",
     )
 
 class TimeConstraint(EnumDefinitionImpl):
@@ -1286,8 +1294,8 @@ slots.action_spec = Slot(uri=MTGOA.action_spec, name="action_spec", curie=MTGOA.
 slots.player = Slot(uri=MTGOA.player, name="player", curie=MTGOA.curie('player'),
                    model_uri=MTGO.player, domain=None, range=Optional[Union[str, "Player"]])
 
-slots.phase = Slot(uri=MTGOA.phase, name="phase", curie=MTGOA.curie('phase'),
-                   model_uri=MTGO.phase, domain=None, range=Optional[Union[str, "TurnPhase"]])
+slots.time = Slot(uri=MTGOA.time, name="time", curie=MTGOA.curie('time'),
+                   model_uri=MTGO.time, domain=None, range=Optional[Union[str, "Time"]])
 
 slots.constraint = Slot(uri=MTGOA.constraint, name="constraint", curie=MTGOA.curie('constraint'),
                    model_uri=MTGO.constraint, domain=None, range=Optional[str])
