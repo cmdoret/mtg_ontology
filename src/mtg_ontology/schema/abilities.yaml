@@ -33,6 +33,7 @@ classes:
       A card ability, activated, triggered or static.
     slots:
       - rules_text
+      - effect
   ActivatedAbility:
     is_a: Ability
     description: >-
@@ -56,22 +57,65 @@ classes:
     slots:
       - condition
 
-  Event:
-    is_a: NamedThing
-    description: A combination of circumstances during a game.
-    slots:
-      - source
-      - action
-      - target
-
   Condition:
     is_a: NamedThing
-    description: A condition expressed as a constraint on a property.
+    description: A condition expressed as constraints.
     slots:
+      - source
       - target
       - property
-      - value_constraint
-  
+      - action_spec
+      - value_spec
+      - time_spec
+
+  Specification:
+    is_a: NamedThing
+    description: A specification for a thing. 
+    slots:
+      - constraint
+      - and
+      - or
+
+  ActionSpecification:
+    is_a: Specification
+    description: A specification for an action.
+    slots:
+    - action
+    slot_usage:
+      and:
+        range: ActionSpecification
+      or:
+        range: ActionSpecification
+      constraint:
+        range: ActionConstraint
+
+  ValueSpecification:
+    is_a: Specification
+    description: A specification for a quantitative value.
+    slots:
+    - value
+    slot_usage:
+      and:
+        range: ValueSpecification
+      or:
+        range: ValueSpecification
+      constraint:
+        range: ValueConstraint
+
+  TimeSpecification:
+    is_a: NamedThing
+    description: A specification for a time.
+    slots:
+      - phase
+      - player
+    slot_usage:
+      and:
+        range: TimeSpecification
+      or:
+        range: TimeSpecification
+      constraint:
+        range: TimeConstraint
+
   Property:
     is_a: NamedThing
     description: A property of an entity.
@@ -86,6 +130,9 @@ slots:
   rules_text:
     range: string
     description: The text describing what an ability does.
+  effect:
+    range: ActionSpecification
+    description: The effect of an ability.
   action:
     range: Action
     required: true
@@ -101,14 +148,45 @@ slots:
       - range: Card
     description: The entity targeted by an action or constraint.
   condition:
-    range: Event
+    range: Condition
     description: A condition required for an activation.
   property:
     range: Property
     description: A property of an entity.
-  value_constraint:
-    range: ValueConstraint
-    description: A constraint on the value of a property.
+  value_spec:
+    range: ValueSpecification
+    description: A specification for the value of a property.
+    multivalued: true
+  time_spec:
+    range: TimeSpecification
+    description: A specification of the time of an event.
+    multivalued: true
+  action_spec:
+    range: ActionSpecification
+    description: A specification of an action.
+    multivalued: true
+  player:
+    range: Player
+    description: A player.
+  phase:
+    range: TurnPhase
+    description: A phase of the game.
+  constraint:
+    any_of:
+      - range: ActionConstraint
+      - range: TimeConstraint
+      - range: ValueConstraint
+    description: A constraint on a time, quantity or action.
+  and:
+    range: NamedThing
+    description: A conjunction of two objects.
+    symmetric: true
+  or:
+    range: NamedThing
+    description: A disjunction of two objects.
+    symmetric: true
+  
+
     
 enums:
 
@@ -181,3 +259,47 @@ enums:
         description: The value must be one of the target list.
       is_not_one_of:
         description: The value must not be one of the target list.
+
+  TurnPhase:
+    description: A phase of the turn.
+    permissible_values:
+      untap:
+        description: The untap step.
+      upkeep:
+        description: The upkeep step.
+      draw:
+        description: The draw step.
+      main:
+        description: The main phase.
+      combat:
+        description: The combat phase.
+      declare_attackers:
+        description: The declare attackers step.
+      declare_blockers:
+        description: The declare blockers step.
+      combat_damage:
+        description: The combat damage step.
+      end_of_combat:
+        description: The end of combat step.
+      end:
+        description: The end step.
+      cleanup:
+        description: The cleanup step.
+  
+  TimeConstraint:
+    description: A constraint on the time of an event.
+    permissible_values:
+      before:
+        description: The event must occur before the target.
+      after:
+        description: The event must occur after the target.
+      during:
+        description: The event must occur during the target.
+      next:
+        description: The event must occur next.
+      previous:
+        description: The event must have occurred previously.
+      this:
+        description: The event must occur this time.
+      each:
+        description: The event must occur each time.
