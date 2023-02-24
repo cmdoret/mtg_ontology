@@ -141,6 +141,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://cmdoret.github.io/mtg-ontology/Time/</loc>
+         <lastmod>2023-02-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://cmdoret.github.io/mtg-ontology/TimeConstraint/</loc>
          <lastmod>2023-02-24</lastmod>
          <changefreq>daily</changefreq>
@@ -157,11 +162,6 @@
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/TriggeredAbility/</loc>
-         <lastmod>2023-02-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://cmdoret.github.io/mtg-ontology/TurnPhase/</loc>
          <lastmod>2023-02-24</lastmod>
          <changefreq>daily</changefreq>
     </url>
@@ -301,11 +301,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://cmdoret.github.io/mtg-ontology/phase/</loc>
-         <lastmod>2023-02-24</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://cmdoret.github.io/mtg-ontology/player/</loc>
          <lastmod>2023-02-24</lastmod>
          <changefreq>daily</changefreq>
@@ -337,6 +332,11 @@
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg-ontology/target/</loc>
+         <lastmod>2023-02-24</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://cmdoret.github.io/mtg-ontology/time/</loc>
          <lastmod>2023-02-24</lastmod>
          <changefreq>daily</changefreq>
     </url>

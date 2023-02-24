@@ -214,8 +214,8 @@
       TimeSpecification : description
       TimeSpecification : id
       TimeSpecification : name
-      TimeSpecification : phase
       TimeSpecification : player
+      TimeSpecification : time
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
@@ -237,8 +237,8 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../phase/">phase</a></td>
-<td>0..1 <br/> <a href="../TurnPhase/">TurnPhase</a></td>
+<td><a href="../time/">time</a></td>
+<td>0..1 <br/> <a href="../Time/">Time</a></td>
 <td>A phase of the game</td>
 <td>direct</td>
 </tr>
@@ -321,7 +321,7 @@ from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
 is_a: NamedThing
 slots:
-- phase
+- time
 - player
 slot_usage:
   and:
@@ -354,16 +354,16 @@ slot_usage:
     name: constraint
     range: TimeConstraint
 attributes:
-  phase:
-    name: phase
+  time:
+    name: time
     description: A phase of the game.
     from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
     rank: 1000
-    alias: phase
+    alias: time
     owner: TimeSpecification
     domain_of:
     - TimeSpecification
-    range: TurnPhase
+    range: Time
   player:
     name: player
     description: A player.
