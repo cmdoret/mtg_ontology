@@ -1,59 +1,81 @@
-@prefix example: <http://www.example.org/rdf#> .
-@prefix mtgo: <https://w3id.org/cmdoret/mtg-ontology/> .
+@prefix ex: <http://www.example.org/rdf#> .
+@prefix : <https://w3id.org/cmdoret/mtg-ontology/> .
 @prefix schema: <http://schema.org/> .
 @prefix wiki: <http://en.wikipedia.org/wiki/> .
 
-example:peg a mtgo:Creature ;
+ex:peg a :Creature ;
     schema:name "Park Heights Pegasus" ;
-    mtgo:color "green", "white" ;
-    mtgo:mana_cost example:peg-c1, example:peg-c2 ;
-    mtgo:converted_mana_cost 2 ;
-    mtgo:type_line "Creature - Pegasus" ;
-    mtgo:card_type "Creature" ;
-    mtgo:card_subtype "Pegasus" ;
-    mtgo:flavor_text "The burglar turned, bowed, and dropped from the ledge onto her waiting mount." ;
-    mtgo:artist "Randy Gallegos" ;
-    mtgo:card_set "Streets of New Capenna" ;
-    mtgo:rarity "rare" ;
-    mtgo:power 2 ;
-    mtgo:toughness 1 ;
-    mtgo:ability example:peg-ab1 .
+    :color "green", "white" ;
+    :mana_cost ex:cost-1g, ex:cost-1w ;
+    :converted_mana_cost 2 ;
+    :type_line "Creature - Pegasus" ;
+    :card_type "Creature" ;
+    :card_subtype "Pegasus" ;
+    :flavor_text "The burglar turned, bowed, and dropped from the ledge onto her waiting mount." ;
+    :artist "Randy Gallegos" ;
+    :card_set "Streets of New Capenna" ;
+    :rarity "rare" ;
+    :power 2 ;
+    :toughness 1 ;
+    :ability ex:peg-abi ;
+    :ability ex:flying ;
+    :ability ex:trample .
 
-example:peg-c1 a mtgo:ManaCost ;
-       mtgo:color "white" ;
-       mtgo:value 1 .
+ex:cost-1w a :ManaCost ;
+       :color "white" ;
+       :value 1 .
 
-example:peg-c2 a mtgo:ManaCost ;
-       mtgo:color "green" ;
-       mtgo:value 1 .
+ex:cost-1g a :ManaCost ;
+       :color "green" ;
+       :value 1 .
 
-example:peg-ab1 a mtgo:TriggeredAbility ;
-    mtgo:rules_text "Whenever Park Heights Pegasus deals combat damage to a player, draw a card if you had two or more creatures enter the battlefield under your control this turn." ;
-    mtgo:effect example:peg-ab1-eff ;
-    mtgo:condition example:peg-ab1-cond1 ;
-    mtgo:condition example:peg-ab1-cond2 .
+ex:flying a :KeywordAbility ;
+    :name "Flying" ;
+    :rules_text "This creature can't be blocked except by creatures with flying or reach." .
 
-example:peg-ab1-eff a mtgo:ActionSpecification .
+ex:trample a :KeywordAbility ;
+    :name "Trample" ;
+    :rules_text "This creature can deal excess combat damage to the player or planeswalker it's attacking." .
 
-example:peg-ab1-cond1 a mtgo:Condition ;
-       mtgo:source example:peg ;
-       mtgo:target mtgo:players ;
-       mtgo:action_spec example:peg-ab1-cond1-aspec ;
-       mtgo:and example:peg-ab1-cond2 .
+ex:peg-abi a :TriggeredAbility ;
+    :rules_text "Whenever Park Heights Pegasus deals combat damage to a player, draw a card if you had two or more creatures enter the battlefield under your control this turn." ;
+    :effect ex:you-draw-1 ;
+    :condition ex:peg-dmg-player ;
+    :condition ex:you-place-ge2-crea .
 
-example:peg-ab1-cond1-aspec a mtgo:ActionSpecification ;
-       mtgo:target mtgo:you ;
-       mtgo:action mtgo:draw .
+ex:you-draw-1 a :Condition ;
+       :target :you ;
+       :action_spec ex:draw ;
+       :value_spec ex:val-1 .
 
-example:peg-ab1-cond2 a mtgo:Condition ;
-       mtgo:source mtgo:you ;
-       mtgo:action_spec example:peg-ab1-cond2-aspec ;
-       mtgo:time_spec example:peg-ab1-cond2-tspec .
+ex:draw a :ActionSpecification ;
+       :action :draw .
 
-example:peg-ab1-cond2-tspec a mtgo:TimeSpecification ;
-       mtgo:constraint mtgo:this ;
-       mtgo:time mtgo:turn .
+ex:val-1 a :ValueSpecification ;
+       :value 1 .
 
-example:peg-ab1-cond2-aspec a mtgo:ActionSpecification ;
-       mtgo:target mtgo:you ;
-       mtgo:action mtgo:place_creature .
+ex:peg-dmg-player a :Condition ;
+       :source ex:peg ;
+       :target :players ;
+       :action_spec ex:deal-dmg ;
+       :and ex:you-place-ge2-crea .
+
+ex:deal-dmg a :ActionSpecification ;
+       :action :deal_damage .
+
+ex:you-place-ge2-crea a :Condition ;
+       :source :you ;
+       :action_spec ex:place-crea ;
+       :time_spec ex:this-turn ;
+       :value_spec ex:val-ge2 .
+
+ex:this-turn a :TimeSpecification ;
+       :constraint :this ;
+       :time :turn .
+
+ex:place-crea a :ActionSpecification ;
+       :action :place_creature .
+
+ex:val-ge2 a :ValueSpecification ;
+       :constraint :greater_or_equal ;
+       :value 2 .
