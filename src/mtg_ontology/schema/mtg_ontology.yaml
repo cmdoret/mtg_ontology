@@ -49,3 +49,11 @@ slots:
   description:
     slot_uri: schema:description
     description: A human-readable description for a thing
+  and:
+    range: NamedThing
+    description: A conjunction of two objects.
+    symmetric: true
+  or:
+    range: NamedThing
+    description: A disjunction of two objects.
+    symmetric: true

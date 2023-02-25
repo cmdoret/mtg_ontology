@@ -39,13 +39,15 @@ classes:
     description: >-
       A card ability which can be activated for a cost.
     slots:
-      - additional_cost
+      - cost
+      - condition
   KeywordAbility:
     is_a: Ability
     description: >-
       A passive ability represented by word that substitutes for a piece of rules text, such as deathtouch or flying.
     slots:
       - name
+      - value
   StaticAbility:
     is_a: Ability
     description: >-
@@ -67,6 +69,7 @@ classes:
       - action_spec
       - value_spec
       - time_spec
+  
 
   Specification:
     is_a: NamedThing
@@ -94,6 +97,7 @@ classes:
     description: A specification for a quantitative value.
     slots:
     - value
+    - unit
     slot_usage:
       and:
         range: ValueSpecification
@@ -119,7 +123,6 @@ classes:
   Property:
     is_a: NamedThing
     description: A property of an entity.
-    class_uri: rdf:predicate
 
 slots:
   ability:
@@ -130,8 +133,14 @@ slots:
   rules_text:
     range: string
     description: The text describing what an ability does.
+  cost:
+    description: A cost to play a card or ability.
+    any_of:
+      - range: Cost
+      - range: Condition
+    multivalued: true
   effect:
-    range: ActionSpecification
+    range: Condition
     description: The effect of an ability.
   action:
     range: Action
@@ -171,20 +180,17 @@ slots:
   time:
     range: Time
     description: A phase of the game.
+  unit:
+    any_of:
+      - range: linkml:ClassDefinition
+      - range: NamedThing
+    description: The type of quantity described by a value.
   constraint:
     any_of:
       - range: ActionConstraint
       - range: TimeConstraint
       - range: ValueConstraint
     description: A constraint on a time, quantity or action.
-  and:
-    range: NamedThing
-    description: A conjunction of two objects.
-    symmetric: true
-  or:
-    range: NamedThing
-    description: A disjunction of two objects.
-    symmetric: true
   
 
     
@@ -227,6 +233,14 @@ enums:
         description: An ability is activated.
       place_creature:
         description: One or more creatures are placed on the battlefield.
+      tap:
+        description: A card is tapped.
+      untap:
+        description: A card is untapped
+      add_mana:
+        description: A player adds mana to their mana pool.
+      control:
+        description: A player controls a card.
 
   ActionConstraint:
     permissible_values:
@@ -269,30 +283,38 @@ enums:
   Time:
     description: A time during the turn.
     permissible_values:
-      untap:
+      beginning_phase:
+        description: The beginning of the turn.
+      untap_step:
         description: The untap step.
-      upkeep:
+      upkeep_step:
         description: The upkeep step.
-      draw:
+      draw_step:
         description: The draw step.
-      main:
-        description: The main phase.
-      combat:
+      main_phase:
+        description: Either main phase.
+      pre_combat_main_phase:
+        description: The first main phase.
+      post_combat_main_phase:
+        description: The second main phase.
+      combat_phase:
         description: The combat phase.
-      declare_attackers:
+      beginning_of_combat_step:
+        description: The first step of the combat phase.
+      declare_attackers_step:
         description: The declare attackers step.
-      declare_blockers:
+      declare_blockers_step:
         description: The declare blockers step.
-      combat_damage:
+      combat_damage_step:
         description: The combat damage step.
-      end_of_combat:
+      end_of_combat_step:
         description: The end of combat step.
-      end:
+      ending_phase:
         description: The end step.
-      cleanup:
+      cleanup_step:
         description: The cleanup step.
       turn:
-        description: Any time during the turn.
+        description: A player turn.
   
   TimeConstraint:
     description: A constraint on the time of an event.

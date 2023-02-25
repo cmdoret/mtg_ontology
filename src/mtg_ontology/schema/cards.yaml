@@ -29,7 +29,6 @@ classes:
     description: >-
       A card in the Magic The Gathering game.
     slots:
-      - additional_cost
       - mana_cost
       - converted_mana_cost
       - color
@@ -90,17 +89,34 @@ classes:
       The cost of a card or ability.
     slots:
       - value
+      - and
+      - or
+    slot_usage:
+      and:
+        range: Cost
+      or:
+        range: Cost
+
   ManaCost:
     is_a: Cost
     description: >-
       The mana cost of a card or ability.
     slots:
       - color
+      - snow
+
   LifeCost:
     is_a: Cost
     description: >-
       The life cost of a card or ability.
 
+  Mana:
+    is_a: NamedThing
+    description: >-
+      A mana in the pool.
+    slots:
+      - color
+      - snow
 
   CardCollection:
     tree_root: true
@@ -114,12 +130,6 @@ classes:
         inlined: true
 
 slots:
-  additional_cost:
-    description: An additional cost to play a card or ability.
-    any_of:
-      - range: ManaCost
-      - range: LifeCost
-      - range: mtgoa:Event
   mana_cost:
     description: A mana cost for a card or ability.
     range: ManaCost
@@ -154,6 +164,9 @@ slots:
     minimum_value: 0
     description: The amount of damage needed to destroy a creature. This is the second number in the lower right corner of a creature card. 
     required: true
+  snow:
+    range: boolean
+    description: Whether a mana or cost includes snow mana.
   type_line:
     range: string
     description: The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).
