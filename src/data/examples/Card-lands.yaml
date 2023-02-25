@@ -1,0 +1,98 @@
+- id: example:island
+  name: Island
+  color: blue
+  type_line: Basic Land - Island
+  card_type: Land
+  card_subtype: Island
+  card_supertype: Basic
+  artist: David Alvarez
+  card_set: "Phyrexia: All Will Be One"
+  rarity: common
+
+- id: example:plains
+  name: Plains
+  color: white
+  type_line: Basic Land - Plains
+  card_type: Land
+  card_subtype: Plains
+  card_supertype: Basic
+  artist: Titus Lunter
+  flavor_text: "Searching for a vanished caravan that was bound for Silverymoon, you’ve come to a bank of mysterious fog."
+  card_set: Adventures in the Forgotten Realms
+  rarity: common
+
+- id: example:bonders-enclave
+  name: Bonders' Enclave
+  color: colorless
+  type_line: Land
+  card_type: Land
+  artist: Cliff Childs
+  flavor_text: "There is a sanctuary that reveals itself only to those graced by the eludha—the mystical connection between bonder and monster."
+  card_set: "Ikoria: Lair of Behemoths"
+  rarity: rare
+  ability:
+    - id: example:tap-add-1colorless
+      type: ActivatedAbility
+      cost:
+        - id: example:cost-tap
+          type: Condition
+          target: example:bonders-enclave
+          action_spec:
+            - id: example:action-tap
+              type: ActionSpecification
+              action: tap
+      effect:
+        - id: add-1cl
+          type: Condition
+          target: you
+          action_spec:
+            - id: example:action-add-mana
+              type: ActionSpecification
+              action: add_mana
+          value_spec:
+            - id: example:value-1colorless
+              type: Specification
+              unit:
+                - id: example:cl
+                  type: Mana
+                  color: colorless
+              value: 1
+    - id: example:3cl-tap-draw
+      type: ActivatedAbility
+      cost:
+        - id: example:cost-3cl
+          type: ManaCost
+          value: 3
+          color: colorless
+        - id: example:cost-tap
+          type: Condition
+          target: example:bonders-enclave
+          action_spec:
+            - id: example:action-tap
+              type: ActionSpecification
+              action: tap
+      condition:
+        - id: example:control-ge4pow
+          type: Condition
+          target: you
+          action_spec:
+            - id: example:control
+              action: control
+          value_spec:
+            - id: example:1creature
+              type: ValueSpecification
+              value: 1
+              unit: Creature
+            - id: example:4pow
+              type: ValueSpecification
+              value: 4
+              unit: power
+              constraint: greater_or_equal
+      effect:
+        - id: example:draw1
+          type: Condition
+          target: you
+          action_spec:
+            - id: example:action-draw
+              type: ActionSpecification
+              action: draw
