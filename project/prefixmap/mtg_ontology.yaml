@@ -4,11 +4,13 @@
    "mtgo": "https://w3id.org/cmdoret/mtg-ontology/",
    "mtgoa": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
    "mtgoc": "https://w3id.org/cmdoret/mtg-ontology/cards/",
-   "rdf": "http://example.org/UNKNOWN/rdf/",
    "schema": "http://schema.org/",
    "wiki": "http://en.wikipedia.org/wiki/",
    "Ability": {
       "@id": "mtgoa:Ability"
+   },
+   "ActionSpecification": {
+      "@id": "mtgoa:ActionSpecification"
    },
    "ActivatedAbility": {
       "@id": "mtgoa:ActivatedAbility"
@@ -34,9 +36,6 @@
    "Enchantment": {
       "@id": "mtgoc:Enchantment"
    },
-   "Event": {
-      "@id": "mtgoa:Event"
-   },
    "Instant": {
       "@id": "mtgoc:Instant"
    },
@@ -49,6 +48,9 @@
    "LifeCost": {
       "@id": "mtgoc:LifeCost"
    },
+   "Mana": {
+      "@id": "mtgoc:Mana"
+   },
    "ManaCost": {
       "@id": "mtgoc:ManaCost"
    },
@@ -59,10 +61,13 @@
       "@id": "mtgoc:Permanent"
    },
    "Property": {
-      "@id": "rdf:predicate"
+      "@id": "mtgoa:Property"
    },
    "Sorcery": {
       "@id": "mtgoc:Sorcery"
+   },
+   "Specification": {
+      "@id": "mtgoa:Specification"
    },
    "Spell": {
       "@id": "mtgoc:Spell"
@@ -70,10 +75,16 @@
    "StaticAbility": {
       "@id": "mtgoa:StaticAbility"
    },
+   "TimeSpecification": {
+      "@id": "mtgoa:TimeSpecification"
+   },
    "Token": {
       "@id": "mtgoc:Token"
    },
    "TriggeredAbility": {
       "@id": "mtgoa:TriggeredAbility"
+   },
+   "ValueSpecification": {
+      "@id": "mtgoa:ValueSpecification"
    }
 }

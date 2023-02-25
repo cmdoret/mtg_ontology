@@ -390,6 +390,34 @@
         {
           "text": "deal_damage",
           "description": "Something deals damage to something else."
+        },
+        {
+          "text": "cast",
+          "description": "A spell is cast."
+        },
+        {
+          "text": "activate",
+          "description": "An ability is activated."
+        },
+        {
+          "text": "place_creature",
+          "description": "One or more creatures are placed on the battlefield."
+        },
+        {
+          "text": "tap",
+          "description": "A card is tapped."
+        },
+        {
+          "text": "untap",
+          "description": "A card is untapped"
+        },
+        {
+          "text": "add_mana",
+          "description": "A player adds mana to their mana pool."
+        },
+        {
+          "text": "control",
+          "description": "A player controls a card."
         }
       ]
     },
@@ -470,6 +498,114 @@
           "description": "The value must not be one of the target list."
         }
       ]
+    },
+    {
+      "name": "Time",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Time",
+      "description": "A time during the turn.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "permissible_values": [
+        {
+          "text": "beginning_phase",
+          "description": "The beginning of the turn."
+        },
+        {
+          "text": "untap_step",
+          "description": "The untap step."
+        },
+        {
+          "text": "upkeep_step",
+          "description": "The upkeep step."
+        },
+        {
+          "text": "draw_step",
+          "description": "The draw step."
+        },
+        {
+          "text": "main_phase",
+          "description": "Either main phase."
+        },
+        {
+          "text": "pre_combat_main_phase",
+          "description": "The first main phase."
+        },
+        {
+          "text": "post_combat_main_phase",
+          "description": "The second main phase."
+        },
+        {
+          "text": "combat_phase",
+          "description": "The combat phase."
+        },
+        {
+          "text": "beginning_of_combat_step",
+          "description": "The first step of the combat phase."
+        },
+        {
+          "text": "declare_attackers_step",
+          "description": "The declare attackers step."
+        },
+        {
+          "text": "declare_blockers_step",
+          "description": "The declare blockers step."
+        },
+        {
+          "text": "combat_damage_step",
+          "description": "The combat damage step."
+        },
+        {
+          "text": "end_of_combat_step",
+          "description": "The end of combat step."
+        },
+        {
+          "text": "ending_phase",
+          "description": "The end step."
+        },
+        {
+          "text": "cleanup_step",
+          "description": "The cleanup step."
+        },
+        {
+          "text": "turn",
+          "description": "A player turn."
+        }
+      ]
+    },
+    {
+      "name": "TimeConstraint",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/TimeConstraint",
+      "description": "A constraint on the time of an event.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "permissible_values": [
+        {
+          "text": "before",
+          "description": "The event must occur before the target."
+        },
+        {
+          "text": "after",
+          "description": "The event must occur after the target."
+        },
+        {
+          "text": "during",
+          "description": "The event must occur during the target."
+        },
+        {
+          "text": "next",
+          "description": "The event must occur next."
+        },
+        {
+          "text": "previous",
+          "description": "The event must have occurred previously."
+        },
+        {
+          "text": "this",
+          "description": "The event must occur this time."
+        },
+        {
+          "text": "each",
+          "description": "The event must occur each time."
+        }
+      ]
     }
   ],
   "slots": [
@@ -526,31 +662,33 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "additional_cost",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/additional_cost",
-      "description": "An additional cost to play a card or ability.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/additional_cost",
-      "owner": "ActivatedAbility",
+      "name": "and",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/and",
+      "description": "A conjunction of two objects.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/and",
+      "owner": "Specification",
       "domain_of": [
-        "Card",
-        "ActivatedAbility"
+        "Cost",
+        "Specification"
       ],
-      "range": "string",
-      "any_of": [
-        {
-          "range": "ManaCost",
-          "@type": "AnonymousSlotExpression"
-        },
-        {
-          "range": "LifeCost",
-          "@type": "AnonymousSlotExpression"
-        },
-        {
-          "range": "mtgoa:Event",
-          "@type": "AnonymousSlotExpression"
-        }
+      "symmetric": true,
+      "range": "NamedThing",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "or",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/or",
+      "description": "A disjunction of two objects.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/or",
+      "owner": "Specification",
+      "domain_of": [
+        "Cost",
+        "Specification"
       ],
+      "symmetric": true,
+      "range": "NamedThing",
       "@type": "SlotDefinition"
     },
     {
@@ -600,10 +738,11 @@
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
       "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/color",
       "multivalued": true,
-      "owner": "ManaCost",
+      "owner": "Mana",
       "domain_of": [
         "Card",
-        "ManaCost"
+        "ManaCost",
+        "Mana"
       ],
       "range": "Color",
       "required": true,
@@ -679,6 +818,20 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "snow",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/snow",
+      "description": "Whether a mana or cost includes snow mana.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/snow",
+      "owner": "Mana",
+      "domain_of": [
+        "ManaCost",
+        "Mana"
+      ],
+      "range": "boolean",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "type_line",
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/type_line",
       "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
@@ -740,9 +893,11 @@
       "description": "The numeric part of a quantitative value.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
       "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/value",
-      "owner": "Cost",
+      "owner": "ValueSpecification",
       "domain_of": [
-        "Cost"
+        "Cost",
+        "KeywordAbility",
+        "ValueSpecification"
       ],
       "range": "integer",
       "@type": "SlotDefinition"
@@ -773,14 +928,51 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "cost",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/cost",
+      "description": "A cost to play a card or ability.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/cost",
+      "multivalued": true,
+      "owner": "ActivatedAbility",
+      "domain_of": [
+        "ActivatedAbility"
+      ],
+      "range": "string",
+      "any_of": [
+        {
+          "range": "Cost",
+          "@type": "AnonymousSlotExpression"
+        },
+        {
+          "range": "Condition",
+          "@type": "AnonymousSlotExpression"
+        }
+      ],
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "effect",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/effect",
+      "description": "The effect of an ability.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/effect",
+      "owner": "Ability",
+      "domain_of": [
+        "Ability"
+      ],
+      "range": "Condition",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "action",
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/action",
       "description": "An action taken by a player or card.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
       "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/action",
-      "owner": "Event",
+      "owner": "ActionSpecification",
       "domain_of": [
-        "Event"
+        "ActionSpecification"
       ],
       "range": "Action",
       "required": true,
@@ -792,9 +984,9 @@
       "description": "The entity responsible for an action.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
       "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/source",
-      "owner": "Event",
+      "owner": "Condition",
       "domain_of": [
-        "Event"
+        "Condition"
       ],
       "range": "string",
       "any_of": [
@@ -817,7 +1009,6 @@
       "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/target",
       "owner": "Condition",
       "domain_of": [
-        "Event",
         "Condition"
       ],
       "range": "string",
@@ -841,9 +1032,10 @@
       "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/condition",
       "owner": "TriggeredAbility",
       "domain_of": [
+        "ActivatedAbility",
         "TriggeredAbility"
       ],
-      "range": "Event",
+      "range": "Condition",
       "@type": "SlotDefinition"
     },
     {
@@ -860,16 +1052,121 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "value_constraint",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/value_constraint",
-      "description": "A constraint on the value of a property.",
+      "name": "value_spec",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/value_spec",
+      "description": "A specification for the value of a property.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/value_constraint",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/value_spec",
+      "multivalued": true,
       "owner": "Condition",
       "domain_of": [
         "Condition"
       ],
-      "range": "ValueConstraint",
+      "range": "ValueSpecification",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "time_spec",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/time_spec",
+      "description": "A specification of the time of an event.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/time_spec",
+      "multivalued": true,
+      "owner": "Condition",
+      "domain_of": [
+        "Condition"
+      ],
+      "range": "TimeSpecification",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "action_spec",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/action_spec",
+      "description": "A specification of an action.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/action_spec",
+      "multivalued": true,
+      "owner": "Condition",
+      "domain_of": [
+        "Condition"
+      ],
+      "range": "ActionSpecification",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "player",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/player",
+      "description": "A player.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/player",
+      "owner": "TimeSpecification",
+      "domain_of": [
+        "TimeSpecification"
+      ],
+      "range": "Player",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "time",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/time",
+      "description": "A phase of the game.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/time",
+      "owner": "TimeSpecification",
+      "domain_of": [
+        "TimeSpecification"
+      ],
+      "range": "Time",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "unit",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/unit",
+      "description": "The type of quantity described by a value.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/unit",
+      "owner": "ValueSpecification",
+      "domain_of": [
+        "ValueSpecification"
+      ],
+      "range": "string",
+      "any_of": [
+        {
+          "range": "linkml:ClassDefinition",
+          "@type": "AnonymousSlotExpression"
+        },
+        {
+          "range": "NamedThing",
+          "@type": "AnonymousSlotExpression"
+        }
+      ],
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "constraint",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/constraint",
+      "description": "A constraint on a time, quantity or action.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/constraint",
+      "owner": "Specification",
+      "domain_of": [
+        "Specification"
+      ],
+      "range": "string",
+      "any_of": [
+        {
+          "range": "ActionConstraint",
+          "@type": "AnonymousSlotExpression"
+        },
+        {
+          "range": "TimeConstraint",
+          "@type": "AnonymousSlotExpression"
+        },
+        {
+          "range": "ValueConstraint",
+          "@type": "AnonymousSlotExpression"
+        }
+      ],
       "@type": "SlotDefinition"
     },
     {
@@ -885,6 +1182,254 @@
       ],
       "range": "Card",
       "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Cost_and",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/and",
+      "description": "A conjunction of two objects.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
+      "is_a": "and",
+      "domain": "Cost",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/and",
+      "alias": "and",
+      "owner": "Cost",
+      "domain_of": [
+        "Cost"
+      ],
+      "symmetric": true,
+      "is_usage_slot": true,
+      "usage_slot_name": "and",
+      "range": "Cost",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Cost_or",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/or",
+      "description": "A disjunction of two objects.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
+      "is_a": "or",
+      "domain": "Cost",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/or",
+      "alias": "or",
+      "owner": "Cost",
+      "domain_of": [
+        "Cost"
+      ],
+      "symmetric": true,
+      "is_usage_slot": true,
+      "usage_slot_name": "or",
+      "range": "Cost",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ActionSpecification_and",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/and",
+      "description": "A conjunction of two objects.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
+      "is_a": "and",
+      "domain": "ActionSpecification",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/and",
+      "alias": "and",
+      "owner": "ActionSpecification",
+      "domain_of": [
+        "ActionSpecification"
+      ],
+      "symmetric": true,
+      "is_usage_slot": true,
+      "usage_slot_name": "and",
+      "range": "ActionSpecification",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ActionSpecification_or",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/or",
+      "description": "A disjunction of two objects.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
+      "is_a": "or",
+      "domain": "ActionSpecification",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/or",
+      "alias": "or",
+      "owner": "ActionSpecification",
+      "domain_of": [
+        "ActionSpecification"
+      ],
+      "symmetric": true,
+      "is_usage_slot": true,
+      "usage_slot_name": "or",
+      "range": "ActionSpecification",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ActionSpecification_constraint",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/constraint",
+      "description": "A constraint on a time, quantity or action.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "is_a": "constraint",
+      "domain": "ActionSpecification",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/constraint",
+      "alias": "constraint",
+      "owner": "ActionSpecification",
+      "domain_of": [
+        "ActionSpecification"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "constraint",
+      "range": "ActionConstraint",
+      "any_of": [
+        {
+          "range": "ActionConstraint",
+          "@type": "AnonymousSlotExpression"
+        },
+        {
+          "range": "TimeConstraint",
+          "@type": "AnonymousSlotExpression"
+        },
+        {
+          "range": "ValueConstraint",
+          "@type": "AnonymousSlotExpression"
+        }
+      ],
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ValueSpecification_and",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/and",
+      "description": "A conjunction of two objects.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
+      "is_a": "and",
+      "domain": "ValueSpecification",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/and",
+      "alias": "and",
+      "owner": "ValueSpecification",
+      "domain_of": [
+        "ValueSpecification"
+      ],
+      "symmetric": true,
+      "is_usage_slot": true,
+      "usage_slot_name": "and",
+      "range": "ValueSpecification",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ValueSpecification_or",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/or",
+      "description": "A disjunction of two objects.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
+      "is_a": "or",
+      "domain": "ValueSpecification",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/or",
+      "alias": "or",
+      "owner": "ValueSpecification",
+      "domain_of": [
+        "ValueSpecification"
+      ],
+      "symmetric": true,
+      "is_usage_slot": true,
+      "usage_slot_name": "or",
+      "range": "ValueSpecification",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ValueSpecification_constraint",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/constraint",
+      "description": "A constraint on a time, quantity or action.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "is_a": "constraint",
+      "domain": "ValueSpecification",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/constraint",
+      "alias": "constraint",
+      "owner": "ValueSpecification",
+      "domain_of": [
+        "ValueSpecification"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "constraint",
+      "range": "ValueConstraint",
+      "any_of": [
+        {
+          "range": "ActionConstraint",
+          "@type": "AnonymousSlotExpression"
+        },
+        {
+          "range": "TimeConstraint",
+          "@type": "AnonymousSlotExpression"
+        },
+        {
+          "range": "ValueConstraint",
+          "@type": "AnonymousSlotExpression"
+        }
+      ],
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "TimeSpecification_and",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/and",
+      "description": "A conjunction of two objects.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
+      "is_a": "and",
+      "domain": "TimeSpecification",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/and",
+      "alias": "and",
+      "owner": "TimeSpecification",
+      "domain_of": [
+        "TimeSpecification"
+      ],
+      "symmetric": true,
+      "is_usage_slot": true,
+      "usage_slot_name": "and",
+      "range": "TimeSpecification",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "TimeSpecification_or",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/or",
+      "description": "A disjunction of two objects.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
+      "is_a": "or",
+      "domain": "TimeSpecification",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/or",
+      "alias": "or",
+      "owner": "TimeSpecification",
+      "domain_of": [
+        "TimeSpecification"
+      ],
+      "symmetric": true,
+      "is_usage_slot": true,
+      "usage_slot_name": "or",
+      "range": "TimeSpecification",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "TimeSpecification_constraint",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/constraint",
+      "description": "A constraint on a time, quantity or action.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "is_a": "constraint",
+      "domain": "TimeSpecification",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/constraint",
+      "alias": "constraint",
+      "owner": "TimeSpecification",
+      "domain_of": [
+        "TimeSpecification"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "constraint",
+      "range": "TimeConstraint",
+      "any_of": [
+        {
+          "range": "ActionConstraint",
+          "@type": "AnonymousSlotExpression"
+        },
+        {
+          "range": "TimeConstraint",
+          "@type": "AnonymousSlotExpression"
+        },
+        {
+          "range": "ValueConstraint",
+          "@type": "AnonymousSlotExpression"
+        }
+      ],
       "@type": "SlotDefinition"
     }
   ],
@@ -916,7 +1461,6 @@
         "id",
         "name",
         "description",
-        "additional_cost",
         "mana_cost",
         "converted_mana_cost",
         "color",
@@ -958,7 +1502,6 @@
         "id",
         "name",
         "description",
-        "additional_cost",
         "mana_cost",
         "converted_mana_cost",
         "color",
@@ -985,7 +1528,6 @@
         "id",
         "name",
         "description",
-        "additional_cost",
         "mana_cost",
         "converted_mana_cost",
         "color",
@@ -1012,7 +1554,6 @@
         "id",
         "name",
         "description",
-        "additional_cost",
         "mana_cost",
         "converted_mana_cost",
         "color",
@@ -1039,7 +1580,6 @@
         "id",
         "name",
         "description",
-        "additional_cost",
         "mana_cost",
         "converted_mana_cost",
         "color",
@@ -1066,7 +1606,6 @@
         "id",
         "name",
         "description",
-        "additional_cost",
         "mana_cost",
         "converted_mana_cost",
         "color",
@@ -1093,7 +1632,6 @@
         "id",
         "name",
         "description",
-        "additional_cost",
         "mana_cost",
         "converted_mana_cost",
         "color",
@@ -1120,7 +1658,6 @@
         "id",
         "name",
         "description",
-        "additional_cost",
         "mana_cost",
         "converted_mana_cost",
         "color",
@@ -1149,7 +1686,6 @@
         "id",
         "name",
         "description",
-        "additional_cost",
         "mana_cost",
         "converted_mana_cost",
         "color",
@@ -1176,7 +1712,9 @@
         "id",
         "name",
         "description",
-        "value"
+        "value",
+        "Cost_and",
+        "Cost_or"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Cost",
@@ -1193,7 +1731,10 @@
         "name",
         "description",
         "value",
-        "color"
+        "Cost_and",
+        "Cost_or",
+        "color",
+        "snow"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/ManaCost",
@@ -1209,10 +1750,29 @@
         "id",
         "name",
         "description",
-        "value"
+        "value",
+        "Cost_and",
+        "Cost_or"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/LifeCost",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Mana",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Mana",
+      "description": "A mana in the pool.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
+      "is_a": "NamedThing",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "color",
+        "snow"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Mana",
       "@type": "ClassDefinition"
     },
     {
@@ -1248,7 +1808,8 @@
         "id",
         "name",
         "description",
-        "rules_text"
+        "rules_text",
+        "effect"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Ability",
@@ -1265,7 +1826,9 @@
         "name",
         "description",
         "rules_text",
-        "additional_cost"
+        "effect",
+        "cost",
+        "condition"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/ActivatedAbility",
@@ -1281,7 +1844,9 @@
         "id",
         "description",
         "rules_text",
-        "name"
+        "effect",
+        "name",
+        "value"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/KeywordAbility",
@@ -1297,7 +1862,8 @@
         "id",
         "name",
         "description",
-        "rules_text"
+        "rules_text",
+        "effect"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/StaticAbility",
@@ -1314,6 +1880,7 @@
         "name",
         "description",
         "rules_text",
+        "effect",
         "condition"
       ],
       "slot_usage": {},
@@ -1321,9 +1888,9 @@
       "@type": "ClassDefinition"
     },
     {
-      "name": "Event",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Event",
-      "description": "A combination of circumstances during a game.",
+      "name": "Condition",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Condition",
+      "description": "A condition expressed as constraints.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
       "is_a": "NamedThing",
       "slots": [
@@ -1331,29 +1898,91 @@
         "name",
         "description",
         "source",
-        "action",
-        "target"
+        "target",
+        "property",
+        "action_spec",
+        "value_spec",
+        "time_spec"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Event",
+      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Condition",
       "@type": "ClassDefinition"
     },
     {
-      "name": "Condition",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Condition",
-      "description": "A condition expressed as a constraint on a property.",
+      "name": "Specification",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Specification",
+      "description": "A specification for a thing.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
       "is_a": "NamedThing",
       "slots": [
         "id",
         "name",
         "description",
-        "target",
-        "property",
-        "value_constraint"
+        "constraint",
+        "and",
+        "or"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Condition",
+      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Specification",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ActionSpecification",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/ActionSpecification",
+      "description": "A specification for an action.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "is_a": "Specification",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "action",
+        "ActionSpecification_and",
+        "ActionSpecification_or",
+        "ActionSpecification_constraint"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/ActionSpecification",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ValueSpecification",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/ValueSpecification",
+      "description": "A specification for a quantitative value.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "is_a": "Specification",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "value",
+        "unit",
+        "ValueSpecification_and",
+        "ValueSpecification_or",
+        "ValueSpecification_constraint"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/ValueSpecification",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "TimeSpecification",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/TimeSpecification",
+      "description": "A specification for a time.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "is_a": "NamedThing",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "time",
+        "player",
+        "TimeSpecification_and",
+        "TimeSpecification_or",
+        "TimeSpecification_constraint"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/TimeSpecification",
       "@type": "ClassDefinition"
     },
     {
@@ -1361,9 +1990,6 @@
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Property",
       "description": "A property of an entity.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "mappings": [
-        "rdf:predicate"
-      ],
       "is_a": "NamedThing",
       "slots": [
         "id",
@@ -1371,15 +1997,15 @@
         "description"
       ],
       "slot_usage": {},
-      "class_uri": "http://example.org/UNKNOWN/rdf/predicate",
+      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Property",
       "@type": "ClassDefinition"
     }
   ],
   "metamodel_version": "1.7.0",
   "source_file": "mtg_ontology.yaml",
-  "source_file_date": "2023-02-23T00:33:11",
-  "source_file_size": 1231,
-  "generation_date": "2023-02-23T00:53:13",
+  "source_file_date": "2023-02-24T23:26:52",
+  "source_file_size": 1422,
+  "generation_date": "2023-02-25T03:32:39",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/mtg_ontology.context.jsonld",

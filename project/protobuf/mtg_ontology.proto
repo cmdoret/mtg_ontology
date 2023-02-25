@@ -5,6 +5,18 @@ message Ability
   string name = 0
   string description = 0
   string rulesText = 0
+  condition effect = 0
+ }
+// A specification for an action.
+message ActionSpecification
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  action action = 0
+  actionSpecification and = 0
+  actionSpecification or = 0
+  actionConstraint constraint = 0
  }
 // A card ability which can be activated for a cost.
 message ActivatedAbility
@@ -13,7 +25,9 @@ message ActivatedAbility
   string name = 0
   string description = 0
   string rulesText = 0
-  string additionalCost = 0
+  condition effect = 0
+ repeated  string cost = 0
+  condition condition = 0
  }
 // A permanent representing a magical item, animated construct, or other objects and devices.
 message Artifact
@@ -21,7 +35,6 @@ message Artifact
   uriorcurie id = 0
   string name = 0
   string description = 0
-  string additionalCost = 0
  repeated  manaCost manaCost = 0
   integer convertedManaCost = 0
  repeated  color color = 0
@@ -40,7 +53,6 @@ message Card
   uriorcurie id = 0
   string name = 0
   string description = 0
-  string additionalCost = 0
  repeated  manaCost manaCost = 0
   integer convertedManaCost = 0
  repeated  color color = 0
@@ -58,15 +70,18 @@ message CardCollection
  {
  repeated  card entries = 0
  }
-// A condition expressed as a constraint on a property.
+// A condition expressed as constraints.
 message Condition
  {
   uriorcurie id = 0
   string name = 0
   string description = 0
+  string source = 0
   string target = 0
   property property = 0
-  valueConstraint valueConstraint = 0
+ repeated  actionSpecification actionSpec = 0
+ repeated  valueSpecification valueSpec = 0
+ repeated  timeSpecification timeSpec = 0
  }
 // The cost of a card or ability.
 message Cost
@@ -75,6 +90,8 @@ message Cost
   string name = 0
   string description = 0
   integer value = 0
+  cost and = 0
+  cost or = 0
  }
 // A card that represents a creature that can be summoned to the battlefield.
 message Creature
@@ -82,7 +99,6 @@ message Creature
   uriorcurie id = 0
   string name = 0
   string description = 0
-  string additionalCost = 0
  repeated  manaCost manaCost = 0
   integer convertedManaCost = 0
  repeated  color color = 0
@@ -103,7 +119,6 @@ message Enchantment
   uriorcurie id = 0
   string name = 0
   string description = 0
-  string additionalCost = 0
  repeated  manaCost manaCost = 0
   integer convertedManaCost = 0
  repeated  color color = 0
@@ -116,23 +131,12 @@ message Enchantment
  repeated  string cardSupertype = 0
   rarity rarity = 0
  }
-// A combination of circumstances during a game.
-message Event
- {
-  uriorcurie id = 0
-  string name = 0
-  string description = 0
-  string source = 0
-  action action = 0
-  string target = 0
- }
 // A card that represents an instant spell that can be cast.
 message Instant
  {
   uriorcurie id = 0
   string name = 0
   string description = 0
-  string additionalCost = 0
  repeated  manaCost manaCost = 0
   integer convertedManaCost = 0
  repeated  color color = 0
@@ -151,7 +155,9 @@ message KeywordAbility
   uriorcurie id = 0
   string description = 0
   string rulesText = 0
+  condition effect = 0
   string name = 0
+  integer value = 0
  }
 // A card that represents a land that can be tapped for mana.
 message Land
@@ -159,7 +165,6 @@ message Land
   uriorcurie id = 0
   string name = 0
   string description = 0
-  string additionalCost = 0
  repeated  manaCost manaCost = 0
   integer convertedManaCost = 0
  repeated  color color = 0
@@ -179,6 +184,17 @@ message LifeCost
   string name = 0
   string description = 0
   integer value = 0
+  cost and = 0
+  cost or = 0
+ }
+// A mana in the pool.
+message Mana
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ repeated  color color = 0
+  boolean snow = 0
  }
 // The mana cost of a card or ability.
 message ManaCost
@@ -187,7 +203,10 @@ message ManaCost
   string name = 0
   string description = 0
   integer value = 0
+  cost and = 0
+  cost or = 0
  repeated  color color = 0
+  boolean snow = 0
  }
 // A generic grouping for any identifiable entity
 message NamedThing
@@ -202,7 +221,6 @@ message Permanent
   uriorcurie id = 0
   string name = 0
   string description = 0
-  string additionalCost = 0
  repeated  manaCost manaCost = 0
   integer convertedManaCost = 0
  repeated  color color = 0
@@ -228,7 +246,6 @@ message Sorcery
   uriorcurie id = 0
   string name = 0
   string description = 0
-  string additionalCost = 0
  repeated  manaCost manaCost = 0
   integer convertedManaCost = 0
  repeated  color color = 0
@@ -240,6 +257,16 @@ message Sorcery
  repeated  string cardSubtype = 0
  repeated  string cardSupertype = 0
   rarity rarity = 0
+ }
+// A specification for a thing.
+message Specification
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  string constraint = 0
+  namedThing and = 0
+  namedThing or = 0
  }
 // An object on the stack. Either a card that has been cast, or a copy.
 message Spell
@@ -255,6 +282,19 @@ message StaticAbility
   string name = 0
   string description = 0
   string rulesText = 0
+  condition effect = 0
+ }
+// A specification for a time.
+message TimeSpecification
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  time time = 0
+  player player = 0
+  timeSpecification and = 0
+  timeSpecification or = 0
+  timeConstraint constraint = 0
  }
 // A permanent that is not represented by a regular card and does not have a casting cost.
 message Token
@@ -262,7 +302,6 @@ message Token
   uriorcurie id = 0
   string name = 0
   string description = 0
-  string additionalCost = 0
  repeated  manaCost manaCost = 0
   integer convertedManaCost = 0
  repeated  color color = 0
@@ -282,5 +321,18 @@ message TriggeredAbility
   string name = 0
   string description = 0
   string rulesText = 0
-  event condition = 0
+  condition effect = 0
+  condition condition = 0
+ }
+// A specification for a quantitative value.
+message ValueSpecification
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+  integer value = 0
+  string unit = 0
+  valueSpecification and = 0
+  valueSpecification or = 0
+  valueConstraint constraint = 0
  }

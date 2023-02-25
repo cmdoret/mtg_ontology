@@ -1,5 +1,5 @@
 # Auto generated from mtg_ontology.yaml by pythongen.py version: 0.9.0
-# Generation date: 2023-02-24T02:59:19
+# Generation date: 2023-02-25T03:32:57
 # Schema: mtgo
 #
 # id: https://w3id.org/cmdoret/mtg-ontology/
@@ -23,8 +23,8 @@ from linkml_runtime.utils.formatutils import camelcase, underscore, sfx
 from linkml_runtime.utils.enumerations import EnumDefinitionImpl
 from rdflib import Namespace, URIRef
 from linkml_runtime.utils.curienamespace import CurieNamespace
-from linkml_runtime.linkml_model.types import Integer, String, Uriorcurie
-from linkml_runtime.utils.metamodelcore import URIorCURIE
+from linkml_runtime.linkml_model.types import Boolean, Integer, String, Uriorcurie
+from linkml_runtime.utils.metamodelcore import Bool, URIorCURIE
 
 metamodel_version = "1.7.0"
 version = None
@@ -38,7 +38,6 @@ LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
 MTGO = CurieNamespace('mtgo', 'https://w3id.org/cmdoret/mtg-ontology/')
 MTGOA = CurieNamespace('mtgoa', 'https://w3id.org/cmdoret/mtg-ontology/abilities/')
 MTGOC = CurieNamespace('mtgoc', 'https://w3id.org/cmdoret/mtg-ontology/cards/')
-RDF = CurieNamespace('rdf', 'http://example.org/UNKNOWN/rdf/')
 SCHEMA = CurieNamespace('schema', 'http://schema.org/')
 WIKI = CurieNamespace('wiki', 'http://en.wikipedia.org/wiki/')
 DEFAULT_ = MTGO
@@ -100,6 +99,10 @@ class ManaCostId(CostId):
 
 
 class LifeCostId(CostId):
+    pass
+
+
+class ManaId(NamedThingId):
     pass
 
 
@@ -197,7 +200,6 @@ class Card(NamedThing):
     color: Union[Union[str, "Color"], List[Union[str, "Color"]]] = None
     type_line: str = None
     card_type: str = None
-    additional_cost: Optional[str] = None
     mana_cost: Optional[Union[Union[str, ManaCostId], List[Union[str, ManaCostId]]]] = empty_list()
     converted_mana_cost: Optional[int] = None
     card_set: Optional[str] = None
@@ -228,9 +230,6 @@ class Card(NamedThing):
             self.MissingRequiredField("card_type")
         if not isinstance(self.card_type, str):
             self.card_type = str(self.card_type)
-
-        if self.additional_cost is not None and not isinstance(self.additional_cost, str):
-            self.additional_cost = str(self.additional_cost)
 
         if not isinstance(self.mana_cost, list):
             self.mana_cost = [self.mana_cost] if self.mana_cost is not None else []
@@ -529,6 +528,8 @@ class Cost(NamedThing):
     id: Union[str, CostId] = None
     name: str = None
     value: Optional[int] = None
+    and: Optional[Union[str, CostId]] = None
+    or: Optional[Union[str, CostId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -538,6 +539,12 @@ class Cost(NamedThing):
 
         if self.value is not None and not isinstance(self.value, int):
             self.value = int(self.value)
+
+        if self.and is not None and not isinstance(self.and, CostId):
+            self.and = CostId(self.and)
+
+        if self.or is not None and not isinstance(self.or, CostId):
+            self.or = CostId(self.or)
 
         super().__post_init__(**kwargs)
 
@@ -557,6 +564,7 @@ class ManaCost(Cost):
     id: Union[str, ManaCostId] = None
     name: str = None
     color: Union[Union[str, "Color"], List[Union[str, "Color"]]] = None
+    snow: Optional[Union[bool, Bool]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -569,6 +577,9 @@ class ManaCost(Cost):
         if not isinstance(self.color, list):
             self.color = [self.color] if self.color is not None else []
         self.color = [v if isinstance(v, Color) else Color(v) for v in self.color]
+
+        if self.snow is not None and not isinstance(self.snow, Bool):
+            self.snow = Bool(self.snow)
 
         super().__post_init__(**kwargs)
 
@@ -593,6 +604,41 @@ class LifeCost(Cost):
             self.MissingRequiredField("id")
         if not isinstance(self.id, LifeCostId):
             self.id = LifeCostId(self.id)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class Mana(NamedThing):
+    """
+    A mana in the pool.
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = MTGOC.Mana
+    class_class_curie: ClassVar[str] = "mtgoc:Mana"
+    class_name: ClassVar[str] = "Mana"
+    class_model_uri: ClassVar[URIRef] = MTGO.Mana
+
+    id: Union[str, ManaId] = None
+    name: str = None
+    color: Union[Union[str, "Color"], List[Union[str, "Color"]]] = None
+    snow: Optional[Union[bool, Bool]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, ManaId):
+            self.id = ManaId(self.id)
+
+        if self._is_empty(self.color):
+            self.MissingRequiredField("color")
+        if not isinstance(self.color, list):
+            self.color = [self.color] if self.color is not None else []
+        self.color = [v if isinstance(v, Color) else Color(v) for v in self.color]
+
+        if self.snow is not None and not isinstance(self.snow, Bool):
+            self.snow = Bool(self.snow)
 
         super().__post_init__(**kwargs)
 
@@ -632,7 +678,7 @@ class Ability(NamedThing):
     id: Union[str, AbilityId] = None
     name: str = None
     rules_text: Optional[str] = None
-    effect: Optional[Union[str, ActionSpecificationId]] = None
+    effect: Optional[Union[str, ConditionId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -643,8 +689,8 @@ class Ability(NamedThing):
         if self.rules_text is not None and not isinstance(self.rules_text, str):
             self.rules_text = str(self.rules_text)
 
-        if self.effect is not None and not isinstance(self.effect, ActionSpecificationId):
-            self.effect = ActionSpecificationId(self.effect)
+        if self.effect is not None and not isinstance(self.effect, ConditionId):
+            self.effect = ConditionId(self.effect)
 
         super().__post_init__(**kwargs)
 
@@ -663,7 +709,8 @@ class ActivatedAbility(Ability):
 
     id: Union[str, ActivatedAbilityId] = None
     name: str = None
-    additional_cost: Optional[str] = None
+    cost: Optional[Union[str, List[str]]] = empty_list()
+    condition: Optional[Union[str, ConditionId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -671,8 +718,12 @@ class ActivatedAbility(Ability):
         if not isinstance(self.id, ActivatedAbilityId):
             self.id = ActivatedAbilityId(self.id)
 
-        if self.additional_cost is not None and not isinstance(self.additional_cost, str):
-            self.additional_cost = str(self.additional_cost)
+        if not isinstance(self.cost, list):
+            self.cost = [self.cost] if self.cost is not None else []
+        self.cost = [v if isinstance(v, str) else str(v) for v in self.cost]
+
+        if self.condition is not None and not isinstance(self.condition, ConditionId):
+            self.condition = ConditionId(self.condition)
 
         super().__post_init__(**kwargs)
 
@@ -691,6 +742,7 @@ class KeywordAbility(Ability):
 
     id: Union[str, KeywordAbilityId] = None
     name: str = None
+    value: Optional[int] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -702,6 +754,9 @@ class KeywordAbility(Ability):
             self.MissingRequiredField("name")
         if not isinstance(self.name, str):
             self.name = str(self.name)
+
+        if self.value is not None and not isinstance(self.value, int):
+            self.value = int(self.value)
 
         super().__post_init__(**kwargs)
 
@@ -902,6 +957,7 @@ class ValueSpecification(Specification):
     id: Union[str, ValueSpecificationId] = None
     name: str = None
     value: Optional[int] = None
+    unit: Optional[str] = None
     and: Optional[Union[str, ValueSpecificationId]] = None
     or: Optional[Union[str, ValueSpecificationId]] = None
     constraint: Optional[Union[str, "ValueConstraint"]] = None
@@ -914,6 +970,9 @@ class ValueSpecification(Specification):
 
         if self.value is not None and not isinstance(self.value, int):
             self.value = int(self.value)
+
+        if self.unit is not None and not isinstance(self.unit, str):
+            self.unit = str(self.unit)
 
         if self.and is not None and not isinstance(self.and, ValueSpecificationId):
             self.and = ValueSpecificationId(self.and)
@@ -978,8 +1037,8 @@ class Property(NamedThing):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = RDF.predicate
-    class_class_curie: ClassVar[str] = "rdf:predicate"
+    class_class_uri: ClassVar[URIRef] = MTGOA.Property
+    class_class_curie: ClassVar[str] = "mtgoa:Property"
     class_name: ClassVar[str] = "Property"
     class_model_uri: ClassVar[URIRef] = MTGO.Property
 
@@ -1086,6 +1145,14 @@ class Action(EnumDefinitionImpl):
                                        description="An ability is activated.")
     place_creature = PermissibleValue(text="place_creature",
                                                    description="One or more creatures are placed on the battlefield.")
+    tap = PermissibleValue(text="tap",
+                             description="A card is tapped.")
+    untap = PermissibleValue(text="untap",
+                                 description="A card is untapped")
+    add_mana = PermissibleValue(text="add_mana",
+                                       description="A player adds mana to their mana pool.")
+    control = PermissibleValue(text="control",
+                                     description="A player controls a card.")
 
     _defn = EnumDefinition(
         name="Action",
@@ -1146,30 +1213,38 @@ class Time(EnumDefinitionImpl):
     """
     A time during the turn.
     """
-    untap = PermissibleValue(text="untap",
-                                 description="The untap step.")
-    upkeep = PermissibleValue(text="upkeep",
-                                   description="The upkeep step.")
-    draw = PermissibleValue(text="draw",
-                               description="The draw step.")
-    main = PermissibleValue(text="main",
-                               description="The main phase.")
-    combat = PermissibleValue(text="combat",
-                                   description="The combat phase.")
-    declare_attackers = PermissibleValue(text="declare_attackers",
-                                                         description="The declare attackers step.")
-    declare_blockers = PermissibleValue(text="declare_blockers",
-                                                       description="The declare blockers step.")
-    combat_damage = PermissibleValue(text="combat_damage",
-                                                 description="The combat damage step.")
-    end_of_combat = PermissibleValue(text="end_of_combat",
-                                                 description="The end of combat step.")
-    end = PermissibleValue(text="end",
-                             description="The end step.")
-    cleanup = PermissibleValue(text="cleanup",
-                                     description="The cleanup step.")
+    beginning_phase = PermissibleValue(text="beginning_phase",
+                                                     description="The beginning of the turn.")
+    untap_step = PermissibleValue(text="untap_step",
+                                           description="The untap step.")
+    upkeep_step = PermissibleValue(text="upkeep_step",
+                                             description="The upkeep step.")
+    draw_step = PermissibleValue(text="draw_step",
+                                         description="The draw step.")
+    main_phase = PermissibleValue(text="main_phase",
+                                           description="Either main phase.")
+    pre_combat_main_phase = PermissibleValue(text="pre_combat_main_phase",
+                                                                 description="The first main phase.")
+    post_combat_main_phase = PermissibleValue(text="post_combat_main_phase",
+                                                                   description="The second main phase.")
+    combat_phase = PermissibleValue(text="combat_phase",
+                                               description="The combat phase.")
+    beginning_of_combat_step = PermissibleValue(text="beginning_of_combat_step",
+                                                                       description="The first step of the combat phase.")
+    declare_attackers_step = PermissibleValue(text="declare_attackers_step",
+                                                                   description="The declare attackers step.")
+    declare_blockers_step = PermissibleValue(text="declare_blockers_step",
+                                                                 description="The declare blockers step.")
+    combat_damage_step = PermissibleValue(text="combat_damage_step",
+                                                           description="The combat damage step.")
+    end_of_combat_step = PermissibleValue(text="end_of_combat_step",
+                                                           description="The end of combat step.")
+    ending_phase = PermissibleValue(text="ending_phase",
+                                               description="The end step.")
+    cleanup_step = PermissibleValue(text="cleanup_step",
+                                               description="The cleanup step.")
     turn = PermissibleValue(text="turn",
-                               description="Any time during the turn.")
+                               description="A player turn.")
 
     _defn = EnumDefinition(
         name="Time",
@@ -1213,8 +1288,11 @@ slots.name = Slot(uri=SCHEMA.name, name="name", curie=SCHEMA.curie('name'),
 slots.description = Slot(uri=SCHEMA.description, name="description", curie=SCHEMA.curie('description'),
                    model_uri=MTGO.description, domain=None, range=Optional[str])
 
-slots.additional_cost = Slot(uri=MTGOC.additional_cost, name="additional_cost", curie=MTGOC.curie('additional_cost'),
-                   model_uri=MTGO.additional_cost, domain=None, range=Optional[str])
+slots.and = Slot(uri=MTGO.and, name="and", curie=MTGO.curie('and'),
+                   model_uri=MTGO.and, domain=None, range=Optional[Union[str, NamedThingId]])
+
+slots.or = Slot(uri=MTGO.or, name="or", curie=MTGO.curie('or'),
+                   model_uri=MTGO.or, domain=None, range=Optional[Union[str, NamedThingId]])
 
 slots.mana_cost = Slot(uri=MTGOC.mana_cost, name="mana_cost", curie=MTGOC.curie('mana_cost'),
                    model_uri=MTGO.mana_cost, domain=None, range=Optional[Union[Union[str, ManaCostId], List[Union[str, ManaCostId]]]])
@@ -1243,6 +1321,9 @@ slots.power = Slot(uri=MTGOC.power, name="power", curie=MTGOC.curie('power'),
 slots.toughness = Slot(uri=MTGOC.toughness, name="toughness", curie=MTGOC.curie('toughness'),
                    model_uri=MTGO.toughness, domain=None, range=int)
 
+slots.snow = Slot(uri=MTGOC.snow, name="snow", curie=MTGOC.curie('snow'),
+                   model_uri=MTGO.snow, domain=None, range=Optional[Union[bool, Bool]])
+
 slots.type_line = Slot(uri=MTGOC.type_line, name="type_line", curie=MTGOC.curie('type_line'),
                    model_uri=MTGO.type_line, domain=None, range=str)
 
@@ -1264,8 +1345,11 @@ slots.ability = Slot(uri=MTGOA.ability, name="ability", curie=MTGOA.curie('abili
 slots.rules_text = Slot(uri=MTGOA.rules_text, name="rules_text", curie=MTGOA.curie('rules_text'),
                    model_uri=MTGO.rules_text, domain=None, range=Optional[str])
 
+slots.cost = Slot(uri=MTGOA.cost, name="cost", curie=MTGOA.curie('cost'),
+                   model_uri=MTGO.cost, domain=None, range=Optional[Union[str, List[str]]])
+
 slots.effect = Slot(uri=MTGOA.effect, name="effect", curie=MTGOA.curie('effect'),
-                   model_uri=MTGO.effect, domain=None, range=Optional[Union[str, ActionSpecificationId]])
+                   model_uri=MTGO.effect, domain=None, range=Optional[Union[str, ConditionId]])
 
 slots.action = Slot(uri=MTGOA.action, name="action", curie=MTGOA.curie('action'),
                    model_uri=MTGO.action, domain=None, range=Union[str, "Action"])
@@ -1297,40 +1381,43 @@ slots.player = Slot(uri=MTGOA.player, name="player", curie=MTGOA.curie('player')
 slots.time = Slot(uri=MTGOA.time, name="time", curie=MTGOA.curie('time'),
                    model_uri=MTGO.time, domain=None, range=Optional[Union[str, "Time"]])
 
+slots.unit = Slot(uri=MTGOA.unit, name="unit", curie=MTGOA.curie('unit'),
+                   model_uri=MTGO.unit, domain=None, range=Optional[str])
+
 slots.constraint = Slot(uri=MTGOA.constraint, name="constraint", curie=MTGOA.curie('constraint'),
                    model_uri=MTGO.constraint, domain=None, range=Optional[str])
-
-slots.and = Slot(uri=MTGOA.and, name="and", curie=MTGOA.curie('and'),
-                   model_uri=MTGO.and, domain=None, range=Optional[Union[str, NamedThingId]])
-
-slots.or = Slot(uri=MTGOA.or, name="or", curie=MTGOA.curie('or'),
-                   model_uri=MTGO.or, domain=None, range=Optional[Union[str, NamedThingId]])
 
 slots.cardCollection__entries = Slot(uri=MTGOC.entries, name="cardCollection__entries", curie=MTGOC.curie('entries'),
                    model_uri=MTGO.cardCollection__entries, domain=None, range=Optional[Union[Dict[Union[str, CardId], Union[dict, Card]], List[Union[dict, Card]]]])
 
-slots.ActionSpecification_and = Slot(uri=MTGOA.and, name="ActionSpecification_and", curie=MTGOA.curie('and'),
+slots.Cost_and = Slot(uri=MTGO.and, name="Cost_and", curie=MTGO.curie('and'),
+                   model_uri=MTGO.Cost_and, domain=Cost, range=Optional[Union[str, CostId]])
+
+slots.Cost_or = Slot(uri=MTGO.or, name="Cost_or", curie=MTGO.curie('or'),
+                   model_uri=MTGO.Cost_or, domain=Cost, range=Optional[Union[str, CostId]])
+
+slots.ActionSpecification_and = Slot(uri=MTGO.and, name="ActionSpecification_and", curie=MTGO.curie('and'),
                    model_uri=MTGO.ActionSpecification_and, domain=ActionSpecification, range=Optional[Union[str, ActionSpecificationId]])
 
-slots.ActionSpecification_or = Slot(uri=MTGOA.or, name="ActionSpecification_or", curie=MTGOA.curie('or'),
+slots.ActionSpecification_or = Slot(uri=MTGO.or, name="ActionSpecification_or", curie=MTGO.curie('or'),
                    model_uri=MTGO.ActionSpecification_or, domain=ActionSpecification, range=Optional[Union[str, ActionSpecificationId]])
 
 slots.ActionSpecification_constraint = Slot(uri=MTGOA.constraint, name="ActionSpecification_constraint", curie=MTGOA.curie('constraint'),
                    model_uri=MTGO.ActionSpecification_constraint, domain=ActionSpecification, range=Optional[Union[str, "ActionConstraint"]])
 
-slots.ValueSpecification_and = Slot(uri=MTGOA.and, name="ValueSpecification_and", curie=MTGOA.curie('and'),
+slots.ValueSpecification_and = Slot(uri=MTGO.and, name="ValueSpecification_and", curie=MTGO.curie('and'),
                    model_uri=MTGO.ValueSpecification_and, domain=ValueSpecification, range=Optional[Union[str, ValueSpecificationId]])
 
-slots.ValueSpecification_or = Slot(uri=MTGOA.or, name="ValueSpecification_or", curie=MTGOA.curie('or'),
+slots.ValueSpecification_or = Slot(uri=MTGO.or, name="ValueSpecification_or", curie=MTGO.curie('or'),
                    model_uri=MTGO.ValueSpecification_or, domain=ValueSpecification, range=Optional[Union[str, ValueSpecificationId]])
 
 slots.ValueSpecification_constraint = Slot(uri=MTGOA.constraint, name="ValueSpecification_constraint", curie=MTGOA.curie('constraint'),
                    model_uri=MTGO.ValueSpecification_constraint, domain=ValueSpecification, range=Optional[Union[str, "ValueConstraint"]])
 
-slots.TimeSpecification_and = Slot(uri=MTGOA.and, name="TimeSpecification_and", curie=MTGOA.curie('and'),
+slots.TimeSpecification_and = Slot(uri=MTGO.and, name="TimeSpecification_and", curie=MTGO.curie('and'),
                    model_uri=MTGO.TimeSpecification_and, domain=TimeSpecification, range=Optional[Union[str, TimeSpecificationId]])
 
-slots.TimeSpecification_or = Slot(uri=MTGOA.or, name="TimeSpecification_or", curie=MTGOA.curie('or'),
+slots.TimeSpecification_or = Slot(uri=MTGO.or, name="TimeSpecification_or", curie=MTGO.curie('or'),
                    model_uri=MTGO.TimeSpecification_or, domain=TimeSpecification, range=Optional[Union[str, TimeSpecificationId]])
 
 slots.TimeSpecification_constraint = Slot(uri=MTGOA.constraint, name="TimeSpecification_constraint", curie=MTGOA.curie('constraint'),

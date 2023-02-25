@@ -1,27 +1,22 @@
 
 
-CREATE TABLE "Ability" (
+CREATE TABLE "ActionSpecification" (
 	id TEXT NOT NULL, 
 	name TEXT NOT NULL, 
 	description TEXT, 
-	rules_text TEXT, 
-	PRIMARY KEY (id)
-);
-
-CREATE TABLE "ActivatedAbility" (
-	id TEXT NOT NULL, 
-	name TEXT NOT NULL, 
-	description TEXT, 
-	rules_text TEXT, 
-	additional_cost TEXT, 
-	PRIMARY KEY (id)
+	action VARCHAR(14) NOT NULL, 
+	"and" TEXT, 
+	"or" TEXT, 
+	"constraint" VARCHAR(8), 
+	PRIMARY KEY (id), 
+	FOREIGN KEY("and") REFERENCES "ActionSpecification" (id), 
+	FOREIGN KEY("or") REFERENCES "ActionSpecification" (id)
 );
 
 CREATE TABLE "Artifact" (
 	id TEXT NOT NULL, 
 	name TEXT NOT NULL, 
 	description TEXT, 
-	additional_cost TEXT, 
 	mana_cost TEXT, 
 	converted_mana_cost INTEGER, 
 	card_set TEXT, 
@@ -37,7 +32,6 @@ CREATE TABLE "Card" (
 	id TEXT NOT NULL, 
 	name TEXT NOT NULL, 
 	description TEXT, 
-	additional_cost TEXT, 
 	mana_cost TEXT, 
 	converted_mana_cost INTEGER, 
 	card_set TEXT, 
@@ -59,14 +53,17 @@ CREATE TABLE "Cost" (
 	name TEXT NOT NULL, 
 	description TEXT, 
 	value INTEGER, 
-	PRIMARY KEY (id)
+	"and" TEXT, 
+	"or" TEXT, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY("and") REFERENCES "Cost" (id), 
+	FOREIGN KEY("or") REFERENCES "Cost" (id)
 );
 
 CREATE TABLE "Creature" (
 	id TEXT NOT NULL, 
 	name TEXT NOT NULL, 
 	description TEXT, 
-	additional_cost TEXT, 
 	mana_cost TEXT, 
 	converted_mana_cost INTEGER, 
 	card_set TEXT, 
@@ -84,7 +81,6 @@ CREATE TABLE "Enchantment" (
 	id TEXT NOT NULL, 
 	name TEXT NOT NULL, 
 	description TEXT, 
-	additional_cost TEXT, 
 	mana_cost TEXT, 
 	converted_mana_cost INTEGER, 
 	card_set TEXT, 
@@ -93,16 +89,6 @@ CREATE TABLE "Enchantment" (
 	type_line TEXT NOT NULL, 
 	card_type TEXT NOT NULL, 
 	rarity VARCHAR(8), 
-	PRIMARY KEY (id)
-);
-
-CREATE TABLE "Event" (
-	id TEXT NOT NULL, 
-	name TEXT NOT NULL, 
-	description TEXT, 
-	source TEXT, 
-	action VARCHAR(11) NOT NULL, 
-	target TEXT, 
 	PRIMARY KEY (id)
 );
 
@@ -110,7 +96,6 @@ CREATE TABLE "Instant" (
 	id TEXT NOT NULL, 
 	name TEXT NOT NULL, 
 	description TEXT, 
-	additional_cost TEXT, 
 	mana_cost TEXT, 
 	converted_mana_cost INTEGER, 
 	card_set TEXT, 
@@ -119,14 +104,6 @@ CREATE TABLE "Instant" (
 	type_line TEXT NOT NULL, 
 	card_type TEXT NOT NULL, 
 	rarity VARCHAR(8), 
-	PRIMARY KEY (id)
-);
-
-CREATE TABLE "KeywordAbility" (
-	id TEXT NOT NULL, 
-	description TEXT, 
-	rules_text TEXT, 
-	name TEXT NOT NULL, 
 	PRIMARY KEY (id)
 );
 
@@ -134,7 +111,6 @@ CREATE TABLE "Land" (
 	id TEXT NOT NULL, 
 	name TEXT NOT NULL, 
 	description TEXT, 
-	additional_cost TEXT, 
 	mana_cost TEXT, 
 	converted_mana_cost INTEGER, 
 	card_set TEXT, 
@@ -146,19 +122,11 @@ CREATE TABLE "Land" (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE "LifeCost" (
+CREATE TABLE "Mana" (
 	id TEXT NOT NULL, 
 	name TEXT NOT NULL, 
 	description TEXT, 
-	value INTEGER, 
-	PRIMARY KEY (id)
-);
-
-CREATE TABLE "ManaCost" (
-	id TEXT NOT NULL, 
-	name TEXT NOT NULL, 
-	description TEXT, 
-	value INTEGER, 
+	snow BOOLEAN, 
 	PRIMARY KEY (id)
 );
 
@@ -173,7 +141,6 @@ CREATE TABLE "Permanent" (
 	id TEXT NOT NULL, 
 	name TEXT NOT NULL, 
 	description TEXT, 
-	additional_cost TEXT, 
 	mana_cost TEXT, 
 	converted_mana_cost INTEGER, 
 	card_set TEXT, 
@@ -196,7 +163,6 @@ CREATE TABLE "Sorcery" (
 	id TEXT NOT NULL, 
 	name TEXT NOT NULL, 
 	description TEXT, 
-	additional_cost TEXT, 
 	mana_cost TEXT, 
 	converted_mana_cost INTEGER, 
 	card_set TEXT, 
@@ -215,19 +181,24 @@ CREATE TABLE "Spell" (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE "StaticAbility" (
+CREATE TABLE "TimeSpecification" (
 	id TEXT NOT NULL, 
 	name TEXT NOT NULL, 
 	description TEXT, 
-	rules_text TEXT, 
-	PRIMARY KEY (id)
+	time VARCHAR(24), 
+	player VARCHAR(10), 
+	"and" TEXT, 
+	"or" TEXT, 
+	"constraint" VARCHAR(8), 
+	PRIMARY KEY (id), 
+	FOREIGN KEY("and") REFERENCES "TimeSpecification" (id), 
+	FOREIGN KEY("or") REFERENCES "TimeSpecification" (id)
 );
 
 CREATE TABLE "Token" (
 	id TEXT NOT NULL, 
 	name TEXT NOT NULL, 
 	description TEXT, 
-	additional_cost TEXT, 
 	mana_cost TEXT, 
 	converted_mana_cost INTEGER, 
 	card_set TEXT, 
@@ -239,25 +210,69 @@ CREATE TABLE "Token" (
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE "ValueSpecification" (
+	id TEXT NOT NULL, 
+	name TEXT NOT NULL, 
+	description TEXT, 
+	value INTEGER, 
+	unit TEXT, 
+	"and" TEXT, 
+	"or" TEXT, 
+	"constraint" VARCHAR(21), 
+	PRIMARY KEY (id), 
+	FOREIGN KEY("and") REFERENCES "ValueSpecification" (id), 
+	FOREIGN KEY("or") REFERENCES "ValueSpecification" (id)
+);
+
 CREATE TABLE "Condition" (
 	id TEXT NOT NULL, 
 	name TEXT NOT NULL, 
 	description TEXT, 
+	source TEXT, 
 	target TEXT, 
 	property TEXT, 
-	value_constraint VARCHAR(21), 
+	action_spec TEXT, 
+	value_spec TEXT, 
+	time_spec TEXT, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(property) REFERENCES "Property" (id)
 );
 
-CREATE TABLE "TriggeredAbility" (
+CREATE TABLE "LifeCost" (
 	id TEXT NOT NULL, 
 	name TEXT NOT NULL, 
 	description TEXT, 
-	rules_text TEXT, 
-	condition TEXT, 
+	value INTEGER, 
+	"and" TEXT, 
+	"or" TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(condition) REFERENCES "Event" (id)
+	FOREIGN KEY("and") REFERENCES "Cost" (id), 
+	FOREIGN KEY("or") REFERENCES "Cost" (id)
+);
+
+CREATE TABLE "ManaCost" (
+	id TEXT NOT NULL, 
+	name TEXT NOT NULL, 
+	description TEXT, 
+	value INTEGER, 
+	"and" TEXT, 
+	"or" TEXT, 
+	snow BOOLEAN, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY("and") REFERENCES "Cost" (id), 
+	FOREIGN KEY("or") REFERENCES "Cost" (id)
+);
+
+CREATE TABLE "Specification" (
+	id TEXT NOT NULL, 
+	name TEXT NOT NULL, 
+	description TEXT, 
+	"constraint" TEXT, 
+	"and" TEXT, 
+	"or" TEXT, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY("and") REFERENCES "NamedThing" (id), 
+	FOREIGN KEY("or") REFERENCES "NamedThing" (id)
 );
 
 CREATE TABLE "Artifact_color" (
@@ -386,11 +401,11 @@ CREATE TABLE "Land_card_supertype" (
 	FOREIGN KEY(backref_id) REFERENCES "Land" (id)
 );
 
-CREATE TABLE "ManaCost_color" (
+CREATE TABLE "Mana_color" (
 	backref_id TEXT, 
 	color VARCHAR(9) NOT NULL, 
 	PRIMARY KEY (backref_id, color), 
-	FOREIGN KEY(backref_id) REFERENCES "ManaCost" (id)
+	FOREIGN KEY(backref_id) REFERENCES "Mana" (id)
 );
 
 CREATE TABLE "Permanent_color" (
@@ -454,4 +469,73 @@ CREATE TABLE "Token_card_supertype" (
 	card_supertype TEXT, 
 	PRIMARY KEY (backref_id, card_supertype), 
 	FOREIGN KEY(backref_id) REFERENCES "Token" (id)
+);
+
+CREATE TABLE "Ability" (
+	id TEXT NOT NULL, 
+	name TEXT NOT NULL, 
+	description TEXT, 
+	rules_text TEXT, 
+	effect TEXT, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(effect) REFERENCES "Condition" (id)
+);
+
+CREATE TABLE "ActivatedAbility" (
+	id TEXT NOT NULL, 
+	name TEXT NOT NULL, 
+	description TEXT, 
+	rules_text TEXT, 
+	effect TEXT, 
+	condition TEXT, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(effect) REFERENCES "Condition" (id), 
+	FOREIGN KEY(condition) REFERENCES "Condition" (id)
+);
+
+CREATE TABLE "KeywordAbility" (
+	id TEXT NOT NULL, 
+	description TEXT, 
+	rules_text TEXT, 
+	effect TEXT, 
+	name TEXT NOT NULL, 
+	value INTEGER, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(effect) REFERENCES "Condition" (id)
+);
+
+CREATE TABLE "StaticAbility" (
+	id TEXT NOT NULL, 
+	name TEXT NOT NULL, 
+	description TEXT, 
+	rules_text TEXT, 
+	effect TEXT, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(effect) REFERENCES "Condition" (id)
+);
+
+CREATE TABLE "TriggeredAbility" (
+	id TEXT NOT NULL, 
+	name TEXT NOT NULL, 
+	description TEXT, 
+	rules_text TEXT, 
+	effect TEXT, 
+	condition TEXT, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(effect) REFERENCES "Condition" (id), 
+	FOREIGN KEY(condition) REFERENCES "Condition" (id)
+);
+
+CREATE TABLE "ManaCost_color" (
+	backref_id TEXT, 
+	color VARCHAR(9) NOT NULL, 
+	PRIMARY KEY (backref_id, color), 
+	FOREIGN KEY(backref_id) REFERENCES "ManaCost" (id)
+);
+
+CREATE TABLE "ActivatedAbility_cost" (
+	backref_id TEXT, 
+	cost TEXT, 
+	PRIMARY KEY (backref_id, cost), 
+	FOREIGN KEY(backref_id) REFERENCES "ActivatedAbility" (id)
 );

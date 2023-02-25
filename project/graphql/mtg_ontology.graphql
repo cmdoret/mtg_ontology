@@ -4,6 +4,18 @@ type Ability
     name: String!
     description: String
     rulesText: String
+    effect: Condition
+  }
+
+type ActionSpecification
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+    action: Action!
+    and: ActionSpecification
+    or: ActionSpecification
+    constraint: ActionConstraint
   }
 
 type ActivatedAbility
@@ -12,7 +24,9 @@ type ActivatedAbility
     name: String!
     description: String
     rulesText: String
-    additionalCost: String
+    effect: Condition
+    cost: [String]
+    condition: Condition
   }
 
 type Artifact
@@ -20,7 +34,6 @@ type Artifact
     id: Uriorcurie!
     name: String!
     description: String
-    additionalCost: String
     manaCost: [ManaCost]
     convertedManaCost: Integer
     color: [Color]!
@@ -39,7 +52,6 @@ type Card
     id: Uriorcurie!
     name: String!
     description: String
-    additionalCost: String
     manaCost: [ManaCost]
     convertedManaCost: Integer
     color: [Color]!
@@ -63,9 +75,12 @@ type Condition
     id: Uriorcurie!
     name: String!
     description: String
+    source: String
     target: String
     property: Property
-    valueConstraint: ValueConstraint
+    actionSpec: [ActionSpecification]
+    valueSpec: [ValueSpecification]
+    timeSpec: [TimeSpecification]
   }
 
 type Cost
@@ -74,6 +89,8 @@ type Cost
     name: String!
     description: String
     value: Integer
+    and: Cost
+    or: Cost
   }
 
 type Creature
@@ -81,7 +98,6 @@ type Creature
     id: Uriorcurie!
     name: String!
     description: String
-    additionalCost: String
     manaCost: [ManaCost]
     convertedManaCost: Integer
     color: [Color]!
@@ -102,7 +118,6 @@ type Enchantment
     id: Uriorcurie!
     name: String!
     description: String
-    additionalCost: String
     manaCost: [ManaCost]
     convertedManaCost: Integer
     color: [Color]!
@@ -116,22 +131,11 @@ type Enchantment
     rarity: Rarity
   }
 
-type Event
-  {
-    id: Uriorcurie!
-    name: String!
-    description: String
-    source: String
-    action: Action!
-    target: String
-  }
-
 type Instant
   {
     id: Uriorcurie!
     name: String!
     description: String
-    additionalCost: String
     manaCost: [ManaCost]
     convertedManaCost: Integer
     color: [Color]!
@@ -150,7 +154,9 @@ type KeywordAbility
     id: Uriorcurie!
     description: String
     rulesText: String
+    effect: Condition
     name: String!
+    value: Integer
   }
 
 type Land
@@ -158,7 +164,6 @@ type Land
     id: Uriorcurie!
     name: String!
     description: String
-    additionalCost: String
     manaCost: [ManaCost]
     convertedManaCost: Integer
     color: [Color]!
@@ -178,6 +183,17 @@ type LifeCost
     name: String!
     description: String
     value: Integer
+    and: Cost
+    or: Cost
+  }
+
+type Mana
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+    color: [Color]!
+    snow: Boolean
   }
 
 type ManaCost
@@ -186,7 +202,10 @@ type ManaCost
     name: String!
     description: String
     value: Integer
+    and: Cost
+    or: Cost
     color: [Color]!
+    snow: Boolean
   }
 
 type NamedThing
@@ -201,7 +220,6 @@ type Permanent
     id: Uriorcurie!
     name: String!
     description: String
-    additionalCost: String
     manaCost: [ManaCost]
     convertedManaCost: Integer
     color: [Color]!
@@ -227,7 +245,6 @@ type Sorcery
     id: Uriorcurie!
     name: String!
     description: String
-    additionalCost: String
     manaCost: [ManaCost]
     convertedManaCost: Integer
     color: [Color]!
@@ -239,6 +256,16 @@ type Sorcery
     cardSubtype: [String]
     cardSupertype: [String]
     rarity: Rarity
+  }
+
+type Specification
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+    constraint: String
+    and: NamedThing
+    or: NamedThing
   }
 
 type Spell
@@ -254,6 +281,19 @@ type StaticAbility
     name: String!
     description: String
     rulesText: String
+    effect: Condition
+  }
+
+type TimeSpecification
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+    time: Time
+    player: Player
+    and: TimeSpecification
+    or: TimeSpecification
+    constraint: TimeConstraint
   }
 
 type Token
@@ -261,7 +301,6 @@ type Token
     id: Uriorcurie!
     name: String!
     description: String
-    additionalCost: String
     manaCost: [ManaCost]
     convertedManaCost: Integer
     color: [Color]!
@@ -281,6 +320,19 @@ type TriggeredAbility
     name: String!
     description: String
     rulesText: String
-    condition: Event
+    effect: Condition
+    condition: Condition
+  }
+
+type ValueSpecification
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+    value: Integer
+    unit: String
+    and: ValueSpecification
+    or: ValueSpecification
+    constraint: ValueConstraint
   }
 
