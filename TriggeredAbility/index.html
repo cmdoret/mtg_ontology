@@ -249,7 +249,7 @@
 </tr>
 <tr>
 <td><a href="../effect/">effect</a></td>
-<td>0..1 <br/> <a href="../ActionSpecification/">ActionSpecification</a></td>
+<td>0..1 <br/> <a href="../Condition/">Condition</a></td>
 <td>The effect of an ability</td>
 <td><a href="../Ability/">Ability</a></td>
 </tr>
@@ -327,6 +327,7 @@ attributes:
     alias: condition
     owner: TriggeredAbility
     domain_of:
+    - ActivatedAbility
     - TriggeredAbility
     range: Condition
   rules_text:
@@ -348,7 +349,7 @@ attributes:
     owner: TriggeredAbility
     domain_of:
     - Ability
-    range: ActionSpecification
+    range: Condition
   id:
     name: id
     description: A unique identifier for a thing

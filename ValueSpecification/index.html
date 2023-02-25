@@ -217,6 +217,7 @@
       ValueSpecification : id
       ValueSpecification : name
       ValueSpecification : or
+      ValueSpecification : unit
       ValueSpecification : value
 
 </div>
@@ -245,6 +246,12 @@
 <td><a href="../value/">value</a></td>
 <td>0..1 <br/> <a href="xsd:integer">xsd:integer</a></td>
 <td>The numeric part of a quantitative value</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../unit/">unit</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td>The type of quantity described by a value</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -351,20 +358,27 @@ rank: 1000
 is_a: Specification
 slots:
 - value
+- unit
 slot_usage:
   and:
     name: and
     domain_of:
     - Specification
+    - Cost
     - Specification
+    - Cost
     - Specification
+    - Cost
     range: ValueSpecification
   or:
     name: or
     domain_of:
     - Specification
+    - Cost
     - Specification
+    - Cost
     - Specification
+    - Cost
     range: ValueSpecification
   constraint:
     name: constraint
@@ -388,15 +402,21 @@ slot_usage:
     name: and
     domain_of:
     - Specification
+    - Cost
     - Specification
+    - Cost
     - Specification
+    - Cost
     range: ValueSpecification
   or:
     name: or
     domain_of:
     - Specification
+    - Cost
     - Specification
+    - Cost
     - Specification
+    - Cost
     range: ValueSpecification
   constraint:
     name: constraint
@@ -414,9 +434,23 @@ attributes:
     alias: value
     owner: ValueSpecification
     domain_of:
+    - KeywordAbility
     - ValueSpecification
     - Cost
     range: integer
+  unit:
+    name: unit
+    description: The type of quantity described by a value.
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
+    rank: 1000
+    alias: unit
+    owner: ValueSpecification
+    domain_of:
+    - ValueSpecification
+    range: string
+    any_of:
+    - range: linkml:ClassDefinition
+    - range: NamedThing
   constraint:
     name: constraint
     description: A constraint on a time, quantity or action.
@@ -431,25 +465,29 @@ attributes:
   and:
     name: and
     description: A conjunction of two objects.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/
     rank: 1000
     alias: and
     owner: ValueSpecification
     domain_of:
     - Specification
+    - Cost
     - Specification
+    - Cost
     symmetric: true
     range: ValueSpecification
   or:
     name: or
     description: A disjunction of two objects.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/
     rank: 1000
     alias: or
     owner: ValueSpecification
     domain_of:
     - Specification
+    - Cost
     - Specification
+    - Cost
     symmetric: true
     range: ValueSpecification
   id:

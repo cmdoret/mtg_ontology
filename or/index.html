@@ -318,7 +318,7 @@
 
 <h1 id="slot-or">Slot: or</h1>
 <p><em>A disjunction of two objects.</em></p>
-<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/abilities/or">mtgoa:or</a></p>
+<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/or">mtgo:or</a></p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -335,12 +335,24 @@
 <td>A specification for a thing</td>
 </tr>
 <tr>
+<td><a href="../Cost/">Cost</a></td>
+<td>The cost of a card or ability</td>
+</tr>
+<tr>
 <td><a href="../ActionSpecification/">ActionSpecification</a></td>
 <td>A specification for an action</td>
 </tr>
 <tr>
 <td><a href="../ValueSpecification/">ValueSpecification</a></td>
 <td>A specification for a quantitative value</td>
+</tr>
+<tr>
+<td><a href="../ManaCost/">ManaCost</a></td>
+<td>The mana cost of a card or ability</td>
+</tr>
+<tr>
+<td><a href="../LifeCost/">LifeCost</a></td>
+<td>The life cost of a card or ability</td>
 </tr>
 </tbody>
 </table>
@@ -351,18 +363,19 @@
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://w3id.org/cmdoret/mtg-ontology/abilities/</li>
+<li>from schema: https://w3id.org/cmdoret/mtg-ontology/</li>
 </ul>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
 <pre><code class="language-yaml">name: or
 description: A disjunction of two objects.
-from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
+from_schema: https://w3id.org/cmdoret/mtg-ontology/
 rank: 1000
 alias: or
 domain_of:
 - Specification
+- Cost
 symmetric: true
 range: NamedThing
 

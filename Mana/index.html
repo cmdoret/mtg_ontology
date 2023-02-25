@@ -5,10 +5,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://cmdoret.github.io/mtg-ontology/Enchantment/" rel="canonical"/>
+<link href="https://cmdoret.github.io/mtg-ontology/Mana/" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.4.2, mkdocs-material-8.5.10" name="generator"/>
-<title>Class: Enchantment - mtg-ontology</title>
+<title>Class: Mana - mtg-ontology</title>
 <link href="../assets/stylesheets/main.975780f9.min.css" rel="stylesheet"/>
 <link href="../assets/stylesheets/palette.2505c338.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -21,7 +21,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-enchantment">
+<a class="md-skip" href="#class-mana">
           Skip to content
         </a>
 </div>
@@ -45,7 +45,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: Enchantment
+              Class: Mana
             
           </span>
 </div>
@@ -196,42 +196,27 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<a class="md-content__button md-icon" href="https://github.com/cmdoret/mtg-ontology/edit/master/docs/Enchantment.md" title="Edit this page">
+<a class="md-content__button md-icon" href="https://github.com/cmdoret/mtg-ontology/edit/master/docs/Mana.md" title="Edit this page">
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"></path></svg>
 </a>
-<h1 id="class-enchantment">Class: Enchantment</h1>
-<p><em>A permanent which applies persistent magical effects.</em></p>
-<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/cards/Enchantment">mtgoc:Enchantment</a></p>
+<h1 id="class-mana">Class: Mana</h1>
+<p><em>A mana in the pool.</em></p>
+<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/cards/Mana">mtgoc:Mana</a></p>
 <div class="mermaid"> classDiagram
-    class Enchantment
-      Permanent &lt;|-- Enchantment
+    class Mana
+      NamedThing &lt;|-- Mana
 
-      Enchantment : artist
-      Enchantment : card_set
-      Enchantment : card_subtype
-      Enchantment : card_supertype
-      Enchantment : card_type
-      Enchantment : color
-      Enchantment : converted_mana_cost
-      Enchantment : description
-      Enchantment : flavor_text
-      Enchantment : id
-      Enchantment : mana_cost
-      Enchantment : name
-      Enchantment : rarity
-      Enchantment : type_line
+      Mana : color
+      Mana : description
+      Mana : id
+      Mana : name
+      Mana : snow
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
 <li><a href="../NamedThing/">NamedThing</a><ul>
-<li><a href="../Card/">Card</a><ul>
-<li><a href="../Permanent/">Permanent</a><ul>
-<li><strong>Enchantment</strong></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>Mana</strong></li>
 </ul>
 </li>
 </ul>
@@ -247,70 +232,16 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../mana_cost/">mana_cost</a></td>
-<td>0..* <br/> <a href="../ManaCost/">ManaCost</a></td>
-<td>A mana cost for a card or ability</td>
-<td><a href="../Card/">Card</a></td>
-</tr>
-<tr>
-<td><a href="../converted_mana_cost/">converted_mana_cost</a></td>
-<td>0..1 <br/> <a href="xsd:integer">xsd:integer</a></td>
-<td>The total mana cost for a card or ability, summed across all colors</td>
-<td><a href="../Card/">Card</a></td>
-</tr>
-<tr>
 <td><a href="../color/">color</a></td>
 <td>1..* <br/> <a href="../Color/">Color</a></td>
 <td>The color of a card</td>
-<td><a href="../Card/">Card</a></td>
+<td>direct</td>
 </tr>
 <tr>
-<td><a href="../card_set/">card_set</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td>A pool of cards released together and designed for the same play environment</td>
-<td><a href="../Card/">Card</a></td>
-</tr>
-<tr>
-<td><a href="../artist/">artist</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td>The artist who drew a card's illustration</td>
-<td><a href="../Card/">Card</a></td>
-</tr>
-<tr>
-<td><a href="../flavor_text/">flavor_text</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td>The lore text at the bottom of a card</td>
-<td><a href="../Card/">Card</a></td>
-</tr>
-<tr>
-<td><a href="../type_line/">type_line</a></td>
-<td>1..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td>The text line below a card's illustration containing the card's type, subtype...</td>
-<td><a href="../Card/">Card</a></td>
-</tr>
-<tr>
-<td><a href="../card_type/">card_type</a></td>
-<td>1..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td>The text line below a card's illustration containing the card's type, subtype...</td>
-<td><a href="../Card/">Card</a></td>
-</tr>
-<tr>
-<td><a href="../card_subtype/">card_subtype</a></td>
-<td>0..* <br/> <a href="xsd:string">xsd:string</a></td>
-<td>The subtype(s) of a card, such as Equipment, Cat or Warrior</td>
-<td><a href="../Card/">Card</a></td>
-</tr>
-<tr>
-<td><a href="../card_supertype/">card_supertype</a></td>
-<td>0..* <br/> <a href="xsd:string">xsd:string</a></td>
-<td>The supertype(s) of a card, such as Basic, Legendary or Snow</td>
-<td><a href="../Card/">Card</a></td>
-</tr>
-<tr>
-<td><a href="../rarity/">rarity</a></td>
-<td>0..1 <br/> <a href="../Rarity/">Rarity</a></td>
-<td>An ability associated with a card</td>
-<td><a href="../Card/">Card</a></td>
+<td><a href="../snow/">snow</a></td>
+<td>0..1 <br/> <a href="xsd:boolean">xsd:boolean</a></td>
+<td>Whether a mana or cost includes snow mana</td>
+<td>direct</td>
 </tr>
 <tr>
 <td><a href="../id/">id</a></td>
@@ -348,11 +279,11 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>mtgoc:Enchantment</td>
+<td>mtgoc:Mana</td>
 </tr>
 <tr>
 <td>native</td>
-<td>mtgoc:Enchantment</td>
+<td>mtgoc:Mana</td>
 </tr>
 </tbody>
 </table>
@@ -360,43 +291,25 @@
 <!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
 <h3 id="direct">Direct</h3>
 <details>
-<pre><code class="language-yaml">name: Enchantment
-description: A permanent which applies persistent magical effects.
+<pre><code class="language-yaml">name: Mana
+description: A mana in the pool.
 from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
 rank: 1000
-is_a: Permanent
+is_a: NamedThing
+slots:
+- color
+- snow
 
 </code></pre>
 </details>
 <h3 id="induced">Induced</h3>
 <details>
-<pre><code class="language-yaml">name: Enchantment
-description: A permanent which applies persistent magical effects.
+<pre><code class="language-yaml">name: Mana
+description: A mana in the pool.
 from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
 rank: 1000
-is_a: Permanent
+is_a: NamedThing
 attributes:
-  mana_cost:
-    name: mana_cost
-    description: A mana cost for a card or ability.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
-    rank: 1000
-    multivalued: true
-    alias: mana_cost
-    owner: Enchantment
-    domain_of:
-    - Card
-    range: ManaCost
-  converted_mana_cost:
-    name: converted_mana_cost
-    description: The total mana cost for a card or ability, summed across all colors.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
-    rank: 1000
-    alias: converted_mana_cost
-    owner: Enchantment
-    domain_of:
-    - Card
-    range: integer
   color:
     name: color
     description: The color of a card.
@@ -404,102 +317,24 @@ attributes:
     rank: 1000
     multivalued: true
     alias: color
-    owner: Enchantment
+    owner: Mana
     domain_of:
     - Card
     - ManaCost
     - Mana
     range: Color
     required: true
-  card_set:
-    name: card_set
-    description: A pool of cards released together and designed for the same play
-      environment.
+  snow:
+    name: snow
+    description: Whether a mana or cost includes snow mana.
     from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
     rank: 1000
-    alias: card_set
-    owner: Enchantment
+    alias: snow
+    owner: Mana
     domain_of:
-    - Card
-    range: string
-  artist:
-    name: artist
-    description: The artist who drew a card's illustration.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
-    rank: 1000
-    alias: artist
-    owner: Enchantment
-    domain_of:
-    - Card
-    range: string
-  flavor_text:
-    name: flavor_text
-    description: The lore text at the bottom of a card.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
-    rank: 1000
-    alias: flavor_text
-    owner: Enchantment
-    domain_of:
-    - Card
-    range: string
-  type_line:
-    name: type_line
-    description: The text line below a card's illustration containing the card's type,
-      subtype and supertype (if applicable).
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
-    rank: 1000
-    alias: type_line
-    owner: Enchantment
-    domain_of:
-    - Card
-    range: string
-    required: true
-  card_type:
-    name: card_type
-    description: The text line below a card's illustration containing the card's type,
-      subtype and supertype (if applicable).
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
-    rank: 1000
-    alias: card_type
-    owner: Enchantment
-    domain_of:
-    - Card
-    range: string
-    required: true
-  card_subtype:
-    name: card_subtype
-    description: The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears
-      on the right of the type line.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
-    rank: 1000
-    multivalued: true
-    alias: card_subtype
-    owner: Enchantment
-    domain_of:
-    - Card
-    range: string
-  card_supertype:
-    name: card_supertype
-    description: The supertype(s) of a card, such as Basic, Legendary or Snow. Appears
-      on the left of the type line, before the type.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
-    rank: 1000
-    multivalued: true
-    alias: card_supertype
-    owner: Enchantment
-    domain_of:
-    - Card
-    range: string
-  rarity:
-    name: rarity
-    description: An ability associated with a card.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
-    rank: 1000
-    alias: rarity
-    owner: Enchantment
-    domain_of:
-    - Card
-    range: Rarity
+    - ManaCost
+    - Mana
+    range: boolean
   id:
     name: id
     description: A unique identifier for a thing
@@ -508,7 +343,7 @@ attributes:
     slot_uri: schema:identifier
     identifier: true
     alias: id
-    owner: Enchantment
+    owner: Mana
     domain_of:
     - NamedThing
     range: uriorcurie
@@ -519,7 +354,7 @@ attributes:
     rank: 1000
     slot_uri: schema:name
     alias: name
-    owner: Enchantment
+    owner: Mana
     domain_of:
     - NamedThing
     - KeywordAbility
@@ -532,7 +367,7 @@ attributes:
     rank: 1000
     slot_uri: schema:description
     alias: description
-    owner: Enchantment
+    owner: Mana
     domain_of:
     - NamedThing
     range: string

@@ -206,7 +206,8 @@
     class ActivatedAbility
       Ability &lt;|-- ActivatedAbility
 
-      ActivatedAbility : additional_cost
+      ActivatedAbility : condition
+      ActivatedAbility : cost
       ActivatedAbility : description
       ActivatedAbility : effect
       ActivatedAbility : id
@@ -236,9 +237,15 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../additional_cost/">additional_cost</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td>An additional cost to play a card or ability</td>
+<td><a href="../cost/">cost</a></td>
+<td>0..* <br/> <a href="xsd:string">xsd:string</a></td>
+<td>A cost to play a card or ability</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../condition/">condition</a></td>
+<td>0..1 <br/> <a href="../Condition/">Condition</a></td>
+<td>A condition required for an activation</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -249,7 +256,7 @@
 </tr>
 <tr>
 <td><a href="../effect/">effect</a></td>
-<td>0..1 <br/> <a href="../ActionSpecification/">ActionSpecification</a></td>
+<td>0..1 <br/> <a href="../Condition/">Condition</a></td>
 <td>The effect of an ability</td>
 <td><a href="../Ability/">Ability</a></td>
 </tr>
@@ -307,7 +314,8 @@ from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
 is_a: Ability
 slots:
-- additional_cost
+- cost
+- condition
 
 </code></pre>
 </details>
@@ -319,21 +327,31 @@ from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
 is_a: Ability
 attributes:
-  additional_cost:
-    name: additional_cost
-    description: An additional cost to play a card or ability.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
+  cost:
+    name: cost
+    description: A cost to play a card or ability.
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
     rank: 1000
-    alias: additional_cost
+    multivalued: true
+    alias: cost
     owner: ActivatedAbility
     domain_of:
     - ActivatedAbility
-    - Card
     range: string
     any_of:
-    - range: ManaCost
-    - range: LifeCost
-    - range: mtgoa:Event
+    - range: Cost
+    - range: Condition
+  condition:
+    name: condition
+    description: A condition required for an activation.
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
+    rank: 1000
+    alias: condition
+    owner: ActivatedAbility
+    domain_of:
+    - ActivatedAbility
+    - TriggeredAbility
+    range: Condition
   rules_text:
     name: rules_text
     description: The text describing what an ability does.
@@ -353,7 +371,7 @@ attributes:
     owner: ActivatedAbility
     domain_of:
     - Ability
-    range: ActionSpecification
+    range: Condition
   id:
     name: id
     description: A unique identifier for a thing

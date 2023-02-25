@@ -211,10 +211,13 @@
     class ManaCost
       Cost &lt;|-- ManaCost
 
+      ManaCost : and
       ManaCost : color
       ManaCost : description
       ManaCost : id
       ManaCost : name
+      ManaCost : or
+      ManaCost : snow
       ManaCost : value
 
 </div>
@@ -246,9 +249,27 @@
 <td>direct</td>
 </tr>
 <tr>
+<td><a href="../snow/">snow</a></td>
+<td>0..1 <br/> <a href="xsd:boolean">xsd:boolean</a></td>
+<td>Whether a mana or cost includes snow mana</td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../value/">value</a></td>
 <td>0..1 <br/> <a href="xsd:integer">xsd:integer</a></td>
 <td>The numeric part of a quantitative value</td>
+<td><a href="../Cost/">Cost</a></td>
+</tr>
+<tr>
+<td><a href="../and/">and</a></td>
+<td>0..1 <br/> <a href="../Cost/">Cost</a></td>
+<td>A conjunction of two objects</td>
+<td><a href="../Cost/">Cost</a></td>
+</tr>
+<tr>
+<td><a href="../or/">or</a></td>
+<td>0..1 <br/> <a href="../Cost/">Cost</a></td>
+<td>A disjunction of two objects</td>
 <td><a href="../Cost/">Cost</a></td>
 </tr>
 <tr>
@@ -373,6 +394,7 @@ rank: 1000
 is_a: Cost
 slots:
 - color
+- snow
 
 </code></pre>
 </details>
@@ -395,8 +417,20 @@ attributes:
     domain_of:
     - Card
     - ManaCost
+    - Mana
     range: Color
     required: true
+  snow:
+    name: snow
+    description: Whether a mana or cost includes snow mana.
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
+    rank: 1000
+    alias: snow
+    owner: ManaCost
+    domain_of:
+    - ManaCost
+    - Mana
+    range: boolean
   value:
     name: value
     description: The numeric part of a quantitative value.
@@ -405,9 +439,50 @@ attributes:
     alias: value
     owner: ManaCost
     domain_of:
+    - KeywordAbility
     - ValueSpecification
     - Cost
     range: integer
+  and:
+    name: and
+    description: A conjunction of two objects.
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/
+    rank: 1000
+    alias: and
+    owner: ManaCost
+    domain_of:
+    - Specification
+    - Cost
+    - Specification
+    - Cost
+    - Specification
+    - Cost
+    - Specification
+    - Cost
+    - Specification
+    - Cost
+    symmetric: true
+    range: Cost
+  or:
+    name: or
+    description: A disjunction of two objects.
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/
+    rank: 1000
+    alias: or
+    owner: ManaCost
+    domain_of:
+    - Specification
+    - Cost
+    - Specification
+    - Cost
+    - Specification
+    - Cost
+    - Specification
+    - Cost
+    - Specification
+    - Cost
+    symmetric: true
+    range: Cost
   id:
     name: id
     description: A unique identifier for a thing

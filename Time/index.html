@@ -330,64 +330,84 @@
 </thead>
 <tbody>
 <tr>
-<td>untap</td>
+<td>beginning_phase</td>
+<td>None</td>
+<td>The beginning of the turn</td>
+</tr>
+<tr>
+<td>untap_step</td>
 <td>None</td>
 <td>The untap step</td>
 </tr>
 <tr>
-<td>upkeep</td>
+<td>upkeep_step</td>
 <td>None</td>
 <td>The upkeep step</td>
 </tr>
 <tr>
-<td>draw</td>
+<td>draw_step</td>
 <td>None</td>
 <td>The draw step</td>
 </tr>
 <tr>
-<td>main</td>
+<td>main_phase</td>
 <td>None</td>
-<td>The main phase</td>
+<td>Either main phase</td>
 </tr>
 <tr>
-<td>combat</td>
+<td>pre_combat_main_phase</td>
+<td>None</td>
+<td>The first main phase</td>
+</tr>
+<tr>
+<td>post_combat_main_phase</td>
+<td>None</td>
+<td>The second main phase</td>
+</tr>
+<tr>
+<td>combat_phase</td>
 <td>None</td>
 <td>The combat phase</td>
 </tr>
 <tr>
-<td>declare_attackers</td>
+<td>beginning_of_combat_step</td>
+<td>None</td>
+<td>The first step of the combat phase</td>
+</tr>
+<tr>
+<td>declare_attackers_step</td>
 <td>None</td>
 <td>The declare attackers step</td>
 </tr>
 <tr>
-<td>declare_blockers</td>
+<td>declare_blockers_step</td>
 <td>None</td>
 <td>The declare blockers step</td>
 </tr>
 <tr>
-<td>combat_damage</td>
+<td>combat_damage_step</td>
 <td>None</td>
 <td>The combat damage step</td>
 </tr>
 <tr>
-<td>end_of_combat</td>
+<td>end_of_combat_step</td>
 <td>None</td>
 <td>The end of combat step</td>
 </tr>
 <tr>
-<td>end</td>
+<td>ending_phase</td>
 <td>None</td>
 <td>The end step</td>
 </tr>
 <tr>
-<td>cleanup</td>
+<td>cleanup_step</td>
 <td>None</td>
 <td>The cleanup step</td>
 </tr>
 <tr>
 <td>turn</td>
 <td>None</td>
-<td>Any time during the turn</td>
+<td>A player turn</td>
 </tr>
 </tbody>
 </table>
@@ -419,42 +439,54 @@ description: A time during the turn.
 from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
 permissible_values:
-  untap:
-    text: untap
+  beginning_phase:
+    text: beginning_phase
+    description: The beginning of the turn.
+  untap_step:
+    text: untap_step
     description: The untap step.
-  upkeep:
-    text: upkeep
+  upkeep_step:
+    text: upkeep_step
     description: The upkeep step.
-  draw:
-    text: draw
+  draw_step:
+    text: draw_step
     description: The draw step.
-  main:
-    text: main
-    description: The main phase.
-  combat:
-    text: combat
+  main_phase:
+    text: main_phase
+    description: Either main phase.
+  pre_combat_main_phase:
+    text: pre_combat_main_phase
+    description: The first main phase.
+  post_combat_main_phase:
+    text: post_combat_main_phase
+    description: The second main phase.
+  combat_phase:
+    text: combat_phase
     description: The combat phase.
-  declare_attackers:
-    text: declare_attackers
+  beginning_of_combat_step:
+    text: beginning_of_combat_step
+    description: The first step of the combat phase.
+  declare_attackers_step:
+    text: declare_attackers_step
     description: The declare attackers step.
-  declare_blockers:
-    text: declare_blockers
+  declare_blockers_step:
+    text: declare_blockers_step
     description: The declare blockers step.
-  combat_damage:
-    text: combat_damage
+  combat_damage_step:
+    text: combat_damage_step
     description: The combat damage step.
-  end_of_combat:
-    text: end_of_combat
+  end_of_combat_step:
+    text: end_of_combat_step
     description: The end of combat step.
-  end:
-    text: end
+  ending_phase:
+    text: ending_phase
     description: The end step.
-  cleanup:
-    text: cleanup
+  cleanup_step:
+    text: cleanup_step
     description: The cleanup step.
   turn:
     text: turn
-    description: Any time during the turn.
+    description: A player turn.
 
 </code></pre>
 

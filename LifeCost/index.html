@@ -206,9 +206,11 @@
     class LifeCost
       Cost &lt;|-- LifeCost
 
+      LifeCost : and
       LifeCost : description
       LifeCost : id
       LifeCost : name
+      LifeCost : or
       LifeCost : value
 
 </div>
@@ -237,6 +239,18 @@
 <td><a href="../value/">value</a></td>
 <td>0..1 <br/> <a href="xsd:integer">xsd:integer</a></td>
 <td>The numeric part of a quantitative value</td>
+<td><a href="../Cost/">Cost</a></td>
+</tr>
+<tr>
+<td><a href="../and/">and</a></td>
+<td>0..1 <br/> <a href="../Cost/">Cost</a></td>
+<td>A conjunction of two objects</td>
+<td><a href="../Cost/">Cost</a></td>
+</tr>
+<tr>
+<td><a href="../or/">or</a></td>
+<td>0..1 <br/> <a href="../Cost/">Cost</a></td>
+<td>A disjunction of two objects</td>
 <td><a href="../Cost/">Cost</a></td>
 </tr>
 <tr>
@@ -311,9 +325,58 @@ attributes:
     alias: value
     owner: LifeCost
     domain_of:
+    - KeywordAbility
     - ValueSpecification
     - Cost
     range: integer
+  and:
+    name: and
+    description: A conjunction of two objects.
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/
+    rank: 1000
+    alias: and
+    owner: LifeCost
+    domain_of:
+    - Specification
+    - Cost
+    - Specification
+    - Cost
+    - Specification
+    - Cost
+    - Specification
+    - Cost
+    - Specification
+    - Cost
+    - Specification
+    - Cost
+    - Specification
+    - Cost
+    symmetric: true
+    range: Cost
+  or:
+    name: or
+    description: A disjunction of two objects.
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/
+    rank: 1000
+    alias: or
+    owner: LifeCost
+    domain_of:
+    - Specification
+    - Cost
+    - Specification
+    - Cost
+    - Specification
+    - Cost
+    - Specification
+    - Cost
+    - Specification
+    - Cost
+    - Specification
+    - Cost
+    - Specification
+    - Cost
+    symmetric: true
+    range: Cost
   id:
     name: id
     description: A unique identifier for a thing

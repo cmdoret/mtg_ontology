@@ -206,7 +206,6 @@
     class Permanent
       Card &lt;|-- Permanent
 
-      Permanent : additional_cost
       Permanent : artist
       Permanent : card_set
       Permanent : card_subtype
@@ -228,7 +227,6 @@
       Permanent &lt;|-- Creature
       Permanent &lt;|-- Land
 
-      Permanent : additional_cost
       Permanent : artist
       Permanent : card_set
       Permanent : card_subtype
@@ -272,12 +270,6 @@
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><a href="../additional_cost/">additional_cost</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td>An additional cost to play a card or ability</td>
-<td><a href="../Card/">Card</a></td>
-</tr>
 <tr>
 <td><a href="../mana_cost/">mana_cost</a></td>
 <td>0..* <br/> <a href="../ManaCost/">ManaCost</a></td>
@@ -408,21 +400,6 @@ from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
 rank: 1000
 is_a: Card
 attributes:
-  additional_cost:
-    name: additional_cost
-    description: An additional cost to play a card or ability.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
-    rank: 1000
-    alias: additional_cost
-    owner: Permanent
-    domain_of:
-    - ActivatedAbility
-    - Card
-    range: string
-    any_of:
-    - range: ManaCost
-    - range: LifeCost
-    - range: mtgoa:Event
   mana_cost:
     name: mana_cost
     description: A mana cost for a card or ability.
@@ -455,6 +432,7 @@ attributes:
     domain_of:
     - Card
     - ManaCost
+    - Mana
     range: Color
     required: true
   card_set:

@@ -211,6 +211,7 @@
       KeywordAbility : id
       KeywordAbility : name
       KeywordAbility : rules_text
+      KeywordAbility : value
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
@@ -241,6 +242,12 @@
 <td>direct</td>
 </tr>
 <tr>
+<td><a href="../value/">value</a></td>
+<td>0..1 <br/> <a href="xsd:integer">xsd:integer</a></td>
+<td>The numeric part of a quantitative value</td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../rules_text/">rules_text</a></td>
 <td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>The text describing what an ability does</td>
@@ -248,7 +255,7 @@
 </tr>
 <tr>
 <td><a href="../effect/">effect</a></td>
-<td>0..1 <br/> <a href="../ActionSpecification/">ActionSpecification</a></td>
+<td>0..1 <br/> <a href="../Condition/">Condition</a></td>
 <td>The effect of an ability</td>
 <td><a href="../Ability/">Ability</a></td>
 </tr>
@@ -302,6 +309,7 @@ rank: 1000
 is_a: Ability
 slots:
 - name
+- value
 
 </code></pre>
 </details>
@@ -327,6 +335,18 @@ attributes:
     - KeywordAbility
     range: string
     required: true
+  value:
+    name: value
+    description: The numeric part of a quantitative value.
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
+    rank: 1000
+    alias: value
+    owner: KeywordAbility
+    domain_of:
+    - KeywordAbility
+    - ValueSpecification
+    - Cost
+    range: integer
   rules_text:
     name: rules_text
     description: The text describing what an ability does.
@@ -346,7 +366,7 @@ attributes:
     owner: KeywordAbility
     domain_of:
     - Ability
-    range: ActionSpecification
+    range: Condition
   id:
     name: id
     description: A unique identifier for a thing
