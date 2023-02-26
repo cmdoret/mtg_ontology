@@ -15,7 +15,7 @@ linkml-runtime = "^1.1.24"
 enable = true
 vcs = "git"
 style = "pep440"
-ipattern = """
+pattern = """
     (?x)                                                (?# ignore whitespace)
     ^(?P<base>\\d+(\\.\\d+)*)                             (?# 1.2.3)
     (-?((?P<stage>[a-zA-Z0-9]+)?\\.?(?P<revision>(pre|post)\\d+)?))?    (?# b0)
