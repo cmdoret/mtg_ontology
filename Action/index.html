@@ -375,6 +375,11 @@
 <td>An ability is activated</td>
 </tr>
 <tr>
+<td>attach</td>
+<td>mtg:attach</td>
+<td>An equipment, aura or fortification is moved onto another object or player</td>
+</tr>
+<tr>
 <td>play</td>
 <td>mtg:play</td>
 <td>A card is played as a land or cast as a spell, whichever is appropriate</td>
@@ -388,6 +393,26 @@
 <td>untap</td>
 <td>mtg:untap</td>
 <td>A card is untapped</td>
+</tr>
+<tr>
+<td>search</td>
+<td>mtg:search</td>
+<td>A player searches their library</td>
+</tr>
+<tr>
+<td>shuffle</td>
+<td>mtg:shuffle</td>
+<td>A player shuffles their library</td>
+</tr>
+<tr>
+<td>reveal</td>
+<td>mtg:reveal</td>
+<td>A player reveals a card or cards to other players</td>
+</tr>
+<tr>
+<td>scry</td>
+<td>mtg:scry</td>
+<td>A player looks at a certain number of cards from the top of their library, an...</td>
 </tr>
 <tr>
 <td>add_mana</td>
@@ -467,6 +492,11 @@ permissible_values:
     text: activate
     description: An ability is activated.
     meaning: mtg:activate
+  attach:
+    text: attach
+    description: An equipment, aura or fortification is moved onto another object
+      or player.
+    meaning: mtg:attach
   play:
     text: play
     description: A card is played as a land or cast as a spell, whichever is appropriate.
@@ -479,6 +509,23 @@ permissible_values:
     text: untap
     description: A card is untapped
     meaning: mtg:untap
+  search:
+    text: search
+    description: A player searches their library.
+    meaning: mtg:search
+  shuffle:
+    text: shuffle
+    description: A player shuffles their library.
+    meaning: mtg:shuffle
+  reveal:
+    text: reveal
+    description: A player reveals a card or cards to other players.
+    meaning: mtg:reveal
+  scry:
+    text: scry
+    description: A player looks at a certain number of cards from the top of their
+      library, and puts them back at the top or bottom of the library in any order.
+    meaning: mtg:scry
   add_mana:
     text: add_mana
     description: A player adds mana to their mana pool.
