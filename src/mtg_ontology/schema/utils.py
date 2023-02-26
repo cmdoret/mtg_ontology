@@ -3,6 +3,7 @@ from pathlib import Path
 from typing import Dict, Any
 
 from linkml_runtime.utils.schemaview import SchemaView
+from linkml_runtime.dumpers import rdflib_dumper
 from rdflib import Graph
 
 PROJECT_DIR = Path(__file__).parents[3] / "project"
@@ -29,3 +30,17 @@ def load_ontology_graph() -> Graph:
     owl_path = PROJECT_DIR / "owl" / "mtg_ontology.owl.ttl"
     graph.parse(owl_path, format='ttl')
     return graph
+
+
+ONTOLOGY_GRAPH = load_schema()
+PREFIXMAP = load_prefixmap()
+
+def instance_to_graph(instance, ontology_graph = ONTOLOGY_GRAPH, prefixmap=PREFIXMAP) -> Graph:
+    return rdflib_dumper.as_rdf_graph(
+        instance,
+        prefix_map=load_prefixmap(),
+        schemaview=load_schema()
+    )
+
+
+
