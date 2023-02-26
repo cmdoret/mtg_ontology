@@ -1,5 +1,5 @@
 # Auto generated from mtg_ontology.yaml by pythongen.py version: 0.9.0
-# Generation date: 2023-02-26T16:55:45
+# Generation date: 2023-02-26T19:48:15
 # Schema: mtgo
 #
 # id: https://w3id.org/cmdoret/mtg-ontology/
