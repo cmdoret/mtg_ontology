@@ -44,6 +44,7 @@ message Artifact
  repeated  string cardSubtype = 0
  repeated  string cardSupertype = 0
   rarity rarity = 0
+  string oracleText = 0
  }
 // A collection of cards and associated costs.
 message CardCollection
@@ -87,6 +88,7 @@ message Creature
  repeated  string cardSubtype = 0
  repeated  string cardSupertype = 0
   rarity rarity = 0
+  string oracleText = 0
   integer power = 0
   integer toughness = 0
  }
@@ -108,6 +110,7 @@ message Enchantment
  repeated  string cardSubtype = 0
  repeated  string cardSupertype = 0
   rarity rarity = 0
+  string oracleText = 0
  }
 // A card that represents an instant spell that can be cast.
 message Instant
@@ -127,6 +130,7 @@ message Instant
  repeated  string cardSubtype = 0
  repeated  string cardSupertype = 0
   rarity rarity = 0
+  string oracleText = 0
  }
 // A passive ability represented by word that substitutes for a piece of rules text, such as deathtouch or flying.
 message KeywordAbility
@@ -155,6 +159,7 @@ message Land
  repeated  string cardSubtype = 0
  repeated  string cardSupertype = 0
   rarity rarity = 0
+  string oracleText = 0
  }
 // The life cost of a card or ability.
 message LifeCost
@@ -206,6 +211,7 @@ message Sorcery
  repeated  string cardSubtype = 0
  repeated  string cardSupertype = 0
   rarity rarity = 0
+  string oracleText = 0
  }
 // An object on the stack. Either a card that has been cast, or a copy.
 message Spell
@@ -252,6 +258,7 @@ message Token
  repeated  string cardSubtype = 0
  repeated  string cardSupertype = 0
   rarity rarity = 0
+  string oracleText = 0
  }
 // A card ability, triggered by an event.
 message TriggeredAbility

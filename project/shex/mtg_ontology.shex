@@ -114,7 +114,8 @@ mtgoc:Card_struct {
           mtgoc:card_type @linkml:String ;
           mtgoc:card_subtype @linkml:String * ;
           mtgoc:card_supertype @linkml:String * ;
-          mtgoc:rarity @mtgoc:Rarity ?
+          mtgoc:rarity @mtgoc:Rarity ? ;
+          mtgoc:oracle_text @linkml:String ?
        ) ;
        rdf:type [ mtg:Card ]
     )

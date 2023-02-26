@@ -62,9 +62,14 @@
                 "deal_damage",
                 "cast",
                 "activate",
+                "attach",
                 "play",
                 "tap",
                 "untap",
+                "search",
+                "shuffle",
+                "reveal",
+                "scry",
                 "add_mana",
                 "control"
             ],
@@ -294,6 +299,10 @@
                 },
                 "name": {
                     "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "oracle_text": {
+                    "description": "The official wording for the card effects.",
                     "type": "string"
                 },
                 "rarity": {
@@ -587,6 +596,10 @@
                     "description": "A human-readable name for a thing",
                     "type": "string"
                 },
+                "oracle_text": {
+                    "description": "The official wording for the card effects.",
+                    "type": "string"
+                },
                 "power": {
                     "description": "The amount of damage dealt in combat. This is the first number in the lower right corner of a creature card.",
                     "minimum": 0,
@@ -689,6 +702,10 @@
                     "description": "A human-readable name for a thing",
                     "type": "string"
                 },
+                "oracle_text": {
+                    "description": "The official wording for the card effects.",
+                    "type": "string"
+                },
                 "rarity": {
                     "$ref": "#/$defs/Rarity",
                     "description": "An ability associated with a card."
@@ -777,6 +794,10 @@
                 },
                 "name": {
                     "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "oracle_text": {
+                    "description": "The official wording for the card effects.",
                     "type": "string"
                 },
                 "rarity": {
@@ -899,6 +920,10 @@
                 },
                 "name": {
                     "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "oracle_text": {
+                    "description": "The official wording for the card effects.",
                     "type": "string"
                 },
                 "rarity": {
@@ -1174,6 +1199,10 @@
                     "description": "A human-readable name for a thing",
                     "type": "string"
                 },
+                "oracle_text": {
+                    "description": "The official wording for the card effects.",
+                    "type": "string"
+                },
                 "rarity": {
                     "$ref": "#/$defs/Rarity",
                     "description": "An ability associated with a card."
@@ -1373,6 +1402,10 @@
                 },
                 "name": {
                     "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "oracle_text": {
+                    "description": "The official wording for the card effects.",
                     "type": "string"
                 },
                 "rarity": {

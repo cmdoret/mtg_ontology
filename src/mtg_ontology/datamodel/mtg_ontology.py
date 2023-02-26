@@ -1,5 +1,5 @@
 # Auto generated from mtg_ontology.yaml by pythongen.py version: 0.9.0
-# Generation date: 2023-02-26T02:54:00
+# Generation date: 2023-02-26T15:29:16
 # Schema: mtgo
 #
 # id: https://w3id.org/cmdoret/mtg-ontology/
@@ -233,6 +233,7 @@ class Card(NamedThing):
     card_subtype: Optional[Union[str, List[str]]] = empty_list()
     card_supertype: Optional[Union[str, List[str]]] = empty_list()
     rarity: Optional[Union[str, "Rarity"]] = None
+    oracle_text: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.color):
@@ -281,6 +282,9 @@ class Card(NamedThing):
 
         if self.rarity is not None and not isinstance(self.rarity, Rarity):
             self.rarity = Rarity(self.rarity)
+
+        if self.oracle_text is not None and not isinstance(self.oracle_text, str):
+            self.oracle_text = str(self.oracle_text)
 
         super().__post_init__(**kwargs)
 
@@ -1166,6 +1170,9 @@ class Action(EnumDefinitionImpl):
     activate = PermissibleValue(text="activate",
                                        description="An ability is activated.",
                                        meaning=MTG.activate)
+    attach = PermissibleValue(text="attach",
+                                   description="An equipment, aura or fortification is moved onto another object or player.",
+                                   meaning=MTG.attach)
     play = PermissibleValue(text="play",
                                description="A card is played as a land or cast as a spell, whichever is appropriate.",
                                meaning=MTG.play)
@@ -1175,6 +1182,18 @@ class Action(EnumDefinitionImpl):
     untap = PermissibleValue(text="untap",
                                  description="A card is untapped",
                                  meaning=MTG.untap)
+    search = PermissibleValue(text="search",
+                                   description="A player searches their library.",
+                                   meaning=MTG.search)
+    shuffle = PermissibleValue(text="shuffle",
+                                     description="A player shuffles their library.",
+                                     meaning=MTG.shuffle)
+    reveal = PermissibleValue(text="reveal",
+                                   description="A player reveals a card or cards to other players.",
+                                   meaning=MTG.reveal)
+    scry = PermissibleValue(text="scry",
+                               description="A player looks at a certain number of cards from the top of their library, and puts them back at the top or bottom of the library in any order.",
+                               meaning=MTG.scry)
     add_mana = PermissibleValue(text="add_mana",
                                        description="A player adds mana to their mana pool.")
     control = PermissibleValue(text="control",
@@ -1360,6 +1379,9 @@ slots.artist = Slot(uri=MTGOC.artist, name="artist", curie=MTGOC.curie('artist')
 
 slots.flavor_text = Slot(uri=MTGOC.flavor_text, name="flavor_text", curie=MTGOC.curie('flavor_text'),
                    model_uri=MTGO.flavor_text, domain=None, range=Optional[str])
+
+slots.oracle_text = Slot(uri=MTGOC.oracle_text, name="oracle_text", curie=MTGOC.curie('oracle_text'),
+                   model_uri=MTGO.oracle_text, domain=None, range=Optional[str])
 
 slots.power = Slot(uri=MTGOC.power, name="power", curie=MTGOC.curie('power'),
                    model_uri=MTGO.power, domain=None, range=int)

@@ -50,6 +50,7 @@ type Artifact
     cardSubtype: [String]
     cardSupertype: [String]
     rarity: Rarity
+    oracleText: String
   }
 
 interface Card
@@ -69,6 +70,7 @@ interface Card
     cardSubtype: [String]
     cardSupertype: [String]
     rarity: Rarity
+    oracleText: String
   }
 
 type CardCollection
@@ -112,6 +114,7 @@ type Creature
     cardSubtype: [String]
     cardSupertype: [String]
     rarity: Rarity
+    oracleText: String
     power: Integer!
     toughness: Integer!
   }
@@ -133,6 +136,7 @@ type Enchantment
     cardSubtype: [String]
     cardSupertype: [String]
     rarity: Rarity
+    oracleText: String
   }
 
 type Instant
@@ -152,6 +156,7 @@ type Instant
     cardSubtype: [String]
     cardSupertype: [String]
     rarity: Rarity
+    oracleText: String
   }
 
 type KeywordAbility
@@ -180,6 +185,7 @@ type Land
     cardSubtype: [String]
     cardSupertype: [String]
     rarity: Rarity
+    oracleText: String
   }
 
 type LifeCost
@@ -231,6 +237,7 @@ interface Permanent
     cardSubtype: [String]
     cardSupertype: [String]
     rarity: Rarity
+    oracleText: String
   }
 
 type Sorcery
@@ -250,6 +257,7 @@ type Sorcery
     cardSubtype: [String]
     cardSupertype: [String]
     rarity: Rarity
+    oracleText: String
   }
 
 interface Specification
@@ -304,6 +312,7 @@ type Token
     cardSubtype: [String]
     cardSupertype: [String]
     rarity: Rarity
+    oracleText: String
   }
 
 type TriggeredAbility

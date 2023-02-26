@@ -433,6 +433,11 @@
           "meaning": "mtg:activate"
         },
         {
+          "text": "attach",
+          "description": "An equipment, aura or fortification is moved onto another object or player.",
+          "meaning": "mtg:attach"
+        },
+        {
           "text": "play",
           "description": "A card is played as a land or cast as a spell, whichever is appropriate.",
           "meaning": "mtg:play"
@@ -446,6 +451,26 @@
           "text": "untap",
           "description": "A card is untapped",
           "meaning": "mtg:untap"
+        },
+        {
+          "text": "search",
+          "description": "A player searches their library.",
+          "meaning": "mtg:search"
+        },
+        {
+          "text": "shuffle",
+          "description": "A player shuffles their library.",
+          "meaning": "mtg:shuffle"
+        },
+        {
+          "text": "reveal",
+          "description": "A player reveals a card or cards to other players.",
+          "meaning": "mtg:reveal"
+        },
+        {
+          "text": "scry",
+          "description": "A player looks at a certain number of cards from the top of their library, and puts them back at the top or bottom of the library in any order.",
+          "meaning": "mtg:scry"
         },
         {
           "text": "add_mana",
@@ -848,6 +873,19 @@
       "description": "The lore text at the bottom of a card.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
       "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/flavor_text",
+      "owner": "Card",
+      "domain_of": [
+        "Card"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "oracle_text",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/oracle_text",
+      "description": "The official wording for the card effects.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/oracle_text",
       "owner": "Card",
       "domain_of": [
         "Card"
@@ -1639,7 +1677,8 @@
         "card_type",
         "card_subtype",
         "card_supertype",
-        "rarity"
+        "rarity",
+        "oracle_text"
       ],
       "slot_usage": {},
       "class_uri": "https://mtg.fandom.com/wiki/Card",
@@ -1686,7 +1725,8 @@
         "card_type",
         "card_subtype",
         "card_supertype",
-        "rarity"
+        "rarity",
+        "oracle_text"
       ],
       "slot_usage": {},
       "class_uri": "https://mtg.fandom.com/wiki/Permanent",
@@ -1716,7 +1756,8 @@
         "card_type",
         "card_subtype",
         "card_supertype",
-        "rarity"
+        "rarity",
+        "oracle_text"
       ],
       "slot_usage": {},
       "class_uri": "https://mtg.fandom.com/wiki/Token",
@@ -1746,7 +1787,8 @@
         "card_type",
         "card_subtype",
         "card_supertype",
-        "rarity"
+        "rarity",
+        "oracle_text"
       ],
       "slot_usage": {},
       "class_uri": "https://mtg.fandom.com/wiki/Sorcery",
@@ -1776,7 +1818,8 @@
         "card_type",
         "card_subtype",
         "card_supertype",
-        "rarity"
+        "rarity",
+        "oracle_text"
       ],
       "slot_usage": {},
       "class_uri": "https://mtg.fandom.com/wiki/Instant",
@@ -1806,7 +1849,8 @@
         "card_type",
         "card_subtype",
         "card_supertype",
-        "rarity"
+        "rarity",
+        "oracle_text"
       ],
       "slot_usage": {},
       "class_uri": "https://mtg.fandom.com/wiki/Enchantment",
@@ -1836,7 +1880,8 @@
         "card_type",
         "card_subtype",
         "card_supertype",
-        "rarity"
+        "rarity",
+        "oracle_text"
       ],
       "slot_usage": {},
       "class_uri": "https://mtg.fandom.com/wiki/Artifact",
@@ -1867,6 +1912,7 @@
         "card_subtype",
         "card_supertype",
         "rarity",
+        "oracle_text",
         "power",
         "toughness"
       ],
@@ -1898,7 +1944,8 @@
         "card_type",
         "card_subtype",
         "card_supertype",
-        "rarity"
+        "rarity",
+        "oracle_text"
       ],
       "slot_usage": {},
       "class_uri": "https://mtg.fandom.com/wiki/Land",
@@ -2270,7 +2317,7 @@
   "source_file": "mtg_ontology.yaml",
   "source_file_date": "2023-02-25T21:35:31",
   "source_file_size": 1587,
-  "generation_date": "2023-02-26T02:53:31",
+  "generation_date": "2023-02-26T15:28:58",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/mtg_ontology.context.jsonld",

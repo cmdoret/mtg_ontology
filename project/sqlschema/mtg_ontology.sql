@@ -33,6 +33,7 @@ CREATE TABLE "Artifact" (
 	type_line TEXT NOT NULL, 
 	card_type TEXT NOT NULL, 
 	rarity VARCHAR(8), 
+	oracle_text TEXT, 
 	PRIMARY KEY (id)
 );
 
@@ -74,6 +75,7 @@ CREATE TABLE "Creature" (
 	type_line TEXT NOT NULL, 
 	card_type TEXT NOT NULL, 
 	rarity VARCHAR(8), 
+	oracle_text TEXT, 
 	power INTEGER NOT NULL, 
 	toughness INTEGER NOT NULL, 
 	PRIMARY KEY (id)
@@ -91,6 +93,7 @@ CREATE TABLE "Enchantment" (
 	type_line TEXT NOT NULL, 
 	card_type TEXT NOT NULL, 
 	rarity VARCHAR(8), 
+	oracle_text TEXT, 
 	PRIMARY KEY (id)
 );
 
@@ -106,6 +109,7 @@ CREATE TABLE "Instant" (
 	type_line TEXT NOT NULL, 
 	card_type TEXT NOT NULL, 
 	rarity VARCHAR(8), 
+	oracle_text TEXT, 
 	PRIMARY KEY (id)
 );
 
@@ -121,6 +125,7 @@ CREATE TABLE "Land" (
 	type_line TEXT NOT NULL, 
 	card_type TEXT NOT NULL, 
 	rarity VARCHAR(8), 
+	oracle_text TEXT, 
 	PRIMARY KEY (id)
 );
 
@@ -149,6 +154,7 @@ CREATE TABLE "Sorcery" (
 	type_line TEXT NOT NULL, 
 	card_type TEXT NOT NULL, 
 	rarity VARCHAR(8), 
+	oracle_text TEXT, 
 	PRIMARY KEY (id)
 );
 
@@ -186,6 +192,7 @@ CREATE TABLE "Token" (
 	type_line TEXT NOT NULL, 
 	card_type TEXT NOT NULL, 
 	rarity VARCHAR(8), 
+	oracle_text TEXT, 
 	PRIMARY KEY (id)
 );
 
