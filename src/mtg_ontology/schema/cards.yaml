@@ -42,6 +42,7 @@ classes:
       - card_subtype
       - card_supertype
       - rarity
+      - oracle_text
 
   Spell:
     is_a: Thing
@@ -179,6 +180,9 @@ slots:
   flavor_text:
     range: string
     description: The lore text at the bottom of a card.
+  oracle_text:
+    range: string
+    description: The official wording for the card effects.
   power:
     range: integer
     minimum_value: 0
