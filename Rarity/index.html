@@ -317,7 +317,7 @@
 
 
 <h1 id="enum-rarity">Enum: Rarity</h1>
-<p><em>The rarity of the card, may be one of Common, Uncommon, Rare or Mythic.</em></p>
+<p><em>The rarity of the card, may be one of Common, Uncommon, Rare or Mythic. enum_uri: mtg:rarity</em></p>
 <p>URI: <a href="Rarity">Rarity</a></p>
 <h2 id="permissible-values">Permissible Values</h2>
 <table>
@@ -331,22 +331,22 @@
 <tbody>
 <tr>
 <td>common</td>
-<td>None</td>
+<td>mtg:common</td>
 <td>The lowest rarity level, identified by a black set image</td>
 </tr>
 <tr>
 <td>uncommon</td>
-<td>None</td>
+<td>mtg:uncommon</td>
 <td>The second lowest rarity level, identified by a silver set image</td>
 </tr>
 <tr>
 <td>rare</td>
-<td>None</td>
+<td>mtg:rare</td>
 <td>The second highest rarity level, identified by a golden set image</td>
 </tr>
 <tr>
 <td>mythic</td>
-<td>None</td>
+<td>mtg:mythic_rare</td>
 <td>The highest rarity level, identified by a red set image</td>
 </tr>
 </tbody>
@@ -375,22 +375,27 @@
 <details>
 
 <pre><code class="language-yaml">name: Rarity
-description: The rarity of the card, may be one of Common, Uncommon, Rare or Mythic.
+description: 'The rarity of the card, may be one of Common, Uncommon, Rare or Mythic.
+  enum_uri: mtg:rarity'
 from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
 rank: 1000
 permissible_values:
   common:
     text: common
     description: The lowest rarity level, identified by a black set image.
+    meaning: mtg:common
   uncommon:
     text: uncommon
     description: The second lowest rarity level, identified by a silver set image.
+    meaning: mtg:uncommon
   rare:
     text: rare
     description: The second highest rarity level, identified by a golden set image.
+    meaning: mtg:rare
   mythic:
     text: mythic
     description: The highest rarity level, identified by a red set image.
+    meaning: mtg:mythic_rare
 
 </code></pre>
 

@@ -201,6 +201,9 @@
 </a>
 <h1 id="class-specification">Class: Specification</h1>
 <p><em>A specification for a thing.</em></p>
+<ul>
+<li><strong>NOTE</strong>: this is an abstract class and should not be instantiated directly</li>
+</ul>
 <p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/abilities/Specification">mtgoa:Specification</a></p>
 <div class="mermaid"> classDiagram
     class Specification
@@ -302,6 +305,7 @@ description: A specification for a thing.
 from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
 is_a: Thing
+abstract: true
 slots:
 - constraint
 - intersection
@@ -316,6 +320,7 @@ description: A specification for a thing.
 from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
 is_a: Thing
+abstract: true
 attributes:
   constraint:
     name: constraint

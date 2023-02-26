@@ -206,7 +206,10 @@
 </a>
 <h1 id="class-card">Class: Card</h1>
 <p><em>A card in the Magic The Gathering game.</em></p>
-<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/cards/Card">mtgoc:Card</a></p>
+<ul>
+<li><strong>NOTE</strong>: this is an abstract class and should not be instantiated directly</li>
+</ul>
+<p>URI: <a href="https://mtg.fandom.com/wiki/Card">mtg:Card</a></p>
 <div class="mermaid"> classDiagram
     class Card
       NamedThing &lt;|-- Card
@@ -401,7 +404,7 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>mtgoc:Card</td>
+<td>mtg:Card</td>
 </tr>
 <tr>
 <td>native</td>
@@ -418,6 +421,7 @@ description: A card in the Magic The Gathering game.
 from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
 rank: 1000
 is_a: NamedThing
+abstract: true
 slots:
 - mana_cost
 - converted_mana_cost
@@ -431,6 +435,7 @@ slots:
 - card_subtype
 - card_supertype
 - rarity
+class_uri: mtg:Card
 
 </code></pre>
 </details>
@@ -441,6 +446,7 @@ description: A card in the Magic The Gathering game.
 from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
 rank: 1000
 is_a: NamedThing
+abstract: true
 attributes:
   mana_cost:
     name: mana_cost
@@ -614,6 +620,7 @@ attributes:
     domain_of:
     - NamedThing
     range: string
+class_uri: mtg:Card
 
 </code></pre>
 </details>

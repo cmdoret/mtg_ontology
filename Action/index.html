@@ -331,28 +331,33 @@
 <tbody>
 <tr>
 <td>discard</td>
-<td>None</td>
+<td>mtg:discard</td>
 <td>Transfer one or more cards from the hand to the graveyard</td>
 </tr>
 <tr>
 <td>draw</td>
-<td>None</td>
+<td>mtg:draw</td>
 <td>Transfer one or more cards from the library to the hand</td>
 </tr>
 <tr>
 <td>sacrifice</td>
-<td>None</td>
-<td>Transfer one or more cards from the battlefield to the graveyard</td>
+<td>mtg:sacrifice</td>
+<td>Transfer one or more permanents you control from the battlefield to their own...</td>
 </tr>
 <tr>
 <td>exile</td>
-<td>None</td>
+<td>mtg:exile</td>
 <td>Remove one or more cards from game</td>
 </tr>
 <tr>
 <td>fight</td>
-<td>None</td>
+<td>mtg:fight</td>
 <td>Two cards fight each other</td>
+</tr>
+<tr>
+<td>destroy</td>
+<td>mtg:destroy</td>
+<td>Transfer one or more permanents from the battlefield to their owner's graveya...</td>
 </tr>
 <tr>
 <td>deal_damage</td>
@@ -361,27 +366,27 @@
 </tr>
 <tr>
 <td>cast</td>
-<td>None</td>
+<td>mtg:cast</td>
 <td>A spell is cast</td>
 </tr>
 <tr>
 <td>activate</td>
-<td>None</td>
+<td>mtg:activate</td>
 <td>An ability is activated</td>
 </tr>
 <tr>
-<td>place_creature</td>
-<td>None</td>
-<td>One or more creatures are placed on the battlefield</td>
+<td>play</td>
+<td>mtg:play</td>
+<td>A card is played as a land or cast as a spell, whichever is appropriate</td>
 </tr>
 <tr>
 <td>tap</td>
-<td>None</td>
+<td>mtg:tap</td>
 <td>A card is tapped</td>
 </tr>
 <tr>
 <td>untap</td>
-<td>None</td>
+<td>mtg:untap</td>
 <td>A card is untapped</td>
 </tr>
 <tr>
@@ -391,7 +396,7 @@
 </tr>
 <tr>
 <td>control</td>
-<td>None</td>
+<td>mtg:control_and_ownership</td>
 <td>A player controls a card</td>
 </tr>
 </tbody>
@@ -423,46 +428,64 @@
 description: An action taken by a player or card.
 from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
+enum_uri: mtg:keyword_action
 permissible_values:
   discard:
     text: discard
     description: Transfer one or more cards from the hand to the graveyard.
+    meaning: mtg:discard
   draw:
     text: draw
     description: Transfer one or more cards from the library to the hand.
+    meaning: mtg:draw
   sacrifice:
     text: sacrifice
-    description: Transfer one or more cards from the battlefield to the graveyard.
+    description: Transfer one or more permanents you control from the battlefield
+      to their owner's graveyard.
+    meaning: mtg:sacrifice
   exile:
     text: exile
     description: Remove one or more cards from game.
+    meaning: mtg:exile
   fight:
     text: fight
     description: Two cards fight each other.
+    meaning: mtg:fight
+  destroy:
+    text: destroy
+    description: Transfer one or more permanents from the battlefield to their owner's
+      graveyard.
+    meaning: mtg:destroy
   deal_damage:
     text: deal_damage
     description: Something deals damage to something else.
   cast:
     text: cast
     description: A spell is cast.
+    meaning: mtg:cast
   activate:
     text: activate
     description: An ability is activated.
-  place_creature:
-    text: place_creature
-    description: One or more creatures are placed on the battlefield.
+    meaning: mtg:activate
+  play:
+    text: play
+    description: A card is played as a land or cast as a spell, whichever is appropriate.
+    meaning: mtg:play
   tap:
     text: tap
     description: A card is tapped.
+    meaning: mtg:tap
   untap:
     text: untap
     description: A card is untapped
+    meaning: mtg:untap
   add_mana:
     text: add_mana
     description: A player adds mana to their mana pool.
   control:
     text: control
     description: A player controls a card.
+    meaning: mtg:control_and_ownership
 
 </code></pre>
 

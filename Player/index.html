@@ -332,27 +332,47 @@
 <tr>
 <td>you</td>
 <td>None</td>
-<td>The focal human player</td>
+<td>The focal player</td>
+</tr>
+<tr>
+<td>active_player</td>
+<td>None</td>
+<td>The player who is currently taking their turn</td>
+</tr>
+<tr>
+<td>non_active_player</td>
+<td>None</td>
+<td>Any player who is not currently taking their turn</td>
+</tr>
+<tr>
+<td>defending_player</td>
+<td>None</td>
+<td>The player who is currently defending</td>
+</tr>
+<tr>
+<td>attacking_player</td>
+<td>None</td>
+<td>The player who is currently attacking</td>
 </tr>
 <tr>
 <td>owner</td>
 <td>None</td>
-<td>The human player who owns a card</td>
+<td>The player who owns a card</td>
 </tr>
 <tr>
 <td>controller</td>
 <td>None</td>
-<td>The human player who controls an object on the stack</td>
+<td>The player who controls an object on the stack</td>
 </tr>
 <tr>
 <td>opponent</td>
 <td>None</td>
-<td>A human player playing against the focal player</td>
+<td>A player playing against the focal player</td>
 </tr>
 <tr>
 <td>opponents</td>
 <td>None</td>
-<td>All human players playing against the focal player</td>
+<td>All players playing against the focal player</td>
 </tr>
 <tr>
 <td>players</td>
@@ -391,19 +411,31 @@ rank: 1000
 permissible_values:
   you:
     text: you
-    description: The focal human player.
+    description: The focal player.
+  active_player:
+    text: active_player
+    description: The player who is currently taking their turn.
+  non_active_player:
+    text: non_active_player
+    description: Any player who is not currently taking their turn.
+  defending_player:
+    text: defending_player
+    description: The player who is currently defending.
+  attacking_player:
+    text: attacking_player
+    description: The player who is currently attacking.
   owner:
     text: owner
-    description: The human player who owns a card.
+    description: The player who owns a card.
   controller:
     text: controller
-    description: The human player who controls an object on the stack.
+    description: The player who controls an object on the stack.
   opponent:
     text: opponent
-    description: A human player playing against the focal player.
+    description: A player playing against the focal player.
   opponents:
     text: opponents
-    description: All human players playing against the focal player.
+    description: All players playing against the focal player.
   players:
     text: players
     description: All players taking part in the game.

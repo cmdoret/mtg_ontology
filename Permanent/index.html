@@ -201,7 +201,10 @@
 </a>
 <h1 id="class-permanent">Class: Permanent</h1>
 <p><em>A card or token that can be put onto the battlefield.</em></p>
-<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/cards/Permanent">mtgoc:Permanent</a></p>
+<ul>
+<li><strong>NOTE</strong>: this is an abstract class and should not be instantiated directly</li>
+</ul>
+<p>URI: <a href="https://mtg.fandom.com/wiki/Permanent">mtg:Permanent</a></p>
 <div class="mermaid"> classDiagram
     class Permanent
       Card &lt;|-- Permanent
@@ -380,7 +383,7 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>mtgoc:Permanent</td>
+<td>mtg:Permanent</td>
 </tr>
 <tr>
 <td>native</td>
@@ -397,6 +400,8 @@ description: A card or token that can be put onto the battlefield.
 from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
 rank: 1000
 is_a: Card
+abstract: true
+class_uri: mtg:Permanent
 
 </code></pre>
 </details>
@@ -407,6 +412,7 @@ description: A card or token that can be put onto the battlefield.
 from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
 rank: 1000
 is_a: Card
+abstract: true
 attributes:
   mana_cost:
     name: mana_cost
@@ -580,6 +586,7 @@ attributes:
     domain_of:
     - NamedThing
     range: string
+class_uri: mtg:Permanent
 
 </code></pre>
 </details>

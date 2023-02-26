@@ -201,7 +201,7 @@
 </a>
 <h1 id="class-creature">Class: Creature</h1>
 <p><em>A card that represents a creature that can be summoned to the battlefield.</em></p>
-<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/cards/Creature">mtgoc:Creature</a></p>
+<p>URI: <a href="https://mtg.fandom.com/wiki/Creature">mtg:Creature</a></p>
 <div class="mermaid"> classDiagram
     class Creature
       Permanent &lt;|-- Creature
@@ -369,7 +369,7 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>mtgoc:Creature</td>
+<td>mtg:Creature</td>
 </tr>
 <tr>
 <td>native</td>
@@ -389,6 +389,7 @@ is_a: Permanent
 slots:
 - power
 - toughness
+class_uri: mtg:Creature
 
 </code></pre>
 </details>
@@ -598,6 +599,7 @@ attributes:
     domain_of:
     - NamedThing
     range: string
+class_uri: mtg:Creature
 
 </code></pre>
 </details>

@@ -206,7 +206,10 @@
 </a>
 <h1 id="class-ability">Class: Ability</h1>
 <p><em>A card ability, activated, triggered or static.</em></p>
-<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/abilities/Ability">mtgoa:Ability</a></p>
+<ul>
+<li><strong>NOTE</strong>: this is an abstract class and should not be instantiated directly</li>
+</ul>
+<p>URI: <a href="https://mtg.fandom.com/wiki/Ability">mtg:Ability</a></p>
 <div class="mermaid"> classDiagram
     class Ability
       Thing &lt;|-- Ability
@@ -353,7 +356,7 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>mtgoa:Ability</td>
+<td>mtg:Ability</td>
 </tr>
 <tr>
 <td>native</td>
@@ -370,9 +373,11 @@ description: A card ability, activated, triggered or static.
 from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
 is_a: Thing
+abstract: true
 slots:
 - rules_text
 - effect
+class_uri: mtg:Ability
 
 </code></pre>
 </details>
@@ -383,6 +388,7 @@ description: A card ability, activated, triggered or static.
 from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
 is_a: Thing
+abstract: true
 attributes:
   rules_text:
     name: rules_text
@@ -417,6 +423,7 @@ attributes:
     - NamedThing
     - Thing
     range: uriorcurie
+class_uri: mtg:Ability
 
 </code></pre>
 </details>

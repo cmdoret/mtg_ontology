@@ -317,7 +317,7 @@
 
 
 <h1 id="enum-color">Enum: Color</h1>
-<p><em>A color, such as Black, Blue, Red, Green, White or Colorless.</em></p>
+<p><em>A color, such as Black, Blue, Red, Green, White or Colorless. enum_uri: mtg:color</em></p>
 <p>URI: <a href="Color">Color</a></p>
 <h2 id="permissible-values">Permissible Values</h2>
 <table>
@@ -331,32 +331,32 @@
 <tbody>
 <tr>
 <td>black</td>
-<td>wiki:Q23445</td>
+<td>mtg:black</td>
 <td>The color black, associated with darkness</td>
 </tr>
 <tr>
 <td>blue</td>
-<td>wiki:Q1088</td>
+<td>mtg:blue</td>
 <td>The color blue, associated with water</td>
 </tr>
 <tr>
 <td>green</td>
-<td>wiki:Q3133</td>
+<td>mtg:green</td>
 <td>The color green, associated with nature</td>
 </tr>
 <tr>
 <td>red</td>
-<td>wiki:Q3142</td>
+<td>mtg:red</td>
 <td>The color red, associated with fire</td>
 </tr>
 <tr>
 <td>white</td>
-<td>wiki:Q23444</td>
+<td>mtg:white</td>
 <td>The color white, associated with light</td>
 </tr>
 <tr>
 <td>colorless</td>
-<td>wiki:Q1396399</td>
+<td>mtg:colorless</td>
 <td>Absence of color</td>
 </tr>
 </tbody>
@@ -385,34 +385,35 @@
 <details>
 
 <pre><code class="language-yaml">name: Color
-description: A color, such as Black, Blue, Red, Green, White or Colorless.
+description: 'A color, such as Black, Blue, Red, Green, White or Colorless. enum_uri:
+  mtg:color'
 from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
 rank: 1000
 permissible_values:
   black:
     text: black
     description: The color black, associated with darkness.
-    meaning: wiki:Q23445
+    meaning: mtg:black
   blue:
     text: blue
     description: The color blue, associated with water.
-    meaning: wiki:Q1088
+    meaning: mtg:blue
   green:
     text: green
     description: The color green, associated with nature.
-    meaning: wiki:Q3133
+    meaning: mtg:green
   red:
     text: red
     description: The color red, associated with fire.
-    meaning: wiki:Q3142
+    meaning: mtg:red
   white:
     text: white
     description: The color white, associated with light.
-    meaning: wiki:Q23444
+    meaning: mtg:white
   colorless:
     text: colorless
     description: Absence of color.
-    meaning: wiki:Q1396399
+    meaning: mtg:colorless
 
 </code></pre>
 
