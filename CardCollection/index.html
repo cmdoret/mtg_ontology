@@ -195,11 +195,12 @@
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"></path></svg>
 </a>
 <h1 id="class-cardcollection">Class: CardCollection</h1>
-<p><em>A collection of Cards, such as a Deck or cards set.</em></p>
+<p><em>A collection of cards and associated costs.</em></p>
 <p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/cards/CardCollection">mtgoc:CardCollection</a></p>
 <div class="mermaid"> classDiagram
     class CardCollection
-      CardCollection : entries
+      CardCollection : cards
+      CardCollection : costs
 
 </div>
 <!-- no inheritance hierarchy -->
@@ -215,9 +216,15 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../entries/">entries</a></td>
+<td><a href="../cards/">cards</a></td>
 <td>0..* <br/> <a href="../Card/">Card</a></td>
-<td>Members of the card collection</td>
+<td>Cards in the collection</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../costs/">costs</a></td>
+<td>0..* <br/> <a href="../Cost/">Cost</a></td>
+<td>Costs in the collection</td>
 <td>direct</td>
 </tr>
 </tbody>
@@ -251,17 +258,25 @@
 <h3 id="direct">Direct</h3>
 <details>
 <pre><code class="language-yaml">name: CardCollection
-description: A collection of Cards, such as a Deck or cards set.
+description: A collection of cards and associated costs.
 from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
 rank: 1000
 attributes:
-  entries:
-    name: entries
-    description: Members of the card collection.
+  cards:
+    name: cards
+    description: Cards in the collection.
     from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
     rank: 1000
     multivalued: true
     range: Card
+    inlined: true
+  costs:
+    name: costs
+    description: Costs in the collection.
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
+    rank: 1000
+    multivalued: true
+    range: Cost
     inlined: true
 tree_root: true
 
@@ -270,21 +285,33 @@ tree_root: true
 <h3 id="induced">Induced</h3>
 <details>
 <pre><code class="language-yaml">name: CardCollection
-description: A collection of Cards, such as a Deck or cards set.
+description: A collection of cards and associated costs.
 from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
 rank: 1000
 attributes:
-  entries:
-    name: entries
-    description: Members of the card collection.
+  cards:
+    name: cards
+    description: Cards in the collection.
     from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
     rank: 1000
     multivalued: true
-    alias: entries
+    alias: cards
     owner: CardCollection
     domain_of:
     - CardCollection
     range: Card
+    inlined: true
+  costs:
+    name: costs
+    description: Costs in the collection.
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
+    rank: 1000
+    multivalued: true
+    alias: costs
+    owner: CardCollection
+    domain_of:
+    - CardCollection
+    range: Cost
     inlined: true
 tree_root: true
 

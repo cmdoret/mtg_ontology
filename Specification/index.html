@@ -204,30 +204,26 @@
 <p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/abilities/Specification">mtgoa:Specification</a></p>
 <div class="mermaid"> classDiagram
     class Specification
-      NamedThing &lt;|-- Specification
+      Thing &lt;|-- Specification
 
-      Specification : and
       Specification : constraint
-      Specification : description
       Specification : id
-      Specification : name
-      Specification : or
+      Specification : intersection
+      Specification : union
 
 
       Specification &lt;|-- ActionSpecification
       Specification &lt;|-- ValueSpecification
 
-      Specification : and
       Specification : constraint
-      Specification : description
       Specification : id
-      Specification : name
-      Specification : or
+      Specification : intersection
+      Specification : union
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../NamedThing/">NamedThing</a><ul>
+<li><a href="../Thing/">Thing</a><ul>
 <li><strong>Specification</strong><ul>
 <li><a href="../ActionSpecification/">ActionSpecification</a></li>
 <li><a href="../ValueSpecification/">ValueSpecification</a></li>
@@ -254,34 +250,22 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../and/">and</a></td>
+<td><a href="../intersection/">intersection</a></td>
 <td>0..1 <br/> <a href="../NamedThing/">NamedThing</a></td>
-<td>A conjunction of two objects</td>
+<td>A conjunction of two objects (a and b)</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../or/">or</a></td>
+<td><a href="../union/">union</a></td>
 <td>0..1 <br/> <a href="../NamedThing/">NamedThing</a></td>
-<td>A disjunction of two objects</td>
+<td>A disjunction of two objects (a or b)</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../id/">id</a></td>
 <td>1..1 <br/> <a href="xsd:anyURI">xsd:anyURI</a></td>
 <td>A unique identifier for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../name/">name</a></td>
-<td>1..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td>A human-readable name for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td>A human-readable description for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Thing/">Thing</a></td>
 </tr>
 </tbody>
 </table>
@@ -317,11 +301,11 @@
 description: A specification for a thing.
 from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
-is_a: NamedThing
+is_a: Thing
 slots:
 - constraint
-- and
-- or
+- intersection
+- union
 
 </code></pre>
 </details>
@@ -331,7 +315,7 @@ slots:
 description: A specification for a thing.
 from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
-is_a: NamedThing
+is_a: Thing
 attributes:
   constraint:
     name: constraint
@@ -347,24 +331,24 @@ attributes:
     - range: ActionConstraint
     - range: TimeConstraint
     - range: ValueConstraint
-  and:
-    name: and
-    description: A conjunction of two objects.
+  intersection:
+    name: intersection
+    description: A conjunction of two objects (a and b).
     from_schema: https://w3id.org/cmdoret/mtg-ontology/
     rank: 1000
-    alias: and
+    alias: intersection
     owner: Specification
     domain_of:
     - Specification
     - Cost
     symmetric: true
     range: NamedThing
-  or:
-    name: or
-    description: A disjunction of two objects.
+  union:
+    name: union
+    description: A disjunction of two objects (a or b).
     from_schema: https://w3id.org/cmdoret/mtg-ontology/
     rank: 1000
-    alias: or
+    alias: union
     owner: Specification
     domain_of:
     - Specification
@@ -382,31 +366,8 @@ attributes:
     owner: Specification
     domain_of:
     - NamedThing
+    - Thing
     range: uriorcurie
-  name:
-    name: name
-    description: A human-readable name for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/
-    rank: 1000
-    slot_uri: schema:name
-    alias: name
-    owner: Specification
-    domain_of:
-    - NamedThing
-    - KeywordAbility
-    range: string
-    required: true
-  description:
-    name: description
-    description: A human-readable description for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/
-    rank: 1000
-    slot_uri: schema:description
-    alias: description
-    owner: Specification
-    domain_of:
-    - NamedThing
-    range: string
 
 </code></pre>
 </details>

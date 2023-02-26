@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://cmdoret.github.io/mtg-ontology/and/">
+        <link rel="canonical" href="https://cmdoret.github.io/mtg-ontology/conditions/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
     
     
       
-        <title>Slot: and - mtg-ontology</title>
+        <title>Slot: conditions - mtg-ontology</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-and" class="md-skip">
+        <a href="#slot-conditions" class="md-skip">
           Skip to content
         </a>
       
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: and
+              Slot: conditions
             
           </span>
         </div>
@@ -310,15 +310,15 @@
                 
                   
 
-  <a href="https://github.com/cmdoret/mtg-ontology/edit/master/docs/and.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/cmdoret/mtg-ontology/edit/master/docs/conditions.md" title="Edit this page" class="md-content__button md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
-<h1 id="slot-and">Slot: and</h1>
-<p><em>A conjunction of two objects.</em></p>
-<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/and">mtgo:and</a></p>
+<h1 id="slot-conditions">Slot: conditions</h1>
+<p><em>Conditions in the collection.</em></p>
+<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/abilities/conditions">mtgoa:conditions</a></p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -331,53 +331,35 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../Specification/">Specification</a></td>
-<td>A specification for a thing</td>
-</tr>
-<tr>
-<td><a href="../Cost/">Cost</a></td>
-<td>The cost of a card or ability</td>
-</tr>
-<tr>
-<td><a href="../ActionSpecification/">ActionSpecification</a></td>
-<td>A specification for an action</td>
-</tr>
-<tr>
-<td><a href="../ValueSpecification/">ValueSpecification</a></td>
-<td>A specification for a quantitative value</td>
-</tr>
-<tr>
-<td><a href="../ManaCost/">ManaCost</a></td>
-<td>The mana cost of a card or ability</td>
-</tr>
-<tr>
-<td><a href="../LifeCost/">LifeCost</a></td>
-<td>The life cost of a card or ability</td>
+<td><a href="../AbilityCollection/">AbilityCollection</a></td>
+<td>A collection of abilities and associated concepts</td>
 </tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>Range: <a href="../NamedThing/">NamedThing</a></li>
+<li>Range: <a href="../Condition/">Condition</a></li>
+<li>Multivalued: True</li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://w3id.org/cmdoret/mtg-ontology/</li>
+<li>from schema: https://w3id.org/cmdoret/mtg-ontology/abilities/</li>
 </ul>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: and
-description: A conjunction of two objects.
-from_schema: https://w3id.org/cmdoret/mtg-ontology/
+<pre><code class="language-yaml">name: conditions
+description: Conditions in the collection.
+from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
-alias: and
+multivalued: true
+alias: conditions
+owner: AbilityCollection
 domain_of:
-- Specification
-- Cost
-symmetric: true
-range: NamedThing
+- AbilityCollection
+range: Condition
+inlined: true
 
 </code></pre>
 

@@ -152,6 +152,11 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#usages">
+    Usages
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#identifier-and-mapping-information">
     Identifier and Mapping Information
   </a>
@@ -208,16 +213,14 @@
 
       ActivatedAbility : condition
       ActivatedAbility : cost
-      ActivatedAbility : description
       ActivatedAbility : effect
       ActivatedAbility : id
-      ActivatedAbility : name
       ActivatedAbility : rules_text
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../NamedThing/">NamedThing</a><ul>
+<li><a href="../Thing/">Thing</a><ul>
 <li><a href="../Ability/">Ability</a><ul>
 <li><strong>ActivatedAbility</strong></li>
 </ul>
@@ -264,19 +267,26 @@
 <td><a href="../id/">id</a></td>
 <td>1..1 <br/> <a href="xsd:anyURI">xsd:anyURI</a></td>
 <td>A unique identifier for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Thing/">Thing</a></td>
 </tr>
+</tbody>
+</table>
+<h2 id="usages">Usages</h2>
+<table>
+<thead>
 <tr>
-<td><a href="../name/">name</a></td>
-<td>1..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td>A human-readable name for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<th>used by</th>
+<th>used in</th>
+<th>type</th>
+<th>used</th>
 </tr>
+</thead>
+<tbody>
 <tr>
-<td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td>A human-readable description for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../AbilityCollection/">AbilityCollection</a></td>
+<td><a href="../activated_abilities/">activated_abilities</a></td>
+<td>range</td>
+<td><a href="./">ActivatedAbility</a></td>
 </tr>
 </tbody>
 </table>
@@ -383,31 +393,8 @@ attributes:
     owner: ActivatedAbility
     domain_of:
     - NamedThing
+    - Thing
     range: uriorcurie
-  name:
-    name: name
-    description: A human-readable name for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/
-    rank: 1000
-    slot_uri: schema:name
-    alias: name
-    owner: ActivatedAbility
-    domain_of:
-    - NamedThing
-    - KeywordAbility
-    range: string
-    required: true
-  description:
-    name: description
-    description: A human-readable description for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/
-    rank: 1000
-    slot_uri: schema:description
-    alias: description
-    owner: ActivatedAbility
-    domain_of:
-    - NamedThing
-    range: string
 
 </code></pre>
 </details>

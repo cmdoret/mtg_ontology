@@ -209,30 +209,26 @@
 <p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/cards/Cost">mtgoc:Cost</a></p>
 <div class="mermaid"> classDiagram
     class Cost
-      NamedThing &lt;|-- Cost
+      Thing &lt;|-- Cost
 
-      Cost : and
-      Cost : description
       Cost : id
-      Cost : name
-      Cost : or
+      Cost : intersection
+      Cost : union
       Cost : value
 
 
       Cost &lt;|-- ManaCost
       Cost &lt;|-- LifeCost
 
-      Cost : and
-      Cost : description
       Cost : id
-      Cost : name
-      Cost : or
+      Cost : intersection
+      Cost : union
       Cost : value
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../NamedThing/">NamedThing</a><ul>
+<li><a href="../Thing/">Thing</a><ul>
 <li><strong>Cost</strong><ul>
 <li><a href="../ManaCost/">ManaCost</a></li>
 <li><a href="../LifeCost/">LifeCost</a></li>
@@ -259,34 +255,22 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../and/">and</a></td>
+<td><a href="../intersection/">intersection</a></td>
 <td>0..1 <br/> <a href="../NamedThing/">NamedThing</a></td>
-<td>A conjunction of two objects</td>
+<td>A conjunction of two objects (a and b)</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../or/">or</a></td>
+<td><a href="../union/">union</a></td>
 <td>0..1 <br/> <a href="../NamedThing/">NamedThing</a></td>
-<td>A disjunction of two objects</td>
+<td>A disjunction of two objects (a or b)</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../id/">id</a></td>
 <td>1..1 <br/> <a href="xsd:anyURI">xsd:anyURI</a></td>
 <td>A unique identifier for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../name/">name</a></td>
-<td>1..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td>A human-readable name for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td>A human-readable description for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Thing/">Thing</a></td>
 </tr>
 </tbody>
 </table>
@@ -303,37 +287,43 @@
 <tbody>
 <tr>
 <td><a href="./">Cost</a></td>
-<td><a href="../and/">and</a></td>
+<td><a href="../intersection/">intersection</a></td>
 <td>range</td>
 <td><a href="./">Cost</a></td>
 </tr>
 <tr>
 <td><a href="./">Cost</a></td>
-<td><a href="../or/">or</a></td>
-<td>range</td>
-<td><a href="./">Cost</a></td>
-</tr>
-<tr>
-<td><a href="../ManaCost/">ManaCost</a></td>
-<td><a href="../and/">and</a></td>
+<td><a href="../union/">union</a></td>
 <td>range</td>
 <td><a href="./">Cost</a></td>
 </tr>
 <tr>
 <td><a href="../ManaCost/">ManaCost</a></td>
-<td><a href="../or/">or</a></td>
+<td><a href="../intersection/">intersection</a></td>
+<td>range</td>
+<td><a href="./">Cost</a></td>
+</tr>
+<tr>
+<td><a href="../ManaCost/">ManaCost</a></td>
+<td><a href="../union/">union</a></td>
 <td>range</td>
 <td><a href="./">Cost</a></td>
 </tr>
 <tr>
 <td><a href="../LifeCost/">LifeCost</a></td>
-<td><a href="../and/">and</a></td>
+<td><a href="../intersection/">intersection</a></td>
 <td>range</td>
 <td><a href="./">Cost</a></td>
 </tr>
 <tr>
 <td><a href="../LifeCost/">LifeCost</a></td>
-<td><a href="../or/">or</a></td>
+<td><a href="../union/">union</a></td>
+<td>range</td>
+<td><a href="./">Cost</a></td>
+</tr>
+<tr>
+<td><a href="../CardCollection/">CardCollection</a></td>
+<td><a href="../costs/">costs</a></td>
 <td>range</td>
 <td><a href="./">Cost</a></td>
 </tr>
@@ -371,14 +361,14 @@
 description: The cost of a card or ability.
 from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
 rank: 1000
-is_a: NamedThing
+is_a: Thing
 slots:
 - value
-- and
-- or
+- intersection
+- union
 slot_usage:
-  and:
-    name: and
+  intersection:
+    name: intersection
     domain_of:
     - Specification
     - Cost
@@ -389,8 +379,8 @@ slot_usage:
     - Specification
     - Cost
     range: Cost
-  or:
-    name: or
+  union:
+    name: union
     domain_of:
     - Specification
     - Cost
@@ -410,10 +400,10 @@ slot_usage:
 description: The cost of a card or ability.
 from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
 rank: 1000
-is_a: NamedThing
+is_a: Thing
 slot_usage:
-  and:
-    name: and
+  intersection:
+    name: intersection
     domain_of:
     - Specification
     - Cost
@@ -424,8 +414,8 @@ slot_usage:
     - Specification
     - Cost
     range: Cost
-  or:
-    name: or
+  union:
+    name: union
     domain_of:
     - Specification
     - Cost
@@ -449,12 +439,12 @@ attributes:
     - ValueSpecification
     - Cost
     range: integer
-  and:
-    name: and
-    description: A conjunction of two objects.
+  intersection:
+    name: intersection
+    description: A conjunction of two objects (a and b).
     from_schema: https://w3id.org/cmdoret/mtg-ontology/
     rank: 1000
-    alias: and
+    alias: intersection
     owner: Cost
     domain_of:
     - Specification
@@ -467,12 +457,12 @@ attributes:
     - Cost
     symmetric: true
     range: Cost
-  or:
-    name: or
-    description: A disjunction of two objects.
+  union:
+    name: union
+    description: A disjunction of two objects (a or b).
     from_schema: https://w3id.org/cmdoret/mtg-ontology/
     rank: 1000
-    alias: or
+    alias: union
     owner: Cost
     domain_of:
     - Specification
@@ -496,31 +486,8 @@ attributes:
     owner: Cost
     domain_of:
     - NamedThing
+    - Thing
     range: uriorcurie
-  name:
-    name: name
-    description: A human-readable name for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/
-    rank: 1000
-    slot_uri: schema:name
-    alias: name
-    owner: Cost
-    domain_of:
-    - NamedThing
-    - KeywordAbility
-    range: string
-    required: true
-  description:
-    name: description
-    description: A human-readable description for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/
-    rank: 1000
-    slot_uri: schema:description
-    alias: description
-    owner: Cost
-    domain_of:
-    - NamedThing
-    range: string
 
 </code></pre>
 </details>

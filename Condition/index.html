@@ -209,13 +209,10 @@
 <p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/abilities/Condition">mtgoa:Condition</a></p>
 <div class="mermaid"> classDiagram
     class Condition
-      NamedThing &lt;|-- Condition
+      Thing &lt;|-- Condition
 
       Condition : action_spec
-      Condition : description
       Condition : id
-      Condition : name
-      Condition : property
       Condition : source
       Condition : target
       Condition : time_spec
@@ -224,7 +221,7 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../NamedThing/">NamedThing</a><ul>
+<li><a href="../Thing/">Thing</a><ul>
 <li><strong>Condition</strong></li>
 </ul>
 </li>
@@ -253,12 +250,6 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../property/">property</a></td>
-<td>0..1 <br/> <a href="../Property/">Property</a></td>
-<td>A property of an entity</td>
-<td>direct</td>
-</tr>
-<tr>
 <td><a href="../action_spec/">action_spec</a></td>
 <td>0..* <br/> <a href="../ActionSpecification/">ActionSpecification</a></td>
 <td>A specification of an action</td>
@@ -280,19 +271,7 @@
 <td><a href="../id/">id</a></td>
 <td>1..1 <br/> <a href="xsd:anyURI">xsd:anyURI</a></td>
 <td>A unique identifier for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../name/">name</a></td>
-<td>1..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td>A human-readable name for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td>A human-readable description for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Thing/">Thing</a></td>
 </tr>
 </tbody>
 </table>
@@ -349,6 +328,12 @@
 <td>range</td>
 <td><a href="./">Condition</a></td>
 </tr>
+<tr>
+<td><a href="../AbilityCollection/">AbilityCollection</a></td>
+<td><a href="../conditions/">conditions</a></td>
+<td>range</td>
+<td><a href="./">Condition</a></td>
+</tr>
 </tbody>
 </table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
@@ -383,11 +368,10 @@
 description: A condition expressed as constraints.
 from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
-is_a: NamedThing
+is_a: Thing
 slots:
 - source
 - target
-- property
 - action_spec
 - value_spec
 - time_spec
@@ -400,7 +384,7 @@ slots:
 description: A condition expressed as constraints.
 from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
-is_a: NamedThing
+is_a: Thing
 attributes:
   source:
     name: source
@@ -428,16 +412,6 @@ attributes:
     any_of:
     - range: Player
     - range: Card
-  property:
-    name: property
-    description: A property of an entity.
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
-    rank: 1000
-    alias: property
-    owner: Condition
-    domain_of:
-    - Condition
-    range: Property
   action_spec:
     name: action_spec
     description: A specification of an action.
@@ -482,31 +456,8 @@ attributes:
     owner: Condition
     domain_of:
     - NamedThing
+    - Thing
     range: uriorcurie
-  name:
-    name: name
-    description: A human-readable name for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/
-    rank: 1000
-    slot_uri: schema:name
-    alias: name
-    owner: Condition
-    domain_of:
-    - NamedThing
-    - KeywordAbility
-    range: string
-    required: true
-  description:
-    name: description
-    description: A human-readable description for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/
-    rank: 1000
-    slot_uri: schema:description
-    alias: description
-    owner: Condition
-    domain_of:
-    - NamedThing
-    range: string
 
 </code></pre>
 </details>

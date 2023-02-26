@@ -209,15 +209,7 @@
 <p>URI: <a href="http://schema.org/Thing">schema:Thing</a></p>
 <div class="mermaid"> classDiagram
     class NamedThing
-      NamedThing &lt;|-- Ability
-      NamedThing &lt;|-- Condition
-      NamedThing &lt;|-- Specification
-      NamedThing &lt;|-- TimeSpecification
-      NamedThing &lt;|-- Property
       NamedThing &lt;|-- Card
-      NamedThing &lt;|-- Spell
-      NamedThing &lt;|-- Cost
-      NamedThing &lt;|-- Mana
 
       NamedThing : description
       NamedThing : id
@@ -227,15 +219,7 @@
 <h2 id="inheritance">Inheritance</h2>
 <ul>
 <li><strong>NamedThing</strong><ul>
-<li><a href="../Ability/">Ability</a></li>
-<li><a href="../Condition/">Condition</a></li>
-<li><a href="../Specification/">Specification</a></li>
-<li><a href="../TimeSpecification/">TimeSpecification</a></li>
-<li><a href="../Property/">Property</a></li>
 <li><a href="../Card/">Card</a></li>
-<li><a href="../Spell/">Spell</a></li>
-<li><a href="../Cost/">Cost</a></li>
-<li><a href="../Mana/">Mana</a></li>
 </ul>
 </li>
 </ul>
@@ -283,13 +267,13 @@
 <tbody>
 <tr>
 <td><a href="../Specification/">Specification</a></td>
-<td><a href="../and/">and</a></td>
+<td><a href="../intersection/">intersection</a></td>
 <td>range</td>
 <td><a href="./">NamedThing</a></td>
 </tr>
 <tr>
 <td><a href="../Specification/">Specification</a></td>
-<td><a href="../or/">or</a></td>
+<td><a href="../union/">union</a></td>
 <td>range</td>
 <td><a href="./">NamedThing</a></td>
 </tr>
@@ -353,6 +337,7 @@ attributes:
     owner: NamedThing
     domain_of:
     - NamedThing
+    - Thing
     range: uriorcurie
   name:
     name: name

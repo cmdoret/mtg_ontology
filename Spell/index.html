@@ -204,16 +204,14 @@
 <p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/cards/Spell">mtgoc:Spell</a></p>
 <div class="mermaid"> classDiagram
     class Spell
-      NamedThing &lt;|-- Spell
+      Thing &lt;|-- Spell
 
-      Spell : description
       Spell : id
-      Spell : name
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../NamedThing/">NamedThing</a><ul>
+<li><a href="../Thing/">Thing</a><ul>
 <li><strong>Spell</strong></li>
 </ul>
 </li>
@@ -233,19 +231,7 @@
 <td><a href="../id/">id</a></td>
 <td>1..1 <br/> <a href="xsd:anyURI">xsd:anyURI</a></td>
 <td>A unique identifier for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../name/">name</a></td>
-<td>1..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td>A human-readable name for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td>A human-readable description for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Thing/">Thing</a></td>
 </tr>
 </tbody>
 </table>
@@ -281,7 +267,7 @@
 description: An object on the stack. Either a card that has been cast, or a copy.
 from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
 rank: 1000
-is_a: NamedThing
+is_a: Thing
 
 </code></pre>
 </details>
@@ -291,7 +277,7 @@ is_a: NamedThing
 description: An object on the stack. Either a card that has been cast, or a copy.
 from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
 rank: 1000
-is_a: NamedThing
+is_a: Thing
 attributes:
   id:
     name: id
@@ -304,31 +290,8 @@ attributes:
     owner: Spell
     domain_of:
     - NamedThing
+    - Thing
     range: uriorcurie
-  name:
-    name: name
-    description: A human-readable name for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/
-    rank: 1000
-    slot_uri: schema:name
-    alias: name
-    owner: Spell
-    domain_of:
-    - NamedThing
-    - KeywordAbility
-    range: string
-    required: true
-  description:
-    name: description
-    description: A human-readable description for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/
-    rank: 1000
-    slot_uri: schema:description
-    alias: description
-    owner: Spell
-    domain_of:
-    - NamedThing
-    range: string
 
 </code></pre>
 </details>

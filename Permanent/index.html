@@ -206,6 +206,7 @@
     class Permanent
       Card &lt;|-- Permanent
 
+      Permanent : ability
       Permanent : artist
       Permanent : card_set
       Permanent : card_subtype
@@ -227,6 +228,7 @@
       Permanent &lt;|-- Creature
       Permanent &lt;|-- Land
 
+      Permanent : ability
       Permanent : artist
       Permanent : card_set
       Permanent : card_subtype
@@ -292,6 +294,12 @@
 <td><a href="../card_set/">card_set</a></td>
 <td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>A pool of cards released together and designed for the same play environment</td>
+<td><a href="../Card/">Card</a></td>
+</tr>
+<tr>
+<td><a href="../ability/">ability</a></td>
+<td>0..* <br/> <a href="../Ability/">Ability</a></td>
+<td>An ability associated with a card</td>
 <td><a href="../Card/">Card</a></td>
 </tr>
 <tr>
@@ -446,6 +454,17 @@ attributes:
     domain_of:
     - Card
     range: string
+  ability:
+    name: ability
+    description: An ability associated with a card.
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
+    rank: 1000
+    multivalued: true
+    alias: ability
+    owner: Permanent
+    domain_of:
+    - Card
+    range: Ability
   artist:
     name: artist
     description: The artist who drew a card's illustration.
@@ -535,6 +554,7 @@ attributes:
     owner: Permanent
     domain_of:
     - NamedThing
+    - Thing
     range: uriorcurie
   name:
     name: name

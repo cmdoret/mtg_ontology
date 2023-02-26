@@ -211,19 +211,17 @@
     class ManaCost
       Cost &lt;|-- ManaCost
 
-      ManaCost : and
       ManaCost : color
-      ManaCost : description
       ManaCost : id
-      ManaCost : name
-      ManaCost : or
+      ManaCost : intersection
       ManaCost : snow
+      ManaCost : union
       ManaCost : value
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../NamedThing/">NamedThing</a><ul>
+<li><a href="../Thing/">Thing</a><ul>
 <li><a href="../Cost/">Cost</a><ul>
 <li><strong>ManaCost</strong></li>
 </ul>
@@ -261,34 +259,22 @@
 <td><a href="../Cost/">Cost</a></td>
 </tr>
 <tr>
-<td><a href="../and/">and</a></td>
+<td><a href="../intersection/">intersection</a></td>
 <td>0..1 <br/> <a href="../Cost/">Cost</a></td>
-<td>A conjunction of two objects</td>
+<td>A conjunction of two objects (a and b)</td>
 <td><a href="../Cost/">Cost</a></td>
 </tr>
 <tr>
-<td><a href="../or/">or</a></td>
+<td><a href="../union/">union</a></td>
 <td>0..1 <br/> <a href="../Cost/">Cost</a></td>
-<td>A disjunction of two objects</td>
+<td>A disjunction of two objects (a or b)</td>
 <td><a href="../Cost/">Cost</a></td>
 </tr>
 <tr>
 <td><a href="../id/">id</a></td>
 <td>1..1 <br/> <a href="xsd:anyURI">xsd:anyURI</a></td>
 <td>A unique identifier for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../name/">name</a></td>
-<td>1..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td>A human-readable name for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td>A human-readable description for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Thing/">Thing</a></td>
 </tr>
 </tbody>
 </table>
@@ -303,6 +289,12 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><a href="../AbilityCollection/">AbilityCollection</a></td>
+<td><a href="../mana_costs/">mana_costs</a></td>
+<td>range</td>
+<td><a href="./">ManaCost</a></td>
+</tr>
 <tr>
 <td><a href="../Card/">Card</a></td>
 <td><a href="../mana_cost/">mana_cost</a></td>
@@ -443,12 +435,12 @@ attributes:
     - ValueSpecification
     - Cost
     range: integer
-  and:
-    name: and
-    description: A conjunction of two objects.
+  intersection:
+    name: intersection
+    description: A conjunction of two objects (a and b).
     from_schema: https://w3id.org/cmdoret/mtg-ontology/
     rank: 1000
-    alias: and
+    alias: intersection
     owner: ManaCost
     domain_of:
     - Specification
@@ -463,12 +455,12 @@ attributes:
     - Cost
     symmetric: true
     range: Cost
-  or:
-    name: or
-    description: A disjunction of two objects.
+  union:
+    name: union
+    description: A disjunction of two objects (a or b).
     from_schema: https://w3id.org/cmdoret/mtg-ontology/
     rank: 1000
-    alias: or
+    alias: union
     owner: ManaCost
     domain_of:
     - Specification
@@ -494,31 +486,8 @@ attributes:
     owner: ManaCost
     domain_of:
     - NamedThing
+    - Thing
     range: uriorcurie
-  name:
-    name: name
-    description: A human-readable name for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/
-    rank: 1000
-    slot_uri: schema:name
-    alias: name
-    owner: ManaCost
-    domain_of:
-    - NamedThing
-    - KeywordAbility
-    range: string
-    required: true
-  description:
-    name: description
-    description: A human-readable description for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/
-    rank: 1000
-    slot_uri: schema:description
-    alias: description
-    owner: ManaCost
-    domain_of:
-    - NamedThing
-    range: string
 
 </code></pre>
 </details>

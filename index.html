@@ -379,7 +379,7 @@
   </a>
 
 
-<h1 id="magic-the-gathering-ontology">Magic The Gathering Ontology</h1>
+<h1 id="magic-the-gathering-ontology">Magic The Gathering Ontology.</h1>
 <p>An ontology describing Magic: The Gathering. It provides
 the basic features needed to describe cards.</p>
 <p>URI: https://w3id.org/cmdoret/mtg-ontology/
@@ -396,6 +396,10 @@ Name: mtgo</p>
 <tr>
 <td><a href="Ability/">Ability</a></td>
 <td>A card ability, activated, triggered or static</td>
+</tr>
+<tr>
+<td><a href="AbilityCollection/">AbilityCollection</a></td>
+<td>A collection of abilities and associated concepts</td>
 </tr>
 <tr>
 <td><a href="ActionSpecification/">ActionSpecification</a></td>
@@ -415,7 +419,7 @@ Name: mtgo</p>
 </tr>
 <tr>
 <td><a href="CardCollection/">CardCollection</a></td>
-<td>A collection of Cards, such as a Deck or cards set</td>
+<td>A collection of cards and associated costs</td>
 </tr>
 <tr>
 <td><a href="Condition/">Condition</a></td>
@@ -466,10 +470,6 @@ Name: mtgo</p>
 <td>A card or token that can be put onto the battlefield</td>
 </tr>
 <tr>
-<td><a href="Property/">Property</a></td>
-<td>A property of an entity</td>
-</tr>
-<tr>
 <td><a href="Sorcery/">Sorcery</a></td>
 <td>A card that represents a sorcery spell that can be cast</td>
 </tr>
@@ -484,6 +484,10 @@ Name: mtgo</p>
 <tr>
 <td><a href="StaticAbility/">StaticAbility</a></td>
 <td>A card ability which remains active until endgame once put into effect</td>
+</tr>
+<tr>
+<td><a href="Thing/">Thing</a></td>
+<td>A generic grouping for any identifiable entity</td>
 </tr>
 <tr>
 <td><a href="TimeSpecification/">TimeSpecification</a></td>
@@ -525,8 +529,12 @@ Name: mtgo</p>
 <td>A specification of an action</td>
 </tr>
 <tr>
-<td><a href="and/">and</a></td>
-<td>A conjunction of two objects</td>
+<td><a href="action_specifications/">action_specifications</a></td>
+<td>Action specifications in the collection</td>
+</tr>
+<tr>
+<td><a href="activated_abilities/">activated_abilities</a></td>
+<td>Activated abilities in the collection</td>
 </tr>
 <tr>
 <td><a href="artist/">artist</a></td>
@@ -549,12 +557,20 @@ Name: mtgo</p>
 <td>The text line below a card's illustration containing the card's type, subtype...</td>
 </tr>
 <tr>
+<td><a href="cards/">cards</a></td>
+<td>Cards in the collection</td>
+</tr>
+<tr>
 <td><a href="color/">color</a></td>
 <td>The color of a card</td>
 </tr>
 <tr>
 <td><a href="condition/">condition</a></td>
 <td>A condition required for an activation</td>
+</tr>
+<tr>
+<td><a href="conditions/">conditions</a></td>
+<td>Conditions in the collection</td>
 </tr>
 <tr>
 <td><a href="constraint/">constraint</a></td>
@@ -569,16 +585,16 @@ Name: mtgo</p>
 <td>A cost to play a card or ability</td>
 </tr>
 <tr>
+<td><a href="costs/">costs</a></td>
+<td>Costs in the collection</td>
+</tr>
+<tr>
 <td><a href="description/">description</a></td>
 <td>A human-readable description for a thing</td>
 </tr>
 <tr>
 <td><a href="effect/">effect</a></td>
 <td>The effect of an ability</td>
-</tr>
-<tr>
-<td><a href="entries/">entries</a></td>
-<td>Members of the card collection</td>
 </tr>
 <tr>
 <td><a href="flavor_text/">flavor_text</a></td>
@@ -589,16 +605,20 @@ Name: mtgo</p>
 <td>A unique identifier for a thing</td>
 </tr>
 <tr>
+<td><a href="intersection/">intersection</a></td>
+<td>A conjunction of two objects (a and b)</td>
+</tr>
+<tr>
 <td><a href="mana_cost/">mana_cost</a></td>
 <td>A mana cost for a card or ability</td>
 </tr>
 <tr>
-<td><a href="name/">name</a></td>
-<td>A human-readable name for a thing</td>
+<td><a href="mana_costs/">mana_costs</a></td>
+<td>Mana costs in the collection</td>
 </tr>
 <tr>
-<td><a href="or/">or</a></td>
-<td>A disjunction of two objects</td>
+<td><a href="name/">name</a></td>
+<td>A human-readable name for a thing</td>
 </tr>
 <tr>
 <td><a href="player/">player</a></td>
@@ -607,10 +627,6 @@ Name: mtgo</p>
 <tr>
 <td><a href="power/">power</a></td>
 <td>The amount of damage dealt in combat</td>
-</tr>
-<tr>
-<td><a href="property/">property</a></td>
-<td>A property of an entity</td>
 </tr>
 <tr>
 <td><a href="rarity/">rarity</a></td>
@@ -633,20 +649,28 @@ Name: mtgo</p>
 <td>The entity targeted by an action or constraint</td>
 </tr>
 <tr>
-<td><a href="time/">time</a></td>
-<td>A phase of the game</td>
-</tr>
-<tr>
 <td><a href="time_spec/">time_spec</a></td>
 <td>A specification of the time of an event</td>
+</tr>
+<tr>
+<td><a href="time_specifications/">time_specifications</a></td>
+<td>Time specifications in the collection</td>
 </tr>
 <tr>
 <td><a href="toughness/">toughness</a></td>
 <td>The amount of damage needed to destroy a creature</td>
 </tr>
 <tr>
+<td><a href="turn_phase/">turn_phase</a></td>
+<td>A phase of the game</td>
+</tr>
+<tr>
 <td><a href="type_line/">type_line</a></td>
 <td>The text line below a card's illustration containing the card's type, subtype...</td>
+</tr>
+<tr>
+<td><a href="union/">union</a></td>
+<td>A disjunction of two objects (a or b)</td>
 </tr>
 <tr>
 <td><a href="unit/">unit</a></td>
@@ -659,6 +683,10 @@ Name: mtgo</p>
 <tr>
 <td><a href="value_spec/">value_spec</a></td>
 <td>A specification for the value of a property</td>
+</tr>
+<tr>
+<td><a href="value_specifications/">value_specifications</a></td>
+<td>Values in the collection</td>
 </tr>
 </tbody>
 </table>
@@ -692,12 +720,12 @@ Name: mtgo</p>
 <td>The rarity of the card, may be one of Common, Uncommon, Rare or Mythic</td>
 </tr>
 <tr>
-<td><a href="Time/">Time</a></td>
-<td>A time during the turn</td>
-</tr>
-<tr>
 <td><a href="TimeConstraint/">TimeConstraint</a></td>
 <td>A constraint on the time of an event</td>
+</tr>
+<tr>
+<td><a href="TurnPhase/">TurnPhase</a></td>
+<td>A time during the turn</td>
 </tr>
 <tr>
 <td><a href="ValueConstraint/">ValueConstraint</a></td>

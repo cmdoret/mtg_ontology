@@ -209,18 +209,16 @@
 <p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/abilities/TimeSpecification">mtgoa:TimeSpecification</a></p>
 <div class="mermaid"> classDiagram
     class TimeSpecification
-      NamedThing &lt;|-- TimeSpecification
+      Thing &lt;|-- TimeSpecification
 
-      TimeSpecification : description
       TimeSpecification : id
-      TimeSpecification : name
       TimeSpecification : player
-      TimeSpecification : time
+      TimeSpecification : turn_phase
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../NamedThing/">NamedThing</a><ul>
+<li><a href="../Thing/">Thing</a><ul>
 <li><strong>TimeSpecification</strong></li>
 </ul>
 </li>
@@ -237,8 +235,8 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../time/">time</a></td>
-<td>0..1 <br/> <a href="../Time/">Time</a></td>
+<td><a href="../turn_phase/">turn_phase</a></td>
+<td>0..1 <br/> <a href="../TurnPhase/">TurnPhase</a></td>
 <td>A phase of the game</td>
 <td>direct</td>
 </tr>
@@ -252,19 +250,7 @@
 <td><a href="../id/">id</a></td>
 <td>1..1 <br/> <a href="xsd:anyURI">xsd:anyURI</a></td>
 <td>A unique identifier for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../name/">name</a></td>
-<td>1..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td>A human-readable name for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td>A human-readable description for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Thing/">Thing</a></td>
 </tr>
 </tbody>
 </table>
@@ -282,6 +268,12 @@
 <tr>
 <td><a href="../Condition/">Condition</a></td>
 <td><a href="../time_spec/">time_spec</a></td>
+<td>range</td>
+<td><a href="./">TimeSpecification</a></td>
+</tr>
+<tr>
+<td><a href="../AbilityCollection/">AbilityCollection</a></td>
+<td><a href="../time_specifications/">time_specifications</a></td>
 <td>range</td>
 <td><a href="./">TimeSpecification</a></td>
 </tr>
@@ -319,16 +311,16 @@
 description: A specification for a time.
 from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
-is_a: NamedThing
+is_a: Thing
 slots:
-- time
+- turn_phase
 - player
 slot_usage:
-  and:
-    name: and
+  intersection:
+    name: intersection
     range: TimeSpecification
-  or:
-    name: or
+  union:
+    name: union
     range: TimeSpecification
   constraint:
     name: constraint
@@ -342,28 +334,28 @@ slot_usage:
 description: A specification for a time.
 from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
-is_a: NamedThing
+is_a: Thing
 slot_usage:
-  and:
-    name: and
+  intersection:
+    name: intersection
     range: TimeSpecification
-  or:
-    name: or
+  union:
+    name: union
     range: TimeSpecification
   constraint:
     name: constraint
     range: TimeConstraint
 attributes:
-  time:
-    name: time
+  turn_phase:
+    name: turn_phase
     description: A phase of the game.
     from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
     rank: 1000
-    alias: time
+    alias: turn_phase
     owner: TimeSpecification
     domain_of:
     - TimeSpecification
-    range: Time
+    range: TurnPhase
   player:
     name: player
     description: A player.
@@ -385,31 +377,8 @@ attributes:
     owner: TimeSpecification
     domain_of:
     - NamedThing
+    - Thing
     range: uriorcurie
-  name:
-    name: name
-    description: A human-readable name for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/
-    rank: 1000
-    slot_uri: schema:name
-    alias: name
-    owner: TimeSpecification
-    domain_of:
-    - NamedThing
-    - KeywordAbility
-    range: string
-    required: true
-  description:
-    name: description
-    description: A human-readable description for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/
-    rank: 1000
-    slot_uri: schema:description
-    alias: description
-    owner: TimeSpecification
-    domain_of:
-    - NamedThing
-    range: string
 
 </code></pre>
 </details>

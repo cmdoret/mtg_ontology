@@ -211,19 +211,17 @@
     class ValueSpecification
       Specification &lt;|-- ValueSpecification
 
-      ValueSpecification : and
       ValueSpecification : constraint
-      ValueSpecification : description
       ValueSpecification : id
-      ValueSpecification : name
-      ValueSpecification : or
+      ValueSpecification : intersection
+      ValueSpecification : union
       ValueSpecification : unit
       ValueSpecification : value
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../NamedThing/">NamedThing</a><ul>
+<li><a href="../Thing/">Thing</a><ul>
 <li><a href="../Specification/">Specification</a><ul>
 <li><strong>ValueSpecification</strong></li>
 </ul>
@@ -261,34 +259,22 @@
 <td><a href="../Specification/">Specification</a></td>
 </tr>
 <tr>
-<td><a href="../and/">and</a></td>
+<td><a href="../intersection/">intersection</a></td>
 <td>0..1 <br/> <a href="./">ValueSpecification</a></td>
-<td>A conjunction of two objects</td>
+<td>A conjunction of two objects (a and b)</td>
 <td><a href="../Specification/">Specification</a></td>
 </tr>
 <tr>
-<td><a href="../or/">or</a></td>
+<td><a href="../union/">union</a></td>
 <td>0..1 <br/> <a href="./">ValueSpecification</a></td>
-<td>A disjunction of two objects</td>
+<td>A disjunction of two objects (a or b)</td>
 <td><a href="../Specification/">Specification</a></td>
 </tr>
 <tr>
 <td><a href="../id/">id</a></td>
 <td>1..1 <br/> <a href="xsd:anyURI">xsd:anyURI</a></td>
 <td>A unique identifier for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../name/">name</a></td>
-<td>1..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td>A human-readable name for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td>A human-readable description for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Thing/">Thing</a></td>
 </tr>
 </tbody>
 </table>
@@ -310,14 +296,20 @@
 <td><a href="./">ValueSpecification</a></td>
 </tr>
 <tr>
-<td><a href="./">ValueSpecification</a></td>
-<td><a href="../and/">and</a></td>
+<td><a href="../AbilityCollection/">AbilityCollection</a></td>
+<td><a href="../value_specifications/">value_specifications</a></td>
 <td>range</td>
 <td><a href="./">ValueSpecification</a></td>
 </tr>
 <tr>
 <td><a href="./">ValueSpecification</a></td>
-<td><a href="../or/">or</a></td>
+<td><a href="../intersection/">intersection</a></td>
+<td>range</td>
+<td><a href="./">ValueSpecification</a></td>
+</tr>
+<tr>
+<td><a href="./">ValueSpecification</a></td>
+<td><a href="../union/">union</a></td>
 <td>range</td>
 <td><a href="./">ValueSpecification</a></td>
 </tr>
@@ -360,8 +352,8 @@ slots:
 - value
 - unit
 slot_usage:
-  and:
-    name: and
+  intersection:
+    name: intersection
     domain_of:
     - Specification
     - Cost
@@ -370,8 +362,8 @@ slot_usage:
     - Specification
     - Cost
     range: ValueSpecification
-  or:
-    name: or
+  union:
+    name: union
     domain_of:
     - Specification
     - Cost
@@ -398,8 +390,8 @@ from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
 rank: 1000
 is_a: Specification
 slot_usage:
-  and:
-    name: and
+  intersection:
+    name: intersection
     domain_of:
     - Specification
     - Cost
@@ -408,8 +400,8 @@ slot_usage:
     - Specification
     - Cost
     range: ValueSpecification
-  or:
-    name: or
+  union:
+    name: union
     domain_of:
     - Specification
     - Cost
@@ -462,12 +454,12 @@ attributes:
     - Specification
     - Specification
     range: ValueConstraint
-  and:
-    name: and
-    description: A conjunction of two objects.
+  intersection:
+    name: intersection
+    description: A conjunction of two objects (a and b).
     from_schema: https://w3id.org/cmdoret/mtg-ontology/
     rank: 1000
-    alias: and
+    alias: intersection
     owner: ValueSpecification
     domain_of:
     - Specification
@@ -476,12 +468,12 @@ attributes:
     - Cost
     symmetric: true
     range: ValueSpecification
-  or:
-    name: or
-    description: A disjunction of two objects.
+  union:
+    name: union
+    description: A disjunction of two objects (a or b).
     from_schema: https://w3id.org/cmdoret/mtg-ontology/
     rank: 1000
-    alias: or
+    alias: union
     owner: ValueSpecification
     domain_of:
     - Specification
@@ -501,31 +493,8 @@ attributes:
     owner: ValueSpecification
     domain_of:
     - NamedThing
+    - Thing
     range: uriorcurie
-  name:
-    name: name
-    description: A human-readable name for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/
-    rank: 1000
-    slot_uri: schema:name
-    alias: name
-    owner: ValueSpecification
-    domain_of:
-    - NamedThing
-    - KeywordAbility
-    range: string
-    required: true
-  description:
-    name: description
-    description: A human-readable description for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/
-    rank: 1000
-    slot_uri: schema:description
-    alias: description
-    owner: ValueSpecification
-    domain_of:
-    - NamedThing
-    range: string
 
 </code></pre>
 </details>

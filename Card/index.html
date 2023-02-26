@@ -211,6 +211,7 @@
     class Card
       NamedThing &lt;|-- Card
 
+      Card : ability
       Card : artist
       Card : card_set
       Card : card_subtype
@@ -232,6 +233,7 @@
       Card &lt;|-- Sorcery
       Card &lt;|-- Instant
 
+      Card : ability
       Card : artist
       Card : card_set
       Card : card_subtype
@@ -294,6 +296,12 @@
 <td><a href="../card_set/">card_set</a></td>
 <td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>A pool of cards released together and designed for the same play environment</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../ability/">ability</a></td>
+<td>0..* <br/> <a href="../Ability/">Ability</a></td>
+<td>An ability associated with a card</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -371,7 +379,7 @@
 <tbody>
 <tr>
 <td><a href="../CardCollection/">CardCollection</a></td>
-<td><a href="../entries/">entries</a></td>
+<td><a href="../cards/">cards</a></td>
 <td>range</td>
 <td><a href="./">Card</a></td>
 </tr>
@@ -415,6 +423,7 @@ slots:
 - converted_mana_cost
 - color
 - card_set
+- ability
 - artist
 - flavor_text
 - type_line
@@ -479,6 +488,17 @@ attributes:
     domain_of:
     - Card
     range: string
+  ability:
+    name: ability
+    description: An ability associated with a card.
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
+    rank: 1000
+    multivalued: true
+    alias: ability
+    owner: Card
+    domain_of:
+    - Card
+    range: Ability
   artist:
     name: artist
     description: The artist who drew a card's illustration.
@@ -568,6 +588,7 @@ attributes:
     owner: Card
     domain_of:
     - NamedThing
+    - Thing
     range: uriorcurie
   name:
     name: name

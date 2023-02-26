@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://cmdoret.github.io/mtg-ontology/id/">
+        <link rel="canonical" href="https://cmdoret.github.io/mtg-ontology/cards/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
     
     
       
-        <title>Slot: id - mtg-ontology</title>
+        <title>Slot: cards - mtg-ontology</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-id" class="md-skip">
+        <a href="#slot-cards" class="md-skip">
           Skip to content
         </a>
       
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: id
+              Slot: cards
             
           </span>
         </div>
@@ -310,15 +310,15 @@
                 
                   
 
-  <a href="https://github.com/cmdoret/mtg-ontology/edit/master/docs/id.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/cmdoret/mtg-ontology/edit/master/docs/cards.md" title="Edit this page" class="md-content__button md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
-<h1 id="slot-id">Slot: id</h1>
-<p><em>A unique identifier for a thing</em></p>
-<p>URI: <a href="http://schema.org/identifier">schema:identifier</a></p>
+<h1 id="slot-cards">Slot: cards</h1>
+<p><em>Cards in the collection.</em></p>
+<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/cards/cards">mtgoc:cards</a></p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -331,134 +331,35 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../NamedThing/">NamedThing</a></td>
-<td>A generic grouping for any identifiable entity</td>
-</tr>
-<tr>
-<td><a href="../Thing/">Thing</a></td>
-<td>A generic grouping for any identifiable entity</td>
-</tr>
-<tr>
-<td><a href="../Ability/">Ability</a></td>
-<td>A card ability, activated, triggered or static</td>
-</tr>
-<tr>
-<td><a href="../ActivatedAbility/">ActivatedAbility</a></td>
-<td>A card ability which can be activated for a cost</td>
-</tr>
-<tr>
-<td><a href="../KeywordAbility/">KeywordAbility</a></td>
-<td>A passive ability represented by word that substitutes for a piece of rules t...</td>
-</tr>
-<tr>
-<td><a href="../StaticAbility/">StaticAbility</a></td>
-<td>A card ability which remains active until endgame once put into effect</td>
-</tr>
-<tr>
-<td><a href="../TriggeredAbility/">TriggeredAbility</a></td>
-<td>A card ability, triggered by an event</td>
-</tr>
-<tr>
-<td><a href="../Condition/">Condition</a></td>
-<td>A condition expressed as constraints</td>
-</tr>
-<tr>
-<td><a href="../Specification/">Specification</a></td>
-<td>A specification for a thing</td>
-</tr>
-<tr>
-<td><a href="../ActionSpecification/">ActionSpecification</a></td>
-<td>A specification for an action</td>
-</tr>
-<tr>
-<td><a href="../ValueSpecification/">ValueSpecification</a></td>
-<td>A specification for a quantitative value</td>
-</tr>
-<tr>
-<td><a href="../TimeSpecification/">TimeSpecification</a></td>
-<td>A specification for a time</td>
-</tr>
-<tr>
-<td><a href="../Card/">Card</a></td>
-<td>A card in the Magic The Gathering game</td>
-</tr>
-<tr>
-<td><a href="../Spell/">Spell</a></td>
-<td>An object on the stack</td>
-</tr>
-<tr>
-<td><a href="../Permanent/">Permanent</a></td>
-<td>A card or token that can be put onto the battlefield</td>
-</tr>
-<tr>
-<td><a href="../Token/">Token</a></td>
-<td>A permanent that is not represented by a regular card and does not have a cas...</td>
-</tr>
-<tr>
-<td><a href="../Sorcery/">Sorcery</a></td>
-<td>A card that represents a sorcery spell that can be cast</td>
-</tr>
-<tr>
-<td><a href="../Instant/">Instant</a></td>
-<td>A card that represents an instant spell that can be cast</td>
-</tr>
-<tr>
-<td><a href="../Enchantment/">Enchantment</a></td>
-<td>A permanent which applies persistent magical effects</td>
-</tr>
-<tr>
-<td><a href="../Artifact/">Artifact</a></td>
-<td>A permanent representing a magical item, animated construct, or other objects...</td>
-</tr>
-<tr>
-<td><a href="../Creature/">Creature</a></td>
-<td>A card that represents a creature that can be summoned to the battlefield</td>
-</tr>
-<tr>
-<td><a href="../Land/">Land</a></td>
-<td>A card that represents a land that can be tapped for mana</td>
-</tr>
-<tr>
-<td><a href="../Cost/">Cost</a></td>
-<td>The cost of a card or ability</td>
-</tr>
-<tr>
-<td><a href="../ManaCost/">ManaCost</a></td>
-<td>The mana cost of a card or ability</td>
-</tr>
-<tr>
-<td><a href="../LifeCost/">LifeCost</a></td>
-<td>The life cost of a card or ability</td>
-</tr>
-<tr>
-<td><a href="../Mana/">Mana</a></td>
-<td>A mana in the pool</td>
+<td><a href="../CardCollection/">CardCollection</a></td>
+<td>A collection of cards and associated costs</td>
 </tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>Range: <a href="xsd:anyURI">xsd:anyURI</a></li>
+<li>Range: <a href="../Card/">Card</a></li>
+<li>Multivalued: True</li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://w3id.org/cmdoret/mtg-ontology/</li>
+<li>from schema: https://w3id.org/cmdoret/mtg-ontology/cards</li>
 </ul>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: id
-description: A unique identifier for a thing
-from_schema: https://w3id.org/cmdoret/mtg-ontology/
+<pre><code class="language-yaml">name: cards
+description: Cards in the collection.
+from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
 rank: 1000
-slot_uri: schema:identifier
-identifier: true
-alias: id
+multivalued: true
+alias: cards
+owner: CardCollection
 domain_of:
-- NamedThing
-- Thing
-range: uriorcurie
+- CardCollection
+range: Card
+inlined: true
 
 </code></pre>
 

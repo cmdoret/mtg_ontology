@@ -204,18 +204,16 @@
 <p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/cards/Mana">mtgoc:Mana</a></p>
 <div class="mermaid"> classDiagram
     class Mana
-      NamedThing &lt;|-- Mana
+      Thing &lt;|-- Mana
 
       Mana : color
-      Mana : description
       Mana : id
-      Mana : name
       Mana : snow
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../NamedThing/">NamedThing</a><ul>
+<li><a href="../Thing/">Thing</a><ul>
 <li><strong>Mana</strong></li>
 </ul>
 </li>
@@ -247,19 +245,7 @@
 <td><a href="../id/">id</a></td>
 <td>1..1 <br/> <a href="xsd:anyURI">xsd:anyURI</a></td>
 <td>A unique identifier for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../name/">name</a></td>
-<td>1..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td>A human-readable name for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
-</tr>
-<tr>
-<td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
-<td>A human-readable description for a thing</td>
-<td><a href="../NamedThing/">NamedThing</a></td>
+<td><a href="../Thing/">Thing</a></td>
 </tr>
 </tbody>
 </table>
@@ -295,7 +281,7 @@
 description: A mana in the pool.
 from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
 rank: 1000
-is_a: NamedThing
+is_a: Thing
 slots:
 - color
 - snow
@@ -308,7 +294,7 @@ slots:
 description: A mana in the pool.
 from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
 rank: 1000
-is_a: NamedThing
+is_a: Thing
 attributes:
   color:
     name: color
@@ -346,31 +332,8 @@ attributes:
     owner: Mana
     domain_of:
     - NamedThing
+    - Thing
     range: uriorcurie
-  name:
-    name: name
-    description: A human-readable name for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/
-    rank: 1000
-    slot_uri: schema:name
-    alias: name
-    owner: Mana
-    domain_of:
-    - NamedThing
-    - KeywordAbility
-    range: string
-    required: true
-  description:
-    name: description
-    description: A human-readable description for a thing
-    from_schema: https://w3id.org/cmdoret/mtg-ontology/
-    rank: 1000
-    slot_uri: schema:description
-    alias: description
-    owner: Mana
-    domain_of:
-    - NamedThing
-    range: string
 
 </code></pre>
 </details>

@@ -256,6 +256,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#applicable-classes" class="md-nav__link">
+    Applicable Classes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#properties" class="md-nav__link">
     Properties
   </a>
@@ -311,9 +318,56 @@
 
 <h1 id="slot-ability">Slot: ability</h1>
 <p><em>An ability associated with a card.</em></p>
-<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/abilities/ability">mtgoa:ability</a></p>
+<p>URI: <a href="https://w3id.org/cmdoret/mtg-ontology/cards/ability">mtgoc:ability</a></p>
 <!-- no inheritance hierarchy -->
 
+<h2 id="applicable-classes">Applicable Classes</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../Card/">Card</a></td>
+<td>A card in the Magic The Gathering game</td>
+</tr>
+<tr>
+<td><a href="../Permanent/">Permanent</a></td>
+<td>A card or token that can be put onto the battlefield</td>
+</tr>
+<tr>
+<td><a href="../Token/">Token</a></td>
+<td>A permanent that is not represented by a regular card and does not have a cas...</td>
+</tr>
+<tr>
+<td><a href="../Sorcery/">Sorcery</a></td>
+<td>A card that represents a sorcery spell that can be cast</td>
+</tr>
+<tr>
+<td><a href="../Instant/">Instant</a></td>
+<td>A card that represents an instant spell that can be cast</td>
+</tr>
+<tr>
+<td><a href="../Enchantment/">Enchantment</a></td>
+<td>A permanent which applies persistent magical effects</td>
+</tr>
+<tr>
+<td><a href="../Artifact/">Artifact</a></td>
+<td>A permanent representing a magical item, animated construct, or other objects...</td>
+</tr>
+<tr>
+<td><a href="../Creature/">Creature</a></td>
+<td>A card that represents a creature that can be summoned to the battlefield</td>
+</tr>
+<tr>
+<td><a href="../Land/">Land</a></td>
+<td>A card that represents a land that can be tapped for mana</td>
+</tr>
+</tbody>
+</table>
 <h2 id="properties">Properties</h2>
 <ul>
 <li>Range: <a href="../Ability/">Ability</a></li>
@@ -322,18 +376,19 @@
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://w3id.org/cmdoret/mtg-ontology/abilities/</li>
+<li>from schema: https://w3id.org/cmdoret/mtg-ontology/cards</li>
 </ul>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
 <pre><code class="language-yaml">name: ability
 description: An ability associated with a card.
-from_schema: https://w3id.org/cmdoret/mtg-ontology/abilities/
+from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
 rank: 1000
-domain: Card
 multivalued: true
 alias: ability
+domain_of:
+- Card
 range: Ability
 
 </code></pre>
