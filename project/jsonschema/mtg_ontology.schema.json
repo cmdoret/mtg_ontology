@@ -4,10 +4,6 @@
             "additionalProperties": false,
             "description": "A card ability, activated, triggered or static.",
             "properties": {
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "effect": {
                     "description": "The effect of an ability.",
                     "type": "string"
@@ -16,20 +12,65 @@
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
-                "name": {
-                    "description": "A human-readable name for a thing",
-                    "type": "string"
-                },
                 "rules_text": {
                     "description": "The text describing what an ability does.",
                     "type": "string"
                 }
             },
             "required": [
-                "id",
-                "name"
+                "id"
             ],
             "title": "Ability",
+            "type": "object"
+        },
+        "AbilityCollection": {
+            "additionalProperties": false,
+            "description": "A collection of abilities and associated concepts.",
+            "properties": {
+                "action_specifications": {
+                    "additionalProperties": {
+                        "$ref": "#/$defs/ActionSpecification__identifier_optional"
+                    },
+                    "description": "Action specifications in the collection.",
+                    "type": "object"
+                },
+                "activated_abilities": {
+                    "additionalProperties": {
+                        "$ref": "#/$defs/ActivatedAbility__identifier_optional"
+                    },
+                    "description": "Activated abilities in the collection.",
+                    "type": "object"
+                },
+                "conditions": {
+                    "additionalProperties": {
+                        "$ref": "#/$defs/Condition__identifier_optional"
+                    },
+                    "description": "Conditions in the collection.",
+                    "type": "object"
+                },
+                "mana_costs": {
+                    "additionalProperties": {
+                        "$ref": "#/$defs/ManaCost__identifier_optional"
+                    },
+                    "description": "Mana costs in the collection.",
+                    "type": "object"
+                },
+                "time_specifications": {
+                    "additionalProperties": {
+                        "$ref": "#/$defs/TimeSpecification__identifier_optional"
+                    },
+                    "description": "Time specifications in the collection.",
+                    "type": "object"
+                },
+                "value_specifications": {
+                    "additionalProperties": {
+                        "$ref": "#/$defs/ValueSpecification__identifier_optional"
+                    },
+                    "description": "Values in the collection.",
+                    "type": "object"
+                }
+            },
+            "title": "AbilityCollection",
             "type": "object"
         },
         "Action": {
@@ -71,35 +112,57 @@
                     "$ref": "#/$defs/Action",
                     "description": "An action taken by a player or card."
                 },
-                "and": {
-                    "description": "A conjunction of two objects.",
-                    "type": "string"
-                },
                 "constraint": {
                     "$ref": "#/$defs/ActionConstraint",
                     "description": "A constraint on a time, quantity or action."
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
                 },
                 "id": {
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
-                "name": {
-                    "description": "A human-readable name for a thing",
+                "intersection": {
+                    "description": "A conjunction of two objects (a and b).",
                     "type": "string"
                 },
-                "or": {
-                    "description": "A disjunction of two objects.",
+                "union": {
+                    "description": "A disjunction of two objects (a or b).",
                     "type": "string"
                 }
             },
             "required": [
                 "action",
-                "id",
-                "name"
+                "id"
+            ],
+            "title": "ActionSpecification",
+            "type": "object"
+        },
+        "ActionSpecification__identifier_optional": {
+            "additionalProperties": false,
+            "description": "A specification for an action.",
+            "properties": {
+                "action": {
+                    "$ref": "#/$defs/Action",
+                    "description": "An action taken by a player or card."
+                },
+                "constraint": {
+                    "$ref": "#/$defs/ActionConstraint",
+                    "description": "A constraint on a time, quantity or action."
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "intersection": {
+                    "description": "A conjunction of two objects (a and b).",
+                    "type": "string"
+                },
+                "union": {
+                    "description": "A disjunction of two objects (a or b).",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "action"
             ],
             "title": "ActionSpecification",
             "type": "object"
@@ -126,9 +189,46 @@
                     },
                     "type": "array"
                 },
-                "description": {
-                    "description": "A human-readable description for a thing",
+                "effect": {
+                    "description": "The effect of an ability.",
                     "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "rules_text": {
+                    "description": "The text describing what an ability does.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "ActivatedAbility",
+            "type": "object"
+        },
+        "ActivatedAbility__identifier_optional": {
+            "additionalProperties": false,
+            "description": "A card ability which can be activated for a cost.",
+            "properties": {
+                "condition": {
+                    "description": "A condition required for an activation.",
+                    "type": "string"
+                },
+                "cost": {
+                    "description": "A cost to play a card or ability.",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "string"
+                            }
+                        ]
+                    },
+                    "type": "array"
                 },
                 "effect": {
                     "description": "The effect of an ability.",
@@ -138,19 +238,12 @@
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
-                "name": {
-                    "description": "A human-readable name for a thing",
-                    "type": "string"
-                },
                 "rules_text": {
                     "description": "The text describing what an ability does.",
                     "type": "string"
                 }
             },
-            "required": [
-                "id",
-                "name"
-            ],
+            "required": [],
             "title": "ActivatedAbility",
             "type": "object"
         },
@@ -158,6 +251,13 @@
             "additionalProperties": false,
             "description": "A permanent representing a magical item, animated construct, or other objects and devices.",
             "properties": {
+                "ability": {
+                    "description": "An ability associated with a card.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "artist": {
                     "description": "The artist who drew a card's illustration.",
                     "type": "string"
@@ -241,6 +341,13 @@
             "additionalProperties": false,
             "description": "A card in the Magic The Gathering game.",
             "properties": {
+                "ability": {
+                    "description": "An ability associated with a card.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "artist": {
                     "description": "The artist who drew a card's illustration.",
                     "type": "string"
@@ -322,13 +429,20 @@
         },
         "CardCollection": {
             "additionalProperties": false,
-            "description": "A collection of Cards, such as a Deck or cards set.",
+            "description": "A collection of cards and associated costs.",
             "properties": {
-                "entries": {
+                "cards": {
                     "additionalProperties": {
                         "$ref": "#/$defs/Card__identifier_optional"
                     },
-                    "description": "Members of the card collection.",
+                    "description": "Cards in the collection.",
+                    "type": "object"
+                },
+                "costs": {
+                    "additionalProperties": {
+                        "$ref": "#/$defs/Cost__identifier_optional"
+                    },
+                    "description": "Costs in the collection.",
                     "type": "object"
                 }
             },
@@ -339,6 +453,13 @@
             "additionalProperties": false,
             "description": "A card in the Magic The Gathering game.",
             "properties": {
+                "ability": {
+                    "description": "An ability associated with a card.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "artist": {
                     "description": "The artist who drew a card's illustration.",
                     "type": "string"
@@ -441,20 +562,8 @@
                     },
                     "type": "array"
                 },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "id": {
                     "description": "A unique identifier for a thing",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "A human-readable name for a thing",
-                    "type": "string"
-                },
-                "property": {
-                    "description": "A property of an entity.",
                     "type": "string"
                 },
                 "source": {
@@ -495,9 +604,64 @@
                 }
             },
             "required": [
-                "id",
-                "name"
+                "id"
             ],
+            "title": "Condition",
+            "type": "object"
+        },
+        "Condition__identifier_optional": {
+            "additionalProperties": false,
+            "description": "A condition expressed as constraints.",
+            "properties": {
+                "action_spec": {
+                    "description": "A specification of an action.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "source": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Player"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "The entity responsible for an action."
+                },
+                "target": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Player"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "The entity targeted by an action or constraint."
+                },
+                "time_spec": {
+                    "description": "A specification of the time of an event.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "value_spec": {
+                    "description": "A specification for the value of a property.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [],
             "title": "Condition",
             "type": "object"
         },
@@ -505,24 +669,16 @@
             "additionalProperties": false,
             "description": "The cost of a card or ability.",
             "properties": {
-                "and": {
-                    "description": "A conjunction of two objects.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "id": {
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
-                "name": {
-                    "description": "A human-readable name for a thing",
+                "intersection": {
+                    "description": "A conjunction of two objects (a and b).",
                     "type": "string"
                 },
-                "or": {
-                    "description": "A disjunction of two objects.",
+                "union": {
+                    "description": "A disjunction of two objects (a or b).",
                     "type": "string"
                 },
                 "value": {
@@ -531,9 +687,33 @@
                 }
             },
             "required": [
-                "id",
-                "name"
+                "id"
             ],
+            "title": "Cost",
+            "type": "object"
+        },
+        "Cost__identifier_optional": {
+            "additionalProperties": false,
+            "description": "The cost of a card or ability.",
+            "properties": {
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "intersection": {
+                    "description": "A conjunction of two objects (a and b).",
+                    "type": "string"
+                },
+                "union": {
+                    "description": "A disjunction of two objects (a or b).",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "The numeric part of a quantitative value.",
+                    "type": "integer"
+                }
+            },
+            "required": [],
             "title": "Cost",
             "type": "object"
         },
@@ -541,6 +721,13 @@
             "additionalProperties": false,
             "description": "A card that represents a creature that can be summoned to the battlefield.",
             "properties": {
+                "ability": {
+                    "description": "An ability associated with a card.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "artist": {
                     "description": "The artist who drew a card's illustration.",
                     "type": "string"
@@ -636,6 +823,13 @@
             "additionalProperties": false,
             "description": "A permanent which applies persistent magical effects.",
             "properties": {
+                "ability": {
+                    "description": "An ability associated with a card.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "artist": {
                     "description": "The artist who drew a card's illustration.",
                     "type": "string"
@@ -719,6 +913,13 @@
             "additionalProperties": false,
             "description": "A card that represents an instant spell that can be cast.",
             "properties": {
+                "ability": {
+                    "description": "An ability associated with a card.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "artist": {
                     "description": "The artist who drew a card's illustration.",
                     "type": "string"
@@ -802,10 +1003,6 @@
             "additionalProperties": false,
             "description": "A passive ability represented by word that substitutes for a piece of rules text, such as deathtouch or flying.",
             "properties": {
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "effect": {
                     "description": "The effect of an ability.",
                     "type": "string"
@@ -838,6 +1035,13 @@
             "additionalProperties": false,
             "description": "A card that represents a land that can be tapped for mana.",
             "properties": {
+                "ability": {
+                    "description": "An ability associated with a card.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "artist": {
                     "description": "The artist who drew a card's illustration.",
                     "type": "string"
@@ -921,24 +1125,16 @@
             "additionalProperties": false,
             "description": "The life cost of a card or ability.",
             "properties": {
-                "and": {
-                    "description": "A conjunction of two objects.",
-                    "type": "string"
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "id": {
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
-                "name": {
-                    "description": "A human-readable name for a thing",
+                "intersection": {
+                    "description": "A conjunction of two objects (a and b).",
                     "type": "string"
                 },
-                "or": {
-                    "description": "A disjunction of two objects.",
+                "union": {
+                    "description": "A disjunction of two objects (a or b).",
                     "type": "string"
                 },
                 "value": {
@@ -947,8 +1143,7 @@
                 }
             },
             "required": [
-                "id",
-                "name"
+                "id"
             ],
             "title": "LifeCost",
             "type": "object"
@@ -964,16 +1159,8 @@
                     },
                     "type": "array"
                 },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "id": {
                     "description": "A unique identifier for a thing",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "A human-readable name for a thing",
                     "type": "string"
                 },
                 "snow": {
@@ -983,8 +1170,7 @@
             },
             "required": [
                 "color",
-                "id",
-                "name"
+                "id"
             ],
             "title": "Mana",
             "type": "object"
@@ -993,10 +1179,6 @@
             "additionalProperties": false,
             "description": "The mana cost of a card or ability.",
             "properties": {
-                "and": {
-                    "description": "A conjunction of two objects.",
-                    "type": "string"
-                },
                 "color": {
                     "description": "The color of a card.",
                     "items": {
@@ -1004,25 +1186,21 @@
                     },
                     "type": "array"
                 },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "id": {
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
-                "name": {
-                    "description": "A human-readable name for a thing",
-                    "type": "string"
-                },
-                "or": {
-                    "description": "A disjunction of two objects.",
+                "intersection": {
+                    "description": "A conjunction of two objects (a and b).",
                     "type": "string"
                 },
                 "snow": {
                     "description": "Whether a mana or cost includes snow mana.",
                     "type": "boolean"
+                },
+                "union": {
+                    "description": "A disjunction of two objects (a or b).",
+                    "type": "string"
                 },
                 "value": {
                     "description": "The numeric part of a quantitative value.",
@@ -1031,8 +1209,45 @@
             },
             "required": [
                 "color",
-                "id",
-                "name"
+                "id"
+            ],
+            "title": "ManaCost",
+            "type": "object"
+        },
+        "ManaCost__identifier_optional": {
+            "additionalProperties": false,
+            "description": "The mana cost of a card or ability.",
+            "properties": {
+                "color": {
+                    "description": "The color of a card.",
+                    "items": {
+                        "$ref": "#/$defs/Color"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "intersection": {
+                    "description": "A conjunction of two objects (a and b).",
+                    "type": "string"
+                },
+                "snow": {
+                    "description": "Whether a mana or cost includes snow mana.",
+                    "type": "boolean"
+                },
+                "union": {
+                    "description": "A disjunction of two objects (a or b).",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "The numeric part of a quantitative value.",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "color"
             ],
             "title": "ManaCost",
             "type": "object"
@@ -1065,6 +1280,13 @@
             "additionalProperties": false,
             "description": "A card or token that can be put onto the battlefield.",
             "properties": {
+                "ability": {
+                    "description": "An ability associated with a card.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "artist": {
                     "description": "The artist who drew a card's illustration.",
                     "type": "string"
@@ -1157,30 +1379,6 @@
             "title": "Player",
             "type": "string"
         },
-        "Property": {
-            "additionalProperties": false,
-            "description": "A property of an entity.",
-            "properties": {
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "A unique identifier for a thing",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "A human-readable name for a thing",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "id",
-                "name"
-            ],
-            "title": "Property",
-            "type": "object"
-        },
         "Rarity": {
             "description": "The rarity of the card, may be one of Common, Uncommon, Rare or Mythic.",
             "enum": [
@@ -1196,6 +1394,13 @@
             "additionalProperties": false,
             "description": "A card that represents a sorcery spell that can be cast.",
             "properties": {
+                "ability": {
+                    "description": "An ability associated with a card.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "artist": {
                     "description": "The artist who drew a card's illustration.",
                     "type": "string"
@@ -1279,10 +1484,6 @@
             "additionalProperties": false,
             "description": "A specification for a thing.",
             "properties": {
-                "and": {
-                    "description": "A conjunction of two objects.",
-                    "type": "string"
-                },
                 "constraint": {
                     "anyOf": [
                         {
@@ -1297,26 +1498,21 @@
                     ],
                     "description": "A constraint on a time, quantity or action."
                 },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "id": {
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
-                "name": {
-                    "description": "A human-readable name for a thing",
+                "intersection": {
+                    "description": "A conjunction of two objects (a and b).",
                     "type": "string"
                 },
-                "or": {
-                    "description": "A disjunction of two objects.",
+                "union": {
+                    "description": "A disjunction of two objects (a or b).",
                     "type": "string"
                 }
             },
             "required": [
-                "id",
-                "name"
+                "id"
             ],
             "title": "Specification",
             "type": "object"
@@ -1325,22 +1521,13 @@
             "additionalProperties": false,
             "description": "An object on the stack. Either a card that has been cast, or a copy.",
             "properties": {
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "id": {
                     "description": "A unique identifier for a thing",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "A human-readable name for a thing",
                     "type": "string"
                 }
             },
             "required": [
-                "id",
-                "name"
+                "id"
             ],
             "title": "Spell",
             "type": "object"
@@ -1349,10 +1536,6 @@
             "additionalProperties": false,
             "description": "A card ability which remains active until endgame once put into effect.",
             "properties": {
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "effect": {
                     "description": "The effect of an ability.",
                     "type": "string"
@@ -1361,44 +1544,31 @@
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
-                "name": {
-                    "description": "A human-readable name for a thing",
-                    "type": "string"
-                },
                 "rules_text": {
                     "description": "The text describing what an ability does.",
                     "type": "string"
                 }
             },
             "required": [
-                "id",
-                "name"
+                "id"
             ],
             "title": "StaticAbility",
             "type": "object"
         },
-        "Time": {
-            "description": "A time during the turn.",
-            "enum": [
-                "beginning_phase",
-                "untap_step",
-                "upkeep_step",
-                "draw_step",
-                "main_phase",
-                "pre_combat_main_phase",
-                "post_combat_main_phase",
-                "combat_phase",
-                "beginning_of_combat_step",
-                "declare_attackers_step",
-                "declare_blockers_step",
-                "combat_damage_step",
-                "end_of_combat_step",
-                "ending_phase",
-                "cleanup_step",
-                "turn"
+        "Thing": {
+            "additionalProperties": false,
+            "description": "A generic grouping for any identifiable entity",
+            "properties": {
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
             ],
-            "title": "Time",
-            "type": "string"
+            "title": "Thing",
+            "type": "object"
         },
         "TimeConstraint": {
             "description": "A constraint on the time of an event.",
@@ -1418,31 +1588,43 @@
             "additionalProperties": false,
             "description": "A specification for a time.",
             "properties": {
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "id": {
                     "description": "A unique identifier for a thing",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "A human-readable name for a thing",
                     "type": "string"
                 },
                 "player": {
                     "$ref": "#/$defs/Player",
                     "description": "A player."
                 },
-                "time": {
-                    "$ref": "#/$defs/Time",
+                "turn_phase": {
+                    "$ref": "#/$defs/TurnPhase",
                     "description": "A phase of the game."
                 }
             },
             "required": [
-                "id",
-                "name"
+                "id"
             ],
+            "title": "TimeSpecification",
+            "type": "object"
+        },
+        "TimeSpecification__identifier_optional": {
+            "additionalProperties": false,
+            "description": "A specification for a time.",
+            "properties": {
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "player": {
+                    "$ref": "#/$defs/Player",
+                    "description": "A player."
+                },
+                "turn_phase": {
+                    "$ref": "#/$defs/TurnPhase",
+                    "description": "A phase of the game."
+                }
+            },
+            "required": [],
             "title": "TimeSpecification",
             "type": "object"
         },
@@ -1450,6 +1632,13 @@
             "additionalProperties": false,
             "description": "A permanent that is not represented by a regular card and does not have a casting cost.",
             "properties": {
+                "ability": {
+                    "description": "An ability associated with a card.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "artist": {
                     "description": "The artist who drew a card's illustration.",
                     "type": "string"
@@ -1537,10 +1726,6 @@
                     "description": "A condition required for an activation.",
                     "type": "string"
                 },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
-                },
                 "effect": {
                     "description": "The effect of an ability.",
                     "type": "string"
@@ -1549,21 +1734,39 @@
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
-                "name": {
-                    "description": "A human-readable name for a thing",
-                    "type": "string"
-                },
                 "rules_text": {
                     "description": "The text describing what an ability does.",
                     "type": "string"
                 }
             },
             "required": [
-                "id",
-                "name"
+                "id"
             ],
             "title": "TriggeredAbility",
             "type": "object"
+        },
+        "TurnPhase": {
+            "description": "A time during the turn.",
+            "enum": [
+                "beginning_phase",
+                "untap_step",
+                "upkeep_step",
+                "draw_step",
+                "main_phase",
+                "pre_combat_main_phase",
+                "post_combat_main_phase",
+                "combat_phase",
+                "beginning_of_combat_step",
+                "declare_attackers_step",
+                "declare_blockers_step",
+                "combat_damage_step",
+                "end_of_combat_step",
+                "ending_phase",
+                "cleanup_step",
+                "turn"
+            ],
+            "title": "TurnPhase",
+            "type": "string"
         },
         "ValueConstraint": {
             "description": "",
@@ -1588,28 +1791,20 @@
             "additionalProperties": false,
             "description": "A specification for a quantitative value.",
             "properties": {
-                "and": {
-                    "description": "A conjunction of two objects.",
-                    "type": "string"
-                },
                 "constraint": {
                     "$ref": "#/$defs/ValueConstraint",
                     "description": "A constraint on a time, quantity or action."
-                },
-                "description": {
-                    "description": "A human-readable description for a thing",
-                    "type": "string"
                 },
                 "id": {
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
-                "name": {
-                    "description": "A human-readable name for a thing",
+                "intersection": {
+                    "description": "A conjunction of two objects (a and b).",
                     "type": "string"
                 },
-                "or": {
-                    "description": "A disjunction of two objects.",
+                "union": {
+                    "description": "A disjunction of two objects (a or b).",
                     "type": "string"
                 },
                 "unit": {
@@ -1629,9 +1824,48 @@
                 }
             },
             "required": [
-                "id",
-                "name"
+                "id"
             ],
+            "title": "ValueSpecification",
+            "type": "object"
+        },
+        "ValueSpecification__identifier_optional": {
+            "additionalProperties": false,
+            "description": "A specification for a quantitative value.",
+            "properties": {
+                "constraint": {
+                    "$ref": "#/$defs/ValueConstraint",
+                    "description": "A constraint on a time, quantity or action."
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "intersection": {
+                    "description": "A conjunction of two objects (a and b).",
+                    "type": "string"
+                },
+                "union": {
+                    "description": "A disjunction of two objects (a or b).",
+                    "type": "string"
+                },
+                "unit": {
+                    "anyOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "The type of quantity described by a value."
+                },
+                "value": {
+                    "description": "The numeric part of a quantitative value.",
+                    "type": "integer"
+                }
+            },
+            "required": [],
             "title": "ValueSpecification",
             "type": "object"
         }
@@ -1641,11 +1875,60 @@
     "additionalProperties": true,
     "metamodel_version": "1.7.0",
     "properties": {
-        "entries": {
+        "action_specifications": {
+            "additionalProperties": {
+                "$ref": "#/$defs/ActionSpecification__identifier_optional"
+            },
+            "description": "Action specifications in the collection.",
+            "type": "object"
+        },
+        "activated_abilities": {
+            "additionalProperties": {
+                "$ref": "#/$defs/ActivatedAbility__identifier_optional"
+            },
+            "description": "Activated abilities in the collection.",
+            "type": "object"
+        },
+        "cards": {
             "additionalProperties": {
                 "$ref": "#/$defs/Card__identifier_optional"
             },
-            "description": "Members of the card collection.",
+            "description": "Cards in the collection.",
+            "type": "object"
+        },
+        "conditions": {
+            "additionalProperties": {
+                "$ref": "#/$defs/Condition__identifier_optional"
+            },
+            "description": "Conditions in the collection.",
+            "type": "object"
+        },
+        "costs": {
+            "additionalProperties": {
+                "$ref": "#/$defs/Cost__identifier_optional"
+            },
+            "description": "Costs in the collection.",
+            "type": "object"
+        },
+        "mana_costs": {
+            "additionalProperties": {
+                "$ref": "#/$defs/ManaCost__identifier_optional"
+            },
+            "description": "Mana costs in the collection.",
+            "type": "object"
+        },
+        "time_specifications": {
+            "additionalProperties": {
+                "$ref": "#/$defs/TimeSpecification__identifier_optional"
+            },
+            "description": "Time specifications in the collection.",
+            "type": "object"
+        },
+        "value_specifications": {
+            "additionalProperties": {
+                "$ref": "#/$defs/ValueSpecification__identifier_optional"
+            },
+            "description": "Values in the collection.",
             "type": "object"
         }
     },

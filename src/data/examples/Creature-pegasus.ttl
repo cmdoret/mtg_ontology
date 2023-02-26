@@ -58,7 +58,7 @@ ex:peg-dmg-player a :Condition ;
        :source ex:peg ;
        :target :players ;
        :action_spec ex:deal-dmg ;
-       :and ex:you-place-ge2-crea .
+       :intersection ex:you-place-ge2-crea .
 
 ex:deal-dmg a :ActionSpecification ;
        :action :deal_damage .
@@ -71,7 +71,7 @@ ex:you-place-ge2-crea a :Condition ;
 
 ex:this-turn a :TimeSpecification ;
        :constraint :this ;
-       :time :turn .
+       :turn_phase :turn .
 
 ex:place-crea a :ActionSpecification ;
        :action :place_creature .

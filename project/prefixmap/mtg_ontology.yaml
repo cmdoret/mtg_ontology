@@ -9,6 +9,9 @@
    "Ability": {
       "@id": "mtgoa:Ability"
    },
+   "AbilityCollection": {
+      "@id": "mtgoa:AbilityCollection"
+   },
    "ActionSpecification": {
       "@id": "mtgoa:ActionSpecification"
    },
@@ -60,9 +63,6 @@
    "Permanent": {
       "@id": "mtgoc:Permanent"
    },
-   "Property": {
-      "@id": "mtgoa:Property"
-   },
    "Sorcery": {
       "@id": "mtgoc:Sorcery"
    },
@@ -74,6 +74,9 @@
    },
    "StaticAbility": {
       "@id": "mtgoa:StaticAbility"
+   },
+   "Thing": {
+      "@id": "schema:Thing"
    },
    "TimeSpecification": {
       "@id": "mtgoa:TimeSpecification"

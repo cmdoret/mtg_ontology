@@ -2,28 +2,32 @@
 message Ability
  {
   uriorcurie id = 0
-  string name = 0
-  string description = 0
   string rulesText = 0
   condition effect = 0
+ }
+// A collection of abilities and associated concepts.
+message AbilityCollection
+ {
+ repeated  activatedAbility activatedAbilities = 0
+ repeated  condition conditions = 0
+ repeated  manaCost manaCosts = 0
+ repeated  valueSpecification valueSpecifications = 0
+ repeated  actionSpecification actionSpecifications = 0
+ repeated  timeSpecification timeSpecifications = 0
  }
 // A specification for an action.
 message ActionSpecification
  {
   uriorcurie id = 0
-  string name = 0
-  string description = 0
   action action = 0
-  actionSpecification and = 0
-  actionSpecification or = 0
+  actionSpecification intersection = 0
+  actionSpecification union = 0
   actionConstraint constraint = 0
  }
 // A card ability which can be activated for a cost.
 message ActivatedAbility
  {
   uriorcurie id = 0
-  string name = 0
-  string description = 0
   string rulesText = 0
   condition effect = 0
  repeated  string cost = 0
@@ -39,6 +43,7 @@ message Artifact
   integer convertedManaCost = 0
  repeated  color color = 0
   string cardSet = 0
+ repeated  ability ability = 0
   string artist = 0
   string flavorText = 0
   string typeLine = 0
@@ -57,6 +62,7 @@ message Card
   integer convertedManaCost = 0
  repeated  color color = 0
   string cardSet = 0
+ repeated  ability ability = 0
   string artist = 0
   string flavorText = 0
   string typeLine = 0
@@ -65,20 +71,18 @@ message Card
  repeated  string cardSupertype = 0
   rarity rarity = 0
  }
-// A collection of Cards, such as a Deck or cards set.
+// A collection of cards and associated costs.
 message CardCollection
  {
- repeated  card entries = 0
+ repeated  card cards = 0
+ repeated  cost costs = 0
  }
 // A condition expressed as constraints.
 message Condition
  {
   uriorcurie id = 0
-  string name = 0
-  string description = 0
   string source = 0
   string target = 0
-  property property = 0
  repeated  actionSpecification actionSpec = 0
  repeated  valueSpecification valueSpec = 0
  repeated  timeSpecification timeSpec = 0
@@ -87,11 +91,9 @@ message Condition
 message Cost
  {
   uriorcurie id = 0
-  string name = 0
-  string description = 0
   integer value = 0
-  cost and = 0
-  cost or = 0
+  cost intersection = 0
+  cost union = 0
  }
 // A card that represents a creature that can be summoned to the battlefield.
 message Creature
@@ -103,6 +105,7 @@ message Creature
   integer convertedManaCost = 0
  repeated  color color = 0
   string cardSet = 0
+ repeated  ability ability = 0
   string artist = 0
   string flavorText = 0
   string typeLine = 0
@@ -123,6 +126,7 @@ message Enchantment
   integer convertedManaCost = 0
  repeated  color color = 0
   string cardSet = 0
+ repeated  ability ability = 0
   string artist = 0
   string flavorText = 0
   string typeLine = 0
@@ -141,6 +145,7 @@ message Instant
   integer convertedManaCost = 0
  repeated  color color = 0
   string cardSet = 0
+ repeated  ability ability = 0
   string artist = 0
   string flavorText = 0
   string typeLine = 0
@@ -153,7 +158,6 @@ message Instant
 message KeywordAbility
  {
   uriorcurie id = 0
-  string description = 0
   string rulesText = 0
   condition effect = 0
   string name = 0
@@ -169,6 +173,7 @@ message Land
   integer convertedManaCost = 0
  repeated  color color = 0
   string cardSet = 0
+ repeated  ability ability = 0
   string artist = 0
   string flavorText = 0
   string typeLine = 0
@@ -181,18 +186,14 @@ message Land
 message LifeCost
  {
   uriorcurie id = 0
-  string name = 0
-  string description = 0
   integer value = 0
-  cost and = 0
-  cost or = 0
+  cost intersection = 0
+  cost union = 0
  }
 // A mana in the pool.
 message Mana
  {
   uriorcurie id = 0
-  string name = 0
-  string description = 0
  repeated  color color = 0
   boolean snow = 0
  }
@@ -200,11 +201,9 @@ message Mana
 message ManaCost
  {
   uriorcurie id = 0
-  string name = 0
-  string description = 0
   integer value = 0
-  cost and = 0
-  cost or = 0
+  cost intersection = 0
+  cost union = 0
  repeated  color color = 0
   boolean snow = 0
  }
@@ -225,6 +224,7 @@ message Permanent
   integer convertedManaCost = 0
  repeated  color color = 0
   string cardSet = 0
+ repeated  ability ability = 0
   string artist = 0
   string flavorText = 0
   string typeLine = 0
@@ -232,13 +232,6 @@ message Permanent
  repeated  string cardSubtype = 0
  repeated  string cardSupertype = 0
   rarity rarity = 0
- }
-// A property of an entity.
-message Property
- {
-  uriorcurie id = 0
-  string name = 0
-  string description = 0
  }
 // A card that represents a sorcery spell that can be cast.
 message Sorcery
@@ -250,6 +243,7 @@ message Sorcery
   integer convertedManaCost = 0
  repeated  color color = 0
   string cardSet = 0
+ repeated  ability ability = 0
   string artist = 0
   string flavorText = 0
   string typeLine = 0
@@ -262,38 +256,35 @@ message Sorcery
 message Specification
  {
   uriorcurie id = 0
-  string name = 0
-  string description = 0
   string constraint = 0
-  namedThing and = 0
-  namedThing or = 0
+  namedThing intersection = 0
+  namedThing union = 0
  }
 // An object on the stack. Either a card that has been cast, or a copy.
 message Spell
  {
   uriorcurie id = 0
-  string name = 0
-  string description = 0
  }
 // A card ability which remains active until endgame once put into effect.
 message StaticAbility
  {
   uriorcurie id = 0
-  string name = 0
-  string description = 0
   string rulesText = 0
   condition effect = 0
+ }
+// A generic grouping for any identifiable entity
+message Thing
+ {
+  uriorcurie id = 0
  }
 // A specification for a time.
 message TimeSpecification
  {
   uriorcurie id = 0
-  string name = 0
-  string description = 0
-  time time = 0
+  turnPhase turnPhase = 0
   player player = 0
-  timeSpecification and = 0
-  timeSpecification or = 0
+  timeSpecification intersection = 0
+  timeSpecification union = 0
   timeConstraint constraint = 0
  }
 // A permanent that is not represented by a regular card and does not have a casting cost.
@@ -306,6 +297,7 @@ message Token
   integer convertedManaCost = 0
  repeated  color color = 0
   string cardSet = 0
+ repeated  ability ability = 0
   string artist = 0
   string flavorText = 0
   string typeLine = 0
@@ -318,8 +310,6 @@ message Token
 message TriggeredAbility
  {
   uriorcurie id = 0
-  string name = 0
-  string description = 0
   string rulesText = 0
   condition effect = 0
   condition condition = 0
@@ -328,11 +318,9 @@ message TriggeredAbility
 message ValueSpecification
  {
   uriorcurie id = 0
-  string name = 0
-  string description = 0
   integer value = 0
   string unit = 0
-  valueSpecification and = 0
-  valueSpecification or = 0
+  valueSpecification intersection = 0
+  valueSpecification union = 0
   valueConstraint constraint = 0
  }

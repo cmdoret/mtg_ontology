@@ -1,28 +1,32 @@
 type Ability
   {
     id: Uriorcurie!
-    name: String!
-    description: String
     rulesText: String
     effect: Condition
+  }
+
+type AbilityCollection
+  {
+    activatedAbilities: [ActivatedAbility]
+    conditions: [Condition]
+    manaCosts: [ManaCost]
+    valueSpecifications: [ValueSpecification]
+    actionSpecifications: [ActionSpecification]
+    timeSpecifications: [TimeSpecification]
   }
 
 type ActionSpecification
   {
     id: Uriorcurie!
-    name: String!
-    description: String
     action: Action!
-    and: ActionSpecification
-    or: ActionSpecification
+    intersection: ActionSpecification
+    union: ActionSpecification
     constraint: ActionConstraint
   }
 
 type ActivatedAbility
   {
     id: Uriorcurie!
-    name: String!
-    description: String
     rulesText: String
     effect: Condition
     cost: [String]
@@ -38,6 +42,7 @@ type Artifact
     convertedManaCost: Integer
     color: [Color]!
     cardSet: String
+    ability: [Ability]
     artist: String
     flavorText: String
     typeLine: String!
@@ -56,6 +61,7 @@ type Card
     convertedManaCost: Integer
     color: [Color]!
     cardSet: String
+    ability: [Ability]
     artist: String
     flavorText: String
     typeLine: String!
@@ -67,17 +73,15 @@ type Card
 
 type CardCollection
   {
-    entries: [Card]
+    cards: [Card]
+    costs: [Cost]
   }
 
 type Condition
   {
     id: Uriorcurie!
-    name: String!
-    description: String
     source: String
     target: String
-    property: Property
     actionSpec: [ActionSpecification]
     valueSpec: [ValueSpecification]
     timeSpec: [TimeSpecification]
@@ -86,11 +90,9 @@ type Condition
 type Cost
   {
     id: Uriorcurie!
-    name: String!
-    description: String
     value: Integer
-    and: Cost
-    or: Cost
+    intersection: Cost
+    union: Cost
   }
 
 type Creature
@@ -102,6 +104,7 @@ type Creature
     convertedManaCost: Integer
     color: [Color]!
     cardSet: String
+    ability: [Ability]
     artist: String
     flavorText: String
     typeLine: String!
@@ -122,6 +125,7 @@ type Enchantment
     convertedManaCost: Integer
     color: [Color]!
     cardSet: String
+    ability: [Ability]
     artist: String
     flavorText: String
     typeLine: String!
@@ -140,6 +144,7 @@ type Instant
     convertedManaCost: Integer
     color: [Color]!
     cardSet: String
+    ability: [Ability]
     artist: String
     flavorText: String
     typeLine: String!
@@ -152,7 +157,6 @@ type Instant
 type KeywordAbility
   {
     id: Uriorcurie!
-    description: String
     rulesText: String
     effect: Condition
     name: String!
@@ -168,6 +172,7 @@ type Land
     convertedManaCost: Integer
     color: [Color]!
     cardSet: String
+    ability: [Ability]
     artist: String
     flavorText: String
     typeLine: String!
@@ -180,18 +185,14 @@ type Land
 type LifeCost
   {
     id: Uriorcurie!
-    name: String!
-    description: String
     value: Integer
-    and: Cost
-    or: Cost
+    intersection: Cost
+    union: Cost
   }
 
 type Mana
   {
     id: Uriorcurie!
-    name: String!
-    description: String
     color: [Color]!
     snow: Boolean
   }
@@ -199,11 +200,9 @@ type Mana
 type ManaCost
   {
     id: Uriorcurie!
-    name: String!
-    description: String
     value: Integer
-    and: Cost
-    or: Cost
+    intersection: Cost
+    union: Cost
     color: [Color]!
     snow: Boolean
   }
@@ -224,6 +223,7 @@ type Permanent
     convertedManaCost: Integer
     color: [Color]!
     cardSet: String
+    ability: [Ability]
     artist: String
     flavorText: String
     typeLine: String!
@@ -231,13 +231,6 @@ type Permanent
     cardSubtype: [String]
     cardSupertype: [String]
     rarity: Rarity
-  }
-
-type Property
-  {
-    id: Uriorcurie!
-    name: String!
-    description: String
   }
 
 type Sorcery
@@ -249,6 +242,7 @@ type Sorcery
     convertedManaCost: Integer
     color: [Color]!
     cardSet: String
+    ability: [Ability]
     artist: String
     flavorText: String
     typeLine: String!
@@ -261,38 +255,35 @@ type Sorcery
 type Specification
   {
     id: Uriorcurie!
-    name: String!
-    description: String
     constraint: String
-    and: NamedThing
-    or: NamedThing
+    intersection: NamedThing
+    union: NamedThing
   }
 
 type Spell
   {
     id: Uriorcurie!
-    name: String!
-    description: String
   }
 
 type StaticAbility
   {
     id: Uriorcurie!
-    name: String!
-    description: String
     rulesText: String
     effect: Condition
+  }
+
+type Thing
+  {
+    id: Uriorcurie!
   }
 
 type TimeSpecification
   {
     id: Uriorcurie!
-    name: String!
-    description: String
-    time: Time
+    turnPhase: TurnPhase
     player: Player
-    and: TimeSpecification
-    or: TimeSpecification
+    intersection: TimeSpecification
+    union: TimeSpecification
     constraint: TimeConstraint
   }
 
@@ -305,6 +296,7 @@ type Token
     convertedManaCost: Integer
     color: [Color]!
     cardSet: String
+    ability: [Ability]
     artist: String
     flavorText: String
     typeLine: String!
@@ -317,8 +309,6 @@ type Token
 type TriggeredAbility
   {
     id: Uriorcurie!
-    name: String!
-    description: String
     rulesText: String
     effect: Condition
     condition: Condition
@@ -327,12 +317,10 @@ type TriggeredAbility
 type ValueSpecification
   {
     id: Uriorcurie!
-    name: String!
-    description: String
     value: Integer
     unit: String
-    and: ValueSpecification
-    or: ValueSpecification
+    intersection: ValueSpecification
+    union: ValueSpecification
     constraint: ValueConstraint
   }
 

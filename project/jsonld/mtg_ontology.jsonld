@@ -1,7 +1,7 @@
 {
   "name": "mtgo",
   "description": "An ontology describing Magic: The Gathering. It provides\nthe basic features needed to describe cards.",
-  "title": "Magic The Gathering Ontology",
+  "title": "Magic The Gathering Ontology.",
   "see_also": [
     "https://cmdoret.github.io/mtg-ontology/abilities"
   ],
@@ -500,8 +500,8 @@
       ]
     },
     {
-      "name": "Time",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Time",
+      "name": "TurnPhase",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/TurnPhase",
       "description": "A time during the turn.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
       "permissible_values": [
@@ -619,9 +619,10 @@
       ],
       "slot_uri": "http://schema.org/identifier",
       "identifier": true,
-      "owner": "NamedThing",
+      "owner": "Thing",
       "domain_of": [
-        "NamedThing"
+        "NamedThing",
+        "Thing"
       ],
       "range": "uriorcurie",
       "required": true,
@@ -662,11 +663,11 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "and",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/and",
-      "description": "A conjunction of two objects.",
+      "name": "intersection",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/intersection",
+      "description": "A conjunction of two objects (a and b).",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/and",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/intersection",
       "owner": "Specification",
       "domain_of": [
         "Cost",
@@ -677,11 +678,11 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "or",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/or",
-      "description": "A disjunction of two objects.",
+      "name": "union",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/union",
+      "description": "A disjunction of two objects (a or b).",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/or",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/union",
       "owner": "Specification",
       "domain_of": [
         "Cost",
@@ -729,6 +730,20 @@
         "Card"
       ],
       "range": "integer",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ability",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/ability",
+      "description": "An ability associated with a card.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/ability",
+      "multivalued": true,
+      "owner": "Card",
+      "domain_of": [
+        "Card"
+      ],
+      "range": "Ability",
       "@type": "SlotDefinition"
     },
     {
@@ -903,18 +918,6 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "ability",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/ability",
-      "description": "An ability associated with a card.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "domain": "Card",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/ability",
-      "multivalued": true,
-      "owner": "ability",
-      "range": "Ability",
-      "@type": "SlotDefinition"
-    },
-    {
       "name": "rules_text",
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/rules_text",
       "description": "The text describing what an ability does.",
@@ -1039,19 +1042,6 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "property",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/property",
-      "description": "A property of an entity.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/property",
-      "owner": "Condition",
-      "domain_of": [
-        "Condition"
-      ],
-      "range": "Property",
-      "@type": "SlotDefinition"
-    },
-    {
       "name": "value_spec",
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/value_spec",
       "description": "A specification for the value of a property.",
@@ -1107,16 +1097,16 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "time",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/time",
+      "name": "turn_phase",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/turn_phase",
       "description": "A phase of the game.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/time",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/turn_phase",
       "owner": "TimeSpecification",
       "domain_of": [
         "TimeSpecification"
       ],
-      "range": "Time",
+      "range": "TurnPhase",
       "@type": "SlotDefinition"
     },
     {
@@ -1170,12 +1160,12 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "cardCollection__entries",
-      "description": "Members of the card collection.",
+      "name": "cardCollection__cards",
+      "description": "Cards in the collection.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/entries",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/cards",
       "multivalued": true,
-      "alias": "entries",
+      "alias": "cards",
       "owner": "CardCollection",
       "domain_of": [
         "CardCollection"
@@ -1185,78 +1175,183 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "Cost_and",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/and",
-      "description": "A conjunction of two objects.",
+      "name": "cardCollection__costs",
+      "description": "Costs in the collection.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/costs",
+      "multivalued": true,
+      "alias": "costs",
+      "owner": "CardCollection",
+      "domain_of": [
+        "CardCollection"
+      ],
+      "range": "Cost",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "abilityCollection__activated_abilities",
+      "description": "Activated abilities in the collection.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/activated_abilities",
+      "multivalued": true,
+      "alias": "activated_abilities",
+      "owner": "AbilityCollection",
+      "domain_of": [
+        "AbilityCollection"
+      ],
+      "range": "ActivatedAbility",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "abilityCollection__conditions",
+      "description": "Conditions in the collection.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/conditions",
+      "multivalued": true,
+      "alias": "conditions",
+      "owner": "AbilityCollection",
+      "domain_of": [
+        "AbilityCollection"
+      ],
+      "range": "Condition",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "abilityCollection__mana_costs",
+      "description": "Mana costs in the collection.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/mana_costs",
+      "multivalued": true,
+      "alias": "mana_costs",
+      "owner": "AbilityCollection",
+      "domain_of": [
+        "AbilityCollection"
+      ],
+      "range": "ManaCost",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "abilityCollection__value_specifications",
+      "description": "Values in the collection.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/value_specifications",
+      "multivalued": true,
+      "alias": "value_specifications",
+      "owner": "AbilityCollection",
+      "domain_of": [
+        "AbilityCollection"
+      ],
+      "range": "ValueSpecification",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "abilityCollection__action_specifications",
+      "description": "Action specifications in the collection.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/action_specifications",
+      "multivalued": true,
+      "alias": "action_specifications",
+      "owner": "AbilityCollection",
+      "domain_of": [
+        "AbilityCollection"
+      ],
+      "range": "ActionSpecification",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "abilityCollection__time_specifications",
+      "description": "Time specifications in the collection.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/time_specifications",
+      "multivalued": true,
+      "alias": "time_specifications",
+      "owner": "AbilityCollection",
+      "domain_of": [
+        "AbilityCollection"
+      ],
+      "range": "TimeSpecification",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Cost_intersection",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/intersection",
+      "description": "A conjunction of two objects (a and b).",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
-      "is_a": "and",
+      "is_a": "intersection",
       "domain": "Cost",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/and",
-      "alias": "and",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/intersection",
+      "alias": "intersection",
       "owner": "Cost",
       "domain_of": [
         "Cost"
       ],
       "symmetric": true,
       "is_usage_slot": true,
-      "usage_slot_name": "and",
+      "usage_slot_name": "intersection",
       "range": "Cost",
       "@type": "SlotDefinition"
     },
     {
-      "name": "Cost_or",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/or",
-      "description": "A disjunction of two objects.",
+      "name": "Cost_union",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/union",
+      "description": "A disjunction of two objects (a or b).",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
-      "is_a": "or",
+      "is_a": "union",
       "domain": "Cost",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/or",
-      "alias": "or",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/union",
+      "alias": "union",
       "owner": "Cost",
       "domain_of": [
         "Cost"
       ],
       "symmetric": true,
       "is_usage_slot": true,
-      "usage_slot_name": "or",
+      "usage_slot_name": "union",
       "range": "Cost",
       "@type": "SlotDefinition"
     },
     {
-      "name": "ActionSpecification_and",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/and",
-      "description": "A conjunction of two objects.",
+      "name": "ActionSpecification_intersection",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/intersection",
+      "description": "A conjunction of two objects (a and b).",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
-      "is_a": "and",
+      "is_a": "intersection",
       "domain": "ActionSpecification",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/and",
-      "alias": "and",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/intersection",
+      "alias": "intersection",
       "owner": "ActionSpecification",
       "domain_of": [
         "ActionSpecification"
       ],
       "symmetric": true,
       "is_usage_slot": true,
-      "usage_slot_name": "and",
+      "usage_slot_name": "intersection",
       "range": "ActionSpecification",
       "@type": "SlotDefinition"
     },
     {
-      "name": "ActionSpecification_or",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/or",
-      "description": "A disjunction of two objects.",
+      "name": "ActionSpecification_union",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/union",
+      "description": "A disjunction of two objects (a or b).",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
-      "is_a": "or",
+      "is_a": "union",
       "domain": "ActionSpecification",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/or",
-      "alias": "or",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/union",
+      "alias": "union",
       "owner": "ActionSpecification",
       "domain_of": [
         "ActionSpecification"
       ],
       "symmetric": true,
       "is_usage_slot": true,
-      "usage_slot_name": "or",
+      "usage_slot_name": "union",
       "range": "ActionSpecification",
       "@type": "SlotDefinition"
     },
@@ -1293,40 +1388,40 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "ValueSpecification_and",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/and",
-      "description": "A conjunction of two objects.",
+      "name": "ValueSpecification_intersection",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/intersection",
+      "description": "A conjunction of two objects (a and b).",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
-      "is_a": "and",
+      "is_a": "intersection",
       "domain": "ValueSpecification",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/and",
-      "alias": "and",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/intersection",
+      "alias": "intersection",
       "owner": "ValueSpecification",
       "domain_of": [
         "ValueSpecification"
       ],
       "symmetric": true,
       "is_usage_slot": true,
-      "usage_slot_name": "and",
+      "usage_slot_name": "intersection",
       "range": "ValueSpecification",
       "@type": "SlotDefinition"
     },
     {
-      "name": "ValueSpecification_or",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/or",
-      "description": "A disjunction of two objects.",
+      "name": "ValueSpecification_union",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/union",
+      "description": "A disjunction of two objects (a or b).",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
-      "is_a": "or",
+      "is_a": "union",
       "domain": "ValueSpecification",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/or",
-      "alias": "or",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/union",
+      "alias": "union",
       "owner": "ValueSpecification",
       "domain_of": [
         "ValueSpecification"
       ],
       "symmetric": true,
       "is_usage_slot": true,
-      "usage_slot_name": "or",
+      "usage_slot_name": "union",
       "range": "ValueSpecification",
       "@type": "SlotDefinition"
     },
@@ -1363,40 +1458,40 @@
       "@type": "SlotDefinition"
     },
     {
-      "name": "TimeSpecification_and",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/and",
-      "description": "A conjunction of two objects.",
+      "name": "TimeSpecification_intersection",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/intersection",
+      "description": "A conjunction of two objects (a and b).",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
-      "is_a": "and",
+      "is_a": "intersection",
       "domain": "TimeSpecification",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/and",
-      "alias": "and",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/intersection",
+      "alias": "intersection",
       "owner": "TimeSpecification",
       "domain_of": [
         "TimeSpecification"
       ],
       "symmetric": true,
       "is_usage_slot": true,
-      "usage_slot_name": "and",
+      "usage_slot_name": "intersection",
       "range": "TimeSpecification",
       "@type": "SlotDefinition"
     },
     {
-      "name": "TimeSpecification_or",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/or",
-      "description": "A disjunction of two objects.",
+      "name": "TimeSpecification_union",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/union",
+      "description": "A disjunction of two objects (a or b).",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
-      "is_a": "or",
+      "is_a": "union",
       "domain": "TimeSpecification",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/or",
-      "alias": "or",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/union",
+      "alias": "union",
       "owner": "TimeSpecification",
       "domain_of": [
         "TimeSpecification"
       ],
       "symmetric": true,
       "is_usage_slot": true,
-      "usage_slot_name": "or",
+      "usage_slot_name": "union",
       "range": "TimeSpecification",
       "@type": "SlotDefinition"
     },
@@ -1452,6 +1547,21 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "Thing",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/Thing",
+      "description": "A generic grouping for any identifiable entity",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
+      "mappings": [
+        "schema:Thing"
+      ],
+      "slots": [
+        "id"
+      ],
+      "slot_usage": {},
+      "class_uri": "http://schema.org/Thing",
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "Card",
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Card",
       "description": "A card in the Magic The Gathering game.",
@@ -1465,6 +1575,7 @@
         "converted_mana_cost",
         "color",
         "card_set",
+        "ability",
         "artist",
         "flavor_text",
         "type_line",
@@ -1482,11 +1593,9 @@
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Spell",
       "description": "An object on the stack. Either a card that has been cast, or a copy.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "is_a": "NamedThing",
+      "is_a": "Thing",
       "slots": [
-        "id",
-        "name",
-        "description"
+        "id"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Spell",
@@ -1506,6 +1615,7 @@
         "converted_mana_cost",
         "color",
         "card_set",
+        "ability",
         "artist",
         "flavor_text",
         "type_line",
@@ -1532,6 +1642,7 @@
         "converted_mana_cost",
         "color",
         "card_set",
+        "ability",
         "artist",
         "flavor_text",
         "type_line",
@@ -1558,6 +1669,7 @@
         "converted_mana_cost",
         "color",
         "card_set",
+        "ability",
         "artist",
         "flavor_text",
         "type_line",
@@ -1584,6 +1696,7 @@
         "converted_mana_cost",
         "color",
         "card_set",
+        "ability",
         "artist",
         "flavor_text",
         "type_line",
@@ -1610,6 +1723,7 @@
         "converted_mana_cost",
         "color",
         "card_set",
+        "ability",
         "artist",
         "flavor_text",
         "type_line",
@@ -1636,6 +1750,7 @@
         "converted_mana_cost",
         "color",
         "card_set",
+        "ability",
         "artist",
         "flavor_text",
         "type_line",
@@ -1662,6 +1777,7 @@
         "converted_mana_cost",
         "color",
         "card_set",
+        "ability",
         "artist",
         "flavor_text",
         "type_line",
@@ -1690,6 +1806,7 @@
         "converted_mana_cost",
         "color",
         "card_set",
+        "ability",
         "artist",
         "flavor_text",
         "type_line",
@@ -1707,14 +1824,12 @@
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Cost",
       "description": "The cost of a card or ability.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "is_a": "NamedThing",
+      "is_a": "Thing",
       "slots": [
         "id",
-        "name",
-        "description",
         "value",
-        "Cost_and",
-        "Cost_or"
+        "Cost_intersection",
+        "Cost_union"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Cost",
@@ -1728,11 +1843,9 @@
       "is_a": "Cost",
       "slots": [
         "id",
-        "name",
-        "description",
         "value",
-        "Cost_and",
-        "Cost_or",
+        "Cost_intersection",
+        "Cost_union",
         "color",
         "snow"
       ],
@@ -1748,11 +1861,9 @@
       "is_a": "Cost",
       "slots": [
         "id",
-        "name",
-        "description",
         "value",
-        "Cost_and",
-        "Cost_or"
+        "Cost_intersection",
+        "Cost_union"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/LifeCost",
@@ -1763,11 +1874,9 @@
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Mana",
       "description": "A mana in the pool.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "is_a": "NamedThing",
+      "is_a": "Thing",
       "slots": [
         "id",
-        "name",
-        "description",
         "color",
         "snow"
       ],
@@ -1778,18 +1887,27 @@
     {
       "name": "CardCollection",
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/CardCollection",
-      "description": "A collection of Cards, such as a Deck or cards set.",
+      "description": "A collection of cards and associated costs.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
       "slots": [
-        "cardCollection__entries"
+        "cardCollection__cards",
+        "cardCollection__costs"
       ],
       "slot_usage": {},
       "attributes": [
         {
-          "name": "entries",
-          "description": "Members of the card collection.",
+          "name": "cards",
+          "description": "Cards in the collection.",
           "multivalued": true,
           "range": "Card",
+          "inlined": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "costs",
+          "description": "Costs in the collection.",
+          "multivalued": true,
+          "range": "Cost",
           "inlined": true,
           "@type": "SlotDefinition"
         }
@@ -1803,11 +1921,9 @@
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Ability",
       "description": "A card ability, activated, triggered or static.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "is_a": "NamedThing",
+      "is_a": "Thing",
       "slots": [
         "id",
-        "name",
-        "description",
         "rules_text",
         "effect"
       ],
@@ -1823,8 +1939,6 @@
       "is_a": "Ability",
       "slots": [
         "id",
-        "name",
-        "description",
         "rules_text",
         "effect",
         "cost",
@@ -1842,7 +1956,6 @@
       "is_a": "Ability",
       "slots": [
         "id",
-        "description",
         "rules_text",
         "effect",
         "name",
@@ -1860,8 +1973,6 @@
       "is_a": "Ability",
       "slots": [
         "id",
-        "name",
-        "description",
         "rules_text",
         "effect"
       ],
@@ -1877,8 +1988,6 @@
       "is_a": "Ability",
       "slots": [
         "id",
-        "name",
-        "description",
         "rules_text",
         "effect",
         "condition"
@@ -1892,14 +2001,11 @@
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Condition",
       "description": "A condition expressed as constraints.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "is_a": "NamedThing",
+      "is_a": "Thing",
       "slots": [
         "id",
-        "name",
-        "description",
         "source",
         "target",
-        "property",
         "action_spec",
         "value_spec",
         "time_spec"
@@ -1909,18 +2015,84 @@
       "@type": "ClassDefinition"
     },
     {
+      "name": "AbilityCollection",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/AbilityCollection",
+      "description": "A collection of abilities and associated concepts.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "slots": [
+        "abilityCollection__activated_abilities",
+        "abilityCollection__conditions",
+        "abilityCollection__mana_costs",
+        "abilityCollection__value_specifications",
+        "abilityCollection__action_specifications",
+        "abilityCollection__time_specifications"
+      ],
+      "slot_usage": {},
+      "attributes": [
+        {
+          "name": "activated_abilities",
+          "description": "Activated abilities in the collection.",
+          "multivalued": true,
+          "range": "ActivatedAbility",
+          "inlined": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "conditions",
+          "description": "Conditions in the collection.",
+          "multivalued": true,
+          "range": "Condition",
+          "inlined": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "mana_costs",
+          "description": "Mana costs in the collection.",
+          "multivalued": true,
+          "range": "ManaCost",
+          "inlined": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "value_specifications",
+          "description": "Values in the collection.",
+          "multivalued": true,
+          "range": "ValueSpecification",
+          "inlined": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "action_specifications",
+          "description": "Action specifications in the collection.",
+          "multivalued": true,
+          "range": "ActionSpecification",
+          "inlined": true,
+          "@type": "SlotDefinition"
+        },
+        {
+          "name": "time_specifications",
+          "description": "Time specifications in the collection.",
+          "multivalued": true,
+          "range": "TimeSpecification",
+          "inlined": true,
+          "@type": "SlotDefinition"
+        }
+      ],
+      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/AbilityCollection",
+      "tree_root": true,
+      "@type": "ClassDefinition"
+    },
+    {
       "name": "Specification",
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Specification",
       "description": "A specification for a thing.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "is_a": "NamedThing",
+      "is_a": "Thing",
       "slots": [
         "id",
-        "name",
-        "description",
         "constraint",
-        "and",
-        "or"
+        "intersection",
+        "union"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Specification",
@@ -1934,11 +2106,9 @@
       "is_a": "Specification",
       "slots": [
         "id",
-        "name",
-        "description",
         "action",
-        "ActionSpecification_and",
-        "ActionSpecification_or",
+        "ActionSpecification_intersection",
+        "ActionSpecification_union",
         "ActionSpecification_constraint"
       ],
       "slot_usage": {},
@@ -1953,12 +2123,10 @@
       "is_a": "Specification",
       "slots": [
         "id",
-        "name",
-        "description",
         "value",
         "unit",
-        "ValueSpecification_and",
-        "ValueSpecification_or",
+        "ValueSpecification_intersection",
+        "ValueSpecification_union",
         "ValueSpecification_constraint"
       ],
       "slot_usage": {},
@@ -1970,42 +2138,25 @@
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/TimeSpecification",
       "description": "A specification for a time.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "is_a": "NamedThing",
+      "is_a": "Thing",
       "slots": [
         "id",
-        "name",
-        "description",
-        "time",
+        "turn_phase",
         "player",
-        "TimeSpecification_and",
-        "TimeSpecification_or",
+        "TimeSpecification_intersection",
+        "TimeSpecification_union",
         "TimeSpecification_constraint"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/TimeSpecification",
       "@type": "ClassDefinition"
-    },
-    {
-      "name": "Property",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Property",
-      "description": "A property of an entity.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "is_a": "NamedThing",
-      "slots": [
-        "id",
-        "name",
-        "description"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Property",
-      "@type": "ClassDefinition"
     }
   ],
   "metamodel_version": "1.7.0",
   "source_file": "mtg_ontology.yaml",
-  "source_file_date": "2023-02-24T23:26:52",
-  "source_file_size": 1422,
-  "generation_date": "2023-02-25T03:32:39",
+  "source_file_date": "2023-02-25T21:35:31",
+  "source_file_size": 1587,
+  "generation_date": "2023-02-26T01:56:10",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/mtg_ontology.context.jsonld",

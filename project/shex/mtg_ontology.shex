@@ -41,7 +41,7 @@ linkml:Nodeidentifier NONLITERAL
 
 mtgoa:Ability  (
     CLOSED {
-       (  $mtgoa:Ability_tes (  &<NamedThing_tes> ;
+       (  $mtgoa:Ability_tes (  &<Thing_tes> ;
              rdf:type [ schema:Thing ] ? ;
              mtgoa:rules_text @linkml:String ? ;
              mtgoa:effect @mtgoa:Condition ?
@@ -51,12 +51,24 @@ mtgoa:Ability  (
     } OR @mtgoa:ActivatedAbility OR @mtgoa:KeywordAbility OR @mtgoa:StaticAbility OR @mtgoa:TriggeredAbility
 )
 
+mtgoa:AbilityCollection CLOSED {
+    (  $mtgoa:AbilityCollection_tes (  mtgoa:activated_abilities @mtgoa:ActivatedAbility * ;
+          mtgoa:conditions @mtgoa:Condition * ;
+          mtgoa:mana_costs @mtgoc:ManaCost * ;
+          mtgoa:value_specifications @mtgoa:ValueSpecification * ;
+          mtgoa:action_specifications @mtgoa:ActionSpecification * ;
+          mtgoa:time_specifications @mtgoa:TimeSpecification *
+       ) ;
+       rdf:type [ mtgoa:AbilityCollection ] ?
+    )
+}
+
 mtgoa:ActionSpecification CLOSED {
     (  $mtgoa:ActionSpecification_tes (  &mtgoa:Specification_tes ;
           rdf:type [ mtgoa:Specification ] ? ;
           mtgoa:action @mtgoa:Action ;
-          <and> @mtgoa:ActionSpecification ? ;
-          <or> @mtgoa:ActionSpecification ? ;
+          <intersection> @mtgoa:ActionSpecification ? ;
+          <union> @mtgoa:ActionSpecification ? ;
           mtgoa:constraint @mtgoa:ActionConstraint ?
        ) ;
        rdf:type [ mtgoa:ActionSpecification ]
@@ -89,6 +101,7 @@ mtgoc:Card  (
              mtgoc:converted_mana_cost @linkml:Integer ? ;
              mtgoc:color @mtgoc:Color + ;
              mtgoc:card_set @linkml:String ? ;
+             mtgoc:ability @mtgoa:Ability * ;
              mtgoc:artist @linkml:String ? ;
              mtgoc:flavor_text @linkml:String ? ;
              mtgoc:type_line @linkml:String ;
@@ -103,17 +116,18 @@ mtgoc:Card  (
 )
 
 mtgoc:CardCollection CLOSED {
-    (  $mtgoc:CardCollection_tes mtgoc:entries @mtgoc:Card * ;
+    (  $mtgoc:CardCollection_tes (  mtgoc:cards @mtgoc:Card * ;
+          mtgoc:costs @mtgoc:Cost *
+       ) ;
        rdf:type [ mtgoc:CardCollection ] ?
     )
 }
 
 mtgoa:Condition CLOSED {
-    (  $mtgoa:Condition_tes (  &<NamedThing_tes> ;
+    (  $mtgoa:Condition_tes (  &<Thing_tes> ;
           rdf:type [ schema:Thing ] ? ;
           mtgoa:source @linkml:String ? ;
           mtgoa:target @linkml:String ? ;
-          mtgoa:property @mtgoa:Property ? ;
           mtgoa:action_spec @mtgoa:ActionSpecification * ;
           mtgoa:value_spec @mtgoa:ValueSpecification * ;
           mtgoa:time_spec @mtgoa:TimeSpecification *
@@ -124,11 +138,11 @@ mtgoa:Condition CLOSED {
 
 mtgoc:Cost  (
     CLOSED {
-       (  $mtgoc:Cost_tes (  &<NamedThing_tes> ;
+       (  $mtgoc:Cost_tes (  &<Thing_tes> ;
              rdf:type [ schema:Thing ] ? ;
              mtgoc:value @linkml:Integer ? ;
-             <and> @mtgoc:Cost ? ;
-             <or> @mtgoc:Cost ?
+             <intersection> @mtgoc:Cost ? ;
+             <union> @mtgoc:Cost ?
           ) ;
           rdf:type [ mtgoc:Cost ]
        )
@@ -164,6 +178,7 @@ mtgoc:Instant CLOSED {
 mtgoa:KeywordAbility CLOSED {
     (  $mtgoa:KeywordAbility_tes (  &mtgoa:Ability_tes ;
           rdf:type [ mtgoa:Ability ] ? ;
+          schema:name @linkml:String ;
           mtgoc:value @linkml:Integer ?
        ) ;
        rdf:type [ mtgoa:KeywordAbility ]
@@ -187,7 +202,7 @@ mtgoc:LifeCost CLOSED {
 }
 
 mtgoc:Mana CLOSED {
-    (  $mtgoc:Mana_tes (  &<NamedThing_tes> ;
+    (  $mtgoc:Mana_tes (  &<Thing_tes> ;
           rdf:type [ schema:Thing ] ? ;
           mtgoc:color @mtgoc:Color + ;
           mtgoc:snow @linkml:Boolean ?
@@ -213,8 +228,7 @@ mtgoc:ManaCost CLOSED {
           ) ;
           rdf:type [ schema:Thing ]
        )
-    } OR @mtgoa:Ability OR @mtgoc:Card OR @mtgoa:Condition OR @mtgoc:Cost OR @mtgoc:Mana OR @mtgoa:Property OR @mtgoa:Specification
-    OR @mtgoc:Spell OR @mtgoa:TimeSpecification
+    } OR @mtgoc:Card
 )
 
 mtgoc:Permanent  (
@@ -227,14 +241,6 @@ mtgoc:Permanent  (
     } OR @mtgoc:Artifact OR @mtgoc:Creature OR @mtgoc:Enchantment OR @mtgoc:Land
 )
 
-mtgoa:Property CLOSED {
-    (  $mtgoa:Property_tes (  &<NamedThing_tes> ;
-          rdf:type [ schema:Thing ] ?
-       ) ;
-       rdf:type [ mtgoa:Property ]
-    )
-}
-
 mtgoc:Sorcery CLOSED {
     (  $mtgoc:Sorcery_tes (  &mtgoc:Card_tes ;
           rdf:type [ mtgoc:Card ] ?
@@ -245,11 +251,11 @@ mtgoc:Sorcery CLOSED {
 
 mtgoa:Specification  (
     CLOSED {
-       (  $mtgoa:Specification_tes (  &<NamedThing_tes> ;
+       (  $mtgoa:Specification_tes (  &<Thing_tes> ;
              rdf:type [ schema:Thing ] ? ;
              mtgoa:constraint @linkml:String ? ;
-             <and> @<NamedThing> ? ;
-             <or> @<NamedThing> ?
+             <intersection> @<NamedThing> ? ;
+             <union> @<NamedThing> ?
           ) ;
           rdf:type [ mtgoa:Specification ]
        )
@@ -257,7 +263,7 @@ mtgoa:Specification  (
 )
 
 mtgoc:Spell CLOSED {
-    (  $mtgoc:Spell_tes (  &<NamedThing_tes> ;
+    (  $mtgoc:Spell_tes (  &<Thing_tes> ;
           rdf:type [ schema:Thing ] ?
        ) ;
        rdf:type [ mtgoc:Spell ]
@@ -272,13 +278,22 @@ mtgoa:StaticAbility CLOSED {
     )
 }
 
+<Thing>  (
+    CLOSED {
+       (  $<Thing_tes> rdf:type . * ;
+          rdf:type [ schema:Thing ]
+       )
+    } OR @mtgoa:Ability OR @mtgoa:Condition OR @mtgoc:Cost OR @mtgoc:Mana OR @mtgoa:Specification OR @mtgoc:Spell OR
+    @mtgoa:TimeSpecification
+)
+
 mtgoa:TimeSpecification CLOSED {
-    (  $mtgoa:TimeSpecification_tes (  &<NamedThing_tes> ;
+    (  $mtgoa:TimeSpecification_tes (  &<Thing_tes> ;
           rdf:type [ schema:Thing ] ? ;
-          mtgoa:time @mtgoa:Time ? ;
+          mtgoa:turn_phase @mtgoa:TurnPhase ? ;
           mtgoa:player @mtgoa:Player ? ;
-          <and> @mtgoa:TimeSpecification ? ;
-          <or> @mtgoa:TimeSpecification ? ;
+          <intersection> @mtgoa:TimeSpecification ? ;
+          <union> @mtgoa:TimeSpecification ? ;
           mtgoa:constraint @mtgoa:TimeConstraint ?
        ) ;
        rdf:type [ mtgoa:TimeSpecification ]
@@ -307,8 +322,8 @@ mtgoa:ValueSpecification CLOSED {
           rdf:type [ mtgoa:Specification ] ? ;
           mtgoc:value @linkml:Integer ? ;
           mtgoa:unit @linkml:String ? ;
-          <and> @mtgoa:ValueSpecification ? ;
-          <or> @mtgoa:ValueSpecification ? ;
+          <intersection> @mtgoa:ValueSpecification ? ;
+          <union> @mtgoa:ValueSpecification ? ;
           mtgoa:constraint @mtgoa:ValueConstraint ?
        ) ;
        rdf:type [ mtgoa:ValueSpecification ]
