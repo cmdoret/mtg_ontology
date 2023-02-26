@@ -281,6 +281,9 @@ enums:
       activate:
         description: An ability is activated.
         meaning: mtg:activate
+      attach:
+        description: An equipment, aura or fortification is moved onto another object or player.
+        meaning: mtg:attach
       play:
         description: A card is played as a land or cast as a spell, whichever is appropriate.
         meaning: mtg:play
@@ -290,6 +293,20 @@ enums:
       untap:
         description: A card is untapped
         meaning: mtg:untap
+      search:
+        description: A player searches their library.
+        meaning: mtg:search
+      shuffle:
+        description: A player shuffles their library.
+        meaning: mtg:shuffle
+      reveal:
+        description: A player reveals a card or cards to other players.
+        meaning: mtg:reveal
+      scry:
+        description: >-
+          A player looks at a certain number of cards from the top of their library,
+          and puts them back at the top or bottom of the library in any order.
+        meaning: mtg:scry
       add_mana:
         description: A player adds mana to their mana pool.
       control:
