@@ -1,13 +1,14 @@
 {
    "example": "http://www.example.org/rdf#",
    "linkml": "https://w3id.org/linkml/",
+   "mtg": "https://mtg.fandom.com/wiki/",
    "mtgo": "https://w3id.org/cmdoret/mtg-ontology/",
    "mtgoa": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
    "mtgoc": "https://w3id.org/cmdoret/mtg-ontology/cards/",
    "schema": "http://schema.org/",
    "wiki": "http://en.wikipedia.org/wiki/",
    "Ability": {
-      "@id": "mtgoa:Ability"
+      "@id": "mtg:Ability"
    },
    "AbilityCollection": {
       "@id": "mtgoa:AbilityCollection"
@@ -16,13 +17,13 @@
       "@id": "mtgoa:ActionSpecification"
    },
    "ActivatedAbility": {
-      "@id": "mtgoa:ActivatedAbility"
+      "@id": "mtg:Activated_ability"
    },
    "Artifact": {
-      "@id": "mtgoc:Artifact"
+      "@id": "mtg:Artifact"
    },
    "Card": {
-      "@id": "mtgoc:Card"
+      "@id": "mtg:Card"
    },
    "CardCollection": {
       "@id": "mtgoc:CardCollection"
@@ -31,49 +32,49 @@
       "@id": "mtgoa:Condition"
    },
    "Cost": {
-      "@id": "mtgoc:Cost"
+      "@id": "mtg:Cost"
    },
    "Creature": {
-      "@id": "mtgoc:Creature"
+      "@id": "mtg:Creature"
    },
    "Enchantment": {
-      "@id": "mtgoc:Enchantment"
+      "@id": "mtg:Enchantment"
    },
    "Instant": {
-      "@id": "mtgoc:Instant"
+      "@id": "mtg:Instant"
    },
    "KeywordAbility": {
-      "@id": "mtgoa:KeywordAbility"
+      "@id": "mtg:Keyword_ability"
    },
    "Land": {
-      "@id": "mtgoc:Land"
+      "@id": "mtg:Land"
    },
    "LifeCost": {
-      "@id": "mtgoc:LifeCost"
+      "@id": "mtg:Life"
    },
    "Mana": {
-      "@id": "mtgoc:Mana"
+      "@id": "mtg:Mana"
    },
    "ManaCost": {
-      "@id": "mtgoc:ManaCost"
+      "@id": "mtg:Mana_cost"
    },
    "NamedThing": {
       "@id": "schema:Thing"
    },
    "Permanent": {
-      "@id": "mtgoc:Permanent"
+      "@id": "mtg:Permanent"
    },
    "Sorcery": {
-      "@id": "mtgoc:Sorcery"
+      "@id": "mtg:Sorcery"
    },
    "Specification": {
       "@id": "mtgoa:Specification"
    },
    "Spell": {
-      "@id": "mtgoc:Spell"
+      "@id": "mtg:Spell"
    },
    "StaticAbility": {
-      "@id": "mtgoa:StaticAbility"
+      "@id": "mtg:Static_ability"
    },
    "Thing": {
       "@id": "schema:Thing"
@@ -82,10 +83,10 @@
       "@id": "mtgoa:TimeSpecification"
    },
    "Token": {
-      "@id": "mtgoc:Token"
+      "@id": "mtg:Token"
    },
    "TriggeredAbility": {
-      "@id": "mtgoa:TriggeredAbility"
+      "@id": "mtg:Triggered_ability"
    },
    "ValueSpecification": {
       "@id": "mtgoa:ValueSpecification"

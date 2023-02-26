@@ -270,62 +270,66 @@
     {
       "name": "Color",
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Color",
-      "description": "A color, such as Black, Blue, Red, Green, White or Colorless.",
+      "description": "A color, such as Black, Blue, Red, Green, White or Colorless. enum_uri: mtg:color",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
       "permissible_values": [
         {
           "text": "black",
           "description": "The color black, associated with darkness.",
-          "meaning": "wiki:Q23445"
+          "meaning": "mtg:black"
         },
         {
           "text": "blue",
           "description": "The color blue, associated with water.",
-          "meaning": "wiki:Q1088"
+          "meaning": "mtg:blue"
         },
         {
           "text": "green",
           "description": "The color green, associated with nature.",
-          "meaning": "wiki:Q3133"
+          "meaning": "mtg:green"
         },
         {
           "text": "red",
           "description": "The color red, associated with fire.",
-          "meaning": "wiki:Q3142"
+          "meaning": "mtg:red"
         },
         {
           "text": "white",
           "description": "The color white, associated with light.",
-          "meaning": "wiki:Q23444"
+          "meaning": "mtg:white"
         },
         {
           "text": "colorless",
           "description": "Absence of color.",
-          "meaning": "wiki:Q1396399"
+          "meaning": "mtg:colorless"
         }
       ]
     },
     {
       "name": "Rarity",
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Rarity",
-      "description": "The rarity of the card, may be one of Common, Uncommon, Rare or Mythic.",
+      "description": "The rarity of the card, may be one of Common, Uncommon, Rare or Mythic. enum_uri: mtg:rarity",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
       "permissible_values": [
         {
           "text": "common",
-          "description": "The lowest rarity level, identified by a black set image."
+          "description": "The lowest rarity level, identified by a black set image.",
+          "meaning": "mtg:common"
         },
         {
           "text": "uncommon",
-          "description": "The second lowest rarity level, identified by a silver set image."
+          "description": "The second lowest rarity level, identified by a silver set image.",
+          "meaning": "mtg:uncommon"
         },
         {
           "text": "rare",
-          "description": "The second highest rarity level, identified by a golden set image."
+          "description": "The second highest rarity level, identified by a golden set image.",
+          "meaning": "mtg:rare"
         },
         {
           "text": "mythic",
-          "description": "The highest rarity level, identified by a red set image."
+          "description": "The highest rarity level, identified by a red set image.",
+          "meaning": "mtg:mythic_rare"
         }
       ]
     },
@@ -337,23 +341,39 @@
       "permissible_values": [
         {
           "text": "you",
-          "description": "The focal human player."
+          "description": "The focal player."
+        },
+        {
+          "text": "active_player",
+          "description": "The player who is currently taking their turn."
+        },
+        {
+          "text": "non_active_player",
+          "description": "Any player who is not currently taking their turn."
+        },
+        {
+          "text": "defending_player",
+          "description": "The player who is currently defending."
+        },
+        {
+          "text": "attacking_player",
+          "description": "The player who is currently attacking."
         },
         {
           "text": "owner",
-          "description": "The human player who owns a card."
+          "description": "The player who owns a card."
         },
         {
           "text": "controller",
-          "description": "The human player who controls an object on the stack."
+          "description": "The player who controls an object on the stack."
         },
         {
           "text": "opponent",
-          "description": "A human player playing against the focal player."
+          "description": "A player playing against the focal player."
         },
         {
           "text": "opponents",
-          "description": "All human players playing against the focal player."
+          "description": "All players playing against the focal player."
         },
         {
           "text": "players",
@@ -366,26 +386,37 @@
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Action",
       "description": "An action taken by a player or card.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "enum_uri": "mtg:keyword_action",
       "permissible_values": [
         {
           "text": "discard",
-          "description": "Transfer one or more cards from the hand to the graveyard."
+          "description": "Transfer one or more cards from the hand to the graveyard.",
+          "meaning": "mtg:discard"
         },
         {
           "text": "draw",
-          "description": "Transfer one or more cards from the library to the hand."
+          "description": "Transfer one or more cards from the library to the hand.",
+          "meaning": "mtg:draw"
         },
         {
           "text": "sacrifice",
-          "description": "Transfer one or more cards from the battlefield to the graveyard."
+          "description": "Transfer one or more permanents you control from the battlefield to their owner's graveyard.",
+          "meaning": "mtg:sacrifice"
         },
         {
           "text": "exile",
-          "description": "Remove one or more cards from game."
+          "description": "Remove one or more cards from game.",
+          "meaning": "mtg:exile"
         },
         {
           "text": "fight",
-          "description": "Two cards fight each other."
+          "description": "Two cards fight each other.",
+          "meaning": "mtg:fight"
+        },
+        {
+          "text": "destroy",
+          "description": "Transfer one or more permanents from the battlefield to their owner's graveyard.",
+          "meaning": "mtg:destroy"
         },
         {
           "text": "deal_damage",
@@ -393,23 +424,28 @@
         },
         {
           "text": "cast",
-          "description": "A spell is cast."
+          "description": "A spell is cast.",
+          "meaning": "mtg:cast"
         },
         {
           "text": "activate",
-          "description": "An ability is activated."
+          "description": "An ability is activated.",
+          "meaning": "mtg:activate"
         },
         {
-          "text": "place_creature",
-          "description": "One or more creatures are placed on the battlefield."
+          "text": "play",
+          "description": "A card is played as a land or cast as a spell, whichever is appropriate.",
+          "meaning": "mtg:play"
         },
         {
           "text": "tap",
-          "description": "A card is tapped."
+          "description": "A card is tapped.",
+          "meaning": "mtg:tap"
         },
         {
           "text": "untap",
-          "description": "A card is untapped"
+          "description": "A card is untapped",
+          "meaning": "mtg:untap"
         },
         {
           "text": "add_mana",
@@ -417,7 +453,8 @@
         },
         {
           "text": "control",
-          "description": "A player controls a card."
+          "description": "A player controls a card.",
+          "meaning": "mtg:control_and_ownership"
         }
       ]
     },
@@ -507,67 +544,83 @@
       "permissible_values": [
         {
           "text": "beginning_phase",
-          "description": "The beginning of the turn."
+          "description": "The beginning of the turn.",
+          "meaning": "mtg:beggining_phase"
         },
         {
           "text": "untap_step",
-          "description": "The untap step."
+          "description": "The untap step.",
+          "meaning": "mtg:untap_step"
         },
         {
           "text": "upkeep_step",
-          "description": "The upkeep step."
+          "description": "The upkeep step.",
+          "meaning": "mtg:upkeep_step"
         },
         {
           "text": "draw_step",
-          "description": "The draw step."
+          "description": "The draw step.",
+          "meaning": "mtg:draw_step"
         },
         {
           "text": "main_phase",
-          "description": "Either main phase."
+          "description": "Either main phase.",
+          "meaning": "mtg:main_phase"
         },
         {
           "text": "pre_combat_main_phase",
-          "description": "The first main phase."
+          "description": "The first main phase.",
+          "meaning": "mtg:main_phase"
         },
         {
           "text": "post_combat_main_phase",
-          "description": "The second main phase."
+          "description": "The second main phase.",
+          "meaning": "mtg:main_phase"
         },
         {
           "text": "combat_phase",
-          "description": "The combat phase."
+          "description": "The combat phase.",
+          "meaning": "mtg:combat_phase"
         },
         {
           "text": "beginning_of_combat_step",
-          "description": "The first step of the combat phase."
+          "description": "The first step of the combat phase.",
+          "meaning": "mtg:beginning_of_combat_step"
         },
         {
           "text": "declare_attackers_step",
-          "description": "The declare attackers step."
+          "description": "The declare attackers step.",
+          "meaning": "mtg:declare_attackers_step"
         },
         {
           "text": "declare_blockers_step",
-          "description": "The declare blockers step."
+          "description": "The declare blockers step.",
+          "meaning": "mtg:declare_blockers_step"
         },
         {
           "text": "combat_damage_step",
-          "description": "The combat damage step."
+          "description": "The combat damage step.",
+          "meaning": "mtg:combat_damage_step"
         },
         {
           "text": "end_of_combat_step",
-          "description": "The end of combat step."
+          "description": "The end of combat step.",
+          "meaning": "mtg:end_of_combat_step"
         },
         {
           "text": "ending_phase",
-          "description": "The end step."
+          "description": "The end step.",
+          "meaning": "mtg:ending_phase"
         },
         {
           "text": "cleanup_step",
-          "description": "The cleanup step."
+          "description": "The cleanup step.",
+          "meaning": "mtg:cleanup_step"
         },
         {
           "text": "turn",
-          "description": "A player turn."
+          "description": "A player turn.",
+          "meaning": "mtg:turn"
         }
       ]
     },
@@ -1566,7 +1619,11 @@
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Card",
       "description": "A card in the Magic The Gathering game.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
+      "mappings": [
+        "mtg:Card"
+      ],
       "is_a": "NamedThing",
+      "abstract": true,
       "slots": [
         "id",
         "name",
@@ -1585,7 +1642,7 @@
         "rarity"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Card",
+      "class_uri": "https://mtg.fandom.com/wiki/Card",
       "@type": "ClassDefinition"
     },
     {
@@ -1593,12 +1650,15 @@
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Spell",
       "description": "An object on the stack. Either a card that has been cast, or a copy.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
+      "mappings": [
+        "mtg:Spell"
+      ],
       "is_a": "Thing",
       "slots": [
         "id"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Spell",
+      "class_uri": "https://mtg.fandom.com/wiki/Spell",
       "@type": "ClassDefinition"
     },
     {
@@ -1606,7 +1666,11 @@
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Permanent",
       "description": "A card or token that can be put onto the battlefield.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
+      "mappings": [
+        "mtg:Permanent"
+      ],
       "is_a": "Card",
+      "abstract": true,
       "slots": [
         "id",
         "name",
@@ -1625,7 +1689,7 @@
         "rarity"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Permanent",
+      "class_uri": "https://mtg.fandom.com/wiki/Permanent",
       "@type": "ClassDefinition"
     },
     {
@@ -1633,6 +1697,9 @@
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Token",
       "description": "A permanent that is not represented by a regular card and does not have a casting cost.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
+      "mappings": [
+        "mtg:Token"
+      ],
       "is_a": "Card",
       "slots": [
         "id",
@@ -1652,7 +1719,7 @@
         "rarity"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Token",
+      "class_uri": "https://mtg.fandom.com/wiki/Token",
       "@type": "ClassDefinition"
     },
     {
@@ -1660,6 +1727,9 @@
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Sorcery",
       "description": "A card that represents a sorcery spell that can be cast.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
+      "mappings": [
+        "mtg:Sorcery"
+      ],
       "is_a": "Card",
       "slots": [
         "id",
@@ -1679,7 +1749,7 @@
         "rarity"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Sorcery",
+      "class_uri": "https://mtg.fandom.com/wiki/Sorcery",
       "@type": "ClassDefinition"
     },
     {
@@ -1687,6 +1757,9 @@
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Instant",
       "description": "A card that represents an instant spell that can be cast.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
+      "mappings": [
+        "mtg:Instant"
+      ],
       "is_a": "Card",
       "slots": [
         "id",
@@ -1706,7 +1779,7 @@
         "rarity"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Instant",
+      "class_uri": "https://mtg.fandom.com/wiki/Instant",
       "@type": "ClassDefinition"
     },
     {
@@ -1714,6 +1787,9 @@
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Enchantment",
       "description": "A permanent which applies persistent magical effects.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
+      "mappings": [
+        "mtg:Enchantment"
+      ],
       "is_a": "Permanent",
       "slots": [
         "id",
@@ -1733,7 +1809,7 @@
         "rarity"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Enchantment",
+      "class_uri": "https://mtg.fandom.com/wiki/Enchantment",
       "@type": "ClassDefinition"
     },
     {
@@ -1741,6 +1817,9 @@
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Artifact",
       "description": "A permanent representing a magical item, animated construct, or other objects and devices.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
+      "mappings": [
+        "mtg:Artifact"
+      ],
       "is_a": "Permanent",
       "slots": [
         "id",
@@ -1760,7 +1839,7 @@
         "rarity"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Artifact",
+      "class_uri": "https://mtg.fandom.com/wiki/Artifact",
       "@type": "ClassDefinition"
     },
     {
@@ -1768,6 +1847,9 @@
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Creature",
       "description": "A card that represents a creature that can be summoned to the battlefield.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
+      "mappings": [
+        "mtg:Creature"
+      ],
       "is_a": "Permanent",
       "slots": [
         "id",
@@ -1789,7 +1871,7 @@
         "toughness"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Creature",
+      "class_uri": "https://mtg.fandom.com/wiki/Creature",
       "@type": "ClassDefinition"
     },
     {
@@ -1797,6 +1879,9 @@
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Land",
       "description": "A card that represents a land that can be tapped for mana.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
+      "mappings": [
+        "mtg:Land"
+      ],
       "is_a": "Permanent",
       "slots": [
         "id",
@@ -1816,7 +1901,7 @@
         "rarity"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Land",
+      "class_uri": "https://mtg.fandom.com/wiki/Land",
       "@type": "ClassDefinition"
     },
     {
@@ -1824,6 +1909,9 @@
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Cost",
       "description": "The cost of a card or ability.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
+      "mappings": [
+        "mtg:Cost"
+      ],
       "is_a": "Thing",
       "slots": [
         "id",
@@ -1832,7 +1920,7 @@
         "Cost_union"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Cost",
+      "class_uri": "https://mtg.fandom.com/wiki/Cost",
       "@type": "ClassDefinition"
     },
     {
@@ -1840,6 +1928,9 @@
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/ManaCost",
       "description": "The mana cost of a card or ability.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
+      "mappings": [
+        "mtg:Mana_cost"
+      ],
       "is_a": "Cost",
       "slots": [
         "id",
@@ -1850,7 +1941,7 @@
         "snow"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/ManaCost",
+      "class_uri": "https://mtg.fandom.com/wiki/Mana_cost",
       "@type": "ClassDefinition"
     },
     {
@@ -1858,6 +1949,9 @@
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/LifeCost",
       "description": "The life cost of a card or ability.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
+      "mappings": [
+        "mtg:Life"
+      ],
       "is_a": "Cost",
       "slots": [
         "id",
@@ -1866,7 +1960,7 @@
         "Cost_union"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/LifeCost",
+      "class_uri": "https://mtg.fandom.com/wiki/Life",
       "@type": "ClassDefinition"
     },
     {
@@ -1874,6 +1968,9 @@
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Mana",
       "description": "A mana in the pool.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
+      "mappings": [
+        "mtg:Mana"
+      ],
       "is_a": "Thing",
       "slots": [
         "id",
@@ -1881,7 +1978,7 @@
         "snow"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Mana",
+      "class_uri": "https://mtg.fandom.com/wiki/Mana",
       "@type": "ClassDefinition"
     },
     {
@@ -1921,14 +2018,18 @@
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Ability",
       "description": "A card ability, activated, triggered or static.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "mappings": [
+        "mtg:Ability"
+      ],
       "is_a": "Thing",
+      "abstract": true,
       "slots": [
         "id",
         "rules_text",
         "effect"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Ability",
+      "class_uri": "https://mtg.fandom.com/wiki/Ability",
       "@type": "ClassDefinition"
     },
     {
@@ -1936,6 +2037,9 @@
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/ActivatedAbility",
       "description": "A card ability which can be activated for a cost.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "mappings": [
+        "mtg:Activated_ability"
+      ],
       "is_a": "Ability",
       "slots": [
         "id",
@@ -1945,7 +2049,7 @@
         "condition"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/ActivatedAbility",
+      "class_uri": "https://mtg.fandom.com/wiki/Activated_ability",
       "@type": "ClassDefinition"
     },
     {
@@ -1953,6 +2057,9 @@
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/KeywordAbility",
       "description": "A passive ability represented by word that substitutes for a piece of rules text, such as deathtouch or flying.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "mappings": [
+        "mtg:Keyword_ability"
+      ],
       "is_a": "Ability",
       "slots": [
         "id",
@@ -1962,7 +2069,7 @@
         "value"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/KeywordAbility",
+      "class_uri": "https://mtg.fandom.com/wiki/Keyword_ability",
       "@type": "ClassDefinition"
     },
     {
@@ -1970,6 +2077,9 @@
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/StaticAbility",
       "description": "A card ability which remains active until endgame once put into effect.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "mappings": [
+        "mtg:Static_ability"
+      ],
       "is_a": "Ability",
       "slots": [
         "id",
@@ -1977,7 +2087,7 @@
         "effect"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/StaticAbility",
+      "class_uri": "https://mtg.fandom.com/wiki/Static_ability",
       "@type": "ClassDefinition"
     },
     {
@@ -1985,6 +2095,9 @@
       "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/TriggeredAbility",
       "description": "A card ability, triggered by an event.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "mappings": [
+        "mtg:Triggered_ability"
+      ],
       "is_a": "Ability",
       "slots": [
         "id",
@@ -1993,7 +2106,7 @@
         "condition"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/TriggeredAbility",
+      "class_uri": "https://mtg.fandom.com/wiki/Triggered_ability",
       "@type": "ClassDefinition"
     },
     {
@@ -2088,6 +2201,7 @@
       "description": "A specification for a thing.",
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
       "is_a": "Thing",
+      "abstract": true,
       "slots": [
         "id",
         "constraint",
@@ -2156,7 +2270,7 @@
   "source_file": "mtg_ontology.yaml",
   "source_file_date": "2023-02-25T21:35:31",
   "source_file_size": 1587,
-  "generation_date": "2023-02-26T01:56:10",
+  "generation_date": "2023-02-26T02:53:31",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/mtg_ontology.context.jsonld",

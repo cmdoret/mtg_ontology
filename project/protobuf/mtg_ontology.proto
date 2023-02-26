@@ -1,10 +1,3 @@
-// A card ability, activated, triggered or static.
-message Ability
- {
-  uriorcurie id = 0
-  string rulesText = 0
-  condition effect = 0
- }
 // A collection of abilities and associated concepts.
 message AbilityCollection
  {
@@ -35,25 +28,6 @@ message ActivatedAbility
  }
 // A permanent representing a magical item, animated construct, or other objects and devices.
 message Artifact
- {
-  uriorcurie id = 0
-  string name = 0
-  string description = 0
- repeated  manaCost manaCost = 0
-  integer convertedManaCost = 0
- repeated  color color = 0
-  string cardSet = 0
- repeated  ability ability = 0
-  string artist = 0
-  string flavorText = 0
-  string typeLine = 0
-  string cardType = 0
- repeated  string cardSubtype = 0
- repeated  string cardSupertype = 0
-  rarity rarity = 0
- }
-// A card in the Magic The Gathering game.
-message Card
  {
   uriorcurie id = 0
   string name = 0
@@ -214,25 +188,6 @@ message NamedThing
   string name = 0
   string description = 0
  }
-// A card or token that can be put onto the battlefield.
-message Permanent
- {
-  uriorcurie id = 0
-  string name = 0
-  string description = 0
- repeated  manaCost manaCost = 0
-  integer convertedManaCost = 0
- repeated  color color = 0
-  string cardSet = 0
- repeated  ability ability = 0
-  string artist = 0
-  string flavorText = 0
-  string typeLine = 0
-  string cardType = 0
- repeated  string cardSubtype = 0
- repeated  string cardSupertype = 0
-  rarity rarity = 0
- }
 // A card that represents a sorcery spell that can be cast.
 message Sorcery
  {
@@ -251,14 +206,6 @@ message Sorcery
  repeated  string cardSubtype = 0
  repeated  string cardSupertype = 0
   rarity rarity = 0
- }
-// A specification for a thing.
-message Specification
- {
-  uriorcurie id = 0
-  string constraint = 0
-  namedThing intersection = 0
-  namedThing union = 0
  }
 // An object on the stack. Either a card that has been cast, or a copy.
 message Spell

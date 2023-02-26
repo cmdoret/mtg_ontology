@@ -12,7 +12,7 @@ CREATE TABLE "AbilityCollection" (
 
 CREATE TABLE "ActionSpecification" (
 	id TEXT NOT NULL, 
-	action VARCHAR(14) NOT NULL, 
+	action VARCHAR(11) NOT NULL, 
 	intersection TEXT, 
 	"union" TEXT, 
 	"constraint" VARCHAR(8), 
@@ -28,23 +28,6 @@ CREATE TABLE "Artifact" (
 	mana_cost TEXT, 
 	converted_mana_cost INTEGER, 
 	card_set TEXT, 
-	ability TEXT, 
-	artist TEXT, 
-	flavor_text TEXT, 
-	type_line TEXT NOT NULL, 
-	card_type TEXT NOT NULL, 
-	rarity VARCHAR(8), 
-	PRIMARY KEY (id)
-);
-
-CREATE TABLE "Card" (
-	id TEXT NOT NULL, 
-	name TEXT NOT NULL, 
-	description TEXT, 
-	mana_cost TEXT, 
-	converted_mana_cost INTEGER, 
-	card_set TEXT, 
-	ability TEXT, 
 	artist TEXT, 
 	flavor_text TEXT, 
 	type_line TEXT NOT NULL, 
@@ -86,7 +69,6 @@ CREATE TABLE "Creature" (
 	mana_cost TEXT, 
 	converted_mana_cost INTEGER, 
 	card_set TEXT, 
-	ability TEXT, 
 	artist TEXT, 
 	flavor_text TEXT, 
 	type_line TEXT NOT NULL, 
@@ -104,7 +86,6 @@ CREATE TABLE "Enchantment" (
 	mana_cost TEXT, 
 	converted_mana_cost INTEGER, 
 	card_set TEXT, 
-	ability TEXT, 
 	artist TEXT, 
 	flavor_text TEXT, 
 	type_line TEXT NOT NULL, 
@@ -120,7 +101,6 @@ CREATE TABLE "Instant" (
 	mana_cost TEXT, 
 	converted_mana_cost INTEGER, 
 	card_set TEXT, 
-	ability TEXT, 
 	artist TEXT, 
 	flavor_text TEXT, 
 	type_line TEXT NOT NULL, 
@@ -136,7 +116,6 @@ CREATE TABLE "Land" (
 	mana_cost TEXT, 
 	converted_mana_cost INTEGER, 
 	card_set TEXT, 
-	ability TEXT, 
 	artist TEXT, 
 	flavor_text TEXT, 
 	type_line TEXT NOT NULL, 
@@ -158,22 +137,6 @@ CREATE TABLE "NamedThing" (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE "Permanent" (
-	id TEXT NOT NULL, 
-	name TEXT NOT NULL, 
-	description TEXT, 
-	mana_cost TEXT, 
-	converted_mana_cost INTEGER, 
-	card_set TEXT, 
-	ability TEXT, 
-	artist TEXT, 
-	flavor_text TEXT, 
-	type_line TEXT NOT NULL, 
-	card_type TEXT NOT NULL, 
-	rarity VARCHAR(8), 
-	PRIMARY KEY (id)
-);
-
 CREATE TABLE "Sorcery" (
 	id TEXT NOT NULL, 
 	name TEXT NOT NULL, 
@@ -181,7 +144,6 @@ CREATE TABLE "Sorcery" (
 	mana_cost TEXT, 
 	converted_mana_cost INTEGER, 
 	card_set TEXT, 
-	ability TEXT, 
 	artist TEXT, 
 	flavor_text TEXT, 
 	type_line TEXT NOT NULL, 
@@ -203,7 +165,7 @@ CREATE TABLE "Thing" (
 CREATE TABLE "TimeSpecification" (
 	id TEXT NOT NULL, 
 	turn_phase VARCHAR(24), 
-	player VARCHAR(10), 
+	player VARCHAR(17), 
 	intersection TEXT, 
 	"union" TEXT, 
 	"constraint" VARCHAR(8), 
@@ -219,7 +181,6 @@ CREATE TABLE "Token" (
 	mana_cost TEXT, 
 	converted_mana_cost INTEGER, 
 	card_set TEXT, 
-	ability TEXT, 
 	artist TEXT, 
 	flavor_text TEXT, 
 	type_line TEXT NOT NULL, 
@@ -238,14 +199,6 @@ CREATE TABLE "ValueSpecification" (
 	PRIMARY KEY (id), 
 	FOREIGN KEY(intersection) REFERENCES "ValueSpecification" (id), 
 	FOREIGN KEY("union") REFERENCES "ValueSpecification" (id)
-);
-
-CREATE TABLE "Ability" (
-	id TEXT NOT NULL, 
-	rules_text TEXT, 
-	effect TEXT, 
-	PRIMARY KEY (id), 
-	FOREIGN KEY(effect) REFERENCES "Condition" (id)
 );
 
 CREATE TABLE "ActivatedAbility" (
@@ -289,16 +242,6 @@ CREATE TABLE "ManaCost" (
 	FOREIGN KEY("union") REFERENCES "Cost" (id)
 );
 
-CREATE TABLE "Specification" (
-	id TEXT NOT NULL, 
-	"constraint" TEXT, 
-	intersection TEXT, 
-	"union" TEXT, 
-	PRIMARY KEY (id), 
-	FOREIGN KEY(intersection) REFERENCES "NamedThing" (id), 
-	FOREIGN KEY("union") REFERENCES "NamedThing" (id)
-);
-
 CREATE TABLE "StaticAbility" (
 	id TEXT NOT NULL, 
 	rules_text TEXT, 
@@ -324,6 +267,13 @@ CREATE TABLE "Artifact_color" (
 	FOREIGN KEY(backref_id) REFERENCES "Artifact" (id)
 );
 
+CREATE TABLE "Artifact_ability" (
+	backref_id TEXT, 
+	ability TEXT, 
+	PRIMARY KEY (backref_id, ability), 
+	FOREIGN KEY(backref_id) REFERENCES "Artifact" (id)
+);
+
 CREATE TABLE "Artifact_card_subtype" (
 	backref_id TEXT, 
 	card_subtype TEXT, 
@@ -338,31 +288,17 @@ CREATE TABLE "Artifact_card_supertype" (
 	FOREIGN KEY(backref_id) REFERENCES "Artifact" (id)
 );
 
-CREATE TABLE "Card_color" (
-	backref_id TEXT, 
-	color VARCHAR(9) NOT NULL, 
-	PRIMARY KEY (backref_id, color), 
-	FOREIGN KEY(backref_id) REFERENCES "Card" (id)
-);
-
-CREATE TABLE "Card_card_subtype" (
-	backref_id TEXT, 
-	card_subtype TEXT, 
-	PRIMARY KEY (backref_id, card_subtype), 
-	FOREIGN KEY(backref_id) REFERENCES "Card" (id)
-);
-
-CREATE TABLE "Card_card_supertype" (
-	backref_id TEXT, 
-	card_supertype TEXT, 
-	PRIMARY KEY (backref_id, card_supertype), 
-	FOREIGN KEY(backref_id) REFERENCES "Card" (id)
-);
-
 CREATE TABLE "Creature_color" (
 	backref_id TEXT, 
 	color VARCHAR(9) NOT NULL, 
 	PRIMARY KEY (backref_id, color), 
+	FOREIGN KEY(backref_id) REFERENCES "Creature" (id)
+);
+
+CREATE TABLE "Creature_ability" (
+	backref_id TEXT, 
+	ability TEXT, 
+	PRIMARY KEY (backref_id, ability), 
 	FOREIGN KEY(backref_id) REFERENCES "Creature" (id)
 );
 
@@ -387,6 +323,13 @@ CREATE TABLE "Enchantment_color" (
 	FOREIGN KEY(backref_id) REFERENCES "Enchantment" (id)
 );
 
+CREATE TABLE "Enchantment_ability" (
+	backref_id TEXT, 
+	ability TEXT, 
+	PRIMARY KEY (backref_id, ability), 
+	FOREIGN KEY(backref_id) REFERENCES "Enchantment" (id)
+);
+
 CREATE TABLE "Enchantment_card_subtype" (
 	backref_id TEXT, 
 	card_subtype TEXT, 
@@ -405,6 +348,13 @@ CREATE TABLE "Instant_color" (
 	backref_id TEXT, 
 	color VARCHAR(9) NOT NULL, 
 	PRIMARY KEY (backref_id, color), 
+	FOREIGN KEY(backref_id) REFERENCES "Instant" (id)
+);
+
+CREATE TABLE "Instant_ability" (
+	backref_id TEXT, 
+	ability TEXT, 
+	PRIMARY KEY (backref_id, ability), 
 	FOREIGN KEY(backref_id) REFERENCES "Instant" (id)
 );
 
@@ -429,6 +379,13 @@ CREATE TABLE "Land_color" (
 	FOREIGN KEY(backref_id) REFERENCES "Land" (id)
 );
 
+CREATE TABLE "Land_ability" (
+	backref_id TEXT, 
+	ability TEXT, 
+	PRIMARY KEY (backref_id, ability), 
+	FOREIGN KEY(backref_id) REFERENCES "Land" (id)
+);
+
 CREATE TABLE "Land_card_subtype" (
 	backref_id TEXT, 
 	card_subtype TEXT, 
@@ -450,31 +407,17 @@ CREATE TABLE "Mana_color" (
 	FOREIGN KEY(backref_id) REFERENCES "Mana" (id)
 );
 
-CREATE TABLE "Permanent_color" (
-	backref_id TEXT, 
-	color VARCHAR(9) NOT NULL, 
-	PRIMARY KEY (backref_id, color), 
-	FOREIGN KEY(backref_id) REFERENCES "Permanent" (id)
-);
-
-CREATE TABLE "Permanent_card_subtype" (
-	backref_id TEXT, 
-	card_subtype TEXT, 
-	PRIMARY KEY (backref_id, card_subtype), 
-	FOREIGN KEY(backref_id) REFERENCES "Permanent" (id)
-);
-
-CREATE TABLE "Permanent_card_supertype" (
-	backref_id TEXT, 
-	card_supertype TEXT, 
-	PRIMARY KEY (backref_id, card_supertype), 
-	FOREIGN KEY(backref_id) REFERENCES "Permanent" (id)
-);
-
 CREATE TABLE "Sorcery_color" (
 	backref_id TEXT, 
 	color VARCHAR(9) NOT NULL, 
 	PRIMARY KEY (backref_id, color), 
+	FOREIGN KEY(backref_id) REFERENCES "Sorcery" (id)
+);
+
+CREATE TABLE "Sorcery_ability" (
+	backref_id TEXT, 
+	ability TEXT, 
+	PRIMARY KEY (backref_id, ability), 
 	FOREIGN KEY(backref_id) REFERENCES "Sorcery" (id)
 );
 
@@ -496,6 +439,13 @@ CREATE TABLE "Token_color" (
 	backref_id TEXT, 
 	color VARCHAR(9) NOT NULL, 
 	PRIMARY KEY (backref_id, color), 
+	FOREIGN KEY(backref_id) REFERENCES "Token" (id)
+);
+
+CREATE TABLE "Token_ability" (
+	backref_id TEXT, 
+	ability TEXT, 
+	PRIMARY KEY (backref_id, ability), 
 	FOREIGN KEY(backref_id) REFERENCES "Token" (id)
 );
 

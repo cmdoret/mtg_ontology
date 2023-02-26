@@ -1,4 +1,4 @@
-type Ability
+interface Ability
   {
     id: Uriorcurie!
     rulesText: String
@@ -52,7 +52,7 @@ type Artifact
     rarity: Rarity
   }
 
-type Card
+interface Card
   {
     id: Uriorcurie!
     name: String!
@@ -214,7 +214,7 @@ type NamedThing
     description: String
   }
 
-type Permanent
+interface Permanent
   {
     id: Uriorcurie!
     name: String!
@@ -252,7 +252,7 @@ type Sorcery
     rarity: Rarity
   }
 
-type Specification
+interface Specification
   {
     id: Uriorcurie!
     constraint: String

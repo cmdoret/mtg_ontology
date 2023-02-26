@@ -1,5 +1,5 @@
 # Auto generated from mtg_ontology.yaml by pythongen.py version: 0.9.0
-# Generation date: 2023-02-26T01:56:33
+# Generation date: 2023-02-26T02:54:00
 # Schema: mtgo
 #
 # id: https://w3id.org/cmdoret/mtg-ontology/
@@ -35,6 +35,7 @@ dataclasses._init_fn = dataclasses_init_fn_with_kwargs
 # Namespaces
 EXAMPLE = CurieNamespace('example', 'http://www.example.org/rdf#')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
+MTG = CurieNamespace('mtg', 'https://mtg.fandom.com/wiki/')
 MTGO = CurieNamespace('mtgo', 'https://w3id.org/cmdoret/mtg-ontology/')
 MTGOA = CurieNamespace('mtgoa', 'https://w3id.org/cmdoret/mtg-ontology/abilities/')
 MTGOC = CurieNamespace('mtgoc', 'https://w3id.org/cmdoret/mtg-ontology/cards/')
@@ -213,8 +214,8 @@ class Card(NamedThing):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGOC.Card
-    class_class_curie: ClassVar[str] = "mtgoc:Card"
+    class_class_uri: ClassVar[URIRef] = MTG.Card
+    class_class_curie: ClassVar[str] = "mtg:Card"
     class_name: ClassVar[str] = "Card"
     class_model_uri: ClassVar[URIRef] = MTGO.Card
 
@@ -234,11 +235,6 @@ class Card(NamedThing):
     rarity: Optional[Union[str, "Rarity"]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, CardId):
-            self.id = CardId(self.id)
-
         if self._is_empty(self.color):
             self.MissingRequiredField("color")
         if not isinstance(self.color, list):
@@ -296,8 +292,8 @@ class Spell(Thing):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGOC.Spell
-    class_class_curie: ClassVar[str] = "mtgoc:Spell"
+    class_class_uri: ClassVar[URIRef] = MTG.Spell
+    class_class_curie: ClassVar[str] = "mtg:Spell"
     class_name: ClassVar[str] = "Spell"
     class_model_uri: ClassVar[URIRef] = MTGO.Spell
 
@@ -319,8 +315,8 @@ class Permanent(Card):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGOC.Permanent
-    class_class_curie: ClassVar[str] = "mtgoc:Permanent"
+    class_class_uri: ClassVar[URIRef] = MTG.Permanent
+    class_class_curie: ClassVar[str] = "mtg:Permanent"
     class_name: ClassVar[str] = "Permanent"
     class_model_uri: ClassVar[URIRef] = MTGO.Permanent
 
@@ -330,15 +326,6 @@ class Permanent(Card):
     type_line: str = None
     card_type: str = None
 
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, PermanentId):
-            self.id = PermanentId(self.id)
-
-        super().__post_init__(**kwargs)
-
-
 @dataclass
 class Token(Card):
     """
@@ -346,8 +333,8 @@ class Token(Card):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGOC.Token
-    class_class_curie: ClassVar[str] = "mtgoc:Token"
+    class_class_uri: ClassVar[URIRef] = MTG.Token
+    class_class_curie: ClassVar[str] = "mtg:Token"
     class_name: ClassVar[str] = "Token"
     class_model_uri: ClassVar[URIRef] = MTGO.Token
 
@@ -373,8 +360,8 @@ class Sorcery(Card):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGOC.Sorcery
-    class_class_curie: ClassVar[str] = "mtgoc:Sorcery"
+    class_class_uri: ClassVar[URIRef] = MTG.Sorcery
+    class_class_curie: ClassVar[str] = "mtg:Sorcery"
     class_name: ClassVar[str] = "Sorcery"
     class_model_uri: ClassVar[URIRef] = MTGO.Sorcery
 
@@ -400,8 +387,8 @@ class Instant(Card):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGOC.Instant
-    class_class_curie: ClassVar[str] = "mtgoc:Instant"
+    class_class_uri: ClassVar[URIRef] = MTG.Instant
+    class_class_curie: ClassVar[str] = "mtg:Instant"
     class_name: ClassVar[str] = "Instant"
     class_model_uri: ClassVar[URIRef] = MTGO.Instant
 
@@ -427,8 +414,8 @@ class Enchantment(Permanent):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGOC.Enchantment
-    class_class_curie: ClassVar[str] = "mtgoc:Enchantment"
+    class_class_uri: ClassVar[URIRef] = MTG.Enchantment
+    class_class_curie: ClassVar[str] = "mtg:Enchantment"
     class_name: ClassVar[str] = "Enchantment"
     class_model_uri: ClassVar[URIRef] = MTGO.Enchantment
 
@@ -454,8 +441,8 @@ class Artifact(Permanent):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGOC.Artifact
-    class_class_curie: ClassVar[str] = "mtgoc:Artifact"
+    class_class_uri: ClassVar[URIRef] = MTG.Artifact
+    class_class_curie: ClassVar[str] = "mtg:Artifact"
     class_name: ClassVar[str] = "Artifact"
     class_model_uri: ClassVar[URIRef] = MTGO.Artifact
 
@@ -481,8 +468,8 @@ class Creature(Permanent):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGOC.Creature
-    class_class_curie: ClassVar[str] = "mtgoc:Creature"
+    class_class_uri: ClassVar[URIRef] = MTG.Creature
+    class_class_curie: ClassVar[str] = "mtg:Creature"
     class_name: ClassVar[str] = "Creature"
     class_model_uri: ClassVar[URIRef] = MTGO.Creature
 
@@ -520,8 +507,8 @@ class Land(Permanent):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGOC.Land
-    class_class_curie: ClassVar[str] = "mtgoc:Land"
+    class_class_uri: ClassVar[URIRef] = MTG.Land
+    class_class_curie: ClassVar[str] = "mtg:Land"
     class_name: ClassVar[str] = "Land"
     class_model_uri: ClassVar[URIRef] = MTGO.Land
 
@@ -547,8 +534,8 @@ class Cost(Thing):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGOC.Cost
-    class_class_curie: ClassVar[str] = "mtgoc:Cost"
+    class_class_uri: ClassVar[URIRef] = MTG.Cost
+    class_class_curie: ClassVar[str] = "mtg:Cost"
     class_name: ClassVar[str] = "Cost"
     class_model_uri: ClassVar[URIRef] = MTGO.Cost
 
@@ -582,8 +569,8 @@ class ManaCost(Cost):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGOC.ManaCost
-    class_class_curie: ClassVar[str] = "mtgoc:ManaCost"
+    class_class_uri: ClassVar[URIRef] = MTG.Mana_cost
+    class_class_curie: ClassVar[str] = "mtg:Mana_cost"
     class_name: ClassVar[str] = "ManaCost"
     class_model_uri: ClassVar[URIRef] = MTGO.ManaCost
 
@@ -616,8 +603,8 @@ class LifeCost(Cost):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGOC.LifeCost
-    class_class_curie: ClassVar[str] = "mtgoc:LifeCost"
+    class_class_uri: ClassVar[URIRef] = MTG.Life
+    class_class_curie: ClassVar[str] = "mtg:Life"
     class_name: ClassVar[str] = "LifeCost"
     class_model_uri: ClassVar[URIRef] = MTGO.LifeCost
 
@@ -639,8 +626,8 @@ class Mana(Thing):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGOC.Mana
-    class_class_curie: ClassVar[str] = "mtgoc:Mana"
+    class_class_uri: ClassVar[URIRef] = MTG.Mana
+    class_class_curie: ClassVar[str] = "mtg:Mana"
     class_name: ClassVar[str] = "Mana"
     class_model_uri: ClassVar[URIRef] = MTGO.Mana
 
@@ -696,8 +683,8 @@ class Ability(Thing):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGOA.Ability
-    class_class_curie: ClassVar[str] = "mtgoa:Ability"
+    class_class_uri: ClassVar[URIRef] = MTG.Ability
+    class_class_curie: ClassVar[str] = "mtg:Ability"
     class_name: ClassVar[str] = "Ability"
     class_model_uri: ClassVar[URIRef] = MTGO.Ability
 
@@ -706,11 +693,6 @@ class Ability(Thing):
     effect: Optional[Union[str, ConditionId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, AbilityId):
-            self.id = AbilityId(self.id)
-
         if self.rules_text is not None and not isinstance(self.rules_text, str):
             self.rules_text = str(self.rules_text)
 
@@ -727,8 +709,8 @@ class ActivatedAbility(Ability):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGOA.ActivatedAbility
-    class_class_curie: ClassVar[str] = "mtgoa:ActivatedAbility"
+    class_class_uri: ClassVar[URIRef] = MTG.Activated_ability
+    class_class_curie: ClassVar[str] = "mtg:Activated_ability"
     class_name: ClassVar[str] = "ActivatedAbility"
     class_model_uri: ClassVar[URIRef] = MTGO.ActivatedAbility
 
@@ -759,8 +741,8 @@ class KeywordAbility(Ability):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGOA.KeywordAbility
-    class_class_curie: ClassVar[str] = "mtgoa:KeywordAbility"
+    class_class_uri: ClassVar[URIRef] = MTG.Keyword_ability
+    class_class_curie: ClassVar[str] = "mtg:Keyword_ability"
     class_name: ClassVar[str] = "KeywordAbility"
     class_model_uri: ClassVar[URIRef] = MTGO.KeywordAbility
 
@@ -792,8 +774,8 @@ class StaticAbility(Ability):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGOA.StaticAbility
-    class_class_curie: ClassVar[str] = "mtgoa:StaticAbility"
+    class_class_uri: ClassVar[URIRef] = MTG.Static_ability
+    class_class_curie: ClassVar[str] = "mtg:Static_ability"
     class_name: ClassVar[str] = "StaticAbility"
     class_model_uri: ClassVar[URIRef] = MTGO.StaticAbility
 
@@ -815,8 +797,8 @@ class TriggeredAbility(Ability):
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGOA.TriggeredAbility
-    class_class_curie: ClassVar[str] = "mtgoa:TriggeredAbility"
+    class_class_uri: ClassVar[URIRef] = MTG.Triggered_ability
+    class_class_curie: ClassVar[str] = "mtg:Triggered_ability"
     class_name: ClassVar[str] = "TriggeredAbility"
     class_model_uri: ClassVar[URIRef] = MTGO.TriggeredAbility
 
@@ -934,11 +916,6 @@ class Specification(Thing):
     union: Optional[Union[str, NamedThingId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, SpecificationId):
-            self.id = SpecificationId(self.id)
-
         if self.constraint is not None and not isinstance(self.constraint, str):
             self.constraint = str(self.constraint)
 
@@ -1081,48 +1058,52 @@ class TimeSpecification(Thing):
 # Enumerations
 class Color(EnumDefinitionImpl):
     """
-    A color, such as Black, Blue, Red, Green, White or Colorless.
+    A color, such as Black, Blue, Red, Green, White or Colorless. enum_uri: mtg:color
     """
     black = PermissibleValue(text="black",
                                  description="The color black, associated with darkness.",
-                                 meaning=WIKI.Q23445)
+                                 meaning=MTG.black)
     blue = PermissibleValue(text="blue",
                                description="The color blue, associated with water.",
-                               meaning=WIKI.Q1088)
+                               meaning=MTG.blue)
     green = PermissibleValue(text="green",
                                  description="The color green, associated with nature.",
-                                 meaning=WIKI.Q3133)
+                                 meaning=MTG.green)
     red = PermissibleValue(text="red",
                              description="The color red, associated with fire.",
-                             meaning=WIKI.Q3142)
+                             meaning=MTG.red)
     white = PermissibleValue(text="white",
                                  description="The color white, associated with light.",
-                                 meaning=WIKI.Q23444)
+                                 meaning=MTG.white)
     colorless = PermissibleValue(text="colorless",
                                          description="Absence of color.",
-                                         meaning=WIKI.Q1396399)
+                                         meaning=MTG.colorless)
 
     _defn = EnumDefinition(
         name="Color",
-        description="A color, such as Black, Blue, Red, Green, White or Colorless.",
+        description="A color, such as Black, Blue, Red, Green, White or Colorless. enum_uri: mtg:color",
     )
 
 class Rarity(EnumDefinitionImpl):
     """
-    The rarity of the card, may be one of Common, Uncommon, Rare or Mythic.
+    The rarity of the card, may be one of Common, Uncommon, Rare or Mythic. enum_uri: mtg:rarity
     """
     common = PermissibleValue(text="common",
-                                   description="The lowest rarity level, identified by a black set image.")
+                                   description="The lowest rarity level, identified by a black set image.",
+                                   meaning=MTG.common)
     uncommon = PermissibleValue(text="uncommon",
-                                       description="The second lowest rarity level, identified by a silver set image.")
+                                       description="The second lowest rarity level, identified by a silver set image.",
+                                       meaning=MTG.uncommon)
     rare = PermissibleValue(text="rare",
-                               description="The second highest rarity level, identified by a golden set image.")
+                               description="The second highest rarity level, identified by a golden set image.",
+                               meaning=MTG.rare)
     mythic = PermissibleValue(text="mythic",
-                                   description="The highest rarity level, identified by a red set image.")
+                                   description="The highest rarity level, identified by a red set image.",
+                                   meaning=MTG.mythic_rare)
 
     _defn = EnumDefinition(
         name="Rarity",
-        description="The rarity of the card, may be one of Common, Uncommon, Rare or Mythic.",
+        description="The rarity of the card, may be one of Common, Uncommon, Rare or Mythic. enum_uri: mtg:rarity",
     )
 
 class Player(EnumDefinitionImpl):
@@ -1130,15 +1111,23 @@ class Player(EnumDefinitionImpl):
     One or more human players.
     """
     you = PermissibleValue(text="you",
-                             description="The focal human player.")
+                             description="The focal player.")
+    active_player = PermissibleValue(text="active_player",
+                                                 description="The player who is currently taking their turn.")
+    non_active_player = PermissibleValue(text="non_active_player",
+                                                         description="Any player who is not currently taking their turn.")
+    defending_player = PermissibleValue(text="defending_player",
+                                                       description="The player who is currently defending.")
+    attacking_player = PermissibleValue(text="attacking_player",
+                                                       description="The player who is currently attacking.")
     owner = PermissibleValue(text="owner",
-                                 description="The human player who owns a card.")
+                                 description="The player who owns a card.")
     controller = PermissibleValue(text="controller",
-                                           description="The human player who controls an object on the stack.")
+                                           description="The player who controls an object on the stack.")
     opponent = PermissibleValue(text="opponent",
-                                       description="A human player playing against the focal player.")
+                                       description="A player playing against the focal player.")
     opponents = PermissibleValue(text="opponents",
-                                         description="All human players playing against the focal player.")
+                                         description="All players playing against the focal player.")
     players = PermissibleValue(text="players",
                                      description="All players taking part in the game.")
 
@@ -1152,31 +1141,45 @@ class Action(EnumDefinitionImpl):
     An action taken by a player or card.
     """
     discard = PermissibleValue(text="discard",
-                                     description="Transfer one or more cards from the hand to the graveyard.")
+                                     description="Transfer one or more cards from the hand to the graveyard.",
+                                     meaning=MTG.discard)
     draw = PermissibleValue(text="draw",
-                               description="Transfer one or more cards from the library to the hand.")
+                               description="Transfer one or more cards from the library to the hand.",
+                               meaning=MTG.draw)
     sacrifice = PermissibleValue(text="sacrifice",
-                                         description="Transfer one or more cards from the battlefield to the graveyard.")
+                                         description="Transfer one or more permanents you control from the battlefield to their owner's graveyard.",
+                                         meaning=MTG.sacrifice)
     exile = PermissibleValue(text="exile",
-                                 description="Remove one or more cards from game.")
+                                 description="Remove one or more cards from game.",
+                                 meaning=MTG.exile)
     fight = PermissibleValue(text="fight",
-                                 description="Two cards fight each other.")
+                                 description="Two cards fight each other.",
+                                 meaning=MTG.fight)
+    destroy = PermissibleValue(text="destroy",
+                                     description="Transfer one or more permanents from the battlefield to their owner's graveyard.",
+                                     meaning=MTG.destroy)
     deal_damage = PermissibleValue(text="deal_damage",
                                              description="Something deals damage to something else.")
     cast = PermissibleValue(text="cast",
-                               description="A spell is cast.")
+                               description="A spell is cast.",
+                               meaning=MTG.cast)
     activate = PermissibleValue(text="activate",
-                                       description="An ability is activated.")
-    place_creature = PermissibleValue(text="place_creature",
-                                                   description="One or more creatures are placed on the battlefield.")
+                                       description="An ability is activated.",
+                                       meaning=MTG.activate)
+    play = PermissibleValue(text="play",
+                               description="A card is played as a land or cast as a spell, whichever is appropriate.",
+                               meaning=MTG.play)
     tap = PermissibleValue(text="tap",
-                             description="A card is tapped.")
+                             description="A card is tapped.",
+                             meaning=MTG.tap)
     untap = PermissibleValue(text="untap",
-                                 description="A card is untapped")
+                                 description="A card is untapped",
+                                 meaning=MTG.untap)
     add_mana = PermissibleValue(text="add_mana",
                                        description="A player adds mana to their mana pool.")
     control = PermissibleValue(text="control",
-                                     description="A player controls a card.")
+                                     description="A player controls a card.",
+                                     meaning=MTG.control_and_ownership)
 
     _defn = EnumDefinition(
         name="Action",
@@ -1238,37 +1241,53 @@ class TurnPhase(EnumDefinitionImpl):
     A time during the turn.
     """
     beginning_phase = PermissibleValue(text="beginning_phase",
-                                                     description="The beginning of the turn.")
+                                                     description="The beginning of the turn.",
+                                                     meaning=MTG.beggining_phase)
     untap_step = PermissibleValue(text="untap_step",
-                                           description="The untap step.")
+                                           description="The untap step.",
+                                           meaning=MTG.untap_step)
     upkeep_step = PermissibleValue(text="upkeep_step",
-                                             description="The upkeep step.")
+                                             description="The upkeep step.",
+                                             meaning=MTG.upkeep_step)
     draw_step = PermissibleValue(text="draw_step",
-                                         description="The draw step.")
+                                         description="The draw step.",
+                                         meaning=MTG.draw_step)
     main_phase = PermissibleValue(text="main_phase",
-                                           description="Either main phase.")
+                                           description="Either main phase.",
+                                           meaning=MTG.main_phase)
     pre_combat_main_phase = PermissibleValue(text="pre_combat_main_phase",
-                                                                 description="The first main phase.")
+                                                                 description="The first main phase.",
+                                                                 meaning=MTG.main_phase)
     post_combat_main_phase = PermissibleValue(text="post_combat_main_phase",
-                                                                   description="The second main phase.")
+                                                                   description="The second main phase.",
+                                                                   meaning=MTG.main_phase)
     combat_phase = PermissibleValue(text="combat_phase",
-                                               description="The combat phase.")
+                                               description="The combat phase.",
+                                               meaning=MTG.combat_phase)
     beginning_of_combat_step = PermissibleValue(text="beginning_of_combat_step",
-                                                                       description="The first step of the combat phase.")
+                                                                       description="The first step of the combat phase.",
+                                                                       meaning=MTG.beginning_of_combat_step)
     declare_attackers_step = PermissibleValue(text="declare_attackers_step",
-                                                                   description="The declare attackers step.")
+                                                                   description="The declare attackers step.",
+                                                                   meaning=MTG.declare_attackers_step)
     declare_blockers_step = PermissibleValue(text="declare_blockers_step",
-                                                                 description="The declare blockers step.")
+                                                                 description="The declare blockers step.",
+                                                                 meaning=MTG.declare_blockers_step)
     combat_damage_step = PermissibleValue(text="combat_damage_step",
-                                                           description="The combat damage step.")
+                                                           description="The combat damage step.",
+                                                           meaning=MTG.combat_damage_step)
     end_of_combat_step = PermissibleValue(text="end_of_combat_step",
-                                                           description="The end of combat step.")
+                                                           description="The end of combat step.",
+                                                           meaning=MTG.end_of_combat_step)
     ending_phase = PermissibleValue(text="ending_phase",
-                                               description="The end step.")
+                                               description="The end step.",
+                                               meaning=MTG.ending_phase)
     cleanup_step = PermissibleValue(text="cleanup_step",
-                                               description="The cleanup step.")
+                                               description="The cleanup step.",
+                                               meaning=MTG.cleanup_step)
     turn = PermissibleValue(text="turn",
-                               description="A player turn.")
+                               description="A player turn.",
+                               meaning=MTG.turn)
 
     _defn = EnumDefinition(
         name="TurnPhase",

@@ -5,6 +5,7 @@ PREFIX mtgoa: <https://w3id.org/cmdoret/mtg-ontology/abilities/>
 PREFIX mtgoc: <https://w3id.org/cmdoret/mtg-ontology/cards/>
 PREFIX linkml: <https://w3id.org/linkml/>
 PREFIX schema: <http://schema.org/>
+PREFIX mtg: <https://mtg.fandom.com/wiki/>
 
 
 linkml:String xsd:string
@@ -40,16 +41,18 @@ linkml:Objectidentifier IRI
 linkml:Nodeidentifier NONLITERAL
 
 mtgoa:Ability  (
-    CLOSED {
-       (  $mtgoa:Ability_tes (  &<Thing_tes> ;
-             rdf:type [ schema:Thing ] ? ;
-             mtgoa:rules_text @linkml:String ? ;
-             mtgoa:effect @mtgoa:Condition ?
-          ) ;
-          rdf:type [ mtgoa:Ability ]
-       )
-    } OR @mtgoa:ActivatedAbility OR @mtgoa:KeywordAbility OR @mtgoa:StaticAbility OR @mtgoa:TriggeredAbility
+    @mtgoa:ActivatedAbility OR @mtgoa:KeywordAbility OR @mtgoa:StaticAbility OR @mtgoa:TriggeredAbility
 )
+
+mtgoa:Ability_struct {
+    (  $mtgoa:Ability_tes (  &<Thing_tes> ;
+          rdf:type [ schema:Thing ] ? ;
+          mtgoa:rules_text @linkml:String ? ;
+          mtgoa:effect @mtgoa:Condition ?
+       ) ;
+       rdf:type [ mtg:Ability ]
+    )
+}
 
 mtgoa:AbilityCollection CLOSED {
     (  $mtgoa:AbilityCollection_tes (  mtgoa:activated_abilities @mtgoa:ActivatedAbility * ;
@@ -77,43 +80,45 @@ mtgoa:ActionSpecification CLOSED {
 
 mtgoa:ActivatedAbility CLOSED {
     (  $mtgoa:ActivatedAbility_tes (  &mtgoa:Ability_tes ;
-          rdf:type [ mtgoa:Ability ] ? ;
+          rdf:type [ mtg:Ability ] ? ;
           mtgoa:cost @linkml:String * ;
           mtgoa:condition @mtgoa:Condition ?
        ) ;
-       rdf:type [ mtgoa:ActivatedAbility ]
+       rdf:type [ mtg:Activated_ability ]
     )
 }
 
 mtgoc:Artifact CLOSED {
     (  $mtgoc:Artifact_tes (  &mtgoc:Permanent_tes ;
-          rdf:type [ mtgoc:Permanent ] ?
+          rdf:type [ mtg:Permanent ] ?
        ) ;
-       rdf:type [ mtgoc:Artifact ]
+       rdf:type [ mtg:Artifact ]
     )
 }
 
 mtgoc:Card  (
-    CLOSED {
-       (  $mtgoc:Card_tes (  &<NamedThing_tes> ;
-             rdf:type [ schema:Thing ] ? ;
-             mtgoc:mana_cost @mtgoc:ManaCost * ;
-             mtgoc:converted_mana_cost @linkml:Integer ? ;
-             mtgoc:color @mtgoc:Color + ;
-             mtgoc:card_set @linkml:String ? ;
-             mtgoc:ability @mtgoa:Ability * ;
-             mtgoc:artist @linkml:String ? ;
-             mtgoc:flavor_text @linkml:String ? ;
-             mtgoc:type_line @linkml:String ;
-             mtgoc:card_type @linkml:String ;
-             mtgoc:card_subtype @linkml:String * ;
-             mtgoc:card_supertype @linkml:String * ;
-             mtgoc:rarity @mtgoc:Rarity ?
-          ) ;
-          rdf:type [ mtgoc:Card ]
-       )
-    } OR @mtgoc:Instant OR @mtgoc:Permanent OR @mtgoc:Sorcery OR @mtgoc:Token
+    @mtgoc:Instant OR @mtgoc:Permanent OR @mtgoc:Sorcery OR @mtgoc:Token
 )
+
+mtgoc:Card_struct {
+    (  $mtgoc:Card_tes (  &<NamedThing_tes> ;
+          rdf:type [ schema:Thing ] ? ;
+          mtgoc:mana_cost @mtgoc:ManaCost * ;
+          mtgoc:converted_mana_cost @linkml:Integer ? ;
+          mtgoc:color @mtgoc:Color + ;
+          mtgoc:card_set @linkml:String ? ;
+          mtgoc:ability @mtgoa:Ability * ;
+          mtgoc:artist @linkml:String ? ;
+          mtgoc:flavor_text @linkml:String ? ;
+          mtgoc:type_line @linkml:String ;
+          mtgoc:card_type @linkml:String ;
+          mtgoc:card_subtype @linkml:String * ;
+          mtgoc:card_supertype @linkml:String * ;
+          mtgoc:rarity @mtgoc:Rarity ?
+       ) ;
+       rdf:type [ mtg:Card ]
+    )
+}
 
 mtgoc:CardCollection CLOSED {
     (  $mtgoc:CardCollection_tes (  mtgoc:cards @mtgoc:Card * ;
@@ -144,60 +149,60 @@ mtgoc:Cost  (
              <intersection> @mtgoc:Cost ? ;
              <union> @mtgoc:Cost ?
           ) ;
-          rdf:type [ mtgoc:Cost ]
+          rdf:type [ mtg:Cost ]
        )
     } OR @mtgoc:LifeCost OR @mtgoc:ManaCost
 )
 
 mtgoc:Creature CLOSED {
     (  $mtgoc:Creature_tes (  &mtgoc:Permanent_tes ;
-          rdf:type [ mtgoc:Permanent ] ? ;
+          rdf:type [ mtg:Permanent ] ? ;
           mtgoc:power @linkml:Integer ;
           mtgoc:toughness @linkml:Integer
        ) ;
-       rdf:type [ mtgoc:Creature ]
+       rdf:type [ mtg:Creature ]
     )
 }
 
 mtgoc:Enchantment CLOSED {
     (  $mtgoc:Enchantment_tes (  &mtgoc:Permanent_tes ;
-          rdf:type [ mtgoc:Permanent ] ?
+          rdf:type [ mtg:Permanent ] ?
        ) ;
-       rdf:type [ mtgoc:Enchantment ]
+       rdf:type [ mtg:Enchantment ]
     )
 }
 
 mtgoc:Instant CLOSED {
     (  $mtgoc:Instant_tes (  &mtgoc:Card_tes ;
-          rdf:type [ mtgoc:Card ] ?
+          rdf:type [ mtg:Card ] ?
        ) ;
-       rdf:type [ mtgoc:Instant ]
+       rdf:type [ mtg:Instant ]
     )
 }
 
 mtgoa:KeywordAbility CLOSED {
     (  $mtgoa:KeywordAbility_tes (  &mtgoa:Ability_tes ;
-          rdf:type [ mtgoa:Ability ] ? ;
+          rdf:type [ mtg:Ability ] ? ;
           schema:name @linkml:String ;
           mtgoc:value @linkml:Integer ?
        ) ;
-       rdf:type [ mtgoa:KeywordAbility ]
+       rdf:type [ mtg:Keyword_ability ]
     )
 }
 
 mtgoc:Land CLOSED {
     (  $mtgoc:Land_tes (  &mtgoc:Permanent_tes ;
-          rdf:type [ mtgoc:Permanent ] ?
+          rdf:type [ mtg:Permanent ] ?
        ) ;
-       rdf:type [ mtgoc:Land ]
+       rdf:type [ mtg:Land ]
     )
 }
 
 mtgoc:LifeCost CLOSED {
     (  $mtgoc:LifeCost_tes (  &mtgoc:Cost_tes ;
-          rdf:type [ mtgoc:Cost ] ?
+          rdf:type [ mtg:Cost ] ?
        ) ;
-       rdf:type [ mtgoc:LifeCost ]
+       rdf:type [ mtg:Life ]
     )
 }
 
@@ -207,17 +212,17 @@ mtgoc:Mana CLOSED {
           mtgoc:color @mtgoc:Color + ;
           mtgoc:snow @linkml:Boolean ?
        ) ;
-       rdf:type [ mtgoc:Mana ]
+       rdf:type [ mtg:Mana ]
     )
 }
 
 mtgoc:ManaCost CLOSED {
     (  $mtgoc:ManaCost_tes (  &mtgoc:Cost_tes ;
-          rdf:type [ mtgoc:Cost ] ? ;
+          rdf:type [ mtg:Cost ] ? ;
           mtgoc:color @mtgoc:Color + ;
           mtgoc:snow @linkml:Boolean ?
        ) ;
-       rdf:type [ mtgoc:ManaCost ]
+       rdf:type [ mtg:Mana_cost ]
     )
 }
 
@@ -232,49 +237,53 @@ mtgoc:ManaCost CLOSED {
 )
 
 mtgoc:Permanent  (
-    CLOSED {
-       (  $mtgoc:Permanent_tes (  &mtgoc:Card_tes ;
-             rdf:type [ mtgoc:Card ] ?
-          ) ;
-          rdf:type [ mtgoc:Permanent ]
-       )
-    } OR @mtgoc:Artifact OR @mtgoc:Creature OR @mtgoc:Enchantment OR @mtgoc:Land
+    @mtgoc:Artifact OR @mtgoc:Creature OR @mtgoc:Enchantment OR @mtgoc:Land
 )
+
+mtgoc:Permanent_struct {
+    (  $mtgoc:Permanent_tes (  &mtgoc:Card_tes ;
+          rdf:type [ mtg:Card ] ?
+       ) ;
+       rdf:type [ mtg:Permanent ]
+    )
+}
 
 mtgoc:Sorcery CLOSED {
     (  $mtgoc:Sorcery_tes (  &mtgoc:Card_tes ;
-          rdf:type [ mtgoc:Card ] ?
+          rdf:type [ mtg:Card ] ?
        ) ;
-       rdf:type [ mtgoc:Sorcery ]
+       rdf:type [ mtg:Sorcery ]
     )
 }
 
 mtgoa:Specification  (
-    CLOSED {
-       (  $mtgoa:Specification_tes (  &<Thing_tes> ;
-             rdf:type [ schema:Thing ] ? ;
-             mtgoa:constraint @linkml:String ? ;
-             <intersection> @<NamedThing> ? ;
-             <union> @<NamedThing> ?
-          ) ;
-          rdf:type [ mtgoa:Specification ]
-       )
-    } OR @mtgoa:ActionSpecification OR @mtgoa:ValueSpecification
+    @mtgoa:ActionSpecification OR @mtgoa:ValueSpecification
 )
+
+mtgoa:Specification_struct {
+    (  $mtgoa:Specification_tes (  &<Thing_tes> ;
+          rdf:type [ schema:Thing ] ? ;
+          mtgoa:constraint @linkml:String ? ;
+          <intersection> @<NamedThing> ? ;
+          <union> @<NamedThing> ?
+       ) ;
+       rdf:type [ mtgoa:Specification ]
+    )
+}
 
 mtgoc:Spell CLOSED {
     (  $mtgoc:Spell_tes (  &<Thing_tes> ;
           rdf:type [ schema:Thing ] ?
        ) ;
-       rdf:type [ mtgoc:Spell ]
+       rdf:type [ mtg:Spell ]
     )
 }
 
 mtgoa:StaticAbility CLOSED {
     (  $mtgoa:StaticAbility_tes (  &mtgoa:Ability_tes ;
-          rdf:type [ mtgoa:Ability ] ?
+          rdf:type [ mtg:Ability ] ?
        ) ;
-       rdf:type [ mtgoa:StaticAbility ]
+       rdf:type [ mtg:Static_ability ]
     )
 }
 
@@ -302,18 +311,18 @@ mtgoa:TimeSpecification CLOSED {
 
 mtgoc:Token CLOSED {
     (  $mtgoc:Token_tes (  &mtgoc:Card_tes ;
-          rdf:type [ mtgoc:Card ] ?
+          rdf:type [ mtg:Card ] ?
        ) ;
-       rdf:type [ mtgoc:Token ]
+       rdf:type [ mtg:Token ]
     )
 }
 
 mtgoa:TriggeredAbility CLOSED {
     (  $mtgoa:TriggeredAbility_tes (  &mtgoa:Ability_tes ;
-          rdf:type [ mtgoa:Ability ] ? ;
+          rdf:type [ mtg:Ability ] ? ;
           mtgoa:condition @mtgoa:Condition ?
        ) ;
-       rdf:type [ mtgoa:TriggeredAbility ]
+       rdf:type [ mtg:Triggered_ability ]
     )
 }
 
