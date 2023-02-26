@@ -1,0 +1,36 @@
+cards:
+  - id: example:island
+    name: Island
+    color: blue
+    type_line: Basic Land - Island
+    card_type: Land
+    card_subtype: Island
+    card_supertype: Basic
+    artist: David Alvarez
+    card_set: "Phyrexia: All Will Be One"
+    rarity: common
+
+  - id: example:plains
+    name: Plains
+    color: white
+    type_line: Basic Land - Plains
+    card_type: Land
+    card_subtype: Plains
+    card_supertype: Basic
+    artist: Titus Lunter
+    flavor_text: "Searching for a vanished caravan that was bound for Silverymoon, you’ve come to a bank of mysterious fog."
+    card_set: Adventures in the Forgotten Realms
+    rarity: common
+
+  - id: example:bonders-enclave
+    name: Bonders' Enclave
+    color: colorless
+    type_line: Land
+    card_type: Land
+    artist: Cliff Childs
+    flavor_text: "There is a sanctuary that reveals itself only to those graced by the eludha—the mystical connection between bonder and monster."
+    card_set: "Ikoria: Lair of Behemoths"
+    rarity: rare
+    ability:
+      - example:tap-add-1colorless
+      - example:3cl-tap-draw

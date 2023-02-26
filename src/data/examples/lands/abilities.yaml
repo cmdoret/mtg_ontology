@@ -1,0 +1,50 @@
+activated_abilities:
+- id: example:tap-add-1colorless
+  cost: example:cost-tap
+  effect: example:add-1cl
+- id: example:3cl-tap-draw
+  cost:
+    - example:cost-3cl
+    - example:cost-tap
+  condition: example:control-1crea-ge4pow
+  effect: example:draw1
+
+mana_costs:
+- id: example:cost-3cl
+  value: 3
+  color: colorless
+
+conditions:
+- id: example:cost-tap
+  target: example:bonders-enclave
+  action_spec: example:action-tap
+- id: example:control-1crea-ge4pow
+  target: you
+  action_spec: example:action-control
+  value_spec:
+    - example:1creature
+    - example:4pow
+- id: example:draw1
+  target: you
+  action_spec: example:action-draw
+  value_spec: example:1card
+
+action_specifications:
+- id: example:action-control
+  action: control
+- id: example:action-draw
+  action: draw
+- id: example:action-tap
+  action: tap
+
+value_specifications:
+- id: example:1card
+  value: 1
+  unit: Card
+- id: example:1creature
+  value: 1
+  unit: Creature
+- id: example:4pow
+  value: 4
+  unit: power
+  constraint: greater_than_or_equal

@@ -1,6 +1,5 @@
 id: https://w3id.org/cmdoret/mtg-ontology/cards
 name: mtgo-cards
-title: Magic The Gathering Ontology for Cards
 description: |-
   An ontology describing Magic: The Gathering cards.
 license: GNU GPL v3.0
@@ -14,14 +13,13 @@ prefixes:
   linkml: https://w3id.org/linkml/
   schema: http://schema.org/
   wiki: http://en.wikipedia.org/wiki/
-  example: http://www.example.org/rdf#
 default_prefix: mtgoc
 default_range: string
 
 imports:
   - linkml:types
   - mtg_ontology
-
+  - abilities
 classes:
 
   Card:
@@ -33,6 +31,7 @@ classes:
       - converted_mana_cost
       - color
       - card_set
+      - ability
       - artist
       - flavor_text
       - type_line
@@ -42,7 +41,7 @@ classes:
       - rarity
 
   Spell:
-    is_a: NamedThing
+    is_a: Thing
     description: >-
       An object on the stack. Either a card that has been cast, or a copy.
 
@@ -84,17 +83,17 @@ classes:
       A card that represents a land that can be tapped for mana.
 
   Cost:
-    is_a: NamedThing
+    is_a: Thing
     description: >-
       The cost of a card or ability.
     slots:
       - value
-      - and
-      - or
+      - intersection
+      - union
     slot_usage:
-      and:
+      intersection:
         range: Cost
-      or:
+      union:
         range: Cost
 
   ManaCost:
@@ -111,7 +110,7 @@ classes:
       The life cost of a card or ability.
 
   Mana:
-    is_a: NamedThing
+    is_a: Thing
     description: >-
       A mana in the pool.
     slots:
@@ -121,11 +120,16 @@ classes:
   CardCollection:
     tree_root: true
     description: >-
-      A collection of Cards, such as a Deck or cards set.
+      A collection of cards and associated costs.
     attributes:
-      entries:
-        description: Members of the card collection.
+      cards:
+        description: Cards in the collection.
         range: Card
+        multivalued: true
+        inlined: true
+      costs:
+        description: Costs in the collection.
+        range: Cost
         multivalued: true
         inlined: true
 
@@ -140,6 +144,10 @@ slots:
   converted_mana_cost:
     description: The total mana cost for a card or ability, summed across all colors.
     range: integer
+  ability:
+    description: An ability associated with a card.
+    range: Ability
+    multivalued: true
   color:
     description: The color of a card.
     range: Color

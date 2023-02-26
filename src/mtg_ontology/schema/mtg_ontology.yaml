@@ -1,6 +1,6 @@
 id: https://w3id.org/cmdoret/mtg-ontology/
 name: mtgo
-title: Magic The Gathering Ontology
+title: Magic The Gathering Ontology.
 description: |-
   An ontology describing Magic: The Gathering. It provides
   the basic features needed to describe cards.
@@ -35,6 +35,13 @@ classes:
       - description
     class_uri: schema:Thing
 
+  Thing:
+    description: >-
+      A generic grouping for any identifiable entity
+    slots:
+      - id
+    class_uri: schema:Thing
+
 slots:
 
   id:
@@ -49,11 +56,11 @@ slots:
   description:
     slot_uri: schema:description
     description: A human-readable description for a thing
-  and:
+  intersection:
     range: NamedThing
-    description: A conjunction of two objects.
+    description: A conjunction of two objects (a and b).
     symmetric: true
-  or:
+  union:
     range: NamedThing
-    description: A disjunction of two objects.
+    description: A disjunction of two objects (a or b).
     symmetric: true

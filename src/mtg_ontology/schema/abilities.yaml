@@ -22,13 +22,13 @@ default_range: string
 
 imports:
   - linkml:types
-  - mtg_ontology
   - cards
+  - mtg_ontology
 
 classes:
 
   Ability:
-    is_a: NamedThing
+    is_a: Thing
     description: >-
       A card ability, activated, triggered or static.
     slots:
@@ -60,24 +60,58 @@ classes:
       - condition
 
   Condition:
-    is_a: NamedThing
+    is_a: Thing
     description: A condition expressed as constraints.
     slots:
       - source
       - target
-      - property
       - action_spec
       - value_spec
       - time_spec
   
+  AbilityCollection:
+    tree_root: true
+    description: >-
+      A collection of abilities and associated concepts.
+    attributes:
+      activated_abilities:
+        description: Activated abilities in the collection.
+        range: ActivatedAbility
+        multivalued: true
+        inlined: true
+      conditions:
+        description: Conditions in the collection.
+        range: Condition
+        multivalued: true
+        inlined: true
+      mana_costs:
+        description: Mana costs in the collection.
+        range: ManaCost
+        multivalued: true
+        inlined: true
+      value_specifications:
+        description: Values in the collection.
+        range: ValueSpecification
+        multivalued: true
+        inlined: true
+      action_specifications:
+        description: Action specifications in the collection.
+        range: ActionSpecification
+        multivalued: true
+        inlined: true
+      time_specifications:
+        description: Time specifications in the collection.
+        range: TimeSpecification
+        multivalued: true
+        inlined: true
 
   Specification:
-    is_a: NamedThing
+    is_a: Thing
     description: A specification for a thing. 
     slots:
       - constraint
-      - and
-      - or
+      - intersection 
+      - union
 
   ActionSpecification:
     is_a: Specification
@@ -85,9 +119,9 @@ classes:
     slots:
     - action
     slot_usage:
-      and:
+      intersection:
         range: ActionSpecification
-      or:
+      union:
         range: ActionSpecification
       constraint:
         range: ActionConstraint
@@ -99,37 +133,29 @@ classes:
     - value
     - unit
     slot_usage:
-      and:
+      intersection:
         range: ValueSpecification
-      or:
+      union:
         range: ValueSpecification
       constraint:
         range: ValueConstraint
 
   TimeSpecification:
-    is_a: NamedThing
+    is_a: Thing
     description: A specification for a time.
     slots:
-      - time 
+      - turn_phase
       - player
     slot_usage:
-      and:
+      intersection:
         range: TimeSpecification
-      or:
+      union:
         range: TimeSpecification
       constraint:
         range: TimeConstraint
 
-  Property:
-    is_a: NamedThing
-    description: A property of an entity.
 
 slots:
-  ability:
-    description: An ability associated with a card.
-    range: Ability
-    domain: Card
-    multivalued: true
   rules_text:
     range: string
     description: The text describing what an ability does.
@@ -159,9 +185,6 @@ slots:
   condition:
     range: Condition
     description: A condition required for an activation.
-  property:
-    range: Property
-    description: A property of an entity.
   value_spec:
     range: ValueSpecification
     description: A specification for the value of a property.
@@ -177,8 +200,8 @@ slots:
   player:
     range: Player
     description: A player.
-  time:
-    range: Time
+  turn_phase:
+    range: TurnPhase
     description: A phase of the game.
   unit:
     any_of:
@@ -280,7 +303,7 @@ enums:
       is_not_one_of:
         description: The value must not be one of the target list.
 
-  Time:
+  TurnPhase:
     description: A time during the turn.
     permissible_values:
       beginning_phase:
