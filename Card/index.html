@@ -227,6 +227,7 @@
       Card : id
       Card : mana_cost
       Card : name
+      Card : oracle_text
       Card : rarity
       Card : type_line
 
@@ -249,6 +250,7 @@
       Card : id
       Card : mana_cost
       Card : name
+      Card : oracle_text
       Card : rarity
       Card : type_line
 
@@ -350,6 +352,12 @@
 <td>direct</td>
 </tr>
 <tr>
+<td><a href="../oracle_text/">oracle_text</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td>The official wording for the card effects</td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../id/">id</a></td>
 <td>1..1 <br/> <a href="xsd:anyURI">xsd:anyURI</a></td>
 <td>A unique identifier for a thing</td>
@@ -435,6 +443,7 @@ slots:
 - card_subtype
 - card_supertype
 - rarity
+- oracle_text
 class_uri: mtg:Card
 
 </code></pre>
@@ -583,6 +592,16 @@ attributes:
     domain_of:
     - Card
     range: Rarity
+  oracle_text:
+    name: oracle_text
+    description: The official wording for the card effects.
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
+    rank: 1000
+    alias: oracle_text
+    owner: Card
+    domain_of:
+    - Card
+    range: string
   id:
     name: id
     description: A unique identifier for a thing

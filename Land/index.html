@@ -219,6 +219,7 @@
       Land : id
       Land : mana_cost
       Land : name
+      Land : oracle_text
       Land : rarity
       Land : type_line
 
@@ -317,6 +318,12 @@
 <td><a href="../rarity/">rarity</a></td>
 <td>0..1 <br/> <a href="../Rarity/">Rarity</a></td>
 <td>An ability associated with a card</td>
+<td><a href="../Card/">Card</a></td>
+</tr>
+<tr>
+<td><a href="../oracle_text/">oracle_text</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td>The official wording for the card effects</td>
 <td><a href="../Card/">Card</a></td>
 </tr>
 <tr>
@@ -519,6 +526,16 @@ attributes:
     domain_of:
     - Card
     range: Rarity
+  oracle_text:
+    name: oracle_text
+    description: The official wording for the card effects.
+    from_schema: https://w3id.org/cmdoret/mtg-ontology/cards
+    rank: 1000
+    alias: oracle_text
+    owner: Land
+    domain_of:
+    - Card
+    range: string
   id:
     name: id
     description: A unique identifier for a thing

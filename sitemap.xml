@@ -331,6 +331,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://cmdoret.github.io/mtg-ontology/oracle_text/</loc>
+         <lastmod>2023-02-26</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://cmdoret.github.io/mtg-ontology/player/</loc>
          <lastmod>2023-02-26</lastmod>
          <changefreq>daily</changefreq>
