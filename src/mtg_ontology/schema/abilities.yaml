@@ -10,9 +10,10 @@ see_also:
   - https://cmdoret.github.io/mtg-ontology
 
 prefixes:
+  mtg: https://mtg.fandom.com/wiki/
+  mtgo: https://w3id.org/cmdoret/mtg-ontology/
   mtgoa: https://w3id.org/cmdoret/mtg-ontology/abilities/
   mtgoc: https://w3id.org/cmdoret/mtg-ontology/cards/
-  mtgo: https://w3id.org/cmdoret/mtg-ontology/
   linkml: https://w3id.org/linkml/
   schema: http://schema.org/
   wiki: http://en.wikipedia.org/wiki/
@@ -29,6 +30,8 @@ classes:
 
   Ability:
     is_a: Thing
+    class_uri: mtg:Ability
+    abstract: true
     description: >-
       A card ability, activated, triggered or static.
     slots:
@@ -36,6 +39,7 @@ classes:
       - effect
   ActivatedAbility:
     is_a: Ability
+    class_uri: mtg:Activated_ability
     description: >-
       A card ability which can be activated for a cost.
     slots:
@@ -43,6 +47,7 @@ classes:
       - condition
   KeywordAbility:
     is_a: Ability
+    class_uri: mtg:Keyword_ability
     description: >-
       A passive ability represented by word that substitutes for a piece of rules text, such as deathtouch or flying.
     slots:
@@ -50,10 +55,12 @@ classes:
       - value
   StaticAbility:
     is_a: Ability
+    class_uri: mtg:Static_ability
     description: >-
       A card ability which remains active until endgame once put into effect.
   TriggeredAbility:
     is_a: Ability
+    class_uri: mtg:Triggered_ability
     description: >-
       A card ability, triggered by an event.
     slots:
@@ -108,6 +115,7 @@ classes:
   Specification:
     is_a: Thing
     description: A specification for a thing. 
+    abstract: true
     slots:
       - constraint
       - intersection 
@@ -223,47 +231,70 @@ enums:
     description: One or more human players.
     permissible_values:
       you:
-        description: The focal human player.
+        description: The focal player.
+      active_player:
+        description: The player who is currently taking their turn.
+      non_active_player:
+        description: Any player who is not currently taking their turn.
+      defending_player:
+        description: The player who is currently defending.
+      attacking_player:
+        description: The player who is currently attacking.
       owner:
-        description: The human player who owns a card.
+        description: The player who owns a card.
       controller:
-        description: The human player who controls an object on the stack.
+        description: The player who controls an object on the stack.
       opponent:
-        description: A human player playing against the focal player.
+        description: A player playing against the focal player.
       opponents:
-        description: All human players playing against the focal player.
+        description: All players playing against the focal player.
       players:
         description: All players taking part in the game.
 
   Action:
     description: An action taken by a player or card.
+    enum_uri: mtg:keyword_action
     permissible_values:
       discard:
         description: Transfer one or more cards from the hand to the graveyard.
+        meaning: mtg:discard
       draw:
         description: Transfer one or more cards from the library to the hand.
+        meaning: mtg:draw
       sacrifice:
-        description: Transfer one or more cards from the battlefield to the graveyard.
+        description: Transfer one or more permanents you control from the battlefield to their owner's graveyard.
+        meaning: mtg:sacrifice
       exile:
         description: Remove one or more cards from game.
+        meaning: mtg:exile
       fight:
         description: Two cards fight each other.
+        meaning: mtg:fight
+      destroy:
+        description: Transfer one or more permanents from the battlefield to their owner's graveyard.
+        meaning: mtg:destroy
       deal_damage:
         description: Something deals damage to something else.
       cast:
         description: A spell is cast.
+        meaning: mtg:cast
       activate:
         description: An ability is activated.
-      place_creature:
-        description: One or more creatures are placed on the battlefield.
+        meaning: mtg:activate
+      play:
+        description: A card is played as a land or cast as a spell, whichever is appropriate.
+        meaning: mtg:play
       tap:
         description: A card is tapped.
+        meaning: mtg:tap
       untap:
         description: A card is untapped
+        meaning: mtg:untap
       add_mana:
         description: A player adds mana to their mana pool.
       control:
         description: A player controls a card.
+        meaning: mtg:control_and_ownership
 
   ActionConstraint:
     permissible_values:
@@ -308,36 +339,52 @@ enums:
     permissible_values:
       beginning_phase:
         description: The beginning of the turn.
+        meaning: mtg:beggining_phase
       untap_step:
         description: The untap step.
+        meaning: mtg:untap_step
       upkeep_step:
         description: The upkeep step.
+        meaning: mtg:upkeep_step
       draw_step:
         description: The draw step.
+        meaning: mtg:draw_step
       main_phase:
         description: Either main phase.
+        meaning: mtg:main_phase
       pre_combat_main_phase:
         description: The first main phase.
+        meaning: mtg:main_phase
       post_combat_main_phase:
         description: The second main phase.
+        meaning: mtg:main_phase
       combat_phase:
         description: The combat phase.
+        meaning: mtg:combat_phase
       beginning_of_combat_step:
         description: The first step of the combat phase.
+        meaning: mtg:beginning_of_combat_step
       declare_attackers_step:
         description: The declare attackers step.
+        meaning: mtg:declare_attackers_step
       declare_blockers_step:
         description: The declare blockers step.
+        meaning: mtg:declare_blockers_step
       combat_damage_step:
         description: The combat damage step.
+        meaning: mtg:combat_damage_step
       end_of_combat_step:
         description: The end of combat step.
+        meaning: mtg:end_of_combat_step
       ending_phase:
         description: The end step.
+        meaning: mtg:ending_phase
       cleanup_step:
         description: The cleanup step.
+        meaning: mtg:cleanup_step
       turn:
         description: A player turn.
+        meaning: mtg:turn
   
   TimeConstraint:
     description: A constraint on the time of an event.

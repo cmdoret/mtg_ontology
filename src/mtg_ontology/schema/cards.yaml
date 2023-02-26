@@ -7,6 +7,7 @@ see_also:
   - https://cmdoret.github.io/mtg-ontology/cards
 
 prefixes:
+  mtg: https://mtg.fandom.com/wiki/
   mtgo: https://w3id.org/cmdoret/mtg-ontology/
   mtgoa: https://w3id.org/cmdoret/mtg-ontology/abilities/
   mtgoc: https://w3id.org/cmdoret/mtg-ontology/cards/
@@ -24,6 +25,8 @@ classes:
 
   Card:
     is_a: NamedThing
+    class_uri: mtg:Card
+    abstract: true
     description: >-
       A card in the Magic The Gathering game.
     slots:
@@ -42,36 +45,45 @@ classes:
 
   Spell:
     is_a: Thing
+    class_uri: mtg:Spell
     description: >-
       An object on the stack. Either a card that has been cast, or a copy.
 
   Permanent:
     is_a: Card
+    class_uri: mtg:Permanent
+    abstract: true
     description: >-
       A card or token that can be put onto the battlefield.
   Token:
     is_a: Card
+    class_uri: mtg:Token
     description: >-
       A permanent that is not represented by a regular card and does not have a casting cost.
 
   Sorcery:
     is_a: Card
+    class_uri: mtg:Sorcery
     description: >-
       A card that represents a sorcery spell that can be cast.
   Instant:
     is_a: Card
+    class_uri: mtg:Instant
     description: >-
       A card that represents an instant spell that can be cast.
   Enchantment:
     is_a: Permanent
+    class_uri: mtg:Enchantment
     description: >-
       A permanent which applies persistent magical effects.
   Artifact:
     is_a: Permanent
+    class_uri: mtg:Artifact
     description: >-
       A permanent representing a magical item, animated construct, or other objects and devices.
   Creature:
     is_a: Permanent
+    class_uri: mtg:Creature
     description: >-
       A card that represents a creature that can be summoned to the battlefield.
     slots:
@@ -79,11 +91,13 @@ classes:
       - toughness
   Land:
     is_a: Permanent
+    class_uri: mtg:Land
     description: >-
       A card that represents a land that can be tapped for mana.
 
   Cost:
     is_a: Thing
+    class_uri: mtg:Cost
     description: >-
       The cost of a card or ability.
     slots:
@@ -98,6 +112,7 @@ classes:
 
   ManaCost:
     is_a: Cost
+    class_uri: mtg:Mana_cost
     description: >-
       The mana cost of a card or ability.
     slots:
@@ -106,11 +121,13 @@ classes:
 
   LifeCost:
     is_a: Cost
+    class_uri: mtg:Life
     description: >-
       The life cost of a card or ability.
 
   Mana:
     is_a: Thing
+    class_uri: mtg:Mana
     description: >-
       A mana in the pool.
     slots:
@@ -200,35 +217,41 @@ enums:
   Color:
     description: >-
       A color, such as Black, Blue, Red, Green, White or Colorless.
+      enum_uri: mtg:color
     permissible_values:
       black:
         description: The color black, associated with darkness.
-        meaning: wiki:Q23445
+        meaning: mtg:black
       blue:
         description: The color blue, associated with water.
-        meaning: wiki:Q1088
+        meaning: mtg:blue
       green:
         description: The color green, associated with nature.
-        meaning: wiki:Q3133
+        meaning: mtg:green
       red:
         description: The color red, associated with fire.
-        meaning: wiki:Q3142
+        meaning: mtg:red
       white:
         description: The color white, associated with light.
-        meaning: wiki:Q23444
+        meaning: mtg:white
       colorless:
         description: Absence of color.
-        meaning: wiki:Q1396399
+        meaning: mtg:colorless
 
   Rarity:
     description: >-
       The rarity of the card, may be one of Common, Uncommon, Rare or Mythic.
+      enum_uri: mtg:rarity
     permissible_values:
       common:
         description: The lowest rarity level, identified by a black set image.
+        meaning: mtg:common
       uncommon:
         description: The second lowest rarity level, identified by a silver set image.
+        meaning: mtg:uncommon
       rare:
         description: The second highest rarity level, identified by a golden set image.
+        meaning: mtg:rare
       mythic:
         description: The highest rarity level, identified by a red set image.
+        meaning: mtg:mythic_rare
