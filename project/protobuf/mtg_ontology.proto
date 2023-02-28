@@ -95,8 +95,8 @@ message Creature
  repeated  string cardSupertype = 0
   rarity rarity = 0
   string oracleText = 0
-  integer power = 0
-  integer toughness = 0
+  string power = 0
+  string toughness = 0
  }
 // A permanent which applies persistent magical effects.
 message Enchantment

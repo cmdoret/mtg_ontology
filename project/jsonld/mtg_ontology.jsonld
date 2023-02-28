@@ -1138,9 +1138,19 @@
       "domain_of": [
         "Creature"
       ],
-      "range": "integer",
+      "range": "string",
       "required": true,
-      "minimum_value": 0,
+      "any_of": [
+        {
+          "range": "integer",
+          "@type": "AnonymousSlotExpression"
+        },
+        {
+          "range": "string",
+          "pattern": "^(\\\\d?\\\\+?\\\\*)$",
+          "@type": "AnonymousSlotExpression"
+        }
+      ],
       "@type": "SlotDefinition"
     },
     {
@@ -1153,9 +1163,20 @@
       "domain_of": [
         "Creature"
       ],
-      "range": "integer",
+      "range": "string",
       "required": true,
       "minimum_value": 0,
+      "any_of": [
+        {
+          "range": "integer",
+          "@type": "AnonymousSlotExpression"
+        },
+        {
+          "range": "string",
+          "pattern": "^(\\\\d?\\\\+?\\\\*)$",
+          "@type": "AnonymousSlotExpression"
+        }
+      ],
       "@type": "SlotDefinition"
     },
     {
@@ -2632,7 +2653,7 @@
   "source_file": "mtg_ontology.yaml",
   "source_file_date": "2023-02-25T21:35:31",
   "source_file_size": 1587,
-  "generation_date": "2023-02-28T01:40:10",
+  "generation_date": "2023-02-28T02:44:02",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/mtg_ontology.context.jsonld",

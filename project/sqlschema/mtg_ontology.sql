@@ -81,8 +81,8 @@ CREATE TABLE "Creature" (
 	card_type TEXT NOT NULL, 
 	rarity VARCHAR(8), 
 	oracle_text TEXT, 
-	power INTEGER NOT NULL, 
-	toughness INTEGER NOT NULL, 
+	power TEXT NOT NULL, 
+	toughness TEXT NOT NULL, 
 	PRIMARY KEY (id)
 );
 

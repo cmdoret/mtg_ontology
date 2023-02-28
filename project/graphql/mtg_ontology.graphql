@@ -122,8 +122,8 @@ type Creature
     cardSupertype: [String]
     rarity: Rarity
     oracleText: String
-    power: Integer!
-    toughness: Integer!
+    power: String!
+    toughness: String!
   }
 
 type Enchantment

@@ -667,18 +667,31 @@
                     "type": "string"
                 },
                 "power": {
-                    "description": "The amount of damage dealt in combat. This is the first number in the lower right corner of a creature card.",
-                    "minimum": 0,
-                    "type": "integer"
+                    "anyOf": [
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "The amount of damage dealt in combat. This is the first number in the lower right corner of a creature card."
                 },
                 "rarity": {
                     "$ref": "#/$defs/Rarity",
                     "description": "An ability associated with a card."
                 },
                 "toughness": {
+                    "anyOf": [
+                        {
+                            "type": "integer"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
                     "description": "The amount of damage needed to destroy a creature. This is the second number in the lower right corner of a creature card.",
-                    "minimum": 0,
-                    "type": "integer"
+                    "minimum": 0
                 },
                 "type_line": {
                     "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",

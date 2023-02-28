@@ -1,5 +1,5 @@
 # Auto generated from mtg_ontology.yaml by pythongen.py version: 0.9.0
-# Generation date: 2023-02-28T01:40:30
+# Generation date: 2023-02-28T02:44:27
 # Schema: mtgo
 #
 # id: https://w3id.org/cmdoret/mtg-ontology/
@@ -490,8 +490,8 @@ class Creature(Permanent):
     color: Union[Union[str, "Color"], List[Union[str, "Color"]]] = None
     type_line: str = None
     card_type: str = None
-    power: int = None
-    toughness: int = None
+    power: str = None
+    toughness: str = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -501,13 +501,13 @@ class Creature(Permanent):
 
         if self._is_empty(self.power):
             self.MissingRequiredField("power")
-        if not isinstance(self.power, int):
-            self.power = int(self.power)
+        if not isinstance(self.power, str):
+            self.power = str(self.power)
 
         if self._is_empty(self.toughness):
             self.MissingRequiredField("toughness")
-        if not isinstance(self.toughness, int):
-            self.toughness = int(self.toughness)
+        if not isinstance(self.toughness, str):
+            self.toughness = str(self.toughness)
 
         super().__post_init__(**kwargs)
 
@@ -1525,10 +1525,10 @@ slots.oracle_text = Slot(uri=MTGOC.oracle_text, name="oracle_text", curie=MTGOC.
                    model_uri=MTGO.oracle_text, domain=None, range=Optional[str])
 
 slots.power = Slot(uri=MTGOC.power, name="power", curie=MTGOC.curie('power'),
-                   model_uri=MTGO.power, domain=None, range=int)
+                   model_uri=MTGO.power, domain=None, range=str)
 
 slots.toughness = Slot(uri=MTGOC.toughness, name="toughness", curie=MTGOC.curie('toughness'),
-                   model_uri=MTGO.toughness, domain=None, range=int)
+                   model_uri=MTGO.toughness, domain=None, range=str)
 
 slots.snow = Slot(uri=MTGOC.snow, name="snow", curie=MTGOC.curie('snow'),
                    model_uri=MTGO.snow, domain=None, range=Optional[Union[bool, Bool]])

@@ -169,8 +169,8 @@ mtgoa:Counter  (
 mtgoc:Creature CLOSED {
     (  $mtgoc:Creature_tes (  &mtgoc:Permanent_tes ;
           rdf:type [ mtg:Permanent ] ? ;
-          mtgoc:power @linkml:Integer ;
-          mtgoc:toughness @linkml:Integer
+          mtgoc:power @linkml:String ;
+          mtgoc:toughness @linkml:String
        ) ;
        rdf:type [ mtg:Creature ]
     )
