@@ -84,7 +84,7 @@
   <nav class="md-header__inner md-grid" aria-label="Header">
     <a href=".." title="Magic: The Gathering Ontology" class="md-header__button md-logo" aria-label="Magic: The Gathering Ontology" data-md-component="logo">
       
-  <img src="../assets/logo.png" alt="logo">
+  <img src="../logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -181,7 +181,7 @@
   <label class="md-nav__title" for="__drawer">
     <a href=".." title="Magic: The Gathering Ontology" class="md-nav__button md-logo" aria-label="Magic: The Gathering Ontology" data-md-component="logo">
       
-  <img src="../assets/logo.png" alt="logo">
+  <img src="../logo.png" alt="logo">
 
     </a>
     Magic: The Gathering Ontology
@@ -340,7 +340,7 @@
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>Range: <a href="xsd:integer">xsd:integer</a></li>
+<li>Range: <a href="xsd:string">xsd:string</a></li>
 <li>Required: True</li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
@@ -359,9 +359,13 @@ rank: 1000
 alias: toughness
 domain_of:
 - Creature
-range: integer
+range: string
 required: true
 minimum_value: 0
+any_of:
+- range: integer
+- range: string
+  pattern: ^(\\d?\\+?\\*)$
 
 </code></pre>
 
@@ -389,7 +393,7 @@ minimum_value: 0
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      The literal information presented on this site about Magic: The Gathering, such as Oracle text, is copyright Wizards of the Coast, LLC, a subsidiary of Hasbro, Inc. Scryfall is not produced by or endorsed by Wizards of the Coast. All other content is released under GPLv3 © 2023 Cyril Matthey-Doret.
+      The literal information presented on this site about Magic: The Gathering, such as Oracle text, is © Wizards of the Coast, LLC, a subsidiary of Hasbro, Inc. This site is not produced by or endorsed by Wizards of the Coast. All other content is released under GPLv3 © 2023 Cyril Matthey-Doret.
     </div>
   
   
