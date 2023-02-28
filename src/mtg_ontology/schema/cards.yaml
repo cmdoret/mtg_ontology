@@ -184,12 +184,17 @@ slots:
     range: string
     description: The official wording for the card effects.
   power:
-    range: integer
-    minimum_value: 0
+    any_of:
+      - range: integer
+      - range: string
+        pattern: '^(\\d?\\+?\\*)$'
     description: The amount of damage dealt in combat. This is the first number in the lower right corner of a creature card. 
     required: true
   toughness:
-    range: integer
+    any_of:
+      - range: integer
+      - range: string
+        pattern: '^(\\d?\\+?\\*)$'
     minimum_value: 0
     description: The amount of damage needed to destroy a creature. This is the second number in the lower right corner of a creature card. 
     required: true
