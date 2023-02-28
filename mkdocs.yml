@@ -4,13 +4,13 @@ site_description: >-
 site_author: "Cyril Matthey-Doret"
 copyright: >-
   The literal information presented on this site about Magic:
-  The Gathering, such as Oracle text, is copyright Wizards of
-  the Coast, LLC, a subsidiary of Hasbro, Inc. Scryfall is not
+  The Gathering, such as Oracle text, is © Wizards of
+  the Coast, LLC, a subsidiary of Hasbro, Inc. This site is not
   produced by or endorsed by Wizards of the Coast. All other
   content is released under GPLv3 © 2023 Cyril Matthey-Doret.
 theme:
   name: material
-  logo: assets/logo.png
+  logo: logo.png
 #  palette:
 #    scheme: slate
 #    primary: cyan
