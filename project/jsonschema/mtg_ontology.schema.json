@@ -50,28 +50,57 @@
             "title": "AbilityCollection",
             "type": "object"
         },
+        "AbilityKeyword": {
+            "description": "A passive ability represented by word that substitutes for a piece of rules text, such as deathtouch or flying.",
+            "enum": [
+                "deathtouch",
+                "defender",
+                "double_strike",
+                "enchant",
+                "equip",
+                "first_strike",
+                "flash",
+                "flying",
+                "haste",
+                "hexproof",
+                "indestructible",
+                "lifelink",
+                "menace",
+                "protection",
+                "reach",
+                "trample",
+                "vigilance",
+                "ward"
+            ],
+            "title": "AbilityKeyword",
+            "type": "string"
+        },
         "Action": {
             "description": "An action taken by a player or card.",
             "enum": [
+                "activate",
+                "add_mana",
+                "attach",
+                "cast",
+                "control",
+                "counter",
+                "create",
+                "deal_damage",
+                "destroy",
                 "discard",
                 "draw",
-                "sacrifice",
+                "exchange",
                 "exile",
                 "fight",
-                "destroy",
-                "deal_damage",
-                "cast",
-                "activate",
-                "attach",
+                "mill",
                 "play",
-                "tap",
-                "untap",
+                "reveal",
+                "sacrifice",
+                "scry",
                 "search",
                 "shuffle",
-                "reveal",
-                "scry",
-                "add_mana",
-                "control"
+                "tap",
+                "untap"
             ],
             "title": "Action",
             "type": "string"
@@ -154,6 +183,17 @@
             "additionalProperties": false,
             "description": "A card ability which can be activated for a cost.",
             "properties": {
+                "ability_keyword": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/AbilityKeyword"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "An ability keyword."
+                },
                 "condition": {
                     "description": "A condition required for an activation.",
                     "type": "string"
@@ -195,6 +235,17 @@
             "additionalProperties": false,
             "description": "A card ability which can be activated for a cost.",
             "properties": {
+                "ability_keyword": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/AbilityKeyword"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "An ability keyword."
+                },
                 "condition": {
                     "description": "A condition required for an activation.",
                     "type": "string"
@@ -525,6 +576,21 @@
             "title": "Cost",
             "type": "object"
         },
+        "Counter": {
+            "additionalProperties": false,
+            "description": "A counter, such as a +1/+1 counter.",
+            "properties": {
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "Counter",
+            "type": "object"
+        },
         "Creature": {
             "additionalProperties": false,
             "description": "A card that represents a creature that can be summoned to the battlefield.",
@@ -819,36 +885,37 @@
             "title": "Instant",
             "type": "object"
         },
-        "KeywordAbility": {
+        "KeywordCounter": {
             "additionalProperties": false,
-            "description": "A passive ability represented by word that substitutes for a piece of rules text, such as deathtouch or flying.",
+            "description": "A counter that gives a some ability to a permanent.",
             "properties": {
-                "effect": {
-                    "description": "The effect of an ability.",
-                    "type": "string"
+                "ability_keyword": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/AbilityKeyword"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "An ability keyword."
                 },
                 "id": {
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
-                "name": {
-                    "description": "A human-readable name for a thing",
-                    "type": "string"
-                },
-                "rules_text": {
-                    "description": "The text describing what an ability does.",
-                    "type": "string"
-                },
-                "value": {
-                    "description": "The numeric part of a quantitative value.",
-                    "type": "integer"
+                "value_spec": {
+                    "description": "A specification for the value of a property.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 }
             },
             "required": [
-                "name",
                 "id"
             ],
-            "title": "KeywordAbility",
+            "title": "KeywordCounter",
             "type": "object"
         },
         "Land": {
@@ -1117,6 +1184,29 @@
             "title": "Player",
             "type": "string"
         },
+        "PowerToughnessCounter": {
+            "additionalProperties": false,
+            "description": "A counter that gives a power and toughness modifier to a creature.",
+            "properties": {
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "power_modifier": {
+                    "description": "A numeric modifier to apply to a creature's power.",
+                    "type": "integer"
+                },
+                "toughness_modifier": {
+                    "description": "A numeric modifier to apply to a creature's toughness.",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "PowerToughnessCounter",
+            "type": "object"
+        },
         "Rarity": {
             "description": "The rarity of the card, may be one of Common, Uncommon, Rare or Mythic. enum_uri: mtg:rarity",
             "enum": [
@@ -1241,6 +1331,17 @@
             "additionalProperties": false,
             "description": "A card ability which remains active until endgame once put into effect.",
             "properties": {
+                "ability_keyword": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/AbilityKeyword"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "An ability keyword."
+                },
                 "effect": {
                     "description": "The effect of an ability.",
                     "type": "string"
@@ -1431,6 +1532,17 @@
             "additionalProperties": false,
             "description": "A card ability, triggered by an event.",
             "properties": {
+                "ability_keyword": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/AbilityKeyword"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "An ability keyword."
+                },
                 "condition": {
                     "description": "A condition required for an activation.",
                     "type": "string"

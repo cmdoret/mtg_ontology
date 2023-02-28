@@ -63,6 +63,11 @@ CREATE TABLE "Cost" (
 	FOREIGN KEY("union") REFERENCES "Cost" (id)
 );
 
+CREATE TABLE "Counter" (
+	id TEXT NOT NULL, 
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE "Creature" (
 	id TEXT NOT NULL, 
 	name TEXT NOT NULL, 
@@ -113,6 +118,13 @@ CREATE TABLE "Instant" (
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE "KeywordCounter" (
+	id TEXT NOT NULL, 
+	ability_keyword TEXT, 
+	value_spec TEXT, 
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE "Land" (
 	id TEXT NOT NULL, 
 	name TEXT NOT NULL, 
@@ -139,6 +151,13 @@ CREATE TABLE "NamedThing" (
 	id TEXT NOT NULL, 
 	name TEXT NOT NULL, 
 	description TEXT, 
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE "PowerToughnessCounter" (
+	id TEXT NOT NULL, 
+	power_modifier INTEGER, 
+	toughness_modifier INTEGER, 
 	PRIMARY KEY (id)
 );
 
@@ -212,20 +231,11 @@ CREATE TABLE "ActivatedAbility" (
 	id TEXT NOT NULL, 
 	rules_text TEXT, 
 	effect TEXT, 
+	ability_keyword TEXT, 
 	condition TEXT, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(effect) REFERENCES "Condition" (id), 
 	FOREIGN KEY(condition) REFERENCES "Condition" (id)
-);
-
-CREATE TABLE "KeywordAbility" (
-	id TEXT NOT NULL, 
-	rules_text TEXT, 
-	effect TEXT, 
-	name TEXT NOT NULL, 
-	value INTEGER, 
-	PRIMARY KEY (id), 
-	FOREIGN KEY(effect) REFERENCES "Condition" (id)
 );
 
 CREATE TABLE "LifeCost" (
@@ -253,6 +263,7 @@ CREATE TABLE "StaticAbility" (
 	id TEXT NOT NULL, 
 	rules_text TEXT, 
 	effect TEXT, 
+	ability_keyword TEXT, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(effect) REFERENCES "Condition" (id)
 );
@@ -261,6 +272,7 @@ CREATE TABLE "TriggeredAbility" (
 	id TEXT NOT NULL, 
 	rules_text TEXT, 
 	effect TEXT, 
+	ability_keyword TEXT, 
 	condition TEXT, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(effect) REFERENCES "Condition" (id), 

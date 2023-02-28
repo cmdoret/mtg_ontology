@@ -41,14 +41,15 @@ linkml:Objectidentifier IRI
 linkml:Nodeidentifier NONLITERAL
 
 mtgoa:Ability  (
-    @mtgoa:ActivatedAbility OR @mtgoa:KeywordAbility OR @mtgoa:StaticAbility OR @mtgoa:TriggeredAbility
+    @mtgoa:ActivatedAbility OR @mtgoa:StaticAbility OR @mtgoa:TriggeredAbility
 )
 
 mtgoa:Ability_struct {
     (  $mtgoa:Ability_tes (  &<Thing_tes> ;
           rdf:type [ schema:Thing ] ? ;
           mtgoa:rules_text @linkml:String ? ;
-          mtgoa:effect @mtgoa:Condition ?
+          mtgoa:effect @mtgoa:Condition ? ;
+          mtgoa:ability_keyword @linkml:String ?
        ) ;
        rdf:type [ mtg:Ability ]
     )
@@ -155,6 +156,16 @@ mtgoc:Cost  (
     } OR @mtgoc:LifeCost OR @mtgoc:ManaCost
 )
 
+mtgoa:Counter  (
+    CLOSED {
+       (  $mtgoa:Counter_tes (  &<Thing_tes> ;
+             rdf:type [ schema:Thing ] ?
+          ) ;
+          rdf:type [ mtg:counters ]
+       )
+    } OR @mtgoa:KeywordCounter OR @mtgoa:PowerToughnessCounter
+)
+
 mtgoc:Creature CLOSED {
     (  $mtgoc:Creature_tes (  &mtgoc:Permanent_tes ;
           rdf:type [ mtg:Permanent ] ? ;
@@ -181,13 +192,13 @@ mtgoc:Instant CLOSED {
     )
 }
 
-mtgoa:KeywordAbility CLOSED {
-    (  $mtgoa:KeywordAbility_tes (  &mtgoa:Ability_tes ;
-          rdf:type [ mtg:Ability ] ? ;
-          schema:name @linkml:String ;
-          mtgoc:value @linkml:Integer ?
+mtgoa:KeywordCounter CLOSED {
+    (  $mtgoa:KeywordCounter_tes (  &mtgoa:Counter_tes ;
+          rdf:type [ mtg:counters ] ? ;
+          mtgoa:ability_keyword @linkml:String ? ;
+          mtgoa:value_spec @mtgoa:ValueSpecification *
        ) ;
-       rdf:type [ mtg:Keyword_ability ]
+       rdf:type [ mtgoa:KeywordCounter ]
     )
 }
 
@@ -249,6 +260,16 @@ mtgoc:Permanent_struct {
     )
 }
 
+mtgoa:PowerToughnessCounter CLOSED {
+    (  $mtgoa:PowerToughnessCounter_tes (  &mtgoa:Counter_tes ;
+          rdf:type [ mtg:counters ] ? ;
+          mtgoa:power_modifier @linkml:Integer ? ;
+          mtgoa:toughness_modifier @linkml:Integer ?
+       ) ;
+       rdf:type [ mtgoa:PowerToughnessCounter ]
+    )
+}
+
 mtgoc:Sorcery CLOSED {
     (  $mtgoc:Sorcery_tes (  &mtgoc:Card_tes ;
           rdf:type [ mtg:Card ] ?
@@ -293,8 +314,8 @@ mtgoa:StaticAbility CLOSED {
        (  $<Thing_tes> rdf:type . * ;
           rdf:type [ schema:Thing ]
        )
-    } OR @mtgoa:Ability OR @mtgoa:Condition OR @mtgoc:Cost OR @mtgoc:Mana OR @mtgoa:Specification OR @mtgoc:Spell OR
-    @mtgoa:TimeSpecification
+    } OR @mtgoa:Ability OR @mtgoa:Condition OR @mtgoc:Cost OR @mtgoa:Counter OR @mtgoc:Mana OR @mtgoa:Specification OR @mtgoc:Spell
+    OR @mtgoa:TimeSpecification
 )
 
 mtgoa:TimeSpecification CLOSED {

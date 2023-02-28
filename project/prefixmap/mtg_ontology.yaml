@@ -34,6 +34,9 @@
    "Cost": {
       "@id": "mtg:Cost"
    },
+   "Counter": {
+      "@id": "mtg:counters"
+   },
    "Creature": {
       "@id": "mtg:Creature"
    },
@@ -43,8 +46,8 @@
    "Instant": {
       "@id": "mtg:Instant"
    },
-   "KeywordAbility": {
-      "@id": "mtg:Keyword_ability"
+   "KeywordCounter": {
+      "@id": "mtgoa:KeywordCounter"
    },
    "Land": {
       "@id": "mtg:Land"
@@ -63,6 +66,9 @@
    },
    "Permanent": {
       "@id": "mtg:Permanent"
+   },
+   "PowerToughnessCounter": {
+      "@id": "mtgoa:PowerToughnessCounter"
    },
    "Sorcery": {
       "@id": "mtg:Sorcery"

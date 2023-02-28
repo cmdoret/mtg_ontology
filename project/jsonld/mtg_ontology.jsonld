@@ -389,9 +389,73 @@
       "enum_uri": "mtg:keyword_action",
       "permissible_values": [
         {
+          "text": "activate",
+          "description": "An ability is activated.",
+          "meaning": "mtg:activate",
+          "in_subset": [
+            "evergreen"
+          ]
+        },
+        {
+          "text": "add_mana",
+          "description": "A player adds mana to their mana pool."
+        },
+        {
+          "text": "attach",
+          "description": "An equipment, aura or fortification is moved onto another object or player.",
+          "meaning": "mtg:attach",
+          "in_subset": [
+            "evergreen"
+          ]
+        },
+        {
+          "text": "cast",
+          "description": "A spell is cast and put on the stack.",
+          "meaning": "mtg:cast",
+          "in_subset": [
+            "evergreen"
+          ]
+        },
+        {
+          "text": "control",
+          "description": "A player controls a card.",
+          "meaning": "mtg:control_and_ownership"
+        },
+        {
+          "text": "counter",
+          "description": "A spell or ability is countered.",
+          "meaning": "mtg:counter",
+          "in_subset": [
+            "evergreen"
+          ]
+        },
+        {
+          "text": "create",
+          "description": "A token is put onto the battlefield.",
+          "meaning": "mtg:create",
+          "in_subset": [
+            "evergreen"
+          ]
+        },
+        {
+          "text": "deal_damage",
+          "description": "Something deals damage to something else."
+        },
+        {
+          "text": "destroy",
+          "description": "Transfer one or more permanents from the battlefield to their owner's graveyard.",
+          "meaning": "mtg:destroy",
+          "in_subset": [
+            "evergreen"
+          ]
+        },
+        {
           "text": "discard",
           "description": "Transfer one or more cards from the hand to the graveyard.",
-          "meaning": "mtg:discard"
+          "meaning": "mtg:discard",
+          "in_subset": [
+            "evergreen"
+          ]
         },
         {
           "text": "draw",
@@ -399,87 +463,100 @@
           "meaning": "mtg:draw"
         },
         {
-          "text": "sacrifice",
-          "description": "Transfer one or more permanents you control from the battlefield to their owner's graveyard.",
-          "meaning": "mtg:sacrifice"
+          "text": "exchange",
+          "description": "The control is swapped between two permanents.",
+          "meaning": "mtg:exchange",
+          "in_subset": [
+            "evergreen"
+          ]
         },
         {
           "text": "exile",
           "description": "Remove one or more cards from game.",
-          "meaning": "mtg:exile"
+          "meaning": "mtg:exile",
+          "in_subset": [
+            "evergreen"
+          ]
         },
         {
           "text": "fight",
           "description": "Two cards fight each other.",
-          "meaning": "mtg:fight"
+          "meaning": "mtg:fight",
+          "in_subset": [
+            "evergreen"
+          ]
         },
         {
-          "text": "destroy",
-          "description": "Transfer one or more permanents from the battlefield to their owner's graveyard.",
-          "meaning": "mtg:destroy"
-        },
-        {
-          "text": "deal_damage",
-          "description": "Something deals damage to something else."
-        },
-        {
-          "text": "cast",
-          "description": "A spell is cast.",
-          "meaning": "mtg:cast"
-        },
-        {
-          "text": "activate",
-          "description": "An ability is activated.",
-          "meaning": "mtg:activate"
-        },
-        {
-          "text": "attach",
-          "description": "An equipment, aura or fortification is moved onto another object or player.",
-          "meaning": "mtg:attach"
+          "text": "mill",
+          "description": "Transfer one or more cards from the library to the graveyard.",
+          "meaning": "mtg:mill",
+          "in_subset": [
+            "evergreen"
+          ]
         },
         {
           "text": "play",
           "description": "A card is played as a land or cast as a spell, whichever is appropriate.",
-          "meaning": "mtg:play"
-        },
-        {
-          "text": "tap",
-          "description": "A card is tapped.",
-          "meaning": "mtg:tap"
-        },
-        {
-          "text": "untap",
-          "description": "A card is untapped",
-          "meaning": "mtg:untap"
-        },
-        {
-          "text": "search",
-          "description": "A player searches their library.",
-          "meaning": "mtg:search"
-        },
-        {
-          "text": "shuffle",
-          "description": "A player shuffles their library.",
-          "meaning": "mtg:shuffle"
+          "meaning": "mtg:play",
+          "in_subset": [
+            "evergreen"
+          ]
         },
         {
           "text": "reveal",
           "description": "A player reveals a card or cards to other players.",
-          "meaning": "mtg:reveal"
+          "meaning": "mtg:reveal",
+          "in_subset": [
+            "evergreen"
+          ]
+        },
+        {
+          "text": "sacrifice",
+          "description": "Transfer one or more permanents you control from the battlefield to their owner's graveyard.",
+          "meaning": "mtg:sacrifice",
+          "in_subset": [
+            "evergreen"
+          ]
         },
         {
           "text": "scry",
           "description": "A player looks at a certain number of cards from the top of their library, and puts them back at the top or bottom of the library in any order.",
-          "meaning": "mtg:scry"
+          "meaning": "mtg:scry",
+          "in_subset": [
+            "evergreen"
+          ]
         },
         {
-          "text": "add_mana",
-          "description": "A player adds mana to their mana pool."
+          "text": "search",
+          "description": "A player searches their library.",
+          "meaning": "mtg:search",
+          "in_subset": [
+            "evergreen"
+          ]
         },
         {
-          "text": "control",
-          "description": "A player controls a card.",
-          "meaning": "mtg:control_and_ownership"
+          "text": "shuffle",
+          "description": "A player shuffles their library.",
+          "meaning": "mtg:shuffle",
+          "in_subset": [
+            "evergreen"
+          ]
+        },
+        {
+          "text": "tap",
+          "description": "A card is tapped.",
+          "meaning": "mtg:tap",
+          "in_subset": [
+            "evergreen"
+          ]
+        },
+        {
+          "text": "untap",
+          "description": "A card is untapped",
+          "meaning": "mtg:untap",
+          "in_subset": [
+            "evergreen"
+          ]
         }
       ]
     },
@@ -684,6 +761,165 @@
           "description": "The event must occur each time."
         }
       ]
+    },
+    {
+      "name": "AbilityKeyword",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/AbilityKeyword",
+      "description": "A passive ability represented by word that substitutes for a piece of rules text, such as deathtouch or flying.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "enum_uri": "mtg:Keyword_ability",
+      "permissible_values": [
+        {
+          "text": "deathtouch",
+          "description": "Any amount of damage a source with deathtouch deals to a creature is enough to destroy it.",
+          "meaning": "mtg:deathtouch",
+          "in_subset": [
+            "evergreen"
+          ]
+        },
+        {
+          "text": "defender",
+          "description": "A creature with defender can't attack.",
+          "meaning": "mtg:defender",
+          "in_subset": [
+            "evergreen"
+          ]
+        },
+        {
+          "text": "double_strike",
+          "description": "A creature with double strike deals combat damage twice.",
+          "meaning": "mtg:double_strike",
+          "in_subset": [
+            "evergreen"
+          ]
+        },
+        {
+          "text": "enchant",
+          "description": "The enchant ability restricts what an aura spell can target and what an aura can enchant.",
+          "meaning": "mtg:enchant",
+          "in_subset": [
+            "evergreen"
+          ]
+        },
+        {
+          "text": "equip",
+          "description": "Attach an equipment to a creature you control.",
+          "meaning": "mtg:equip",
+          "notes": [
+            "activated"
+          ],
+          "in_subset": [
+            "evergreen"
+          ]
+        },
+        {
+          "text": "first_strike",
+          "description": "A creature with first strike deals combat damage before creatures without first strike.",
+          "meaning": "mtg:first_strike",
+          "in_subset": [
+            "evergreen"
+          ]
+        },
+        {
+          "text": "flash",
+          "description": "A creature with flash can be cast any time you could cast an instant.",
+          "meaning": "mtg:flash",
+          "notes": [
+            "activated"
+          ],
+          "in_subset": [
+            "evergreen"
+          ]
+        },
+        {
+          "text": "flying",
+          "description": "A creature with flying can't be blocked except by creatures with flying or reach.",
+          "meaning": "mtg:flying",
+          "in_subset": [
+            "evergreen"
+          ]
+        },
+        {
+          "text": "haste",
+          "description": "A creature with haste can attack and tap as soon as it comes under your control.",
+          "meaning": "mtg:haste",
+          "in_subset": [
+            "evergreen"
+          ]
+        },
+        {
+          "text": "hexproof",
+          "description": "A creature with hexproof can't be the target of spells or abilities your opponents control.",
+          "meaning": "mtg:hexproof",
+          "in_subset": [
+            "evergreen"
+          ]
+        },
+        {
+          "text": "indestructible",
+          "description": "A permanent with indestructible can't be destroyed.",
+          "meaning": "mtg:indestructible",
+          "in_subset": [
+            "evergreen"
+          ]
+        },
+        {
+          "text": "lifelink",
+          "description": "A creature with lifelink deals damage to a creature or player equal to the damage dealt to it.",
+          "meaning": "mtg:lifelink",
+          "in_subset": [
+            "evergreen"
+          ]
+        },
+        {
+          "text": "menace",
+          "description": "A creature with menace can't be blocked except by two or more creatures.",
+          "meaning": "mtg:menace",
+          "in_subset": [
+            "evergreen"
+          ]
+        },
+        {
+          "text": "protection",
+          "description": "A creature with protection from a color or a creature type can't be blocked, targeted, dealt damage, enchanted, or equipped by sources of the chosen color or of the chosen type.",
+          "meaning": "mtg:protection",
+          "in_subset": [
+            "evergreen"
+          ]
+        },
+        {
+          "text": "reach",
+          "description": "A creature with reach can block creatures with flying.",
+          "meaning": "mtg:reach",
+          "in_subset": [
+            "evergreen"
+          ]
+        },
+        {
+          "text": "trample",
+          "description": "If a creature with trample would assign enough damage to its blockers to destroy them, it assigns the rest of its damage to defending player or planeswalker.",
+          "meaning": "mtg:trample",
+          "in_subset": [
+            "evergreen"
+          ]
+        },
+        {
+          "text": "vigilance",
+          "description": "A creature with vigilance doesn't tap during your untap step.",
+          "meaning": "mtg:vigilance",
+          "in_subset": [
+            "evergreen"
+          ]
+        },
+        {
+          "text": "ward",
+          "description": "Whenever this creature becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays N. ",
+          "meaning": "mtg:ward",
+          "in_subset": [
+            "evergreen"
+          ]
+        }
+      ]
     }
   ],
   "slots": [
@@ -715,10 +951,9 @@
         "http://schema.org/name"
       ],
       "slot_uri": "http://schema.org/name",
-      "owner": "KeywordAbility",
+      "owner": "NamedThing",
       "domain_of": [
-        "NamedThing",
-        "KeywordAbility"
+        "NamedThing"
       ],
       "range": "string",
       "required": true,
@@ -1002,7 +1237,6 @@
       "owner": "ValueSpecification",
       "domain_of": [
         "Cost",
-        "KeywordAbility",
         "ValueSpecification"
       ],
       "range": "integer",
@@ -1139,9 +1373,10 @@
       "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
       "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/value_spec",
       "multivalued": true,
-      "owner": "Condition",
+      "owner": "KeywordCounter",
       "domain_of": [
-        "Condition"
+        "Condition",
+        "KeywordCounter"
       ],
       "range": "ValueSpecification",
       "@type": "SlotDefinition"
@@ -1248,6 +1483,56 @@
           "@type": "AnonymousSlotExpression"
         }
       ],
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "ability_keyword",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/ability_keyword",
+      "description": "An ability keyword.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/ability_keyword",
+      "owner": "KeywordCounter",
+      "domain_of": [
+        "Ability",
+        "KeywordCounter"
+      ],
+      "range": "string",
+      "any_of": [
+        {
+          "range": "AbilityKeyword",
+          "@type": "AnonymousSlotExpression"
+        },
+        {
+          "range": "string",
+          "@type": "AnonymousSlotExpression"
+        }
+      ],
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "power_modifier",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/power_modifier",
+      "description": "A numeric modifier to apply to a creature's power.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/power_modifier",
+      "owner": "PowerToughnessCounter",
+      "domain_of": [
+        "PowerToughnessCounter"
+      ],
+      "range": "integer",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "toughness_modifier",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/toughness_modifier",
+      "description": "A numeric modifier to apply to a creature's toughness.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/toughness_modifier",
+      "owner": "PowerToughnessCounter",
+      "domain_of": [
+        "PowerToughnessCounter"
+      ],
+      "range": "integer",
       "@type": "SlotDefinition"
     },
     {
@@ -2073,7 +2358,8 @@
       "slots": [
         "id",
         "rules_text",
-        "effect"
+        "effect",
+        "ability_keyword"
       ],
       "slot_usage": {},
       "class_uri": "https://mtg.fandom.com/wiki/Ability",
@@ -2092,31 +2378,12 @@
         "id",
         "rules_text",
         "effect",
+        "ability_keyword",
         "cost",
         "condition"
       ],
       "slot_usage": {},
       "class_uri": "https://mtg.fandom.com/wiki/Activated_ability",
-      "@type": "ClassDefinition"
-    },
-    {
-      "name": "KeywordAbility",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/KeywordAbility",
-      "description": "A passive ability represented by word that substitutes for a piece of rules text, such as deathtouch or flying.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "mappings": [
-        "mtg:Keyword_ability"
-      ],
-      "is_a": "Ability",
-      "slots": [
-        "id",
-        "rules_text",
-        "effect",
-        "name",
-        "value"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://mtg.fandom.com/wiki/Keyword_ability",
       "@type": "ClassDefinition"
     },
     {
@@ -2131,7 +2398,8 @@
       "slots": [
         "id",
         "rules_text",
-        "effect"
+        "effect",
+        "ability_keyword"
       ],
       "slot_usage": {},
       "class_uri": "https://mtg.fandom.com/wiki/Static_ability",
@@ -2150,6 +2418,7 @@
         "id",
         "rules_text",
         "effect",
+        "ability_keyword",
         "condition"
       ],
       "slot_usage": {},
@@ -2311,13 +2580,59 @@
       "slot_usage": {},
       "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/TimeSpecification",
       "@type": "ClassDefinition"
+    },
+    {
+      "name": "Counter",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Counter",
+      "description": "A counter, such as a +1/+1 counter.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "mappings": [
+        "mtg:counters"
+      ],
+      "is_a": "Thing",
+      "slots": [
+        "id"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://mtg.fandom.com/wiki/counters",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "PowerToughnessCounter",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/PowerToughnessCounter",
+      "description": "A counter that gives a power and toughness modifier to a creature.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "is_a": "Counter",
+      "slots": [
+        "id",
+        "power_modifier",
+        "toughness_modifier"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/PowerToughnessCounter",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "KeywordCounter",
+      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/KeywordCounter",
+      "description": "A counter that gives a some ability to a permanent.",
+      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "is_a": "Counter",
+      "slots": [
+        "id",
+        "ability_keyword",
+        "value_spec"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/KeywordCounter",
+      "@type": "ClassDefinition"
     }
   ],
   "metamodel_version": "1.7.0",
   "source_file": "mtg_ontology.yaml",
   "source_file_date": "2023-02-25T21:35:31",
   "source_file_size": 1587,
-  "generation_date": "2023-02-26T19:47:52",
+  "generation_date": "2023-02-28T01:40:10",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/mtg_ontology.context.jsonld",

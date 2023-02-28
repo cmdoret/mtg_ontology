@@ -3,6 +3,7 @@ interface Ability
     id: Uriorcurie!
     rulesText: String
     effect: Condition
+    abilityKeyword: String
   }
 
 type AbilityCollection
@@ -29,6 +30,7 @@ type ActivatedAbility
     id: Uriorcurie!
     rulesText: String
     effect: Condition
+    abilityKeyword: String
     cost: [String]
     condition: Condition
   }
@@ -97,6 +99,11 @@ type Cost
     union: Cost
   }
 
+type Counter
+  {
+    id: Uriorcurie!
+  }
+
 type Creature
   {
     id: Uriorcurie!
@@ -159,13 +166,11 @@ type Instant
     oracleText: String
   }
 
-type KeywordAbility
+type KeywordCounter
   {
     id: Uriorcurie!
-    rulesText: String
-    effect: Condition
-    name: String!
-    value: Integer
+    abilityKeyword: String
+    valueSpec: [ValueSpecification]
   }
 
 type Land
@@ -240,6 +245,13 @@ interface Permanent
     oracleText: String
   }
 
+type PowerToughnessCounter
+  {
+    id: Uriorcurie!
+    powerModifier: Integer
+    toughnessModifier: Integer
+  }
+
 type Sorcery
   {
     id: Uriorcurie!
@@ -278,6 +290,7 @@ type StaticAbility
     id: Uriorcurie!
     rulesText: String
     effect: Condition
+    abilityKeyword: String
   }
 
 type Thing
@@ -320,6 +333,7 @@ type TriggeredAbility
     id: Uriorcurie!
     rulesText: String
     effect: Condition
+    abilityKeyword: String
     condition: Condition
   }
 

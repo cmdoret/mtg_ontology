@@ -1,5 +1,5 @@
 # Auto generated from mtg_ontology.yaml by pythongen.py version: 0.9.0
-# Generation date: 2023-02-26T19:48:15
+# Generation date: 2023-02-28T01:40:30
 # Schema: mtgo
 #
 # id: https://w3id.org/cmdoret/mtg-ontology/
@@ -119,10 +119,6 @@ class ActivatedAbilityId(AbilityId):
     pass
 
 
-class KeywordAbilityId(AbilityId):
-    pass
-
-
 class StaticAbilityId(AbilityId):
     pass
 
@@ -148,6 +144,18 @@ class ValueSpecificationId(SpecificationId):
 
 
 class TimeSpecificationId(ThingId):
+    pass
+
+
+class CounterId(ThingId):
+    pass
+
+
+class PowerToughnessCounterId(CounterId):
+    pass
+
+
+class KeywordCounterId(CounterId):
     pass
 
 
@@ -695,6 +703,7 @@ class Ability(Thing):
     id: Union[str, AbilityId] = None
     rules_text: Optional[str] = None
     effect: Optional[Union[str, ConditionId]] = None
+    ability_keyword: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self.rules_text is not None and not isinstance(self.rules_text, str):
@@ -702,6 +711,9 @@ class Ability(Thing):
 
         if self.effect is not None and not isinstance(self.effect, ConditionId):
             self.effect = ConditionId(self.effect)
+
+        if self.ability_keyword is not None and not isinstance(self.ability_keyword, str):
+            self.ability_keyword = str(self.ability_keyword)
 
         super().__post_init__(**kwargs)
 
@@ -734,39 +746,6 @@ class ActivatedAbility(Ability):
 
         if self.condition is not None and not isinstance(self.condition, ConditionId):
             self.condition = ConditionId(self.condition)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass
-class KeywordAbility(Ability):
-    """
-    A passive ability represented by word that substitutes for a piece of rules text, such as deathtouch or flying.
-    """
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = MTG.Keyword_ability
-    class_class_curie: ClassVar[str] = "mtg:Keyword_ability"
-    class_name: ClassVar[str] = "KeywordAbility"
-    class_model_uri: ClassVar[URIRef] = MTGO.KeywordAbility
-
-    id: Union[str, KeywordAbilityId] = None
-    name: str = None
-    value: Optional[int] = None
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, KeywordAbilityId):
-            self.id = KeywordAbilityId(self.id)
-
-        if self._is_empty(self.name):
-            self.MissingRequiredField("name")
-        if not isinstance(self.name, str):
-            self.name = str(self.name)
-
-        if self.value is not None and not isinstance(self.value, int):
-            self.value = int(self.value)
 
         super().__post_init__(**kwargs)
 
@@ -1059,6 +1038,92 @@ class TimeSpecification(Thing):
         super().__post_init__(**kwargs)
 
 
+@dataclass
+class Counter(Thing):
+    """
+    A counter, such as a +1/+1 counter.
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = MTG.counters
+    class_class_curie: ClassVar[str] = "mtg:counters"
+    class_name: ClassVar[str] = "Counter"
+    class_model_uri: ClassVar[URIRef] = MTGO.Counter
+
+    id: Union[str, CounterId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, CounterId):
+            self.id = CounterId(self.id)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class PowerToughnessCounter(Counter):
+    """
+    A counter that gives a power and toughness modifier to a creature.
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = MTGOA.PowerToughnessCounter
+    class_class_curie: ClassVar[str] = "mtgoa:PowerToughnessCounter"
+    class_name: ClassVar[str] = "PowerToughnessCounter"
+    class_model_uri: ClassVar[URIRef] = MTGO.PowerToughnessCounter
+
+    id: Union[str, PowerToughnessCounterId] = None
+    power_modifier: Optional[int] = None
+    toughness_modifier: Optional[int] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, PowerToughnessCounterId):
+            self.id = PowerToughnessCounterId(self.id)
+
+        if self.power_modifier is not None and not isinstance(self.power_modifier, int):
+            self.power_modifier = int(self.power_modifier)
+
+        if self.toughness_modifier is not None and not isinstance(self.toughness_modifier, int):
+            self.toughness_modifier = int(self.toughness_modifier)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class KeywordCounter(Counter):
+    """
+    A counter that gives a some ability to a permanent.
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = MTGOA.KeywordCounter
+    class_class_curie: ClassVar[str] = "mtgoa:KeywordCounter"
+    class_name: ClassVar[str] = "KeywordCounter"
+    class_model_uri: ClassVar[URIRef] = MTGO.KeywordCounter
+
+    id: Union[str, KeywordCounterId] = None
+    ability_keyword: Optional[str] = None
+    value_spec: Optional[Union[Union[str, ValueSpecificationId], List[Union[str, ValueSpecificationId]]]] = empty_list()
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, KeywordCounterId):
+            self.id = KeywordCounterId(self.id)
+
+        if self.ability_keyword is not None and not isinstance(self.ability_keyword, str):
+            self.ability_keyword = str(self.ability_keyword)
+
+        if not isinstance(self.value_spec, list):
+            self.value_spec = [self.value_spec] if self.value_spec is not None else []
+        self.value_spec = [v if isinstance(v, ValueSpecificationId) else ValueSpecificationId(v) for v in self.value_spec]
+
+        super().__post_init__(**kwargs)
+
+
 # Enumerations
 class Color(EnumDefinitionImpl):
     """
@@ -1144,61 +1209,73 @@ class Action(EnumDefinitionImpl):
     """
     An action taken by a player or card.
     """
+    activate = PermissibleValue(text="activate",
+                                       description="An ability is activated.",
+                                       meaning=MTG.activate)
+    add_mana = PermissibleValue(text="add_mana",
+                                       description="A player adds mana to their mana pool.")
+    attach = PermissibleValue(text="attach",
+                                   description="An equipment, aura or fortification is moved onto another object or player.",
+                                   meaning=MTG.attach)
+    cast = PermissibleValue(text="cast",
+                               description="A spell is cast and put on the stack.",
+                               meaning=MTG.cast)
+    control = PermissibleValue(text="control",
+                                     description="A player controls a card.",
+                                     meaning=MTG.control_and_ownership)
+    counter = PermissibleValue(text="counter",
+                                     description="A spell or ability is countered.",
+                                     meaning=MTG.counter)
+    create = PermissibleValue(text="create",
+                                   description="A token is put onto the battlefield.",
+                                   meaning=MTG.create)
+    deal_damage = PermissibleValue(text="deal_damage",
+                                             description="Something deals damage to something else.")
+    destroy = PermissibleValue(text="destroy",
+                                     description="Transfer one or more permanents from the battlefield to their owner's graveyard.",
+                                     meaning=MTG.destroy)
     discard = PermissibleValue(text="discard",
                                      description="Transfer one or more cards from the hand to the graveyard.",
                                      meaning=MTG.discard)
     draw = PermissibleValue(text="draw",
                                description="Transfer one or more cards from the library to the hand.",
                                meaning=MTG.draw)
-    sacrifice = PermissibleValue(text="sacrifice",
-                                         description="Transfer one or more permanents you control from the battlefield to their owner's graveyard.",
-                                         meaning=MTG.sacrifice)
+    exchange = PermissibleValue(text="exchange",
+                                       description="The control is swapped between two permanents.",
+                                       meaning=MTG.exchange)
     exile = PermissibleValue(text="exile",
                                  description="Remove one or more cards from game.",
                                  meaning=MTG.exile)
     fight = PermissibleValue(text="fight",
                                  description="Two cards fight each other.",
                                  meaning=MTG.fight)
-    destroy = PermissibleValue(text="destroy",
-                                     description="Transfer one or more permanents from the battlefield to their owner's graveyard.",
-                                     meaning=MTG.destroy)
-    deal_damage = PermissibleValue(text="deal_damage",
-                                             description="Something deals damage to something else.")
-    cast = PermissibleValue(text="cast",
-                               description="A spell is cast.",
-                               meaning=MTG.cast)
-    activate = PermissibleValue(text="activate",
-                                       description="An ability is activated.",
-                                       meaning=MTG.activate)
-    attach = PermissibleValue(text="attach",
-                                   description="An equipment, aura or fortification is moved onto another object or player.",
-                                   meaning=MTG.attach)
+    mill = PermissibleValue(text="mill",
+                               description="Transfer one or more cards from the library to the graveyard.",
+                               meaning=MTG.mill)
     play = PermissibleValue(text="play",
                                description="A card is played as a land or cast as a spell, whichever is appropriate.",
                                meaning=MTG.play)
-    tap = PermissibleValue(text="tap",
-                             description="A card is tapped.",
-                             meaning=MTG.tap)
-    untap = PermissibleValue(text="untap",
-                                 description="A card is untapped",
-                                 meaning=MTG.untap)
+    reveal = PermissibleValue(text="reveal",
+                                   description="A player reveals a card or cards to other players.",
+                                   meaning=MTG.reveal)
+    sacrifice = PermissibleValue(text="sacrifice",
+                                         description="Transfer one or more permanents you control from the battlefield to their owner's graveyard.",
+                                         meaning=MTG.sacrifice)
+    scry = PermissibleValue(text="scry",
+                               description="A player looks at a certain number of cards from the top of their library, and puts them back at the top or bottom of the library in any order.",
+                               meaning=MTG.scry)
     search = PermissibleValue(text="search",
                                    description="A player searches their library.",
                                    meaning=MTG.search)
     shuffle = PermissibleValue(text="shuffle",
                                      description="A player shuffles their library.",
                                      meaning=MTG.shuffle)
-    reveal = PermissibleValue(text="reveal",
-                                   description="A player reveals a card or cards to other players.",
-                                   meaning=MTG.reveal)
-    scry = PermissibleValue(text="scry",
-                               description="A player looks at a certain number of cards from the top of their library, and puts them back at the top or bottom of the library in any order.",
-                               meaning=MTG.scry)
-    add_mana = PermissibleValue(text="add_mana",
-                                       description="A player adds mana to their mana pool.")
-    control = PermissibleValue(text="control",
-                                     description="A player controls a card.",
-                                     meaning=MTG.control_and_ownership)
+    tap = PermissibleValue(text="tap",
+                             description="A card is tapped.",
+                             meaning=MTG.tap)
+    untap = PermissibleValue(text="untap",
+                                 description="A card is untapped",
+                                 meaning=MTG.untap)
 
     _defn = EnumDefinition(
         name="Action",
@@ -1337,6 +1414,70 @@ class TimeConstraint(EnumDefinitionImpl):
         description="A constraint on the time of an event.",
     )
 
+class AbilityKeyword(EnumDefinitionImpl):
+    """
+    A passive ability represented by word that substitutes for a piece of rules text, such as deathtouch or flying.
+    """
+    deathtouch = PermissibleValue(text="deathtouch",
+                                           description="Any amount of damage a source with deathtouch deals to a creature is enough to destroy it.",
+                                           meaning=MTG.deathtouch)
+    defender = PermissibleValue(text="defender",
+                                       description="A creature with defender can't attack.",
+                                       meaning=MTG.defender)
+    double_strike = PermissibleValue(text="double_strike",
+                                                 description="A creature with double strike deals combat damage twice.",
+                                                 meaning=MTG.double_strike)
+    enchant = PermissibleValue(text="enchant",
+                                     description="The enchant ability restricts what an aura spell can target and what an aura can enchant.",
+                                     meaning=MTG.enchant)
+    equip = PermissibleValue(text="equip",
+                                 description="Attach an equipment to a creature you control.",
+                                 meaning=MTG.equip)
+    first_strike = PermissibleValue(text="first_strike",
+                                               description="A creature with first strike deals combat damage before creatures without first strike.",
+                                               meaning=MTG.first_strike)
+    flash = PermissibleValue(text="flash",
+                                 description="A creature with flash can be cast any time you could cast an instant.",
+                                 meaning=MTG.flash)
+    flying = PermissibleValue(text="flying",
+                                   description="A creature with flying can't be blocked except by creatures with flying or reach.",
+                                   meaning=MTG.flying)
+    haste = PermissibleValue(text="haste",
+                                 description="A creature with haste can attack and tap as soon as it comes under your control.",
+                                 meaning=MTG.haste)
+    hexproof = PermissibleValue(text="hexproof",
+                                       description="A creature with hexproof can't be the target of spells or abilities your opponents control.",
+                                       meaning=MTG.hexproof)
+    indestructible = PermissibleValue(text="indestructible",
+                                                   description="A permanent with indestructible can't be destroyed.",
+                                                   meaning=MTG.indestructible)
+    lifelink = PermissibleValue(text="lifelink",
+                                       description="A creature with lifelink deals damage to a creature or player equal to the damage dealt to it.",
+                                       meaning=MTG.lifelink)
+    menace = PermissibleValue(text="menace",
+                                   description="A creature with menace can't be blocked except by two or more creatures.",
+                                   meaning=MTG.menace)
+    protection = PermissibleValue(text="protection",
+                                           description="A creature with protection from a color or a creature type can't be blocked, targeted, dealt damage, enchanted, or equipped by sources of the chosen color or of the chosen type.",
+                                           meaning=MTG.protection)
+    reach = PermissibleValue(text="reach",
+                                 description="A creature with reach can block creatures with flying.",
+                                 meaning=MTG.reach)
+    trample = PermissibleValue(text="trample",
+                                     description="If a creature with trample would assign enough damage to its blockers to destroy them, it assigns the rest of its damage to defending player or planeswalker.",
+                                     meaning=MTG.trample)
+    vigilance = PermissibleValue(text="vigilance",
+                                         description="A creature with vigilance doesn't tap during your untap step.",
+                                         meaning=MTG.vigilance)
+    ward = PermissibleValue(text="ward",
+                               description="Whenever this creature becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays N. ",
+                               meaning=MTG.ward)
+
+    _defn = EnumDefinition(
+        name="AbilityKeyword",
+        description="A passive ability represented by word that substitutes for a piece of rules text, such as deathtouch or flying.",
+    )
+
 # Slots
 class slots:
     pass
@@ -1448,6 +1589,15 @@ slots.unit = Slot(uri=MTGOA.unit, name="unit", curie=MTGOA.curie('unit'),
 
 slots.constraint = Slot(uri=MTGOA.constraint, name="constraint", curie=MTGOA.curie('constraint'),
                    model_uri=MTGO.constraint, domain=None, range=Optional[str])
+
+slots.ability_keyword = Slot(uri=MTGOA.ability_keyword, name="ability_keyword", curie=MTGOA.curie('ability_keyword'),
+                   model_uri=MTGO.ability_keyword, domain=None, range=Optional[str])
+
+slots.power_modifier = Slot(uri=MTGOA.power_modifier, name="power_modifier", curie=MTGOA.curie('power_modifier'),
+                   model_uri=MTGO.power_modifier, domain=None, range=Optional[int])
+
+slots.toughness_modifier = Slot(uri=MTGOA.toughness_modifier, name="toughness_modifier", curie=MTGOA.curie('toughness_modifier'),
+                   model_uri=MTGO.toughness_modifier, domain=None, range=Optional[int])
 
 slots.cardCollection__cards = Slot(uri=MTGOC.cards, name="cardCollection__cards", curie=MTGOC.curie('cards'),
                    model_uri=MTGO.cardCollection__cards, domain=None, range=Optional[Union[Dict[Union[str, CardId], Union[dict, Card]], List[Union[dict, Card]]]])

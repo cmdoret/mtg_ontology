@@ -23,6 +23,7 @@ message ActivatedAbility
   uriorcurie id = 0
   string rulesText = 0
   condition effect = 0
+  string abilityKeyword = 0
  repeated  string cost = 0
   condition condition = 0
  }
@@ -69,6 +70,11 @@ message Cost
   integer value = 0
   cost intersection = 0
   cost union = 0
+ }
+// A counter, such as a +1/+1 counter.
+message Counter
+ {
+  uriorcurie id = 0
  }
 // A card that represents a creature that can be summoned to the battlefield.
 message Creature
@@ -132,14 +138,12 @@ message Instant
   rarity rarity = 0
   string oracleText = 0
  }
-// A passive ability represented by word that substitutes for a piece of rules text, such as deathtouch or flying.
-message KeywordAbility
+// A counter that gives a some ability to a permanent.
+message KeywordCounter
  {
   uriorcurie id = 0
-  string rulesText = 0
-  condition effect = 0
-  string name = 0
-  integer value = 0
+  string abilityKeyword = 0
+ repeated  valueSpecification valueSpec = 0
  }
 // A card that represents a land that can be tapped for mana.
 message Land
@@ -193,6 +197,13 @@ message NamedThing
   string name = 0
   string description = 0
  }
+// A counter that gives a power and toughness modifier to a creature.
+message PowerToughnessCounter
+ {
+  uriorcurie id = 0
+  integer powerModifier = 0
+  integer toughnessModifier = 0
+ }
 // A card that represents a sorcery spell that can be cast.
 message Sorcery
  {
@@ -224,6 +235,7 @@ message StaticAbility
   uriorcurie id = 0
   string rulesText = 0
   condition effect = 0
+  string abilityKeyword = 0
  }
 // A generic grouping for any identifiable entity
 message Thing
@@ -266,6 +278,7 @@ message TriggeredAbility
   uriorcurie id = 0
   string rulesText = 0
   condition effect = 0
+  string abilityKeyword = 0
   condition condition = 0
  }
 // A specification for a quantitative value.
