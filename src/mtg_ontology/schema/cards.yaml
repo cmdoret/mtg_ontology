@@ -23,6 +23,36 @@ imports:
   - abilities
 classes:
 
+  Permanent:
+    is_a: NamedThing
+    class_uri: mtg:Permanent
+    abstract: true
+    description: >-
+      A card or token that can be put onto the battlefield.
+
+  Spell:
+    is_a: Thing
+    class_uri: mtg:Spell
+    description: >-
+      An object on the stack. Either a card that has been cast, or a copy.
+
+  Token:
+    is_a: Permanent
+    class_uri: mtg:Token
+    description: >-
+      A permanent that is not represented by a regular card and does not have a casting cost.
+    slots:
+      - color
+      - card_set
+      - ability
+      - artist
+      - flavor_text
+      - type_line
+      - card_type
+      - card_subtype
+      - card_supertype
+      - oracle_text
+
   Card:
     is_a: NamedThing
     class_uri: mtg:Card
@@ -43,24 +73,29 @@ classes:
       - card_supertype
       - rarity
       - oracle_text
-
-  Spell:
-    is_a: Thing
-    class_uri: mtg:Spell
+  AnyEnchantment:
+    is_a: Permanent
+    abstract: true
+    class_uri: mtg:Enchantment
     description: >-
-      An object on the stack. Either a card that has been cast, or a copy.
-
-  Permanent:
-    is_a: Card
-    class_uri: mtg:Permanent
+      A permanent which applies persistent magical effects.
+  AnyCreature:
+    is_a: Permanent
+    class_uri: mtg:Creature
     abstract: true
     description: >-
-      A card or token that can be put onto the battlefield.
-  Token:
-    is_a: Card
-    class_uri: mtg:Token
+      A creature that can be summoned to the battlefield.
+    slots:
+      - power
+      - toughness
+      - variable_power
+      - variable_toughness
+  AnyArtifact:
+    is_a: Permanent
+    abstract: true
+    class_uri: mtg:Artifact
     description: >-
-      A permanent that is not represented by a regular card and does not have a casting cost.
+      A permanent representing a magical item, animated construct, or other objects and devices.
 
   Sorcery:
     is_a: Card
@@ -73,25 +108,52 @@ classes:
     description: >-
       A card that represents an instant spell that can be cast.
   Enchantment:
-    is_a: Permanent
+    mixin:
+      - AnyEnchantment
+      - Card
     class_uri: mtg:Enchantment
     description: >-
-      A permanent which applies persistent magical effects.
+      A card that represents an enchantment that can be cast and put onto the battlefield.
+  EnchantmentToken:
+    mixin:
+      - AnyEnchantment
+      - Token
+    description: >-
+      A token that represents an enchantment that can be placed onto the battlefield by other effects.
   Artifact:
-    is_a: Permanent
+    mixin:
+      - AnyArtifact
+      - Card
     class_uri: mtg:Artifact
     description: >-
-      A permanent representing a magical item, animated construct, or other objects and devices.
+      A card that represents an artifact that can be cast and put onto the battlefield.
+  ArtifactToken:
+    mixin:
+      - AnyArtifact
+      - Token
+    description: >-
+      A token that represents an artifact that can be placed onto the battlefield by other effects.
+
+
   Creature:
-    is_a: Permanent
+    mixin:
+      - Card
+      - AnyCreature
     class_uri: mtg:Creature
     description: >-
-      A card that represents a creature that can be summoned to the battlefield.
-    slots:
-      - power
-      - toughness
+      A card that represents a creature that can be cast and put onto the battlefield.
+  
+  CreatureToken:
+    mixin:
+      - Token
+      - AnyCreature
+    description: >-
+      A token that represents a creature that can be placed onto the battlefield by other effects.
+    
   Land:
-    is_a: Permanent
+    mixin:
+      - Permanent
+      - Card
     class_uri: mtg:Land
     description: >-
       A card that represents a land that can be tapped for mana.
@@ -184,20 +246,19 @@ slots:
     range: string
     description: The official wording for the card effects.
   power:
-    any_of:
-      - range: integer
-      - range: string
-        pattern: '^(\\d?\\+?\\*)$'
+    range: integer
     description: The amount of damage dealt in combat. This is the first number in the lower right corner of a creature card. 
     required: true
   toughness:
-    any_of:
-      - range: integer
-      - range: string
-        pattern: '^(\\d?\\+?\\*)$'
-    minimum_value: 0
+    range: integer
     description: The amount of damage needed to destroy a creature. This is the second number in the lower right corner of a creature card. 
     required: true
+  variable_power:
+    range: boolean
+    description: Whether a creature's power is variable. Denoted as X on cards.
+  variable_toughness:
+    range: boolean
+    description: Whether a creature's toughness is variable. Denoted as X or Y on cards.
   snow:
     range: boolean
     description: Whether a mana or cost includes snow mana.
