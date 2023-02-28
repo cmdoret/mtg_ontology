@@ -37,6 +37,8 @@ classes:
     slots:
       - rules_text
       - effect
+      - ability_keyword
+
   ActivatedAbility:
     is_a: Ability
     class_uri: mtg:Activated_ability
@@ -45,19 +47,13 @@ classes:
     slots:
       - cost
       - condition
-  KeywordAbility:
-    is_a: Ability
-    class_uri: mtg:Keyword_ability
-    description: >-
-      A passive ability represented by word that substitutes for a piece of rules text, such as deathtouch or flying.
-    slots:
-      - name
-      - value
+
   StaticAbility:
     is_a: Ability
     class_uri: mtg:Static_ability
     description: >-
       A card ability which remains active until endgame once put into effect.
+
   TriggeredAbility:
     is_a: Ability
     class_uri: mtg:Triggered_ability
@@ -163,6 +159,29 @@ classes:
         range: TimeConstraint
 
 
+  Counter:
+    is_a: Thing
+    description: >-
+      A counter, such as a +1/+1 counter.
+    class_uri: mtg:counters
+  
+  PowerToughnessCounter:
+    is_a: Counter
+    description: >-
+      A counter that gives a power and toughness modifier to a creature.
+    slots:
+      - power_modifier
+      - toughness_modifier
+
+  KeywordCounter:
+    is_a: Counter
+    description: >-
+      A counter that gives a some ability to a permanent.
+    slots:
+      - ability_keyword
+      - value_spec
+    
+
 slots:
   rules_text:
     range: string
@@ -222,11 +241,21 @@ slots:
       - range: TimeConstraint
       - range: ValueConstraint
     description: A constraint on a time, quantity or action.
+  ability_keyword:
+    any_of:
+      - range: AbilityKeyword
+      - range: string
+    description: An ability keyword.
+  power_modifier:
+    range: integer
+    description: A numeric modifier to apply to a creature's power.
+  toughness_modifier:
+    range: integer
+    description: A numeric modifier to apply to a creature's toughness.
   
 
     
 enums:
-
   Player:
     description: One or more human players.
     permissible_values:
@@ -255,63 +284,94 @@ enums:
     description: An action taken by a player or card.
     enum_uri: mtg:keyword_action
     permissible_values:
-      discard:
-        description: Transfer one or more cards from the hand to the graveyard.
-        meaning: mtg:discard
-      draw:
-        description: Transfer one or more cards from the library to the hand.
-        meaning: mtg:draw
-      sacrifice:
-        description: Transfer one or more permanents you control from the battlefield to their owner's graveyard.
-        meaning: mtg:sacrifice
-      exile:
-        description: Remove one or more cards from game.
-        meaning: mtg:exile
-      fight:
-        description: Two cards fight each other.
-        meaning: mtg:fight
-      destroy:
-        description: Transfer one or more permanents from the battlefield to their owner's graveyard.
-        meaning: mtg:destroy
-      deal_damage:
-        description: Something deals damage to something else.
-      cast:
-        description: A spell is cast.
-        meaning: mtg:cast
       activate:
         description: An ability is activated.
         meaning: mtg:activate
+        in_subset: evergreen
+      add_mana:
+        description: A player adds mana to their mana pool.
       attach:
         description: An equipment, aura or fortification is moved onto another object or player.
         meaning: mtg:attach
+        in_subset: evergreen
+      cast:
+        description: A spell is cast and put on the stack.
+        meaning: mtg:cast
+        in_subset: evergreen
+      control:
+        description: A player controls a card.
+        meaning: mtg:control_and_ownership
+      counter:
+        description: A spell or ability is countered.
+        meaning: mtg:counter
+        in_subset: evergreen
+      create:
+        description: A token is put onto the battlefield.
+        meaning: mtg:create
+        in_subset: evergreen
+      deal_damage:
+        description: Something deals damage to something else.
+      destroy:
+        description: Transfer one or more permanents from the battlefield to their owner's graveyard.
+        meaning: mtg:destroy
+        in_subset: evergreen
+      discard:
+        description: Transfer one or more cards from the hand to the graveyard.
+        meaning: mtg:discard
+        in_subset: evergreen
+      draw:
+        description: Transfer one or more cards from the library to the hand.
+        meaning: mtg:draw
+      exchange:
+        description: The control is swapped between two permanents.
+        meaning: mtg:exchange
+        in_subset: evergreen
+      exile:
+        description: Remove one or more cards from game.
+        meaning: mtg:exile
+        in_subset: evergreen
+      fight:
+        description: Two cards fight each other.
+        meaning: mtg:fight
+        in_subset: evergreen
+      mill:
+        description: Transfer one or more cards from the library to the graveyard.
+        meaning: mtg:mill
+        in_subset: evergreen
       play:
         description: A card is played as a land or cast as a spell, whichever is appropriate.
         meaning: mtg:play
-      tap:
-        description: A card is tapped.
-        meaning: mtg:tap
-      untap:
-        description: A card is untapped
-        meaning: mtg:untap
-      search:
-        description: A player searches their library.
-        meaning: mtg:search
-      shuffle:
-        description: A player shuffles their library.
-        meaning: mtg:shuffle
+        in_subset: evergreen
       reveal:
         description: A player reveals a card or cards to other players.
         meaning: mtg:reveal
+        in_subset: evergreen
+      sacrifice:
+        description: Transfer one or more permanents you control from the battlefield to their owner's graveyard.
+        meaning: mtg:sacrifice
+        in_subset: evergreen
       scry:
         description: >-
           A player looks at a certain number of cards from the top of their library,
           and puts them back at the top or bottom of the library in any order.
         meaning: mtg:scry
-      add_mana:
-        description: A player adds mana to their mana pool.
-      control:
-        description: A player controls a card.
-        meaning: mtg:control_and_ownership
+        in_subset: evergreen
+      search:
+        description: A player searches their library.
+        meaning: mtg:search
+        in_subset: evergreen
+      shuffle:
+        description: A player shuffles their library.
+        meaning: mtg:shuffle
+        in_subset: evergreen
+      tap:
+        description: A card is tapped.
+        meaning: mtg:tap
+        in_subset: evergreen
+      untap:
+        description: A card is untapped
+        meaning: mtg:untap
+        in_subset: evergreen
 
   ActionConstraint:
     permissible_values:
@@ -420,3 +480,101 @@ enums:
         description: The event must occur this time.
       each:
         description: The event must occur each time.
+      
+  AbilityKeyword:
+    enum_uri: mtg:Keyword_ability
+    description: >-
+      A passive ability represented by word that substitutes for a piece of rules text, such as deathtouch or flying.
+    permissible_values:
+      deathtouch:
+        description: >-
+          Any amount of damage a source with deathtouch deals to a creature is enough to destroy it.
+        meaning: mtg:deathtouch
+        in_subset: evergreen
+      defender:
+        description: >-
+          A creature with defender can't attack.
+        meaning: mtg:defender
+        in_subset: evergreen
+      double_strike:
+        description: >-
+          A creature with double strike deals combat damage twice.
+        meaning: mtg:double_strike
+        in_subset: evergreen
+      enchant:
+        description: >-
+          The enchant ability restricts what an aura spell can target and what an aura can enchant.
+        meaning: mtg:enchant
+        in_subset: evergreen
+      equip:
+        description: >-
+          Attach an equipment to a creature you control.
+        meaning: mtg:equip
+        in_subset: evergreen
+        notes: activated
+      first_strike:
+        description: >-
+          A creature with first strike deals combat damage before creatures without first strike.
+        meaning: mtg:first_strike
+        in_subset: evergreen
+      flash:
+        description: >-
+          A creature with flash can be cast any time you could cast an instant.
+        meaning: mtg:flash
+        in_subset: evergreen
+        notes: activated
+      flying:
+        description: >-
+          A creature with flying can't be blocked except by creatures with flying or reach.
+        meaning: mtg:flying
+        in_subset: evergreen
+      haste:
+        description: >-
+          A creature with haste can attack and tap as soon as it comes under your control.
+        meaning: mtg:haste
+        in_subset: evergreen
+      hexproof:
+        description: >-
+          A creature with hexproof can't be the target of spells or abilities your opponents control.
+        meaning: mtg:hexproof
+        in_subset: evergreen
+      indestructible:
+        description: >-
+          A permanent with indestructible can't be destroyed.
+        meaning: mtg:indestructible
+        in_subset: evergreen
+      lifelink:
+        description: >-
+          A creature with lifelink deals damage to a creature or player equal to the damage dealt to it.
+        meaning: mtg:lifelink
+        in_subset: evergreen
+      menace:
+        description: >-
+          A creature with menace can't be blocked except by two or more creatures.
+        meaning: mtg:menace
+        in_subset: evergreen
+      protection:
+        description: >-
+          A creature with protection from a color or a creature type can't be blocked, targeted, dealt damage, enchanted, or equipped by sources of the chosen color or of the chosen type.
+        meaning: mtg:protection
+        in_subset: evergreen
+      reach:
+        description: >-
+          A creature with reach can block creatures with flying.
+        meaning: mtg:reach
+        in_subset: evergreen
+      trample:
+        description: >-
+          If a creature with trample would assign enough damage to its blockers to destroy them, it assigns the rest of its damage to defending player or planeswalker.
+        meaning: mtg:trample
+        in_subset: evergreen
+      vigilance:
+        description: >-
+          A creature with vigilance doesn't tap during your untap step.
+        meaning: mtg:vigilance
+        in_subset: evergreen
+      ward:
+        description: >-
+         Whenever this creature becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays N. 
+        meaning: mtg:ward
+        in_subset: evergreen
