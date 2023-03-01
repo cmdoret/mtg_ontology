@@ -27,7 +27,7 @@ message ActivatedAbility
  repeated  string cost = 0
   condition condition = 0
  }
-// A permanent representing a magical item, animated construct, or other objects and devices.
+// A card that represents an artifact that can be cast and put onto the battlefield.
 message Artifact
  {
   uriorcurie id = 0
@@ -45,6 +45,23 @@ message Artifact
  repeated  string cardSubtype = 0
  repeated  string cardSupertype = 0
   rarity rarity = 0
+  string oracleText = 0
+ }
+// A token that represents an artifact that can be placed onto the battlefield by other effects.
+message ArtifactToken
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ repeated  color color = 0
+  string cardSet = 0
+ repeated  ability ability = 0
+  string artist = 0
+  string flavorText = 0
+  string typeLine = 0
+  string cardType = 0
+ repeated  string cardSubtype = 0
+ repeated  string cardSupertype = 0
   string oracleText = 0
  }
 // A collection of cards and associated costs.
@@ -70,13 +87,14 @@ message Cost
   integer value = 0
   cost intersection = 0
   cost union = 0
+  boolean variableCost = 0
  }
 // A counter, such as a +1/+1 counter.
 message Counter
  {
   uriorcurie id = 0
  }
-// A card that represents a creature that can be summoned to the battlefield.
+// A card that represents a creature that can be cast and put onto the battlefield.
 message Creature
  {
   uriorcurie id = 0
@@ -95,10 +113,33 @@ message Creature
  repeated  string cardSupertype = 0
   rarity rarity = 0
   string oracleText = 0
-  string power = 0
-  string toughness = 0
+  integer power = 0
+  integer toughness = 0
+  boolean variablePower = 0
+  boolean variableToughness = 0
  }
-// A permanent which applies persistent magical effects.
+// A token that represents a creature that can be placed onto the battlefield by other effects.
+message CreatureToken
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ repeated  color color = 0
+  string cardSet = 0
+ repeated  ability ability = 0
+  string artist = 0
+  string flavorText = 0
+  string typeLine = 0
+  string cardType = 0
+ repeated  string cardSubtype = 0
+ repeated  string cardSupertype = 0
+  string oracleText = 0
+  integer power = 0
+  integer toughness = 0
+  boolean variablePower = 0
+  boolean variableToughness = 0
+ }
+// A card that represents an enchantment that can be cast and put onto the battlefield.
 message Enchantment
  {
   uriorcurie id = 0
@@ -116,6 +157,23 @@ message Enchantment
  repeated  string cardSubtype = 0
  repeated  string cardSupertype = 0
   rarity rarity = 0
+  string oracleText = 0
+ }
+// A token that represents an enchantment that can be placed onto the battlefield by other effects.
+message EnchantmentToken
+ {
+  uriorcurie id = 0
+  string name = 0
+  string description = 0
+ repeated  color color = 0
+  string cardSet = 0
+ repeated  ability ability = 0
+  string artist = 0
+  string flavorText = 0
+  string typeLine = 0
+  string cardType = 0
+ repeated  string cardSubtype = 0
+ repeated  string cardSupertype = 0
   string oracleText = 0
  }
 // A card that represents an instant spell that can be cast.
@@ -172,6 +230,7 @@ message LifeCost
   integer value = 0
   cost intersection = 0
   cost union = 0
+  boolean variableCost = 0
  }
 // A mana in the pool.
 message Mana
@@ -179,6 +238,8 @@ message Mana
   uriorcurie id = 0
  repeated  color color = 0
   boolean snow = 0
+  boolean phyrexian = 0
+  boolean hybrid = 0
  }
 // The mana cost of a card or ability.
 message ManaCost
@@ -187,8 +248,11 @@ message ManaCost
   integer value = 0
   cost intersection = 0
   cost union = 0
+  boolean variableCost = 0
  repeated  color color = 0
   boolean snow = 0
+  boolean phyrexian = 0
+  boolean hybrid = 0
  }
 // A generic grouping for any identifiable entity
 message NamedThing
@@ -258,8 +322,6 @@ message Token
   uriorcurie id = 0
   string name = 0
   string description = 0
- repeated  manaCost manaCost = 0
-  integer convertedManaCost = 0
  repeated  color color = 0
   string cardSet = 0
  repeated  ability ability = 0
@@ -269,7 +331,6 @@ message Token
   string cardType = 0
  repeated  string cardSubtype = 0
  repeated  string cardSupertype = 0
-  rarity rarity = 0
   string oracleText = 0
  }
 // A card ability, triggered by an event.

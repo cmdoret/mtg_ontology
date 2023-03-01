@@ -37,6 +37,19 @@ CREATE TABLE "Artifact" (
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE "ArtifactToken" (
+	id TEXT NOT NULL, 
+	name TEXT NOT NULL, 
+	description TEXT, 
+	card_set TEXT, 
+	artist TEXT, 
+	flavor_text TEXT, 
+	type_line TEXT NOT NULL, 
+	card_type TEXT NOT NULL, 
+	oracle_text TEXT, 
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE "CardCollection" (
 	cards TEXT, 
 	costs TEXT, 
@@ -58,6 +71,7 @@ CREATE TABLE "Cost" (
 	value INTEGER, 
 	intersection TEXT, 
 	"union" TEXT, 
+	variable_cost BOOLEAN, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(intersection) REFERENCES "Cost" (id), 
 	FOREIGN KEY("union") REFERENCES "Cost" (id)
@@ -81,8 +95,27 @@ CREATE TABLE "Creature" (
 	card_type TEXT NOT NULL, 
 	rarity VARCHAR(8), 
 	oracle_text TEXT, 
-	power TEXT NOT NULL, 
-	toughness TEXT NOT NULL, 
+	power INTEGER NOT NULL, 
+	toughness INTEGER NOT NULL, 
+	variable_power BOOLEAN, 
+	variable_toughness BOOLEAN, 
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE "CreatureToken" (
+	id TEXT NOT NULL, 
+	name TEXT NOT NULL, 
+	description TEXT, 
+	card_set TEXT, 
+	artist TEXT, 
+	flavor_text TEXT, 
+	type_line TEXT NOT NULL, 
+	card_type TEXT NOT NULL, 
+	oracle_text TEXT, 
+	power INTEGER NOT NULL, 
+	toughness INTEGER NOT NULL, 
+	variable_power BOOLEAN, 
+	variable_toughness BOOLEAN, 
 	PRIMARY KEY (id)
 );
 
@@ -98,6 +131,19 @@ CREATE TABLE "Enchantment" (
 	type_line TEXT NOT NULL, 
 	card_type TEXT NOT NULL, 
 	rarity VARCHAR(8), 
+	oracle_text TEXT, 
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE "EnchantmentToken" (
+	id TEXT NOT NULL, 
+	name TEXT NOT NULL, 
+	description TEXT, 
+	card_set TEXT, 
+	artist TEXT, 
+	flavor_text TEXT, 
+	type_line TEXT NOT NULL, 
+	card_type TEXT NOT NULL, 
 	oracle_text TEXT, 
 	PRIMARY KEY (id)
 );
@@ -144,6 +190,8 @@ CREATE TABLE "Land" (
 CREATE TABLE "Mana" (
 	id TEXT NOT NULL, 
 	snow BOOLEAN, 
+	phyrexian BOOLEAN, 
+	hybrid BOOLEAN, 
 	PRIMARY KEY (id)
 );
 
@@ -203,14 +251,11 @@ CREATE TABLE "Token" (
 	id TEXT NOT NULL, 
 	name TEXT NOT NULL, 
 	description TEXT, 
-	mana_cost TEXT, 
-	converted_mana_cost INTEGER, 
 	card_set TEXT, 
 	artist TEXT, 
 	flavor_text TEXT, 
 	type_line TEXT NOT NULL, 
 	card_type TEXT NOT NULL, 
-	rarity VARCHAR(8), 
 	oracle_text TEXT, 
 	PRIMARY KEY (id)
 );
@@ -243,6 +288,7 @@ CREATE TABLE "LifeCost" (
 	value INTEGER, 
 	intersection TEXT, 
 	"union" TEXT, 
+	variable_cost BOOLEAN, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(intersection) REFERENCES "Cost" (id), 
 	FOREIGN KEY("union") REFERENCES "Cost" (id)
@@ -253,7 +299,10 @@ CREATE TABLE "ManaCost" (
 	value INTEGER, 
 	intersection TEXT, 
 	"union" TEXT, 
+	variable_cost BOOLEAN, 
 	snow BOOLEAN, 
+	phyrexian BOOLEAN, 
+	hybrid BOOLEAN, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(intersection) REFERENCES "Cost" (id), 
 	FOREIGN KEY("union") REFERENCES "Cost" (id)
@@ -307,6 +356,34 @@ CREATE TABLE "Artifact_card_supertype" (
 	FOREIGN KEY(backref_id) REFERENCES "Artifact" (id)
 );
 
+CREATE TABLE "ArtifactToken_color" (
+	backref_id TEXT, 
+	color VARCHAR(9) NOT NULL, 
+	PRIMARY KEY (backref_id, color), 
+	FOREIGN KEY(backref_id) REFERENCES "ArtifactToken" (id)
+);
+
+CREATE TABLE "ArtifactToken_ability" (
+	backref_id TEXT, 
+	ability TEXT, 
+	PRIMARY KEY (backref_id, ability), 
+	FOREIGN KEY(backref_id) REFERENCES "ArtifactToken" (id)
+);
+
+CREATE TABLE "ArtifactToken_card_subtype" (
+	backref_id TEXT, 
+	card_subtype TEXT, 
+	PRIMARY KEY (backref_id, card_subtype), 
+	FOREIGN KEY(backref_id) REFERENCES "ArtifactToken" (id)
+);
+
+CREATE TABLE "ArtifactToken_card_supertype" (
+	backref_id TEXT, 
+	card_supertype TEXT, 
+	PRIMARY KEY (backref_id, card_supertype), 
+	FOREIGN KEY(backref_id) REFERENCES "ArtifactToken" (id)
+);
+
 CREATE TABLE "Creature_color" (
 	backref_id TEXT, 
 	color VARCHAR(9) NOT NULL, 
@@ -335,6 +412,34 @@ CREATE TABLE "Creature_card_supertype" (
 	FOREIGN KEY(backref_id) REFERENCES "Creature" (id)
 );
 
+CREATE TABLE "CreatureToken_color" (
+	backref_id TEXT, 
+	color VARCHAR(9) NOT NULL, 
+	PRIMARY KEY (backref_id, color), 
+	FOREIGN KEY(backref_id) REFERENCES "CreatureToken" (id)
+);
+
+CREATE TABLE "CreatureToken_ability" (
+	backref_id TEXT, 
+	ability TEXT, 
+	PRIMARY KEY (backref_id, ability), 
+	FOREIGN KEY(backref_id) REFERENCES "CreatureToken" (id)
+);
+
+CREATE TABLE "CreatureToken_card_subtype" (
+	backref_id TEXT, 
+	card_subtype TEXT, 
+	PRIMARY KEY (backref_id, card_subtype), 
+	FOREIGN KEY(backref_id) REFERENCES "CreatureToken" (id)
+);
+
+CREATE TABLE "CreatureToken_card_supertype" (
+	backref_id TEXT, 
+	card_supertype TEXT, 
+	PRIMARY KEY (backref_id, card_supertype), 
+	FOREIGN KEY(backref_id) REFERENCES "CreatureToken" (id)
+);
+
 CREATE TABLE "Enchantment_color" (
 	backref_id TEXT, 
 	color VARCHAR(9) NOT NULL, 
@@ -361,6 +466,34 @@ CREATE TABLE "Enchantment_card_supertype" (
 	card_supertype TEXT, 
 	PRIMARY KEY (backref_id, card_supertype), 
 	FOREIGN KEY(backref_id) REFERENCES "Enchantment" (id)
+);
+
+CREATE TABLE "EnchantmentToken_color" (
+	backref_id TEXT, 
+	color VARCHAR(9) NOT NULL, 
+	PRIMARY KEY (backref_id, color), 
+	FOREIGN KEY(backref_id) REFERENCES "EnchantmentToken" (id)
+);
+
+CREATE TABLE "EnchantmentToken_ability" (
+	backref_id TEXT, 
+	ability TEXT, 
+	PRIMARY KEY (backref_id, ability), 
+	FOREIGN KEY(backref_id) REFERENCES "EnchantmentToken" (id)
+);
+
+CREATE TABLE "EnchantmentToken_card_subtype" (
+	backref_id TEXT, 
+	card_subtype TEXT, 
+	PRIMARY KEY (backref_id, card_subtype), 
+	FOREIGN KEY(backref_id) REFERENCES "EnchantmentToken" (id)
+);
+
+CREATE TABLE "EnchantmentToken_card_supertype" (
+	backref_id TEXT, 
+	card_supertype TEXT, 
+	PRIMARY KEY (backref_id, card_supertype), 
+	FOREIGN KEY(backref_id) REFERENCES "EnchantmentToken" (id)
 );
 
 CREATE TABLE "Instant_color" (

@@ -283,7 +283,7 @@
         },
         "Artifact": {
             "additionalProperties": false,
-            "description": "A permanent representing a magical item, animated construct, or other objects and devices.",
+            "description": "A card that represents an artifact that can be cast and put onto the battlefield.",
             "properties": {
                 "ability": {
                     "description": "An ability associated with a card.",
@@ -373,6 +373,85 @@
                 "name"
             ],
             "title": "Artifact",
+            "type": "object"
+        },
+        "ArtifactToken": {
+            "additionalProperties": false,
+            "description": "A token that represents an artifact that can be placed onto the battlefield by other effects.",
+            "properties": {
+                "ability": {
+                    "description": "An ability associated with a card.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "artist": {
+                    "description": "The artist who drew a card's illustration.",
+                    "type": "string"
+                },
+                "card_set": {
+                    "description": "A pool of cards released together and designed for the same play environment.",
+                    "type": "string"
+                },
+                "card_subtype": {
+                    "description": "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "card_supertype": {
+                    "description": "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "card_type": {
+                    "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
+                    "type": "string"
+                },
+                "color": {
+                    "description": "The color of a card.",
+                    "items": {
+                        "$ref": "#/$defs/Color"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "flavor_text": {
+                    "description": "The lore text at the bottom of a card.",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "oracle_text": {
+                    "description": "The official wording for the card effects.",
+                    "type": "string"
+                },
+                "type_line": {
+                    "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "color",
+                "type_line",
+                "card_type",
+                "id",
+                "name"
+            ],
+            "title": "ArtifactToken",
             "type": "object"
         },
         "CardCollection": {
@@ -543,6 +622,10 @@
                 "value": {
                     "description": "The numeric part of a quantitative value.",
                     "type": "integer"
+                },
+                "variable_cost": {
+                    "description": "Whether a cost is variable. Denoted as X on cards.",
+                    "type": "boolean"
                 }
             },
             "required": [
@@ -570,6 +653,10 @@
                 "value": {
                     "description": "The numeric part of a quantitative value.",
                     "type": "integer"
+                },
+                "variable_cost": {
+                    "description": "Whether a cost is variable. Denoted as X on cards.",
+                    "type": "boolean"
                 }
             },
             "required": [],
@@ -593,7 +680,7 @@
         },
         "Creature": {
             "additionalProperties": false,
-            "description": "A card that represents a creature that can be summoned to the battlefield.",
+            "description": "A card that represents a creature that can be cast and put onto the battlefield.",
             "properties": {
                 "ability": {
                     "description": "An ability associated with a card.",
@@ -667,52 +754,142 @@
                     "type": "string"
                 },
                 "power": {
-                    "anyOf": [
-                        {
-                            "type": "integer"
-                        },
-                        {
-                            "type": "string"
-                        }
-                    ],
-                    "description": "The amount of damage dealt in combat. This is the first number in the lower right corner of a creature card."
+                    "description": "The amount of damage dealt in combat. This is the first number in the lower right corner of a creature card.",
+                    "type": "integer"
                 },
                 "rarity": {
                     "$ref": "#/$defs/Rarity",
                     "description": "An ability associated with a card."
                 },
                 "toughness": {
-                    "anyOf": [
-                        {
-                            "type": "integer"
-                        },
-                        {
-                            "type": "string"
-                        }
-                    ],
                     "description": "The amount of damage needed to destroy a creature. This is the second number in the lower right corner of a creature card.",
-                    "minimum": 0
+                    "type": "integer"
                 },
                 "type_line": {
                     "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
                     "type": "string"
+                },
+                "variable_power": {
+                    "description": "Whether a creature's power is variable. Denoted as * on cards.",
+                    "type": "boolean"
+                },
+                "variable_toughness": {
+                    "description": "Whether a creature's toughness is variable. Denoted as * on cards.",
+                    "type": "boolean"
                 }
             },
             "required": [
-                "power",
-                "toughness",
                 "color",
                 "type_line",
                 "card_type",
+                "power",
+                "toughness",
                 "id",
                 "name"
             ],
             "title": "Creature",
             "type": "object"
         },
+        "CreatureToken": {
+            "additionalProperties": false,
+            "description": "A token that represents a creature that can be placed onto the battlefield by other effects.",
+            "properties": {
+                "ability": {
+                    "description": "An ability associated with a card.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "artist": {
+                    "description": "The artist who drew a card's illustration.",
+                    "type": "string"
+                },
+                "card_set": {
+                    "description": "A pool of cards released together and designed for the same play environment.",
+                    "type": "string"
+                },
+                "card_subtype": {
+                    "description": "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "card_supertype": {
+                    "description": "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "card_type": {
+                    "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
+                    "type": "string"
+                },
+                "color": {
+                    "description": "The color of a card.",
+                    "items": {
+                        "$ref": "#/$defs/Color"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "flavor_text": {
+                    "description": "The lore text at the bottom of a card.",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "oracle_text": {
+                    "description": "The official wording for the card effects.",
+                    "type": "string"
+                },
+                "power": {
+                    "description": "The amount of damage dealt in combat. This is the first number in the lower right corner of a creature card.",
+                    "type": "integer"
+                },
+                "toughness": {
+                    "description": "The amount of damage needed to destroy a creature. This is the second number in the lower right corner of a creature card.",
+                    "type": "integer"
+                },
+                "type_line": {
+                    "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
+                    "type": "string"
+                },
+                "variable_power": {
+                    "description": "Whether a creature's power is variable. Denoted as * on cards.",
+                    "type": "boolean"
+                },
+                "variable_toughness": {
+                    "description": "Whether a creature's toughness is variable. Denoted as * on cards.",
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "color",
+                "type_line",
+                "card_type",
+                "power",
+                "toughness",
+                "id",
+                "name"
+            ],
+            "title": "CreatureToken",
+            "type": "object"
+        },
         "Enchantment": {
             "additionalProperties": false,
-            "description": "A permanent which applies persistent magical effects.",
+            "description": "A card that represents an enchantment that can be cast and put onto the battlefield.",
             "properties": {
                 "ability": {
                     "description": "An ability associated with a card.",
@@ -802,6 +979,85 @@
                 "name"
             ],
             "title": "Enchantment",
+            "type": "object"
+        },
+        "EnchantmentToken": {
+            "additionalProperties": false,
+            "description": "A token that represents an enchantment that can be placed onto the battlefield by other effects.",
+            "properties": {
+                "ability": {
+                    "description": "An ability associated with a card.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "artist": {
+                    "description": "The artist who drew a card's illustration.",
+                    "type": "string"
+                },
+                "card_set": {
+                    "description": "A pool of cards released together and designed for the same play environment.",
+                    "type": "string"
+                },
+                "card_subtype": {
+                    "description": "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "card_supertype": {
+                    "description": "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "card_type": {
+                    "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
+                    "type": "string"
+                },
+                "color": {
+                    "description": "The color of a card.",
+                    "items": {
+                        "$ref": "#/$defs/Color"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "A human-readable description for a thing",
+                    "type": "string"
+                },
+                "flavor_text": {
+                    "description": "The lore text at the bottom of a card.",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for a thing",
+                    "type": "string"
+                },
+                "oracle_text": {
+                    "description": "The official wording for the card effects.",
+                    "type": "string"
+                },
+                "type_line": {
+                    "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "color",
+                "type_line",
+                "card_type",
+                "id",
+                "name"
+            ],
+            "title": "EnchantmentToken",
             "type": "object"
         },
         "Instant": {
@@ -1044,6 +1300,10 @@
                 "value": {
                     "description": "The numeric part of a quantitative value.",
                     "type": "integer"
+                },
+                "variable_cost": {
+                    "description": "Whether a cost is variable. Denoted as X on cards.",
+                    "type": "boolean"
                 }
             },
             "required": [
@@ -1063,12 +1323,20 @@
                     },
                     "type": "array"
                 },
+                "hybrid": {
+                    "description": "A hybrid mana cost can be paid with 1 mana of either of its component colors.",
+                    "type": "boolean"
+                },
                 "id": {
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
+                "phyrexian": {
+                    "description": "A phyrexian mana cost can be paid with either 2 life or 1 mana of its component color(s).",
+                    "type": "boolean"
+                },
                 "snow": {
-                    "description": "Whether a mana or cost includes snow mana.",
+                    "description": "A snow mana cost can be paid with a snow source, regardless of its color.",
                     "type": "boolean"
                 }
             },
@@ -1090,6 +1358,10 @@
                     },
                     "type": "array"
                 },
+                "hybrid": {
+                    "description": "A hybrid mana cost can be paid with 1 mana of either of its component colors.",
+                    "type": "boolean"
+                },
                 "id": {
                     "description": "A unique identifier for a thing",
                     "type": "string"
@@ -1098,8 +1370,12 @@
                     "description": "A conjunction of two objects (a and b).",
                     "type": "string"
                 },
+                "phyrexian": {
+                    "description": "A phyrexian mana cost can be paid with either 2 life or 1 mana of its component color(s).",
+                    "type": "boolean"
+                },
                 "snow": {
-                    "description": "Whether a mana or cost includes snow mana.",
+                    "description": "A snow mana cost can be paid with a snow source, regardless of its color.",
                     "type": "boolean"
                 },
                 "union": {
@@ -1109,6 +1385,10 @@
                 "value": {
                     "description": "The numeric part of a quantitative value.",
                     "type": "integer"
+                },
+                "variable_cost": {
+                    "description": "Whether a cost is variable. Denoted as X on cards.",
+                    "type": "boolean"
                 }
             },
             "required": [
@@ -1129,6 +1409,10 @@
                     },
                     "type": "array"
                 },
+                "hybrid": {
+                    "description": "A hybrid mana cost can be paid with 1 mana of either of its component colors.",
+                    "type": "boolean"
+                },
                 "id": {
                     "description": "A unique identifier for a thing",
                     "type": "string"
@@ -1137,8 +1421,12 @@
                     "description": "A conjunction of two objects (a and b).",
                     "type": "string"
                 },
+                "phyrexian": {
+                    "description": "A phyrexian mana cost can be paid with either 2 life or 1 mana of its component color(s).",
+                    "type": "boolean"
+                },
                 "snow": {
-                    "description": "Whether a mana or cost includes snow mana.",
+                    "description": "A snow mana cost can be paid with a snow source, regardless of its color.",
                     "type": "boolean"
                 },
                 "union": {
@@ -1148,6 +1436,10 @@
                 "value": {
                     "description": "The numeric part of a quantitative value.",
                     "type": "integer"
+                },
+                "variable_cost": {
+                    "description": "Whether a cost is variable. Denoted as X on cards.",
+                    "type": "boolean"
                 }
             },
             "required": [
@@ -1491,10 +1783,6 @@
                     },
                     "type": "array"
                 },
-                "converted_mana_cost": {
-                    "description": "The total mana cost for a card or ability, summed across all colors.",
-                    "type": "integer"
-                },
                 "description": {
                     "description": "A human-readable description for a thing",
                     "type": "string"
@@ -1507,13 +1795,6 @@
                     "description": "A unique identifier for a thing",
                     "type": "string"
                 },
-                "mana_cost": {
-                    "description": "A mana cost for a card or ability.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
                 "name": {
                     "description": "A human-readable name for a thing",
                     "type": "string"
@@ -1521,10 +1802,6 @@
                 "oracle_text": {
                     "description": "The official wording for the card effects.",
                     "type": "string"
-                },
-                "rarity": {
-                    "$ref": "#/$defs/Rarity",
-                    "description": "An ability associated with a card."
                 },
                 "type_line": {
                     "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",

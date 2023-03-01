@@ -35,7 +35,32 @@ type ActivatedAbility
     condition: Condition
   }
 
-type Artifact
+interface AnyArtifact
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+  }
+
+interface AnyCreature
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+    power: Integer!
+    toughness: Integer!
+    variablePower: Boolean
+    variableToughness: Boolean
+  }
+
+interface AnyEnchantment
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+  }
+
+type Artifact implements AnyArtifact, Card
   {
     id: Uriorcurie!
     name: String!
@@ -52,6 +77,23 @@ type Artifact
     cardSubtype: [String]
     cardSupertype: [String]
     rarity: Rarity
+    oracleText: String
+  }
+
+type ArtifactToken implements AnyArtifact, Token
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+    color: [Color]!
+    cardSet: String
+    ability: [Ability]
+    artist: String
+    flavorText: String
+    typeLine: String!
+    cardType: String!
+    cardSubtype: [String]
+    cardSupertype: [String]
     oracleText: String
   }
 
@@ -97,6 +139,7 @@ type Cost
     value: Integer
     intersection: Cost
     union: Cost
+    variableCost: Boolean
   }
 
 type Counter
@@ -104,7 +147,7 @@ type Counter
     id: Uriorcurie!
   }
 
-type Creature
+type Creature implements Card, AnyCreature
   {
     id: Uriorcurie!
     name: String!
@@ -122,11 +165,34 @@ type Creature
     cardSupertype: [String]
     rarity: Rarity
     oracleText: String
-    power: String!
-    toughness: String!
+    power: Integer!
+    toughness: Integer!
+    variablePower: Boolean
+    variableToughness: Boolean
   }
 
-type Enchantment
+type CreatureToken implements Token, AnyCreature
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+    color: [Color]!
+    cardSet: String
+    ability: [Ability]
+    artist: String
+    flavorText: String
+    typeLine: String!
+    cardType: String!
+    cardSubtype: [String]
+    cardSupertype: [String]
+    oracleText: String
+    power: Integer!
+    toughness: Integer!
+    variablePower: Boolean
+    variableToughness: Boolean
+  }
+
+type Enchantment implements AnyEnchantment, Card
   {
     id: Uriorcurie!
     name: String!
@@ -143,6 +209,23 @@ type Enchantment
     cardSubtype: [String]
     cardSupertype: [String]
     rarity: Rarity
+    oracleText: String
+  }
+
+type EnchantmentToken implements AnyEnchantment, Token
+  {
+    id: Uriorcurie!
+    name: String!
+    description: String
+    color: [Color]!
+    cardSet: String
+    ability: [Ability]
+    artist: String
+    flavorText: String
+    typeLine: String!
+    cardType: String!
+    cardSubtype: [String]
+    cardSupertype: [String]
     oracleText: String
   }
 
@@ -173,7 +256,7 @@ type KeywordCounter
     valueSpec: [ValueSpecification]
   }
 
-type Land
+type Land implements Permanent, Card
   {
     id: Uriorcurie!
     name: String!
@@ -199,6 +282,7 @@ type LifeCost
     value: Integer
     intersection: Cost
     union: Cost
+    variableCost: Boolean
   }
 
 type Mana
@@ -206,16 +290,21 @@ type Mana
     id: Uriorcurie!
     color: [Color]!
     snow: Boolean
+    phyrexian: Boolean
+    hybrid: Boolean
   }
 
-type ManaCost
+type ManaCost implements Cost, Mana
   {
     id: Uriorcurie!
     value: Integer
     intersection: Cost
     union: Cost
+    variableCost: Boolean
     color: [Color]!
     snow: Boolean
+    phyrexian: Boolean
+    hybrid: Boolean
   }
 
 type NamedThing
@@ -230,19 +319,6 @@ interface Permanent
     id: Uriorcurie!
     name: String!
     description: String
-    manaCost: [ManaCost]
-    convertedManaCost: Integer
-    color: [Color]!
-    cardSet: String
-    ability: [Ability]
-    artist: String
-    flavorText: String
-    typeLine: String!
-    cardType: String!
-    cardSubtype: [String]
-    cardSupertype: [String]
-    rarity: Rarity
-    oracleText: String
   }
 
 type PowerToughnessCounter
@@ -313,8 +389,6 @@ type Token
     id: Uriorcurie!
     name: String!
     description: String
-    manaCost: [ManaCost]
-    convertedManaCost: Integer
     color: [Color]!
     cardSet: String
     ability: [Ability]
@@ -324,7 +398,6 @@ type Token
     cardType: String!
     cardSubtype: [String]
     cardSupertype: [String]
-    rarity: Rarity
     oracleText: String
   }
 

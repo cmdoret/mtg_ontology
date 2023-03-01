@@ -1,5 +1,5 @@
 # Auto generated from mtg_ontology.yaml by pythongen.py version: 0.9.0
-# Generation date: 2023-02-28T02:44:27
+# Generation date: 2023-03-01T01:37:38
 # Schema: mtgo
 #
 # id: https://w3id.org/cmdoret/mtg-ontology/
@@ -55,7 +55,7 @@ class ThingId(URIorCURIE):
     pass
 
 
-class CardId(NamedThingId):
+class PermanentId(NamedThingId):
     pass
 
 
@@ -63,11 +63,23 @@ class SpellId(ThingId):
     pass
 
 
-class PermanentId(CardId):
+class TokenId(PermanentId):
     pass
 
 
-class TokenId(CardId):
+class CardId(NamedThingId):
+    pass
+
+
+class AnyEnchantmentId(PermanentId):
+    pass
+
+
+class AnyCreatureId(PermanentId):
+    pass
+
+
+class AnyArtifactId(PermanentId):
     pass
 
 
@@ -79,19 +91,31 @@ class InstantId(CardId):
     pass
 
 
-class EnchantmentId(PermanentId):
+class EnchantmentId(URIorCURIE):
     pass
 
 
-class ArtifactId(PermanentId):
+class EnchantmentTokenId(URIorCURIE):
     pass
 
 
-class CreatureId(PermanentId):
+class ArtifactId(URIorCURIE):
     pass
 
 
-class LandId(PermanentId):
+class ArtifactTokenId(URIorCURIE):
+    pass
+
+
+class CreatureId(URIorCURIE):
+    pass
+
+
+class CreatureTokenId(URIorCURIE):
+    pass
+
+
+class LandId(URIorCURIE):
     pass
 
 
@@ -99,15 +123,15 @@ class CostId(ThingId):
     pass
 
 
-class ManaCostId(CostId):
+class ManaId(ThingId):
+    pass
+
+
+class ManaCostId(URIorCURIE):
     pass
 
 
 class LifeCostId(CostId):
-    pass
-
-
-class ManaId(ThingId):
     pass
 
 
@@ -216,6 +240,118 @@ class Thing(YAMLRoot):
 
 
 @dataclass
+class Permanent(NamedThing):
+    """
+    A card or token that can be put onto the battlefield.
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = MTG.Permanent
+    class_class_curie: ClassVar[str] = "mtg:Permanent"
+    class_name: ClassVar[str] = "Permanent"
+    class_model_uri: ClassVar[URIRef] = MTGO.Permanent
+
+    id: Union[str, PermanentId] = None
+    name: str = None
+
+@dataclass
+class Spell(Thing):
+    """
+    An object on the stack. Either a card that has been cast, or a copy.
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = MTG.Spell
+    class_class_curie: ClassVar[str] = "mtg:Spell"
+    class_name: ClassVar[str] = "Spell"
+    class_model_uri: ClassVar[URIRef] = MTGO.Spell
+
+    id: Union[str, SpellId] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, SpellId):
+            self.id = SpellId(self.id)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class Token(Permanent):
+    """
+    A permanent that is not represented by a regular card and does not have a casting cost.
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = MTG.Token
+    class_class_curie: ClassVar[str] = "mtg:Token"
+    class_name: ClassVar[str] = "Token"
+    class_model_uri: ClassVar[URIRef] = MTGO.Token
+
+    id: Union[str, TokenId] = None
+    name: str = None
+    color: Union[Union[str, "Color"], List[Union[str, "Color"]]] = None
+    type_line: str = None
+    card_type: str = None
+    card_set: Optional[str] = None
+    ability: Optional[Union[Union[str, AbilityId], List[Union[str, AbilityId]]]] = empty_list()
+    artist: Optional[str] = None
+    flavor_text: Optional[str] = None
+    card_subtype: Optional[Union[str, List[str]]] = empty_list()
+    card_supertype: Optional[Union[str, List[str]]] = empty_list()
+    oracle_text: Optional[str] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, TokenId):
+            self.id = TokenId(self.id)
+
+        if self._is_empty(self.color):
+            self.MissingRequiredField("color")
+        if not isinstance(self.color, list):
+            self.color = [self.color] if self.color is not None else []
+        self.color = [v if isinstance(v, Color) else Color(v) for v in self.color]
+
+        if self._is_empty(self.type_line):
+            self.MissingRequiredField("type_line")
+        if not isinstance(self.type_line, str):
+            self.type_line = str(self.type_line)
+
+        if self._is_empty(self.card_type):
+            self.MissingRequiredField("card_type")
+        if not isinstance(self.card_type, str):
+            self.card_type = str(self.card_type)
+
+        if self.card_set is not None and not isinstance(self.card_set, str):
+            self.card_set = str(self.card_set)
+
+        if not isinstance(self.ability, list):
+            self.ability = [self.ability] if self.ability is not None else []
+        self.ability = [v if isinstance(v, AbilityId) else AbilityId(v) for v in self.ability]
+
+        if self.artist is not None and not isinstance(self.artist, str):
+            self.artist = str(self.artist)
+
+        if self.flavor_text is not None and not isinstance(self.flavor_text, str):
+            self.flavor_text = str(self.flavor_text)
+
+        if not isinstance(self.card_subtype, list):
+            self.card_subtype = [self.card_subtype] if self.card_subtype is not None else []
+        self.card_subtype = [v if isinstance(v, str) else str(v) for v in self.card_subtype]
+
+        if not isinstance(self.card_supertype, list):
+            self.card_supertype = [self.card_supertype] if self.card_supertype is not None else []
+        self.card_supertype = [v if isinstance(v, str) else str(v) for v in self.card_supertype]
+
+        if self.oracle_text is not None and not isinstance(self.oracle_text, str):
+            self.oracle_text = str(self.oracle_text)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
 class Card(NamedThing):
     """
     A card in the Magic The Gathering game.
@@ -298,72 +434,73 @@ class Card(NamedThing):
 
 
 @dataclass
-class Spell(Thing):
+class AnyEnchantment(Permanent):
     """
-    An object on the stack. Either a card that has been cast, or a copy.
+    A permanent which applies persistent magical effects.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTG.Spell
-    class_class_curie: ClassVar[str] = "mtg:Spell"
-    class_name: ClassVar[str] = "Spell"
-    class_model_uri: ClassVar[URIRef] = MTGO.Spell
+    class_class_uri: ClassVar[URIRef] = MTG.Enchantment
+    class_class_curie: ClassVar[str] = "mtg:Enchantment"
+    class_name: ClassVar[str] = "AnyEnchantment"
+    class_model_uri: ClassVar[URIRef] = MTGO.AnyEnchantment
 
-    id: Union[str, SpellId] = None
+    id: Union[str, AnyEnchantmentId] = None
+    name: str = None
+
+@dataclass
+class AnyCreature(Permanent):
+    """
+    A creature that can be summoned to the battlefield.
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = MTG.Creature
+    class_class_curie: ClassVar[str] = "mtg:Creature"
+    class_name: ClassVar[str] = "AnyCreature"
+    class_model_uri: ClassVar[URIRef] = MTGO.AnyCreature
+
+    id: Union[str, AnyCreatureId] = None
+    name: str = None
+    power: int = None
+    toughness: int = None
+    variable_power: Optional[Union[bool, Bool]] = None
+    variable_toughness: Optional[Union[bool, Bool]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, SpellId):
-            self.id = SpellId(self.id)
+        if self._is_empty(self.power):
+            self.MissingRequiredField("power")
+        if not isinstance(self.power, int):
+            self.power = int(self.power)
+
+        if self._is_empty(self.toughness):
+            self.MissingRequiredField("toughness")
+        if not isinstance(self.toughness, int):
+            self.toughness = int(self.toughness)
+
+        if self.variable_power is not None and not isinstance(self.variable_power, Bool):
+            self.variable_power = Bool(self.variable_power)
+
+        if self.variable_toughness is not None and not isinstance(self.variable_toughness, Bool):
+            self.variable_toughness = Bool(self.variable_toughness)
 
         super().__post_init__(**kwargs)
 
 
 @dataclass
-class Permanent(Card):
+class AnyArtifact(Permanent):
     """
-    A card or token that can be put onto the battlefield.
-    """
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = MTG.Permanent
-    class_class_curie: ClassVar[str] = "mtg:Permanent"
-    class_name: ClassVar[str] = "Permanent"
-    class_model_uri: ClassVar[URIRef] = MTGO.Permanent
-
-    id: Union[str, PermanentId] = None
-    name: str = None
-    color: Union[Union[str, "Color"], List[Union[str, "Color"]]] = None
-    type_line: str = None
-    card_type: str = None
-
-@dataclass
-class Token(Card):
-    """
-    A permanent that is not represented by a regular card and does not have a casting cost.
+    A permanent representing a magical item, animated construct, or other objects and devices.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTG.Token
-    class_class_curie: ClassVar[str] = "mtg:Token"
-    class_name: ClassVar[str] = "Token"
-    class_model_uri: ClassVar[URIRef] = MTGO.Token
+    class_class_uri: ClassVar[URIRef] = MTG.Artifact
+    class_class_curie: ClassVar[str] = "mtg:Artifact"
+    class_name: ClassVar[str] = "AnyArtifact"
+    class_model_uri: ClassVar[URIRef] = MTGO.AnyArtifact
 
-    id: Union[str, TokenId] = None
+    id: Union[str, AnyArtifactId] = None
     name: str = None
-    color: Union[Union[str, "Color"], List[Union[str, "Color"]]] = None
-    type_line: str = None
-    card_type: str = None
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, TokenId):
-            self.id = TokenId(self.id)
-
-        super().__post_init__(**kwargs)
-
 
 @dataclass
 class Sorcery(Card):
@@ -420,9 +557,9 @@ class Instant(Card):
 
 
 @dataclass
-class Enchantment(Permanent):
+class Enchantment(YAMLRoot):
     """
-    A permanent which applies persistent magical effects.
+    A card that represents an enchantment that can be cast and put onto the battlefield.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -436,6 +573,16 @@ class Enchantment(Permanent):
     color: Union[Union[str, "Color"], List[Union[str, "Color"]]] = None
     type_line: str = None
     card_type: str = None
+    mana_cost: Optional[Union[Union[str, ManaCostId], List[Union[str, ManaCostId]]]] = empty_list()
+    converted_mana_cost: Optional[int] = None
+    card_set: Optional[str] = None
+    ability: Optional[Union[Union[str, AbilityId], List[Union[str, AbilityId]]]] = empty_list()
+    artist: Optional[str] = None
+    flavor_text: Optional[str] = None
+    card_subtype: Optional[Union[str, List[str]]] = empty_list()
+    card_supertype: Optional[Union[str, List[str]]] = empty_list()
+    rarity: Optional[Union[str, "Rarity"]] = None
+    oracle_text: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -443,13 +590,137 @@ class Enchantment(Permanent):
         if not isinstance(self.id, EnchantmentId):
             self.id = EnchantmentId(self.id)
 
+        if self._is_empty(self.color):
+            self.MissingRequiredField("color")
+        if not isinstance(self.color, list):
+            self.color = [self.color] if self.color is not None else []
+        self.color = [v if isinstance(v, Color) else Color(v) for v in self.color]
+
+        if self._is_empty(self.type_line):
+            self.MissingRequiredField("type_line")
+        if not isinstance(self.type_line, str):
+            self.type_line = str(self.type_line)
+
+        if self._is_empty(self.card_type):
+            self.MissingRequiredField("card_type")
+        if not isinstance(self.card_type, str):
+            self.card_type = str(self.card_type)
+
+        if not isinstance(self.mana_cost, list):
+            self.mana_cost = [self.mana_cost] if self.mana_cost is not None else []
+        self.mana_cost = [v if isinstance(v, ManaCostId) else ManaCostId(v) for v in self.mana_cost]
+
+        if self.converted_mana_cost is not None and not isinstance(self.converted_mana_cost, int):
+            self.converted_mana_cost = int(self.converted_mana_cost)
+
+        if self.card_set is not None and not isinstance(self.card_set, str):
+            self.card_set = str(self.card_set)
+
+        if not isinstance(self.ability, list):
+            self.ability = [self.ability] if self.ability is not None else []
+        self.ability = [v if isinstance(v, AbilityId) else AbilityId(v) for v in self.ability]
+
+        if self.artist is not None and not isinstance(self.artist, str):
+            self.artist = str(self.artist)
+
+        if self.flavor_text is not None and not isinstance(self.flavor_text, str):
+            self.flavor_text = str(self.flavor_text)
+
+        if not isinstance(self.card_subtype, list):
+            self.card_subtype = [self.card_subtype] if self.card_subtype is not None else []
+        self.card_subtype = [v if isinstance(v, str) else str(v) for v in self.card_subtype]
+
+        if not isinstance(self.card_supertype, list):
+            self.card_supertype = [self.card_supertype] if self.card_supertype is not None else []
+        self.card_supertype = [v if isinstance(v, str) else str(v) for v in self.card_supertype]
+
+        if self.rarity is not None and not isinstance(self.rarity, Rarity):
+            self.rarity = Rarity(self.rarity)
+
+        if self.oracle_text is not None and not isinstance(self.oracle_text, str):
+            self.oracle_text = str(self.oracle_text)
+
         super().__post_init__(**kwargs)
 
 
 @dataclass
-class Artifact(Permanent):
+class EnchantmentToken(YAMLRoot):
     """
-    A permanent representing a magical item, animated construct, or other objects and devices.
+    A token that represents an enchantment that can be placed onto the battlefield by other effects.
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = MTGOC.EnchantmentToken
+    class_class_curie: ClassVar[str] = "mtgoc:EnchantmentToken"
+    class_name: ClassVar[str] = "EnchantmentToken"
+    class_model_uri: ClassVar[URIRef] = MTGO.EnchantmentToken
+
+    id: Union[str, EnchantmentTokenId] = None
+    name: str = None
+    color: Union[Union[str, "Color"], List[Union[str, "Color"]]] = None
+    type_line: str = None
+    card_type: str = None
+    card_set: Optional[str] = None
+    ability: Optional[Union[Union[str, AbilityId], List[Union[str, AbilityId]]]] = empty_list()
+    artist: Optional[str] = None
+    flavor_text: Optional[str] = None
+    card_subtype: Optional[Union[str, List[str]]] = empty_list()
+    card_supertype: Optional[Union[str, List[str]]] = empty_list()
+    oracle_text: Optional[str] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, EnchantmentTokenId):
+            self.id = EnchantmentTokenId(self.id)
+
+        if self._is_empty(self.color):
+            self.MissingRequiredField("color")
+        if not isinstance(self.color, list):
+            self.color = [self.color] if self.color is not None else []
+        self.color = [v if isinstance(v, Color) else Color(v) for v in self.color]
+
+        if self._is_empty(self.type_line):
+            self.MissingRequiredField("type_line")
+        if not isinstance(self.type_line, str):
+            self.type_line = str(self.type_line)
+
+        if self._is_empty(self.card_type):
+            self.MissingRequiredField("card_type")
+        if not isinstance(self.card_type, str):
+            self.card_type = str(self.card_type)
+
+        if self.card_set is not None and not isinstance(self.card_set, str):
+            self.card_set = str(self.card_set)
+
+        if not isinstance(self.ability, list):
+            self.ability = [self.ability] if self.ability is not None else []
+        self.ability = [v if isinstance(v, AbilityId) else AbilityId(v) for v in self.ability]
+
+        if self.artist is not None and not isinstance(self.artist, str):
+            self.artist = str(self.artist)
+
+        if self.flavor_text is not None and not isinstance(self.flavor_text, str):
+            self.flavor_text = str(self.flavor_text)
+
+        if not isinstance(self.card_subtype, list):
+            self.card_subtype = [self.card_subtype] if self.card_subtype is not None else []
+        self.card_subtype = [v if isinstance(v, str) else str(v) for v in self.card_subtype]
+
+        if not isinstance(self.card_supertype, list):
+            self.card_supertype = [self.card_supertype] if self.card_supertype is not None else []
+        self.card_supertype = [v if isinstance(v, str) else str(v) for v in self.card_supertype]
+
+        if self.oracle_text is not None and not isinstance(self.oracle_text, str):
+            self.oracle_text = str(self.oracle_text)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class Artifact(YAMLRoot):
+    """
+    A card that represents an artifact that can be cast and put onto the battlefield.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -463,6 +734,16 @@ class Artifact(Permanent):
     color: Union[Union[str, "Color"], List[Union[str, "Color"]]] = None
     type_line: str = None
     card_type: str = None
+    mana_cost: Optional[Union[Union[str, ManaCostId], List[Union[str, ManaCostId]]]] = empty_list()
+    converted_mana_cost: Optional[int] = None
+    card_set: Optional[str] = None
+    ability: Optional[Union[Union[str, AbilityId], List[Union[str, AbilityId]]]] = empty_list()
+    artist: Optional[str] = None
+    flavor_text: Optional[str] = None
+    card_subtype: Optional[Union[str, List[str]]] = empty_list()
+    card_supertype: Optional[Union[str, List[str]]] = empty_list()
+    rarity: Optional[Union[str, "Rarity"]] = None
+    oracle_text: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -470,13 +751,137 @@ class Artifact(Permanent):
         if not isinstance(self.id, ArtifactId):
             self.id = ArtifactId(self.id)
 
+        if self._is_empty(self.color):
+            self.MissingRequiredField("color")
+        if not isinstance(self.color, list):
+            self.color = [self.color] if self.color is not None else []
+        self.color = [v if isinstance(v, Color) else Color(v) for v in self.color]
+
+        if self._is_empty(self.type_line):
+            self.MissingRequiredField("type_line")
+        if not isinstance(self.type_line, str):
+            self.type_line = str(self.type_line)
+
+        if self._is_empty(self.card_type):
+            self.MissingRequiredField("card_type")
+        if not isinstance(self.card_type, str):
+            self.card_type = str(self.card_type)
+
+        if not isinstance(self.mana_cost, list):
+            self.mana_cost = [self.mana_cost] if self.mana_cost is not None else []
+        self.mana_cost = [v if isinstance(v, ManaCostId) else ManaCostId(v) for v in self.mana_cost]
+
+        if self.converted_mana_cost is not None and not isinstance(self.converted_mana_cost, int):
+            self.converted_mana_cost = int(self.converted_mana_cost)
+
+        if self.card_set is not None and not isinstance(self.card_set, str):
+            self.card_set = str(self.card_set)
+
+        if not isinstance(self.ability, list):
+            self.ability = [self.ability] if self.ability is not None else []
+        self.ability = [v if isinstance(v, AbilityId) else AbilityId(v) for v in self.ability]
+
+        if self.artist is not None and not isinstance(self.artist, str):
+            self.artist = str(self.artist)
+
+        if self.flavor_text is not None and not isinstance(self.flavor_text, str):
+            self.flavor_text = str(self.flavor_text)
+
+        if not isinstance(self.card_subtype, list):
+            self.card_subtype = [self.card_subtype] if self.card_subtype is not None else []
+        self.card_subtype = [v if isinstance(v, str) else str(v) for v in self.card_subtype]
+
+        if not isinstance(self.card_supertype, list):
+            self.card_supertype = [self.card_supertype] if self.card_supertype is not None else []
+        self.card_supertype = [v if isinstance(v, str) else str(v) for v in self.card_supertype]
+
+        if self.rarity is not None and not isinstance(self.rarity, Rarity):
+            self.rarity = Rarity(self.rarity)
+
+        if self.oracle_text is not None and not isinstance(self.oracle_text, str):
+            self.oracle_text = str(self.oracle_text)
+
         super().__post_init__(**kwargs)
 
 
 @dataclass
-class Creature(Permanent):
+class ArtifactToken(YAMLRoot):
     """
-    A card that represents a creature that can be summoned to the battlefield.
+    A token that represents an artifact that can be placed onto the battlefield by other effects.
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = MTGOC.ArtifactToken
+    class_class_curie: ClassVar[str] = "mtgoc:ArtifactToken"
+    class_name: ClassVar[str] = "ArtifactToken"
+    class_model_uri: ClassVar[URIRef] = MTGO.ArtifactToken
+
+    id: Union[str, ArtifactTokenId] = None
+    name: str = None
+    color: Union[Union[str, "Color"], List[Union[str, "Color"]]] = None
+    type_line: str = None
+    card_type: str = None
+    card_set: Optional[str] = None
+    ability: Optional[Union[Union[str, AbilityId], List[Union[str, AbilityId]]]] = empty_list()
+    artist: Optional[str] = None
+    flavor_text: Optional[str] = None
+    card_subtype: Optional[Union[str, List[str]]] = empty_list()
+    card_supertype: Optional[Union[str, List[str]]] = empty_list()
+    oracle_text: Optional[str] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, ArtifactTokenId):
+            self.id = ArtifactTokenId(self.id)
+
+        if self._is_empty(self.color):
+            self.MissingRequiredField("color")
+        if not isinstance(self.color, list):
+            self.color = [self.color] if self.color is not None else []
+        self.color = [v if isinstance(v, Color) else Color(v) for v in self.color]
+
+        if self._is_empty(self.type_line):
+            self.MissingRequiredField("type_line")
+        if not isinstance(self.type_line, str):
+            self.type_line = str(self.type_line)
+
+        if self._is_empty(self.card_type):
+            self.MissingRequiredField("card_type")
+        if not isinstance(self.card_type, str):
+            self.card_type = str(self.card_type)
+
+        if self.card_set is not None and not isinstance(self.card_set, str):
+            self.card_set = str(self.card_set)
+
+        if not isinstance(self.ability, list):
+            self.ability = [self.ability] if self.ability is not None else []
+        self.ability = [v if isinstance(v, AbilityId) else AbilityId(v) for v in self.ability]
+
+        if self.artist is not None and not isinstance(self.artist, str):
+            self.artist = str(self.artist)
+
+        if self.flavor_text is not None and not isinstance(self.flavor_text, str):
+            self.flavor_text = str(self.flavor_text)
+
+        if not isinstance(self.card_subtype, list):
+            self.card_subtype = [self.card_subtype] if self.card_subtype is not None else []
+        self.card_subtype = [v if isinstance(v, str) else str(v) for v in self.card_subtype]
+
+        if not isinstance(self.card_supertype, list):
+            self.card_supertype = [self.card_supertype] if self.card_supertype is not None else []
+        self.card_supertype = [v if isinstance(v, str) else str(v) for v in self.card_supertype]
+
+        if self.oracle_text is not None and not isinstance(self.oracle_text, str):
+            self.oracle_text = str(self.oracle_text)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class Creature(YAMLRoot):
+    """
+    A card that represents a creature that can be cast and put onto the battlefield.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -490,8 +895,20 @@ class Creature(Permanent):
     color: Union[Union[str, "Color"], List[Union[str, "Color"]]] = None
     type_line: str = None
     card_type: str = None
-    power: str = None
-    toughness: str = None
+    power: int = None
+    toughness: int = None
+    mana_cost: Optional[Union[Union[str, ManaCostId], List[Union[str, ManaCostId]]]] = empty_list()
+    converted_mana_cost: Optional[int] = None
+    card_set: Optional[str] = None
+    ability: Optional[Union[Union[str, AbilityId], List[Union[str, AbilityId]]]] = empty_list()
+    artist: Optional[str] = None
+    flavor_text: Optional[str] = None
+    card_subtype: Optional[Union[str, List[str]]] = empty_list()
+    card_supertype: Optional[Union[str, List[str]]] = empty_list()
+    rarity: Optional[Union[str, "Rarity"]] = None
+    oracle_text: Optional[str] = None
+    variable_power: Optional[Union[bool, Bool]] = None
+    variable_toughness: Optional[Union[bool, Bool]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -499,21 +916,171 @@ class Creature(Permanent):
         if not isinstance(self.id, CreatureId):
             self.id = CreatureId(self.id)
 
+        if self._is_empty(self.color):
+            self.MissingRequiredField("color")
+        if not isinstance(self.color, list):
+            self.color = [self.color] if self.color is not None else []
+        self.color = [v if isinstance(v, Color) else Color(v) for v in self.color]
+
+        if self._is_empty(self.type_line):
+            self.MissingRequiredField("type_line")
+        if not isinstance(self.type_line, str):
+            self.type_line = str(self.type_line)
+
+        if self._is_empty(self.card_type):
+            self.MissingRequiredField("card_type")
+        if not isinstance(self.card_type, str):
+            self.card_type = str(self.card_type)
+
         if self._is_empty(self.power):
             self.MissingRequiredField("power")
-        if not isinstance(self.power, str):
-            self.power = str(self.power)
+        if not isinstance(self.power, int):
+            self.power = int(self.power)
 
         if self._is_empty(self.toughness):
             self.MissingRequiredField("toughness")
-        if not isinstance(self.toughness, str):
-            self.toughness = str(self.toughness)
+        if not isinstance(self.toughness, int):
+            self.toughness = int(self.toughness)
+
+        if not isinstance(self.mana_cost, list):
+            self.mana_cost = [self.mana_cost] if self.mana_cost is not None else []
+        self.mana_cost = [v if isinstance(v, ManaCostId) else ManaCostId(v) for v in self.mana_cost]
+
+        if self.converted_mana_cost is not None and not isinstance(self.converted_mana_cost, int):
+            self.converted_mana_cost = int(self.converted_mana_cost)
+
+        if self.card_set is not None and not isinstance(self.card_set, str):
+            self.card_set = str(self.card_set)
+
+        if not isinstance(self.ability, list):
+            self.ability = [self.ability] if self.ability is not None else []
+        self.ability = [v if isinstance(v, AbilityId) else AbilityId(v) for v in self.ability]
+
+        if self.artist is not None and not isinstance(self.artist, str):
+            self.artist = str(self.artist)
+
+        if self.flavor_text is not None and not isinstance(self.flavor_text, str):
+            self.flavor_text = str(self.flavor_text)
+
+        if not isinstance(self.card_subtype, list):
+            self.card_subtype = [self.card_subtype] if self.card_subtype is not None else []
+        self.card_subtype = [v if isinstance(v, str) else str(v) for v in self.card_subtype]
+
+        if not isinstance(self.card_supertype, list):
+            self.card_supertype = [self.card_supertype] if self.card_supertype is not None else []
+        self.card_supertype = [v if isinstance(v, str) else str(v) for v in self.card_supertype]
+
+        if self.rarity is not None and not isinstance(self.rarity, Rarity):
+            self.rarity = Rarity(self.rarity)
+
+        if self.oracle_text is not None and not isinstance(self.oracle_text, str):
+            self.oracle_text = str(self.oracle_text)
+
+        if self.variable_power is not None and not isinstance(self.variable_power, Bool):
+            self.variable_power = Bool(self.variable_power)
+
+        if self.variable_toughness is not None and not isinstance(self.variable_toughness, Bool):
+            self.variable_toughness = Bool(self.variable_toughness)
 
         super().__post_init__(**kwargs)
 
 
 @dataclass
-class Land(Permanent):
+class CreatureToken(YAMLRoot):
+    """
+    A token that represents a creature that can be placed onto the battlefield by other effects.
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = MTGOC.CreatureToken
+    class_class_curie: ClassVar[str] = "mtgoc:CreatureToken"
+    class_name: ClassVar[str] = "CreatureToken"
+    class_model_uri: ClassVar[URIRef] = MTGO.CreatureToken
+
+    id: Union[str, CreatureTokenId] = None
+    name: str = None
+    color: Union[Union[str, "Color"], List[Union[str, "Color"]]] = None
+    type_line: str = None
+    card_type: str = None
+    power: int = None
+    toughness: int = None
+    card_set: Optional[str] = None
+    ability: Optional[Union[Union[str, AbilityId], List[Union[str, AbilityId]]]] = empty_list()
+    artist: Optional[str] = None
+    flavor_text: Optional[str] = None
+    card_subtype: Optional[Union[str, List[str]]] = empty_list()
+    card_supertype: Optional[Union[str, List[str]]] = empty_list()
+    oracle_text: Optional[str] = None
+    variable_power: Optional[Union[bool, Bool]] = None
+    variable_toughness: Optional[Union[bool, Bool]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, CreatureTokenId):
+            self.id = CreatureTokenId(self.id)
+
+        if self._is_empty(self.color):
+            self.MissingRequiredField("color")
+        if not isinstance(self.color, list):
+            self.color = [self.color] if self.color is not None else []
+        self.color = [v if isinstance(v, Color) else Color(v) for v in self.color]
+
+        if self._is_empty(self.type_line):
+            self.MissingRequiredField("type_line")
+        if not isinstance(self.type_line, str):
+            self.type_line = str(self.type_line)
+
+        if self._is_empty(self.card_type):
+            self.MissingRequiredField("card_type")
+        if not isinstance(self.card_type, str):
+            self.card_type = str(self.card_type)
+
+        if self._is_empty(self.power):
+            self.MissingRequiredField("power")
+        if not isinstance(self.power, int):
+            self.power = int(self.power)
+
+        if self._is_empty(self.toughness):
+            self.MissingRequiredField("toughness")
+        if not isinstance(self.toughness, int):
+            self.toughness = int(self.toughness)
+
+        if self.card_set is not None and not isinstance(self.card_set, str):
+            self.card_set = str(self.card_set)
+
+        if not isinstance(self.ability, list):
+            self.ability = [self.ability] if self.ability is not None else []
+        self.ability = [v if isinstance(v, AbilityId) else AbilityId(v) for v in self.ability]
+
+        if self.artist is not None and not isinstance(self.artist, str):
+            self.artist = str(self.artist)
+
+        if self.flavor_text is not None and not isinstance(self.flavor_text, str):
+            self.flavor_text = str(self.flavor_text)
+
+        if not isinstance(self.card_subtype, list):
+            self.card_subtype = [self.card_subtype] if self.card_subtype is not None else []
+        self.card_subtype = [v if isinstance(v, str) else str(v) for v in self.card_subtype]
+
+        if not isinstance(self.card_supertype, list):
+            self.card_supertype = [self.card_supertype] if self.card_supertype is not None else []
+        self.card_supertype = [v if isinstance(v, str) else str(v) for v in self.card_supertype]
+
+        if self.oracle_text is not None and not isinstance(self.oracle_text, str):
+            self.oracle_text = str(self.oracle_text)
+
+        if self.variable_power is not None and not isinstance(self.variable_power, Bool):
+            self.variable_power = Bool(self.variable_power)
+
+        if self.variable_toughness is not None and not isinstance(self.variable_toughness, Bool):
+            self.variable_toughness = Bool(self.variable_toughness)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class Land(YAMLRoot):
     """
     A card that represents a land that can be tapped for mana.
     """
@@ -529,12 +1096,72 @@ class Land(Permanent):
     color: Union[Union[str, "Color"], List[Union[str, "Color"]]] = None
     type_line: str = None
     card_type: str = None
+    mana_cost: Optional[Union[Union[str, ManaCostId], List[Union[str, ManaCostId]]]] = empty_list()
+    converted_mana_cost: Optional[int] = None
+    card_set: Optional[str] = None
+    ability: Optional[Union[Union[str, AbilityId], List[Union[str, AbilityId]]]] = empty_list()
+    artist: Optional[str] = None
+    flavor_text: Optional[str] = None
+    card_subtype: Optional[Union[str, List[str]]] = empty_list()
+    card_supertype: Optional[Union[str, List[str]]] = empty_list()
+    rarity: Optional[Union[str, "Rarity"]] = None
+    oracle_text: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
             self.MissingRequiredField("id")
         if not isinstance(self.id, LandId):
             self.id = LandId(self.id)
+
+        if self._is_empty(self.color):
+            self.MissingRequiredField("color")
+        if not isinstance(self.color, list):
+            self.color = [self.color] if self.color is not None else []
+        self.color = [v if isinstance(v, Color) else Color(v) for v in self.color]
+
+        if self._is_empty(self.type_line):
+            self.MissingRequiredField("type_line")
+        if not isinstance(self.type_line, str):
+            self.type_line = str(self.type_line)
+
+        if self._is_empty(self.card_type):
+            self.MissingRequiredField("card_type")
+        if not isinstance(self.card_type, str):
+            self.card_type = str(self.card_type)
+
+        if not isinstance(self.mana_cost, list):
+            self.mana_cost = [self.mana_cost] if self.mana_cost is not None else []
+        self.mana_cost = [v if isinstance(v, ManaCostId) else ManaCostId(v) for v in self.mana_cost]
+
+        if self.converted_mana_cost is not None and not isinstance(self.converted_mana_cost, int):
+            self.converted_mana_cost = int(self.converted_mana_cost)
+
+        if self.card_set is not None and not isinstance(self.card_set, str):
+            self.card_set = str(self.card_set)
+
+        if not isinstance(self.ability, list):
+            self.ability = [self.ability] if self.ability is not None else []
+        self.ability = [v if isinstance(v, AbilityId) else AbilityId(v) for v in self.ability]
+
+        if self.artist is not None and not isinstance(self.artist, str):
+            self.artist = str(self.artist)
+
+        if self.flavor_text is not None and not isinstance(self.flavor_text, str):
+            self.flavor_text = str(self.flavor_text)
+
+        if not isinstance(self.card_subtype, list):
+            self.card_subtype = [self.card_subtype] if self.card_subtype is not None else []
+        self.card_subtype = [v if isinstance(v, str) else str(v) for v in self.card_subtype]
+
+        if not isinstance(self.card_supertype, list):
+            self.card_supertype = [self.card_supertype] if self.card_supertype is not None else []
+        self.card_supertype = [v if isinstance(v, str) else str(v) for v in self.card_supertype]
+
+        if self.rarity is not None and not isinstance(self.rarity, Rarity):
+            self.rarity = Rarity(self.rarity)
+
+        if self.oracle_text is not None and not isinstance(self.oracle_text, str):
+            self.oracle_text = str(self.oracle_text)
 
         super().__post_init__(**kwargs)
 
@@ -555,6 +1182,7 @@ class Cost(Thing):
     value: Optional[int] = None
     intersection: Optional[Union[str, CostId]] = None
     union: Optional[Union[str, CostId]] = None
+    variable_cost: Optional[Union[bool, Bool]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -571,11 +1199,56 @@ class Cost(Thing):
         if self.union is not None and not isinstance(self.union, CostId):
             self.union = CostId(self.union)
 
+        if self.variable_cost is not None and not isinstance(self.variable_cost, Bool):
+            self.variable_cost = Bool(self.variable_cost)
+
         super().__post_init__(**kwargs)
 
 
 @dataclass
-class ManaCost(Cost):
+class Mana(Thing):
+    """
+    A mana in the pool.
+    """
+    _inherited_slots: ClassVar[List[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = MTG.Mana
+    class_class_curie: ClassVar[str] = "mtg:Mana"
+    class_name: ClassVar[str] = "Mana"
+    class_model_uri: ClassVar[URIRef] = MTGO.Mana
+
+    id: Union[str, ManaId] = None
+    color: Union[Union[str, "Color"], List[Union[str, "Color"]]] = None
+    snow: Optional[Union[bool, Bool]] = None
+    phyrexian: Optional[Union[bool, Bool]] = None
+    hybrid: Optional[Union[bool, Bool]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, ManaId):
+            self.id = ManaId(self.id)
+
+        if self._is_empty(self.color):
+            self.MissingRequiredField("color")
+        if not isinstance(self.color, list):
+            self.color = [self.color] if self.color is not None else []
+        self.color = [v if isinstance(v, Color) else Color(v) for v in self.color]
+
+        if self.snow is not None and not isinstance(self.snow, Bool):
+            self.snow = Bool(self.snow)
+
+        if self.phyrexian is not None and not isinstance(self.phyrexian, Bool):
+            self.phyrexian = Bool(self.phyrexian)
+
+        if self.hybrid is not None and not isinstance(self.hybrid, Bool):
+            self.hybrid = Bool(self.hybrid)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class ManaCost(YAMLRoot):
     """
     The mana cost of a card or ability.
     """
@@ -588,7 +1261,13 @@ class ManaCost(Cost):
 
     id: Union[str, ManaCostId] = None
     color: Union[Union[str, "Color"], List[Union[str, "Color"]]] = None
+    value: Optional[int] = None
+    intersection: Optional[Union[str, CostId]] = None
+    union: Optional[Union[str, CostId]] = None
+    variable_cost: Optional[Union[bool, Bool]] = None
     snow: Optional[Union[bool, Bool]] = None
+    phyrexian: Optional[Union[bool, Bool]] = None
+    hybrid: Optional[Union[bool, Bool]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -602,8 +1281,26 @@ class ManaCost(Cost):
             self.color = [self.color] if self.color is not None else []
         self.color = [v if isinstance(v, Color) else Color(v) for v in self.color]
 
+        if self.value is not None and not isinstance(self.value, int):
+            self.value = int(self.value)
+
+        if self.intersection is not None and not isinstance(self.intersection, CostId):
+            self.intersection = CostId(self.intersection)
+
+        if self.union is not None and not isinstance(self.union, CostId):
+            self.union = CostId(self.union)
+
+        if self.variable_cost is not None and not isinstance(self.variable_cost, Bool):
+            self.variable_cost = Bool(self.variable_cost)
+
         if self.snow is not None and not isinstance(self.snow, Bool):
             self.snow = Bool(self.snow)
+
+        if self.phyrexian is not None and not isinstance(self.phyrexian, Bool):
+            self.phyrexian = Bool(self.phyrexian)
+
+        if self.hybrid is not None and not isinstance(self.hybrid, Bool):
+            self.hybrid = Bool(self.hybrid)
 
         super().__post_init__(**kwargs)
 
@@ -627,40 +1324,6 @@ class LifeCost(Cost):
             self.MissingRequiredField("id")
         if not isinstance(self.id, LifeCostId):
             self.id = LifeCostId(self.id)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass
-class Mana(Thing):
-    """
-    A mana in the pool.
-    """
-    _inherited_slots: ClassVar[List[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = MTG.Mana
-    class_class_curie: ClassVar[str] = "mtg:Mana"
-    class_name: ClassVar[str] = "Mana"
-    class_model_uri: ClassVar[URIRef] = MTGO.Mana
-
-    id: Union[str, ManaId] = None
-    color: Union[Union[str, "Color"], List[Union[str, "Color"]]] = None
-    snow: Optional[Union[bool, Bool]] = None
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, ManaId):
-            self.id = ManaId(self.id)
-
-        if self._is_empty(self.color):
-            self.MissingRequiredField("color")
-        if not isinstance(self.color, list):
-            self.color = [self.color] if self.color is not None else []
-        self.color = [v if isinstance(v, Color) else Color(v) for v in self.color]
-
-        if self.snow is not None and not isinstance(self.snow, Bool):
-            self.snow = Bool(self.snow)
 
         super().__post_init__(**kwargs)
 
@@ -1525,12 +2188,27 @@ slots.oracle_text = Slot(uri=MTGOC.oracle_text, name="oracle_text", curie=MTGOC.
                    model_uri=MTGO.oracle_text, domain=None, range=Optional[str])
 
 slots.power = Slot(uri=MTGOC.power, name="power", curie=MTGOC.curie('power'),
-                   model_uri=MTGO.power, domain=None, range=str)
+                   model_uri=MTGO.power, domain=None, range=int)
 
 slots.toughness = Slot(uri=MTGOC.toughness, name="toughness", curie=MTGOC.curie('toughness'),
-                   model_uri=MTGO.toughness, domain=None, range=str)
+                   model_uri=MTGO.toughness, domain=None, range=int)
 
-slots.snow = Slot(uri=MTGOC.snow, name="snow", curie=MTGOC.curie('snow'),
+slots.variable_power = Slot(uri=MTGOC.variable_power, name="variable_power", curie=MTGOC.curie('variable_power'),
+                   model_uri=MTGO.variable_power, domain=None, range=Optional[Union[bool, Bool]])
+
+slots.variable_toughness = Slot(uri=MTGOC.variable_toughness, name="variable_toughness", curie=MTGOC.curie('variable_toughness'),
+                   model_uri=MTGO.variable_toughness, domain=None, range=Optional[Union[bool, Bool]])
+
+slots.variable_cost = Slot(uri=MTG.x, name="variable_cost", curie=MTG.curie('x'),
+                   model_uri=MTGO.variable_cost, domain=None, range=Optional[Union[bool, Bool]])
+
+slots.hybrid = Slot(uri=MTG.hybrid_mana, name="hybrid", curie=MTG.curie('hybrid_mana'),
+                   model_uri=MTGO.hybrid, domain=None, range=Optional[Union[bool, Bool]])
+
+slots.phyrexian = Slot(uri=MTG.phyrexian_mana, name="phyrexian", curie=MTG.curie('phyrexian_mana'),
+                   model_uri=MTGO.phyrexian, domain=None, range=Optional[Union[bool, Bool]])
+
+slots.snow = Slot(uri=MTG.snow, name="snow", curie=MTG.curie('snow'),
                    model_uri=MTGO.snow, domain=None, range=Optional[Union[bool, Bool]])
 
 slots.type_line = Slot(uri=MTGOC.type_line, name="type_line", curie=MTGOC.curie('type_line'),

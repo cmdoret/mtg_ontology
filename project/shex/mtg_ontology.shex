@@ -89,16 +89,83 @@ mtgoa:ActivatedAbility CLOSED {
     )
 }
 
-mtgoc:Artifact CLOSED {
-    (  $mtgoc:Artifact_tes (  &mtgoc:Permanent_tes ;
+mtgoc:AnyArtifact {
+    (  $mtgoc:AnyArtifact_tes (  &mtgoc:Permanent_tes ;
           rdf:type [ mtg:Permanent ] ?
        ) ;
        rdf:type [ mtg:Artifact ]
     )
 }
 
+mtgoc:AnyCreature {
+    (  $mtgoc:AnyCreature_tes (  &mtgoc:Permanent_tes ;
+          rdf:type [ mtg:Permanent ] ? ;
+          mtgoc:power @linkml:Integer ;
+          mtgoc:toughness @linkml:Integer ;
+          mtgoc:variable_power @linkml:Boolean ? ;
+          mtgoc:variable_toughness @linkml:Boolean ?
+       ) ;
+       rdf:type [ mtg:Creature ]
+    )
+}
+
+mtgoc:AnyEnchantment {
+    (  $mtgoc:AnyEnchantment_tes (  &mtgoc:Permanent_tes ;
+          rdf:type [ mtg:Permanent ] ?
+       ) ;
+       rdf:type [ mtg:Enchantment ]
+    )
+}
+
+mtgoc:Artifact CLOSED {
+    (  $mtgoc:Artifact_tes (  &mtgoc:AnyArtifact_tes ;
+          rdf:type [ mtg:Artifact ] ? ;
+          &mtgoc:Card_tes ;
+          rdf:type [ mtg:Card ] ? ;
+          schema:name @linkml:String ;
+          schema:description @linkml:String ? ;
+          mtgoc:mana_cost @mtgoc:ManaCost * ;
+          mtgoc:converted_mana_cost @linkml:Integer ? ;
+          mtgoc:color @mtgoc:Color + ;
+          mtgoc:card_set @linkml:String ? ;
+          mtgoc:ability @mtgoa:Ability * ;
+          mtgoc:artist @linkml:String ? ;
+          mtgoc:flavor_text @linkml:String ? ;
+          mtgoc:type_line @linkml:String ;
+          mtgoc:card_type @linkml:String ;
+          mtgoc:card_subtype @linkml:String * ;
+          mtgoc:card_supertype @linkml:String * ;
+          mtgoc:rarity @mtgoc:Rarity ? ;
+          mtgoc:oracle_text @linkml:String ?
+       ) ;
+       rdf:type [ mtg:Artifact ]
+    )
+}
+
+mtgoc:ArtifactToken CLOSED {
+    (  $mtgoc:ArtifactToken_tes (  &mtgoc:AnyArtifact_tes ;
+          rdf:type [ mtg:Artifact ] ? ;
+          &mtgoc:Token_tes ;
+          rdf:type [ mtg:Token ] ? ;
+          schema:name @linkml:String ;
+          schema:description @linkml:String ? ;
+          mtgoc:color @mtgoc:Color + ;
+          mtgoc:card_set @linkml:String ? ;
+          mtgoc:ability @mtgoa:Ability * ;
+          mtgoc:artist @linkml:String ? ;
+          mtgoc:flavor_text @linkml:String ? ;
+          mtgoc:type_line @linkml:String ;
+          mtgoc:card_type @linkml:String ;
+          mtgoc:card_subtype @linkml:String * ;
+          mtgoc:card_supertype @linkml:String * ;
+          mtgoc:oracle_text @linkml:String ?
+       ) ;
+       rdf:type [ mtgoc:ArtifactToken ]
+    )
+}
+
 mtgoc:Card  (
-    @mtgoc:Instant OR @mtgoc:Permanent OR @mtgoc:Sorcery OR @mtgoc:Token
+    @mtgoc:Instant OR @mtgoc:Sorcery
 )
 
 mtgoc:Card_struct {
@@ -149,11 +216,12 @@ mtgoc:Cost  (
              rdf:type [ schema:Thing ] ? ;
              mtgoc:value @linkml:Integer ? ;
              <intersection> @mtgoc:Cost ? ;
-             <union> @mtgoc:Cost ?
+             <union> @mtgoc:Cost ? ;
+             mtg:x @linkml:Boolean ?
           ) ;
           rdf:type [ mtg:Cost ]
        )
-    } OR @mtgoc:LifeCost OR @mtgoc:ManaCost
+    } OR @mtgoc:LifeCost
 )
 
 mtgoa:Counter  (
@@ -167,20 +235,104 @@ mtgoa:Counter  (
 )
 
 mtgoc:Creature CLOSED {
-    (  $mtgoc:Creature_tes (  &mtgoc:Permanent_tes ;
-          rdf:type [ mtg:Permanent ] ? ;
-          mtgoc:power @linkml:String ;
-          mtgoc:toughness @linkml:String
+    (  $mtgoc:Creature_tes (  &mtgoc:Card_tes ;
+          rdf:type [ mtg:Card ] ? ;
+          &mtgoc:AnyCreature_tes ;
+          rdf:type [ mtg:Creature ] ? ;
+          schema:name @linkml:String ;
+          schema:description @linkml:String ? ;
+          mtgoc:mana_cost @mtgoc:ManaCost * ;
+          mtgoc:converted_mana_cost @linkml:Integer ? ;
+          mtgoc:color @mtgoc:Color + ;
+          mtgoc:card_set @linkml:String ? ;
+          mtgoc:ability @mtgoa:Ability * ;
+          mtgoc:artist @linkml:String ? ;
+          mtgoc:flavor_text @linkml:String ? ;
+          mtgoc:type_line @linkml:String ;
+          mtgoc:card_type @linkml:String ;
+          mtgoc:card_subtype @linkml:String * ;
+          mtgoc:card_supertype @linkml:String * ;
+          mtgoc:rarity @mtgoc:Rarity ? ;
+          mtgoc:oracle_text @linkml:String ? ;
+          mtgoc:power @linkml:Integer ;
+          mtgoc:toughness @linkml:Integer ;
+          mtgoc:variable_power @linkml:Boolean ? ;
+          mtgoc:variable_toughness @linkml:Boolean ?
        ) ;
        rdf:type [ mtg:Creature ]
     )
 }
 
+mtgoc:CreatureToken CLOSED {
+    (  $mtgoc:CreatureToken_tes (  &mtgoc:Token_tes ;
+          rdf:type [ mtg:Token ] ? ;
+          &mtgoc:AnyCreature_tes ;
+          rdf:type [ mtg:Creature ] ? ;
+          schema:name @linkml:String ;
+          schema:description @linkml:String ? ;
+          mtgoc:color @mtgoc:Color + ;
+          mtgoc:card_set @linkml:String ? ;
+          mtgoc:ability @mtgoa:Ability * ;
+          mtgoc:artist @linkml:String ? ;
+          mtgoc:flavor_text @linkml:String ? ;
+          mtgoc:type_line @linkml:String ;
+          mtgoc:card_type @linkml:String ;
+          mtgoc:card_subtype @linkml:String * ;
+          mtgoc:card_supertype @linkml:String * ;
+          mtgoc:oracle_text @linkml:String ? ;
+          mtgoc:power @linkml:Integer ;
+          mtgoc:toughness @linkml:Integer ;
+          mtgoc:variable_power @linkml:Boolean ? ;
+          mtgoc:variable_toughness @linkml:Boolean ?
+       ) ;
+       rdf:type [ mtgoc:CreatureToken ]
+    )
+}
+
 mtgoc:Enchantment CLOSED {
-    (  $mtgoc:Enchantment_tes (  &mtgoc:Permanent_tes ;
-          rdf:type [ mtg:Permanent ] ?
+    (  $mtgoc:Enchantment_tes (  &mtgoc:AnyEnchantment_tes ;
+          rdf:type [ mtg:Enchantment ] ? ;
+          &mtgoc:Card_tes ;
+          rdf:type [ mtg:Card ] ? ;
+          schema:name @linkml:String ;
+          schema:description @linkml:String ? ;
+          mtgoc:mana_cost @mtgoc:ManaCost * ;
+          mtgoc:converted_mana_cost @linkml:Integer ? ;
+          mtgoc:color @mtgoc:Color + ;
+          mtgoc:card_set @linkml:String ? ;
+          mtgoc:ability @mtgoa:Ability * ;
+          mtgoc:artist @linkml:String ? ;
+          mtgoc:flavor_text @linkml:String ? ;
+          mtgoc:type_line @linkml:String ;
+          mtgoc:card_type @linkml:String ;
+          mtgoc:card_subtype @linkml:String * ;
+          mtgoc:card_supertype @linkml:String * ;
+          mtgoc:rarity @mtgoc:Rarity ? ;
+          mtgoc:oracle_text @linkml:String ?
        ) ;
        rdf:type [ mtg:Enchantment ]
+    )
+}
+
+mtgoc:EnchantmentToken CLOSED {
+    (  $mtgoc:EnchantmentToken_tes (  &mtgoc:AnyEnchantment_tes ;
+          rdf:type [ mtg:Enchantment ] ? ;
+          &mtgoc:Token_tes ;
+          rdf:type [ mtg:Token ] ? ;
+          schema:name @linkml:String ;
+          schema:description @linkml:String ? ;
+          mtgoc:color @mtgoc:Color + ;
+          mtgoc:card_set @linkml:String ? ;
+          mtgoc:ability @mtgoa:Ability * ;
+          mtgoc:artist @linkml:String ? ;
+          mtgoc:flavor_text @linkml:String ? ;
+          mtgoc:type_line @linkml:String ;
+          mtgoc:card_type @linkml:String ;
+          mtgoc:card_subtype @linkml:String * ;
+          mtgoc:card_supertype @linkml:String * ;
+          mtgoc:oracle_text @linkml:String ?
+       ) ;
+       rdf:type [ mtgoc:EnchantmentToken ]
     )
 }
 
@@ -204,7 +356,24 @@ mtgoa:KeywordCounter CLOSED {
 
 mtgoc:Land CLOSED {
     (  $mtgoc:Land_tes (  &mtgoc:Permanent_tes ;
-          rdf:type [ mtg:Permanent ] ?
+          rdf:type [ mtg:Permanent ] ? ;
+          &mtgoc:Card_tes ;
+          rdf:type [ mtg:Card ] ? ;
+          schema:name @linkml:String ;
+          schema:description @linkml:String ? ;
+          mtgoc:mana_cost @mtgoc:ManaCost * ;
+          mtgoc:converted_mana_cost @linkml:Integer ? ;
+          mtgoc:color @mtgoc:Color + ;
+          mtgoc:card_set @linkml:String ? ;
+          mtgoc:ability @mtgoa:Ability * ;
+          mtgoc:artist @linkml:String ? ;
+          mtgoc:flavor_text @linkml:String ? ;
+          mtgoc:type_line @linkml:String ;
+          mtgoc:card_type @linkml:String ;
+          mtgoc:card_subtype @linkml:String * ;
+          mtgoc:card_supertype @linkml:String * ;
+          mtgoc:rarity @mtgoc:Rarity ? ;
+          mtgoc:oracle_text @linkml:String ?
        ) ;
        rdf:type [ mtg:Land ]
     )
@@ -222,7 +391,9 @@ mtgoc:Mana CLOSED {
     (  $mtgoc:Mana_tes (  &<Thing_tes> ;
           rdf:type [ schema:Thing ] ? ;
           mtgoc:color @mtgoc:Color + ;
-          mtgoc:snow @linkml:Boolean ?
+          mtg:snow @linkml:Boolean ? ;
+          mtg:phyrexian_mana @linkml:Boolean ? ;
+          mtg:hybrid_mana @linkml:Boolean ?
        ) ;
        rdf:type [ mtg:Mana ]
     )
@@ -231,8 +402,16 @@ mtgoc:Mana CLOSED {
 mtgoc:ManaCost CLOSED {
     (  $mtgoc:ManaCost_tes (  &mtgoc:Cost_tes ;
           rdf:type [ mtg:Cost ] ? ;
+          &mtgoc:Mana_tes ;
+          rdf:type [ mtg:Mana ] ? ;
+          mtgoc:value @linkml:Integer ? ;
+          <intersection> @mtgoc:Cost ? ;
+          <union> @mtgoc:Cost ? ;
+          mtg:x @linkml:Boolean ? ;
           mtgoc:color @mtgoc:Color + ;
-          mtgoc:snow @linkml:Boolean ?
+          mtg:snow @linkml:Boolean ? ;
+          mtg:phyrexian_mana @linkml:Boolean ? ;
+          mtg:hybrid_mana @linkml:Boolean ?
        ) ;
        rdf:type [ mtg:Mana_cost ]
     )
@@ -245,16 +424,16 @@ mtgoc:ManaCost CLOSED {
           ) ;
           rdf:type [ schema:Thing ]
        )
-    } OR @mtgoc:Card
+    } OR @mtgoc:Card OR @mtgoc:Permanent
 )
 
 mtgoc:Permanent  (
-    @mtgoc:Artifact OR @mtgoc:Creature OR @mtgoc:Enchantment OR @mtgoc:Land
+    @mtgoc:AnyArtifact OR @mtgoc:AnyCreature OR @mtgoc:AnyEnchantment OR @mtgoc:Token
 )
 
 mtgoc:Permanent_struct {
-    (  $mtgoc:Permanent_tes (  &mtgoc:Card_tes ;
-          rdf:type [ mtg:Card ] ?
+    (  $mtgoc:Permanent_tes (  &<NamedThing_tes> ;
+          rdf:type [ schema:Thing ] ?
        ) ;
        rdf:type [ mtg:Permanent ]
     )
@@ -332,8 +511,18 @@ mtgoa:TimeSpecification CLOSED {
 }
 
 mtgoc:Token CLOSED {
-    (  $mtgoc:Token_tes (  &mtgoc:Card_tes ;
-          rdf:type [ mtg:Card ] ?
+    (  $mtgoc:Token_tes (  &mtgoc:Permanent_tes ;
+          rdf:type [ mtg:Permanent ] ? ;
+          mtgoc:color @mtgoc:Color + ;
+          mtgoc:card_set @linkml:String ? ;
+          mtgoc:ability @mtgoa:Ability * ;
+          mtgoc:artist @linkml:String ? ;
+          mtgoc:flavor_text @linkml:String ? ;
+          mtgoc:type_line @linkml:String ;
+          mtgoc:card_type @linkml:String ;
+          mtgoc:card_subtype @linkml:String * ;
+          mtgoc:card_supertype @linkml:String * ;
+          mtgoc:oracle_text @linkml:String ?
        ) ;
        rdf:type [ mtg:Token ]
     )

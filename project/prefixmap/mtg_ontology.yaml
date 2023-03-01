@@ -19,8 +19,20 @@
    "ActivatedAbility": {
       "@id": "mtg:Activated_ability"
    },
+   "AnyArtifact": {
+      "@id": "mtg:Artifact"
+   },
+   "AnyCreature": {
+      "@id": "mtg:Creature"
+   },
+   "AnyEnchantment": {
+      "@id": "mtg:Enchantment"
+   },
    "Artifact": {
       "@id": "mtg:Artifact"
+   },
+   "ArtifactToken": {
+      "@id": "mtgoc:ArtifactToken"
    },
    "Card": {
       "@id": "mtg:Card"
@@ -40,8 +52,14 @@
    "Creature": {
       "@id": "mtg:Creature"
    },
+   "CreatureToken": {
+      "@id": "mtgoc:CreatureToken"
+   },
    "Enchantment": {
       "@id": "mtg:Enchantment"
+   },
+   "EnchantmentToken": {
+      "@id": "mtgoc:EnchantmentToken"
    },
    "Instant": {
       "@id": "mtg:Instant"
