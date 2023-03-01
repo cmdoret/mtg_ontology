@@ -412,8 +412,24 @@ Name: mtgo</p>
 <td>A card ability which can be activated for a cost</td>
 </tr>
 <tr>
-<td><a href="Artifact/">Artifact</a></td>
+<td><a href="AnyArtifact/">AnyArtifact</a></td>
 <td>A permanent representing a magical item, animated construct, or other objects...</td>
+</tr>
+<tr>
+<td><a href="AnyCreature/">AnyCreature</a></td>
+<td>A creature that can be summoned to the battlefield</td>
+</tr>
+<tr>
+<td><a href="AnyEnchantment/">AnyEnchantment</a></td>
+<td>A permanent which applies persistent magical effects</td>
+</tr>
+<tr>
+<td><a href="Artifact/">Artifact</a></td>
+<td>A card that represents an artifact that can be cast and put onto the battlefi...</td>
+</tr>
+<tr>
+<td><a href="ArtifactToken/">ArtifactToken</a></td>
+<td>A token that represents an artifact that can be placed onto the battlefield b...</td>
 </tr>
 <tr>
 <td><a href="Card/">Card</a></td>
@@ -437,11 +453,19 @@ Name: mtgo</p>
 </tr>
 <tr>
 <td><a href="Creature/">Creature</a></td>
-<td>A card that represents a creature that can be summoned to the battlefield</td>
+<td>A card that represents a creature that can be cast and put onto the battlefie...</td>
+</tr>
+<tr>
+<td><a href="CreatureToken/">CreatureToken</a></td>
+<td>A token that represents a creature that can be placed onto the battlefield by...</td>
 </tr>
 <tr>
 <td><a href="Enchantment/">Enchantment</a></td>
-<td>A permanent which applies persistent magical effects</td>
+<td>A card that represents an enchantment that can be cast and put onto the battl...</td>
+</tr>
+<tr>
+<td><a href="EnchantmentToken/">EnchantmentToken</a></td>
+<td>A token that represents an enchantment that can be placed onto the battlefiel...</td>
 </tr>
 <tr>
 <td><a href="Instant/">Instant</a></td>
@@ -615,6 +639,10 @@ Name: mtgo</p>
 <td>The lore text at the bottom of a card</td>
 </tr>
 <tr>
+<td><a href="hybrid/">hybrid</a></td>
+<td>A hybrid mana cost can be paid with 1 mana of either of its component colors</td>
+</tr>
+<tr>
 <td><a href="id/">id</a></td>
 <td>A unique identifier for a thing</td>
 </tr>
@@ -639,6 +667,10 @@ Name: mtgo</p>
 <td>The official wording for the card effects</td>
 </tr>
 <tr>
+<td><a href="phyrexian/">phyrexian</a></td>
+<td>A phyrexian mana cost can be paid with either 2 life or 1 mana of its compone...</td>
+</tr>
+<tr>
 <td><a href="player/">player</a></td>
 <td>A player</td>
 </tr>
@@ -660,7 +692,7 @@ Name: mtgo</p>
 </tr>
 <tr>
 <td><a href="snow/">snow</a></td>
-<td>Whether a mana or cost includes snow mana</td>
+<td>A snow mana cost can be paid with a snow source, regardless of its color</td>
 </tr>
 <tr>
 <td><a href="source/">source</a></td>
@@ -713,6 +745,18 @@ Name: mtgo</p>
 <tr>
 <td><a href="value_specifications/">value_specifications</a></td>
 <td>Values in the collection</td>
+</tr>
+<tr>
+<td><a href="variable_cost/">variable_cost</a></td>
+<td>Whether a cost is variable</td>
+</tr>
+<tr>
+<td><a href="variable_power/">variable_power</a></td>
+<td>Whether a creature's power is variable</td>
+</tr>
+<tr>
+<td><a href="variable_toughness/">variable_toughness</a></td>
+<td>Whether a creature's toughness is variable</td>
 </tr>
 </tbody>
 </table>
@@ -896,7 +940,7 @@ Name: mtgo</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["content.tabs.link"], "search": "assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": ".", "features": ["content.tabs.link", "content.code.annotate"], "search": "assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
       <script src="assets/javascripts/bundle.5a2dcb6a.min.js"></script>
