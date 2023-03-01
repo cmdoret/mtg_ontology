@@ -7,8 +7,7 @@ The aim of this ontology is to provide a formal description of cards and their a
 
 In addition, python dataclasses are generated for each class in the ontology. They can be used to load or dump instances for various tasks.
 
-```yaml
-# island.yaml
+```yaml title="island.yaml"
 id: example:plains
 name: Plains
 color: white
@@ -24,20 +23,15 @@ rarity: common
 
 ```python
 from linkml_runtime.loaders import yaml_loader
-from linkml_runtime.dumpers import rdflib_dumper
-from mtg_ontology.schema.utils import load_prefixmap, load_schema
 from mtg_ontology.datamodel import Land
+from mtg_ontology.helpers import instance_to_graph 
 
-card = yaml_loader.load('island.yaml', target_class=Land)
-graph = rdflib_dumper.as_rdf_graph(
-    card,
-    prefix_map=load_prefixmap(),
-    schemaview=load_schema()
-)
-print(graph.serialize(format='ttl'))
+island = yaml_loader.load('island.yaml', target_class=Land)
+island_graph = instance_to_graph(island)
+print(island_graph.serialize(format='ttl'))
 ```
 
-```ttl
+```turtle
 @prefix example: <http://www.example.org/rdf#> .
 @prefix mtgoc: <https://w3id.org/cmdoret/mtg-ontology/cards/> .
 @prefix schema: <http://schema.org/> .
@@ -55,9 +49,9 @@ example:island a mtgoc:Card ;
     mtgoc:type_line "Basic Land - Island" .
 ```
 
-The whole schema can also be loaded into rdflib using:
+The whole (owl) schema can also be loaded into rdflib using:
 
 ```python
-from mtg_ontology.schema.utils import load_ontology_graph
-mtg_graph = load_ontology_graph()
+from mtg_ontology.helpers import load_schema_rdflib_graph
+mtgo_graph = load_schema_rdflib_graph()
 ```
