@@ -27,5 +27,6 @@ jobs:
       run: |
         mkdir -p docs
         touch docs/.nojekyll
+        cp src/docs/* docs/
         poetry run gen-doc -d docs src/mtg_ontology/schema/mtg_ontology.yaml
         poetry run mkdocs gh-deploy
