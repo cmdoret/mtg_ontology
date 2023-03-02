@@ -7,7 +7,7 @@ The aim of this ontology is to provide a formal description of cards and their a
 
 In addition, python dataclasses are generated for each class in the ontology. They can be used to load or dump instances for various tasks.
 
-```yaml title="island.yaml"
+```yaml title="plains.yaml"
 id: example:plains
 name: Plains
 color: white
@@ -26,27 +26,27 @@ from linkml_runtime.loaders import yaml_loader
 from mtg_ontology.datamodel import Land
 from mtg_ontology.helpers import instance_to_graph 
 
-island = yaml_loader.load('island.yaml', target_class=Land)
-island_graph = instance_to_graph(island)
-print(island_graph.serialize(format='ttl'))
+plains = yaml_loader.load('plains.yaml', target_class=Land)
+island_graph = instance_to_graph(plains)
+print(plains_graph.serialize(format='ttl'))
 ```
 
 ```turtle
-@prefix example: <http://www.example.org/rdf#> .
-@prefix mtgoc: <https://w3id.org/cmdoret/mtg-ontology/cards/> .
-@prefix schema: <http://schema.org/> .
-@prefix wiki: <http://en.wikipedia.org/wiki/> .
+@prefix example1: <http://www.example.org/rdf#> .
+@prefix mtgo1: <https://cmdoret.net/mtg_ontology/> .
+@prefix schema1: <http://schema.org/> .
 
-example:island a mtgoc:Card ;
-    schema:name "Island" ;
-    mtgoc:artist "David Alvarez" ;
-    mtgoc:card_set "Phyrexia: All Will Be One" ;
-    mtgoc:card_subtype "Island" ;
-    mtgoc:card_supertype "Basic" ;
-    mtgoc:card_type "Land" ;
-    mtgoc:color wiki:Q1088 ;
-    mtgoc:rarity "common" ;
-    mtgoc:type_line "Basic Land - Island" .
+example1:plains a <mtg:Land> ;
+    schema1:name "Plains" ;
+    mtgo1:artist "Titus Lunter" ;
+    mtgo1:card_set "Adventures in the Forgotten Realms" ;
+    mtgo1:card_subtype "Plains" ;
+    mtgo1:card_supertype "Basic" ;
+    mtgo1:card_type "Land" ;
+    mtgo1:color <https://mtg.fandom.com/wiki/white> ;
+    mtgo1:flavor_text "Searching for a vanished caravan that was bound for Silverymoon, you’ve come to a bank of mysterious fog." ;
+    mtgo1:rarity <https://mtg.fandom.com/wiki/common> ;
+    mtgo1:type_line "Basic Land - Plains" .
 ```
 
 The whole (owl) schema can also be loaded into rdflib using:
