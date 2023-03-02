@@ -31,12 +31,12 @@ plugins:
   - search
   - mermaid2
 nav:
-#  - Home: home.md
   - Index: index.md
   - About: about.md
   - Ability: Ability.md
   - Card: Card.md
   - Cost: Cost.md
+  - API: api.md
 site_url: https://cmdoret.github.io/mtg_ontology
 repo_url: https://github.com/cmdoret/mtg_ontology
 
