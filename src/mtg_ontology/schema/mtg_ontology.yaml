@@ -10,11 +10,12 @@ see_also:
   - https://cmdoret.github.io/mtg_ontology/
 
 prefixes:
+  mtg: https://mtg.fandom.com/wiki/
   mtgo: https://cmdoret.net/mtg_ontology/
   linkml: https://w3id.org/linkml/
   schema: http://schema.org/
-  wiki: http://en.wikipedia.org/wiki/
   example: http://www.example.org/rdf#
+  scryfall: https://api.scryfall.com/cards/
 default_prefix: mtgo
 default_range: string
 

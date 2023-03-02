@@ -1,5 +1,5 @@
-id: https://cmdoret.net/mtg_ontology/
-name: mtgo
+id: https://cmdoret.net/mtg_ontology/cards
+name: mtgoc
 title: Magic The Gathering Ontology.
 description: |-
   An ontology describing Magic: The Gathering. It provides
@@ -11,10 +11,7 @@ see_also:
 
 prefixes:
   mtg: https://mtg.fandom.com/wiki/
-  mtgo: https://cmdoret.net/mtg_ontology/
   linkml: https://w3id.org/linkml/
-  schema: http://schema.org/
-  wiki: http://en.wikipedia.org/wiki/
 default_prefix: mtgo
 default_range: string
 
@@ -26,20 +23,23 @@ classes:
 
   Permanent:
     is_a: NamedThing
-    class_uri: mtg:Permanent
+    class_uri: mtgo:Permanent
+    see_also: mtg:Permanent
     abstract: true
     description: >-
       A card or token that can be put onto the battlefield.
 
   Spell:
     is_a: Thing
-    class_uri: mtg:Spell
+    class_uri: mtgo:Spell
+    see_also: mtg:Spell
     description: >-
       An object on the stack. Either a card that has been cast, or a copy.
 
   Token:
     is_a: Permanent
-    class_uri: mtg:Token
+    class_uri: mtgo:Token
+    see_also: mtg:Token
     description: >-
       A permanent that is not represented by a regular card and does not have a casting cost.
     slots:
@@ -56,7 +56,8 @@ classes:
 
   Card:
     is_a: NamedThing
-    class_uri: mtg:Card
+    class_uri: mtgo:Card
+    see_also: mtg:Card
     abstract: true
     description: >-
       A card in the Magic The Gathering game.
@@ -76,11 +77,13 @@ classes:
       - oracle_text
   AnyEnchantment:
     is_a: Permanent
+    class_uri: mtgo:AnyEnchantment
     abstract: true
     description: >-
       A permanent which applies persistent magical effects.
   AnyCreature:
     is_a: Permanent
+    class_uri: mtgo:AnyCreature
     abstract: true
     description: >-
       A creature that can be summoned to the battlefield.
@@ -91,29 +94,34 @@ classes:
       - variable_toughness
   AnyArtifact:
     is_a: Permanent
+    class_uri: mtgo:AnyArtifact
     abstract: true
     description: >-
       A permanent representing a magical item, animated construct, or other objects and devices.
 
   Sorcery:
     is_a: Card
-    class_uri: mtg:Sorcery
+    class_uri: mtgo:Sorcery
+    see_also: mtg:Sorcery
     description: >-
       A card that represents a sorcery spell that can be cast.
   Instant:
     is_a: Card
-    class_uri: mtg:Instant
+    class_uri: mtgo:Instant
+    see_also: mtg:Instant
     description: >-
       A card that represents an instant spell that can be cast.
   Enchantment:
     is_a: Card
     mixins:
       - AnyEnchantment
-    class_uri: mtg:Enchantment
+    class_uri: mtgo:Enchantment
+    see_also: mtg:Enchantment
     description: >-
       A card that represents an enchantment that can be cast and put onto the battlefield.
   EnchantmentToken:
     is_a: Token
+    class_uri: mtgo:EnchantmentToken
     mixins:
       - AnyEnchantment
     description: >-
@@ -122,11 +130,13 @@ classes:
     is_a: Card
     mixins:
       - AnyArtifact
-    class_uri: mtg:Artifact
+    class_uri: mtgo:Artifact
+    see_also: mtg:Artifact
     description: >-
       A card that represents an artifact that can be cast and put onto the battlefield.
   ArtifactToken:
     is_a: Token
+    class_uri: mtgo:ArtifactToken
     mixins:
       - AnyArtifact
     description: >-
@@ -135,11 +145,13 @@ classes:
     is_a: Card
     mixins:
       - AnyCreature
-    class_uri: mtg:Creature
+    class_uri: mtgo:Creature
+    see_also: mtg:Creature
     description: >-
       A card that represents a creature that can be cast and put onto the battlefield.
   CreatureToken:
     is_a: Token
+    class_uri: mtgo:CreatureToken
     mixins:
       - AnyCreature
     description: >-
@@ -149,13 +161,15 @@ classes:
     is_a: Card
     mixins:
       - Permanent
-    class_uri: mtg:Land
+    class_uri: mtgo:Land
+    see_also: mtg:Land
     description: >-
       A card that represents a land that can be tapped for mana.
 
   Cost:
     is_a: Thing
-    class_uri: mtg:Cost
+    class_uri: mtgo:Cost
+    see_also: mtg:Cost
     description: >-
       The cost of a card or ability.
     slots:
@@ -171,7 +185,8 @@ classes:
 
   Mana:
     is_a: Thing
-    class_uri: mtg:Mana
+    class_uri: mtgo:Mana
+    see_also: mtg:Mana
     description: >-
       A mana in the pool.
     slots:
@@ -184,18 +199,21 @@ classes:
     is_a: Cost
     mixins:
       - Mana
-    class_uri: mtg:Mana_cost
+    class_uri: mtgo:ManaCost
+    see_also: mtg:Mana_cost
     description: >-
       The mana cost of a card or ability.
 
   LifeCost:
     is_a: Cost
+    class_uri: mtgo:LifeCost
     description: >-
       The life cost of a card or ability.
 
 
   CardCollection:
     tree_root: true
+    class_uri: mtgo:CardCollection
     description: >-
       A collection of cards and associated costs.
     attributes:
@@ -215,81 +233,103 @@ slots:
     description: A mana cost for a card or ability.
     range: ManaCost
     multivalued: true
+    slot_uri: mtgo:mana_cost
   card_set:
     description: A pool of cards released together and designed for the same play environment.
     range: string
+    slot_uri: mtgo:card_set
   converted_mana_cost:
     description: The total mana cost for a card or ability, summed across all colors.
     range: integer
+    slot_uri: mtgo:converted_mana_cost
   ability:
     description: An ability associated with a card.
     range: Ability
+    slot_uri: mtgo:ability
     multivalued: true
   color:
     description: The color of a card.
     range: Color
+    slot_uri: mtgo:color
     multivalued: true
     required: true
   rarity:
     description: An ability associated with a card.
     range: Rarity
+    slot_uri: mtgo:rarity
   artist:
     range: string
+    slot_uri: mtgo:artist
     description: The artist who drew a card's illustration.
   flavor_text:
     range: string
+    slot_uri: mtgo:flavor_text
     description: The lore text at the bottom of a card.
   oracle_text:
     range: string
+    slot_uri: mtgo:oracle_text
     description: The official wording for the card effects.
   power:
     range: integer
+    slot_uri: mtgo:power
     description: The amount of damage dealt in combat. This is the first number in the lower right corner of a creature card. 
     required: true
   toughness:
     range: integer
+    slot_uri: mtgo:toughness
     description: The amount of damage needed to destroy a creature. This is the second number in the lower right corner of a creature card. 
     required: true
   variable_power:
     range: boolean
+    slot_uri: mtgo:variable_power
     description: Whether a creature's power is variable. Denoted as * on cards.
   variable_toughness:
     range: boolean
+    slot_uri: mtgo:variable_toughness
     description: Whether a creature's toughness is variable. Denoted as * on cards.
   variable_cost:
     range: boolean
+    slot_uri: mtgo:variable_cost
     description: Whether a cost is variable. Denoted as X on cards.
-    slot_uri: mtg:x
+    see_also: mtg:x
   hybrid:
     range: boolean
+    slot_uri: mtgo:hybrid
     description: A hybrid mana cost can be paid with 1 mana of either of its component colors.
-    slot_uri: mtg:hybrid_mana
+    see_also: mtg:hybrid_mana
   phyrexian:
     range: boolean
+    slot_uri: mtgo:phyrexian
     description: A phyrexian mana cost can be paid with either 2 life or 1 mana of its component color(s).
-    slot_uri: mtg:phyrexian_mana
+    see_also: mtg:phyrexian_mana
   snow:
     range: boolean
+    slot_uri: mtgo:snow
     description: A snow mana cost can be paid with a snow source, regardless of its color.
-    slot_uri: mtg:snow
+    see_also: mtg:snow
   type_line:
     range: string
+    slot_uri: mtgo:type_line
     description: The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).
     required: true
   card_subtype:
     range: string
+    slot_uri: mtgo:card_subtype
     description: The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line.
     multivalued: true
   card_supertype:
     range: string
+    slot_uri: mtgo:card_supertype
     description: The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type.
     multivalued: true
   card_type:
     range: string
+    slot_uri: mtgo:card_type
     description: The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).
     required: true
   value:
     range: integer
+    slot_uri: mtgo:value
     description: The numeric part of a quantitative value.
     
 enums:
@@ -297,7 +337,7 @@ enums:
   Color:
     description: >-
       A color, such as Black, Blue, Red, Green, White or Colorless.
-      enum_uri: mtg:color
+      see_also: mtg:color
     permissible_values:
       black:
         description: The color black, associated with darkness.
@@ -321,7 +361,7 @@ enums:
   Rarity:
     description: >-
       The rarity of the card, may be one of Common, Uncommon, Rare or Mythic.
-      enum_uri: mtg:rarity
+      see_also: mtg:rarity
     permissible_values:
       common:
         description: The lowest rarity level, identified by a black set image.

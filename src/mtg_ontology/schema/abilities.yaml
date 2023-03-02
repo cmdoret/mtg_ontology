@@ -1,5 +1,5 @@
-id: https://cmdoret.net/mtg_ontology/
-name: mtgo
+id: https://cmdoret.net/mtg_ontology/abilities
+name: mtgoa
 title: Magic The Gathering Ontology.
 description: |-
   An ontology describing Magic: The Gathering. It provides
@@ -10,11 +10,7 @@ see_also:
   - https://cmdoret.github.io/mtg_ontology/
 
 prefixes:
-  mtgo: https://cmdoret.net/mtg_ontology/
   linkml: https://w3id.org/linkml/
-  schema: http://schema.org/
-  wiki: http://en.wikipedia.org/wiki/
-  example: http://www.example.org/rdf#
 default_prefix: mtgo
 default_range: string
 
@@ -27,7 +23,8 @@ classes:
 
   Ability:
     is_a: Thing
-    class_uri: mtg:Ability
+    class_uri: mtgo:Ability
+    see_also: mtg:Ability
     abstract: true
     description: >-
       A card ability, activated, triggered or static.
@@ -38,7 +35,8 @@ classes:
 
   ActivatedAbility:
     is_a: Ability
-    class_uri: mtg:Activated_ability
+    class_uri: mtgo:ActivatedAbility
+    see_also: mtg:Activated_ability
     description: >-
       A card ability which can be activated for a cost.
     slots:
@@ -47,13 +45,15 @@ classes:
 
   StaticAbility:
     is_a: Ability
-    class_uri: mtg:Static_ability
+    class_uri: mtgo:StaticAbility
+    see_also: mtg:Static_ability
     description: >-
       A card ability which remains active until endgame once put into effect.
 
   TriggeredAbility:
     is_a: Ability
-    class_uri: mtg:Triggered_ability
+    class_uri: mtgo:TriggeredAbility
+    see_also: mtg:Triggered_ability
     description: >-
       A card ability, triggered by an event.
     slots:
@@ -61,6 +61,7 @@ classes:
 
   Condition:
     is_a: Thing
+    class_uri: mtgo:Condition
     description: A condition expressed as constraints.
     slots:
       - source
@@ -71,6 +72,7 @@ classes:
   
   AbilityCollection:
     tree_root: true
+    class_uri: mtgo:AbilityCollection
     description: >-
       A collection of abilities and associated concepts.
     attributes:
@@ -107,6 +109,7 @@ classes:
 
   Specification:
     is_a: Thing
+    class_uri: mtgo:Specification
     description: A specification for a thing. 
     abstract: true
     slots:
@@ -116,6 +119,7 @@ classes:
 
   ActionSpecification:
     is_a: Specification
+    class_uri: mtgo:ActionSpecification
     description: A specification for an action.
     slots:
     - action
@@ -129,6 +133,7 @@ classes:
 
   ValueSpecification:
     is_a: Specification
+    class_uri: mtgo:ValueSpecification
     description: A specification for a quantitative value.
     slots:
     - value
@@ -143,6 +148,7 @@ classes:
 
   TimeSpecification:
     is_a: Thing
+    class_uri: mtgo:TimeSpecification
     description: A specification for a time.
     slots:
       - turn_phase
@@ -158,12 +164,14 @@ classes:
 
   Counter:
     is_a: Thing
+    class_uri: mtgo:Counter
+    see_also: mtg:counters
     description: >-
       A counter, such as a +1/+1 counter.
-    class_uri: mtg:counters
   
   PowerToughnessCounter:
     is_a: Counter
+    class_uri: mtgo:PowerToughnessCounter
     description: >-
       A counter that gives a power and toughness modifier to a creature.
     slots:
@@ -172,6 +180,7 @@ classes:
 
   KeywordCounter:
     is_a: Counter
+    class_uri: mtgo:KeywordCounter
     description: >-
       A counter that gives a some ability to a permanent.
     slots:
@@ -181,72 +190,89 @@ classes:
 
 slots:
   rules_text:
+    slot_uri: mtgo:rules_text
     range: string
     description: The text describing what an ability does.
   cost:
+    slot_uri: mtgo:cost
     description: A cost to play a card or ability.
     any_of:
       - range: Cost
       - range: Condition
     multivalued: true
   effect:
+    slot_uri: mtgo:effect
     range: Condition
     description: The effect of an ability.
   action:
+    slot_uri: mtgo:action
     range: Action
     required: true
     description: An action taken by a player or card.
   source:
+    slot_uri: mtgo:source
     any_of:
       - range: Player
       - range: Card
     description: The entity responsible for an action.
   target:
+    slot_uri: mtgo:target
     any_of:
       - range: Player
       - range: Card
     description: The entity targeted by an action or constraint.
   condition:
+    slot_uri: mtgo:condition
     range: Condition
     description: A condition required for an activation.
   value_spec:
+    slot_uri: mtgo:value_spec
     range: ValueSpecification
     description: A specification for the value of a property.
     multivalued: true
   time_spec:
+    slot_uri: mtgo:time_spec
     range: TimeSpecification
     description: A specification of the time of an event.
     multivalued: true
   action_spec:
+    slot_uri: mtgo:action_spec
     range: ActionSpecification
     description: A specification of an action.
     multivalued: true
   player:
+    slot_uri: mtgo:player
     range: Player
     description: A player.
   turn_phase:
+    slot_uri: mtgo:turn_phase
     range: TurnPhase
     description: A phase of the game.
   unit:
+    slot_uri: mtgo:unit
     any_of:
       - range: linkml:ClassDefinition
       - range: NamedThing
     description: The type of quantity described by a value.
   constraint:
+    slot_uri: mtgo:constraint
     any_of:
       - range: ActionConstraint
       - range: TimeConstraint
       - range: ValueConstraint
     description: A constraint on a time, quantity or action.
   ability_keyword:
+    slot_uri: mtgo:ability_keyword
     any_of:
       - range: AbilityKeyword
       - range: string
     description: An ability keyword.
   power_modifier:
+    slot_uri: mtgo:power_modifier
     range: integer
     description: A numeric modifier to apply to a creature's power.
   toughness_modifier:
+    slot_uri: mtgo:toughness_modifier
     range: integer
     description: A numeric modifier to apply to a creature's toughness.
   
@@ -279,7 +305,7 @@ enums:
 
   Action:
     description: An action taken by a player or card.
-    enum_uri: mtg:keyword_action
+    see_also: mtg:keyword_action
     permissible_values:
       activate:
         description: An ability is activated.
@@ -479,7 +505,7 @@ enums:
         description: The event must occur each time.
       
   AbilityKeyword:
-    enum_uri: mtg:Keyword_ability
+    see_also: mtg:Keyword_ability
     description: >-
       A passive ability represented by word that substitutes for a piece of rules text, such as deathtouch or flying.
     permissible_values:
