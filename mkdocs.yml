@@ -14,9 +14,19 @@ theme:
   features:
     - content.tabs.link
     - content.code.annotate
-#  palette:
-#    scheme: slate
-#    primary: cyan
+  palette:
+    - scheme: slate
+      primary: grey
+      accent: light blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+    - scheme: default
+      primary: grey
+      accent: light blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
 plugins:
   - search
   - mermaid2
@@ -24,6 +34,9 @@ nav:
 #  - Home: home.md
   - Index: index.md
   - About: about.md
+  - Ability: Ability.md
+  - Card: Card.md
+  - Cost: Cost.md
 site_url: https://cmdoret.github.io/mtg_ontology
 repo_url: https://github.com/cmdoret/mtg_ontology
 
@@ -34,7 +47,11 @@ markdown_extensions:
       pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
 
 # Uncomment this block to enable use of Google Analytics. 
 # Replace the property value with your own ID.
