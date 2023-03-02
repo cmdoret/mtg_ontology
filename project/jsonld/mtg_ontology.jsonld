@@ -1,11 +1,11 @@
 {
   "name": "mtgo",
-  "description": "An ontology describing Magic: The Gathering. It provides\nthe basic features needed to describe cards.",
+  "description": "An ontology describing Magic: The Gathering. It provides\nthe concepts and relationships needed to represent cards,\ntheir cost and abilities.",
   "title": "Magic The Gathering Ontology.",
   "see_also": [
-    "https://cmdoret.github.io/mtg-ontology/abilities"
+    "https://cmdoret.github.io/mtg_ontology/"
   ],
-  "id": "https://w3id.org/cmdoret/mtg-ontology/",
+  "id": "https://cmdoret.net/mtg_ontology/",
   "imports": [
     "linkml:types",
     "cards",
@@ -15,16 +15,12 @@
   "license": "GNU GPL v3.0",
   "prefixes": [
     {
+      "prefix_prefix": "mtg",
+      "prefix_reference": "https://mtg.fandom.com/wiki/"
+    },
+    {
       "prefix_prefix": "mtgo",
-      "prefix_reference": "https://w3id.org/cmdoret/mtg-ontology/"
-    },
-    {
-      "prefix_prefix": "mtgoa",
-      "prefix_reference": "https://w3id.org/cmdoret/mtg-ontology/abilities/"
-    },
-    {
-      "prefix_prefix": "mtgoc",
-      "prefix_reference": "https://w3id.org/cmdoret/mtg-ontology/cards/"
+      "prefix_reference": "https://cmdoret.net/mtg_ontology/"
     },
     {
       "prefix_prefix": "linkml",
@@ -35,12 +31,12 @@
       "prefix_reference": "http://schema.org/"
     },
     {
-      "prefix_prefix": "wiki",
-      "prefix_reference": "http://en.wikipedia.org/wiki/"
-    },
-    {
       "prefix_prefix": "example",
       "prefix_reference": "http://www.example.org/rdf#"
+    },
+    {
+      "prefix_prefix": "scryfall",
+      "prefix_reference": "https://api.scryfall.com/cards/"
     }
   ],
   "default_prefix": "mtgo",
@@ -269,9 +265,9 @@
   "enums": [
     {
       "name": "Color",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Color",
-      "description": "A color, such as Black, Blue, Red, Green, White or Colorless. enum_uri: mtg:color",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/Color",
+      "description": "A color, such as Black, Blue, Red, Green, White or Colorless. see_also: mtg:color",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
       "permissible_values": [
         {
           "text": "black",
@@ -307,9 +303,9 @@
     },
     {
       "name": "Rarity",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Rarity",
-      "description": "The rarity of the card, may be one of Common, Uncommon, Rare or Mythic. enum_uri: mtg:rarity",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/Rarity",
+      "description": "The rarity of the card, may be one of Common, Uncommon, Rare or Mythic. see_also: mtg:rarity",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
       "permissible_values": [
         {
           "text": "common",
@@ -335,9 +331,9 @@
     },
     {
       "name": "Player",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Player",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/Player",
       "description": "One or more human players.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
       "permissible_values": [
         {
           "text": "you",
@@ -383,10 +379,12 @@
     },
     {
       "name": "Action",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Action",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/Action",
       "description": "An action taken by a player or card.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "enum_uri": "mtg:keyword_action",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "see_also": [
+        "mtg:keyword_action"
+      ],
       "permissible_values": [
         {
           "text": "activate",
@@ -562,8 +560,8 @@
     },
     {
       "name": "ActionConstraint",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/ActionConstraint",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/ActionConstraint",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
       "permissible_values": [
         {
           "text": "must",
@@ -585,8 +583,8 @@
     },
     {
       "name": "ValueConstraint",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/ValueConstraint",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
       "permissible_values": [
         {
           "text": "equal",
@@ -640,9 +638,9 @@
     },
     {
       "name": "TurnPhase",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/TurnPhase",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/TurnPhase",
       "description": "A time during the turn.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
       "permissible_values": [
         {
           "text": "beginning_phase",
@@ -728,9 +726,9 @@
     },
     {
       "name": "TimeConstraint",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/TimeConstraint",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/TimeConstraint",
       "description": "A constraint on the time of an event.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
       "permissible_values": [
         {
           "text": "before",
@@ -764,10 +762,12 @@
     },
     {
       "name": "AbilityKeyword",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/AbilityKeyword",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/AbilityKeyword",
       "description": "A passive ability represented by word that substitutes for a piece of rules text, such as deathtouch or flying.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "enum_uri": "mtg:Keyword_ability",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "see_also": [
+        "mtg:Keyword_ability"
+      ],
       "permissible_values": [
         {
           "text": "deathtouch",
@@ -925,9 +925,9 @@
   "slots": [
     {
       "name": "id",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/id",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/id",
       "description": "A unique identifier for a thing",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
+      "from_schema": "https://cmdoret.net/mtg_ontology/",
       "mappings": [
         "http://schema.org/identifier"
       ],
@@ -944,9 +944,9 @@
     },
     {
       "name": "name",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/name",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/name",
       "description": "A human-readable name for a thing",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
+      "from_schema": "https://cmdoret.net/mtg_ontology/",
       "mappings": [
         "http://schema.org/name"
       ],
@@ -961,9 +961,9 @@
     },
     {
       "name": "description",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/description",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/description",
       "description": "A human-readable description for a thing",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
+      "from_schema": "https://cmdoret.net/mtg_ontology/",
       "mappings": [
         "http://schema.org/description"
       ],
@@ -977,10 +977,10 @@
     },
     {
       "name": "intersection",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/intersection",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/intersection",
       "description": "A conjunction of two objects (a and b).",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/intersection",
+      "from_schema": "https://cmdoret.net/mtg_ontology/",
+      "slot_uri": "https://cmdoret.net/mtg_ontology/intersection",
       "owner": "Specification",
       "domain_of": [
         "Cost",
@@ -992,10 +992,10 @@
     },
     {
       "name": "union",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/union",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/union",
       "description": "A disjunction of two objects (a or b).",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/union",
+      "from_schema": "https://cmdoret.net/mtg_ontology/",
+      "slot_uri": "https://cmdoret.net/mtg_ontology/union",
       "owner": "Specification",
       "domain_of": [
         "Cost",
@@ -1007,10 +1007,13 @@
     },
     {
       "name": "mana_cost",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/mana_cost",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/mana_cost",
       "description": "A mana cost for a card or ability.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/mana_cost",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/mana_cost"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/mana_cost",
       "multivalued": true,
       "owner": "Card",
       "domain_of": [
@@ -1021,10 +1024,13 @@
     },
     {
       "name": "card_set",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/card_set",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/card_set",
       "description": "A pool of cards released together and designed for the same play environment.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/card_set",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/card_set"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/card_set",
       "owner": "Card",
       "domain_of": [
         "Token",
@@ -1035,10 +1041,13 @@
     },
     {
       "name": "converted_mana_cost",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/converted_mana_cost",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/converted_mana_cost",
       "description": "The total mana cost for a card or ability, summed across all colors.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/converted_mana_cost",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/converted_mana_cost"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/converted_mana_cost",
       "owner": "Card",
       "domain_of": [
         "Card"
@@ -1048,10 +1057,13 @@
     },
     {
       "name": "ability",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/ability",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/ability",
       "description": "An ability associated with a card.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/ability",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/ability"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/ability",
       "multivalued": true,
       "owner": "Card",
       "domain_of": [
@@ -1063,10 +1075,13 @@
     },
     {
       "name": "color",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/color",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/color",
       "description": "The color of a card.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/color",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/color"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/color",
       "multivalued": true,
       "owner": "Mana",
       "domain_of": [
@@ -1080,10 +1095,13 @@
     },
     {
       "name": "rarity",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/rarity",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/rarity",
       "description": "An ability associated with a card.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/rarity",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/rarity"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/rarity",
       "owner": "Card",
       "domain_of": [
         "Card"
@@ -1093,10 +1111,13 @@
     },
     {
       "name": "artist",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/artist",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/artist",
       "description": "The artist who drew a card's illustration.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/artist",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/artist"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/artist",
       "owner": "Card",
       "domain_of": [
         "Token",
@@ -1107,10 +1128,13 @@
     },
     {
       "name": "flavor_text",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/flavor_text",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/flavor_text",
       "description": "The lore text at the bottom of a card.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/flavor_text",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/flavor_text"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/flavor_text",
       "owner": "Card",
       "domain_of": [
         "Token",
@@ -1121,10 +1145,13 @@
     },
     {
       "name": "oracle_text",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/oracle_text",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/oracle_text",
       "description": "The official wording for the card effects.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/oracle_text",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/oracle_text"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/oracle_text",
       "owner": "Card",
       "domain_of": [
         "Token",
@@ -1135,10 +1162,13 @@
     },
     {
       "name": "power",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/power",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/power",
       "description": "The amount of damage dealt in combat. This is the first number in the lower right corner of a creature card.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/power",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/power"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/power",
       "owner": "AnyCreature",
       "domain_of": [
         "AnyCreature"
@@ -1149,10 +1179,13 @@
     },
     {
       "name": "toughness",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/toughness",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/toughness",
       "description": "The amount of damage needed to destroy a creature. This is the second number in the lower right corner of a creature card.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/toughness",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/toughness"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/toughness",
       "owner": "AnyCreature",
       "domain_of": [
         "AnyCreature"
@@ -1163,10 +1196,13 @@
     },
     {
       "name": "variable_power",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/variable_power",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/variable_power",
       "description": "Whether a creature's power is variable. Denoted as * on cards.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/variable_power",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/variable_power"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/variable_power",
       "owner": "AnyCreature",
       "domain_of": [
         "AnyCreature"
@@ -1176,10 +1212,13 @@
     },
     {
       "name": "variable_toughness",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/variable_toughness",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/variable_toughness",
       "description": "Whether a creature's toughness is variable. Denoted as * on cards.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/variable_toughness",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/variable_toughness"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/variable_toughness",
       "owner": "AnyCreature",
       "domain_of": [
         "AnyCreature"
@@ -1189,13 +1228,16 @@
     },
     {
       "name": "variable_cost",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/variable_cost",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/variable_cost",
       "description": "Whether a cost is variable. Denoted as X on cards.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "mappings": [
-        "https://mtg.fandom.com/wiki/x"
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "see_also": [
+        "mtg:x"
       ],
-      "slot_uri": "https://mtg.fandom.com/wiki/x",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/variable_cost"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/variable_cost",
       "owner": "Cost",
       "domain_of": [
         "Cost"
@@ -1205,13 +1247,16 @@
     },
     {
       "name": "hybrid",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/hybrid",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/hybrid",
       "description": "A hybrid mana cost can be paid with 1 mana of either of its component colors.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "mappings": [
-        "https://mtg.fandom.com/wiki/hybrid_mana"
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "see_also": [
+        "mtg:hybrid_mana"
       ],
-      "slot_uri": "https://mtg.fandom.com/wiki/hybrid_mana",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/hybrid"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/hybrid",
       "owner": "Mana",
       "domain_of": [
         "Mana"
@@ -1221,13 +1266,16 @@
     },
     {
       "name": "phyrexian",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/phyrexian",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/phyrexian",
       "description": "A phyrexian mana cost can be paid with either 2 life or 1 mana of its component color(s).",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "mappings": [
-        "https://mtg.fandom.com/wiki/phyrexian_mana"
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "see_also": [
+        "mtg:phyrexian_mana"
       ],
-      "slot_uri": "https://mtg.fandom.com/wiki/phyrexian_mana",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/phyrexian"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/phyrexian",
       "owner": "Mana",
       "domain_of": [
         "Mana"
@@ -1237,13 +1285,16 @@
     },
     {
       "name": "snow",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/snow",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/snow",
       "description": "A snow mana cost can be paid with a snow source, regardless of its color.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "mappings": [
-        "https://mtg.fandom.com/wiki/snow"
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "see_also": [
+        "mtg:snow"
       ],
-      "slot_uri": "https://mtg.fandom.com/wiki/snow",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/snow"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/snow",
       "owner": "Mana",
       "domain_of": [
         "Mana"
@@ -1253,10 +1304,13 @@
     },
     {
       "name": "type_line",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/type_line",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/type_line",
       "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/type_line",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/type_line"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/type_line",
       "owner": "Card",
       "domain_of": [
         "Token",
@@ -1268,10 +1322,13 @@
     },
     {
       "name": "card_subtype",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/card_subtype",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/card_subtype",
       "description": "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/card_subtype",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/card_subtype"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/card_subtype",
       "multivalued": true,
       "owner": "Card",
       "domain_of": [
@@ -1283,10 +1340,13 @@
     },
     {
       "name": "card_supertype",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/card_supertype",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/card_supertype",
       "description": "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/card_supertype",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/card_supertype"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/card_supertype",
       "multivalued": true,
       "owner": "Card",
       "domain_of": [
@@ -1298,10 +1358,13 @@
     },
     {
       "name": "card_type",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/card_type",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/card_type",
       "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/card_type",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/card_type"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/card_type",
       "owner": "Card",
       "domain_of": [
         "Token",
@@ -1313,10 +1376,13 @@
     },
     {
       "name": "value",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/value",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/value",
       "description": "The numeric part of a quantitative value.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/value",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/value"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/value",
       "owner": "ValueSpecification",
       "domain_of": [
         "Cost",
@@ -1327,10 +1393,13 @@
     },
     {
       "name": "rules_text",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/rules_text",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/rules_text",
       "description": "The text describing what an ability does.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/rules_text",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/rules_text"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/rules_text",
       "owner": "Ability",
       "domain_of": [
         "Ability"
@@ -1340,10 +1409,13 @@
     },
     {
       "name": "cost",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/cost",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/cost",
       "description": "A cost to play a card or ability.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/cost",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/cost"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/cost",
       "multivalued": true,
       "owner": "ActivatedAbility",
       "domain_of": [
@@ -1364,10 +1436,13 @@
     },
     {
       "name": "effect",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/effect",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/effect",
       "description": "The effect of an ability.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/effect",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/effect"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/effect",
       "owner": "Ability",
       "domain_of": [
         "Ability"
@@ -1377,10 +1452,13 @@
     },
     {
       "name": "action",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/action",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/action",
       "description": "An action taken by a player or card.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/action",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/action"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/action",
       "owner": "ActionSpecification",
       "domain_of": [
         "ActionSpecification"
@@ -1391,10 +1469,13 @@
     },
     {
       "name": "source",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/source",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/source",
       "description": "The entity responsible for an action.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/source",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/source"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/source",
       "owner": "Condition",
       "domain_of": [
         "Condition"
@@ -1414,10 +1495,13 @@
     },
     {
       "name": "target",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/target",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/target",
       "description": "The entity targeted by an action or constraint.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/target",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/target"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/target",
       "owner": "Condition",
       "domain_of": [
         "Condition"
@@ -1437,10 +1521,13 @@
     },
     {
       "name": "condition",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/condition",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/condition",
       "description": "A condition required for an activation.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/condition",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/condition"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/condition",
       "owner": "TriggeredAbility",
       "domain_of": [
         "ActivatedAbility",
@@ -1451,10 +1538,13 @@
     },
     {
       "name": "value_spec",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/value_spec",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/value_spec",
       "description": "A specification for the value of a property.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/value_spec",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/value_spec"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/value_spec",
       "multivalued": true,
       "owner": "KeywordCounter",
       "domain_of": [
@@ -1466,10 +1556,13 @@
     },
     {
       "name": "time_spec",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/time_spec",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/time_spec",
       "description": "A specification of the time of an event.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/time_spec",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/time_spec"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/time_spec",
       "multivalued": true,
       "owner": "Condition",
       "domain_of": [
@@ -1480,10 +1573,13 @@
     },
     {
       "name": "action_spec",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/action_spec",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/action_spec",
       "description": "A specification of an action.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/action_spec",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/action_spec"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/action_spec",
       "multivalued": true,
       "owner": "Condition",
       "domain_of": [
@@ -1494,10 +1590,13 @@
     },
     {
       "name": "player",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/player",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/player",
       "description": "A player.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/player",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/player"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/player",
       "owner": "TimeSpecification",
       "domain_of": [
         "TimeSpecification"
@@ -1507,10 +1606,13 @@
     },
     {
       "name": "turn_phase",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/turn_phase",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/turn_phase",
       "description": "A phase of the game.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/turn_phase",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/turn_phase"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/turn_phase",
       "owner": "TimeSpecification",
       "domain_of": [
         "TimeSpecification"
@@ -1520,10 +1622,13 @@
     },
     {
       "name": "unit",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/unit",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/unit",
       "description": "The type of quantity described by a value.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/unit",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/unit"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/unit",
       "owner": "ValueSpecification",
       "domain_of": [
         "ValueSpecification"
@@ -1543,10 +1648,13 @@
     },
     {
       "name": "constraint",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/constraint",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/constraint",
       "description": "A constraint on a time, quantity or action.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/constraint",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/constraint"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/constraint",
       "owner": "Specification",
       "domain_of": [
         "Specification"
@@ -1570,10 +1678,13 @@
     },
     {
       "name": "ability_keyword",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/ability_keyword",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/ability_keyword",
       "description": "An ability keyword.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/ability_keyword",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/ability_keyword"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/ability_keyword",
       "owner": "KeywordCounter",
       "domain_of": [
         "Ability",
@@ -1594,10 +1705,13 @@
     },
     {
       "name": "power_modifier",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/power_modifier",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/power_modifier",
       "description": "A numeric modifier to apply to a creature's power.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/power_modifier",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/power_modifier"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/power_modifier",
       "owner": "PowerToughnessCounter",
       "domain_of": [
         "PowerToughnessCounter"
@@ -1607,10 +1721,13 @@
     },
     {
       "name": "toughness_modifier",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/toughness_modifier",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/toughness_modifier",
       "description": "A numeric modifier to apply to a creature's toughness.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/toughness_modifier",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/toughness_modifier"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/toughness_modifier",
       "owner": "PowerToughnessCounter",
       "domain_of": [
         "PowerToughnessCounter"
@@ -1621,8 +1738,8 @@
     {
       "name": "cardCollection__cards",
       "description": "Cards in the collection.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/cards",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "slot_uri": "https://cmdoret.net/mtg_ontology/cards",
       "multivalued": true,
       "alias": "cards",
       "owner": "CardCollection",
@@ -1636,8 +1753,8 @@
     {
       "name": "cardCollection__costs",
       "description": "Costs in the collection.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/costs",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "slot_uri": "https://cmdoret.net/mtg_ontology/costs",
       "multivalued": true,
       "alias": "costs",
       "owner": "CardCollection",
@@ -1651,8 +1768,8 @@
     {
       "name": "abilityCollection__activated_abilities",
       "description": "Activated abilities in the collection.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/activated_abilities",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "slot_uri": "https://cmdoret.net/mtg_ontology/activated_abilities",
       "multivalued": true,
       "alias": "activated_abilities",
       "owner": "AbilityCollection",
@@ -1666,8 +1783,8 @@
     {
       "name": "abilityCollection__conditions",
       "description": "Conditions in the collection.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/conditions",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "slot_uri": "https://cmdoret.net/mtg_ontology/conditions",
       "multivalued": true,
       "alias": "conditions",
       "owner": "AbilityCollection",
@@ -1681,8 +1798,8 @@
     {
       "name": "abilityCollection__mana_costs",
       "description": "Mana costs in the collection.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/mana_costs",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "slot_uri": "https://cmdoret.net/mtg_ontology/mana_costs",
       "multivalued": true,
       "alias": "mana_costs",
       "owner": "AbilityCollection",
@@ -1696,8 +1813,8 @@
     {
       "name": "abilityCollection__value_specifications",
       "description": "Values in the collection.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/value_specifications",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "slot_uri": "https://cmdoret.net/mtg_ontology/value_specifications",
       "multivalued": true,
       "alias": "value_specifications",
       "owner": "AbilityCollection",
@@ -1711,8 +1828,8 @@
     {
       "name": "abilityCollection__action_specifications",
       "description": "Action specifications in the collection.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/action_specifications",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "slot_uri": "https://cmdoret.net/mtg_ontology/action_specifications",
       "multivalued": true,
       "alias": "action_specifications",
       "owner": "AbilityCollection",
@@ -1726,8 +1843,8 @@
     {
       "name": "abilityCollection__time_specifications",
       "description": "Time specifications in the collection.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/time_specifications",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "slot_uri": "https://cmdoret.net/mtg_ontology/time_specifications",
       "multivalued": true,
       "alias": "time_specifications",
       "owner": "AbilityCollection",
@@ -1740,12 +1857,12 @@
     },
     {
       "name": "Cost_intersection",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/intersection",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/intersection",
       "description": "A conjunction of two objects (a and b).",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
+      "from_schema": "https://cmdoret.net/mtg_ontology/",
       "is_a": "intersection",
       "domain": "Cost",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/intersection",
+      "slot_uri": "https://cmdoret.net/mtg_ontology/intersection",
       "alias": "intersection",
       "owner": "Cost",
       "domain_of": [
@@ -1759,12 +1876,12 @@
     },
     {
       "name": "Cost_union",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/union",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/union",
       "description": "A disjunction of two objects (a or b).",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
+      "from_schema": "https://cmdoret.net/mtg_ontology/",
       "is_a": "union",
       "domain": "Cost",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/union",
+      "slot_uri": "https://cmdoret.net/mtg_ontology/union",
       "alias": "union",
       "owner": "Cost",
       "domain_of": [
@@ -1778,12 +1895,12 @@
     },
     {
       "name": "ActionSpecification_intersection",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/intersection",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/intersection",
       "description": "A conjunction of two objects (a and b).",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
+      "from_schema": "https://cmdoret.net/mtg_ontology/",
       "is_a": "intersection",
       "domain": "ActionSpecification",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/intersection",
+      "slot_uri": "https://cmdoret.net/mtg_ontology/intersection",
       "alias": "intersection",
       "owner": "ActionSpecification",
       "domain_of": [
@@ -1797,12 +1914,12 @@
     },
     {
       "name": "ActionSpecification_union",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/union",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/union",
       "description": "A disjunction of two objects (a or b).",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
+      "from_schema": "https://cmdoret.net/mtg_ontology/",
       "is_a": "union",
       "domain": "ActionSpecification",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/union",
+      "slot_uri": "https://cmdoret.net/mtg_ontology/union",
       "alias": "union",
       "owner": "ActionSpecification",
       "domain_of": [
@@ -1816,12 +1933,15 @@
     },
     {
       "name": "ActionSpecification_constraint",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/constraint",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/constraint",
       "description": "A constraint on a time, quantity or action.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/constraint"
+      ],
       "is_a": "constraint",
       "domain": "ActionSpecification",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/constraint",
+      "slot_uri": "https://cmdoret.net/mtg_ontology/constraint",
       "alias": "constraint",
       "owner": "ActionSpecification",
       "domain_of": [
@@ -1848,12 +1968,12 @@
     },
     {
       "name": "ValueSpecification_intersection",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/intersection",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/intersection",
       "description": "A conjunction of two objects (a and b).",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
+      "from_schema": "https://cmdoret.net/mtg_ontology/",
       "is_a": "intersection",
       "domain": "ValueSpecification",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/intersection",
+      "slot_uri": "https://cmdoret.net/mtg_ontology/intersection",
       "alias": "intersection",
       "owner": "ValueSpecification",
       "domain_of": [
@@ -1867,12 +1987,12 @@
     },
     {
       "name": "ValueSpecification_union",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/union",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/union",
       "description": "A disjunction of two objects (a or b).",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
+      "from_schema": "https://cmdoret.net/mtg_ontology/",
       "is_a": "union",
       "domain": "ValueSpecification",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/union",
+      "slot_uri": "https://cmdoret.net/mtg_ontology/union",
       "alias": "union",
       "owner": "ValueSpecification",
       "domain_of": [
@@ -1886,12 +2006,15 @@
     },
     {
       "name": "ValueSpecification_constraint",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/constraint",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/constraint",
       "description": "A constraint on a time, quantity or action.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/constraint"
+      ],
       "is_a": "constraint",
       "domain": "ValueSpecification",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/constraint",
+      "slot_uri": "https://cmdoret.net/mtg_ontology/constraint",
       "alias": "constraint",
       "owner": "ValueSpecification",
       "domain_of": [
@@ -1918,12 +2041,12 @@
     },
     {
       "name": "TimeSpecification_intersection",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/intersection",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/intersection",
       "description": "A conjunction of two objects (a and b).",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
+      "from_schema": "https://cmdoret.net/mtg_ontology/",
       "is_a": "intersection",
       "domain": "TimeSpecification",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/intersection",
+      "slot_uri": "https://cmdoret.net/mtg_ontology/intersection",
       "alias": "intersection",
       "owner": "TimeSpecification",
       "domain_of": [
@@ -1937,12 +2060,12 @@
     },
     {
       "name": "TimeSpecification_union",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/union",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/union",
       "description": "A disjunction of two objects (a or b).",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
+      "from_schema": "https://cmdoret.net/mtg_ontology/",
       "is_a": "union",
       "domain": "TimeSpecification",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/union",
+      "slot_uri": "https://cmdoret.net/mtg_ontology/union",
       "alias": "union",
       "owner": "TimeSpecification",
       "domain_of": [
@@ -1956,12 +2079,15 @@
     },
     {
       "name": "TimeSpecification_constraint",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/constraint",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/constraint",
       "description": "A constraint on a time, quantity or action.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/constraint"
+      ],
       "is_a": "constraint",
       "domain": "TimeSpecification",
-      "slot_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/constraint",
+      "slot_uri": "https://cmdoret.net/mtg_ontology/constraint",
       "alias": "constraint",
       "owner": "TimeSpecification",
       "domain_of": [
@@ -1990,9 +2116,9 @@
   "classes": [
     {
       "name": "NamedThing",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/NamedThing",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/NamedThing",
       "description": "A generic grouping for any identifiable entity",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
+      "from_schema": "https://cmdoret.net/mtg_ontology/",
       "mappings": [
         "schema:Thing"
       ],
@@ -2007,9 +2133,9 @@
     },
     {
       "name": "Thing",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/Thing",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/Thing",
       "description": "A generic grouping for any identifiable entity",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/",
+      "from_schema": "https://cmdoret.net/mtg_ontology/",
       "mappings": [
         "schema:Thing"
       ],
@@ -2022,11 +2148,14 @@
     },
     {
       "name": "Permanent",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Permanent",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/Permanent",
       "description": "A card or token that can be put onto the battlefield.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "mappings": [
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "see_also": [
         "mtg:Permanent"
+      ],
+      "mappings": [
+        "mtgo:Permanent"
       ],
       "is_a": "NamedThing",
       "abstract": true,
@@ -2036,32 +2165,38 @@
         "description"
       ],
       "slot_usage": {},
-      "class_uri": "https://mtg.fandom.com/wiki/Permanent",
+      "class_uri": "https://cmdoret.net/mtg_ontology/Permanent",
       "@type": "ClassDefinition"
     },
     {
       "name": "Spell",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Spell",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/Spell",
       "description": "An object on the stack. Either a card that has been cast, or a copy.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "mappings": [
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "see_also": [
         "mtg:Spell"
+      ],
+      "mappings": [
+        "mtgo:Spell"
       ],
       "is_a": "Thing",
       "slots": [
         "id"
       ],
       "slot_usage": {},
-      "class_uri": "https://mtg.fandom.com/wiki/Spell",
+      "class_uri": "https://cmdoret.net/mtg_ontology/Spell",
       "@type": "ClassDefinition"
     },
     {
       "name": "Token",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Token",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/Token",
       "description": "A permanent that is not represented by a regular card and does not have a casting cost.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "mappings": [
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "see_also": [
         "mtg:Token"
+      ],
+      "mappings": [
+        "mtgo:Token"
       ],
       "is_a": "Permanent",
       "slots": [
@@ -2080,16 +2215,19 @@
         "oracle_text"
       ],
       "slot_usage": {},
-      "class_uri": "https://mtg.fandom.com/wiki/Token",
+      "class_uri": "https://cmdoret.net/mtg_ontology/Token",
       "@type": "ClassDefinition"
     },
     {
       "name": "Card",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Card",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/Card",
       "description": "A card in the Magic The Gathering game.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "mappings": [
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "see_also": [
         "mtg:Card"
+      ],
+      "mappings": [
+        "mtgo:Card"
       ],
       "is_a": "NamedThing",
       "abstract": true,
@@ -2112,16 +2250,16 @@
         "oracle_text"
       ],
       "slot_usage": {},
-      "class_uri": "https://mtg.fandom.com/wiki/Card",
+      "class_uri": "https://cmdoret.net/mtg_ontology/Card",
       "@type": "ClassDefinition"
     },
     {
       "name": "AnyEnchantment",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/AnyEnchantment",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/AnyEnchantment",
       "description": "A permanent which applies persistent magical effects.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
       "mappings": [
-        "mtg:Enchantment"
+        "mtgo:AnyEnchantment"
       ],
       "is_a": "Permanent",
       "abstract": true,
@@ -2131,16 +2269,16 @@
         "description"
       ],
       "slot_usage": {},
-      "class_uri": "https://mtg.fandom.com/wiki/Enchantment",
+      "class_uri": "https://cmdoret.net/mtg_ontology/AnyEnchantment",
       "@type": "ClassDefinition"
     },
     {
       "name": "AnyCreature",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/AnyCreature",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/AnyCreature",
       "description": "A creature that can be summoned to the battlefield.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
       "mappings": [
-        "mtg:Creature"
+        "mtgo:AnyCreature"
       ],
       "is_a": "Permanent",
       "abstract": true,
@@ -2154,16 +2292,16 @@
         "variable_toughness"
       ],
       "slot_usage": {},
-      "class_uri": "https://mtg.fandom.com/wiki/Creature",
+      "class_uri": "https://cmdoret.net/mtg_ontology/AnyCreature",
       "@type": "ClassDefinition"
     },
     {
       "name": "AnyArtifact",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/AnyArtifact",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/AnyArtifact",
       "description": "A permanent representing a magical item, animated construct, or other objects and devices.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
       "mappings": [
-        "mtg:Artifact"
+        "mtgo:AnyArtifact"
       ],
       "is_a": "Permanent",
       "abstract": true,
@@ -2173,16 +2311,19 @@
         "description"
       ],
       "slot_usage": {},
-      "class_uri": "https://mtg.fandom.com/wiki/Artifact",
+      "class_uri": "https://cmdoret.net/mtg_ontology/AnyArtifact",
       "@type": "ClassDefinition"
     },
     {
       "name": "Sorcery",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Sorcery",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/Sorcery",
       "description": "A card that represents a sorcery spell that can be cast.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "mappings": [
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "see_also": [
         "mtg:Sorcery"
+      ],
+      "mappings": [
+        "mtgo:Sorcery"
       ],
       "is_a": "Card",
       "slots": [
@@ -2204,16 +2345,19 @@
         "oracle_text"
       ],
       "slot_usage": {},
-      "class_uri": "https://mtg.fandom.com/wiki/Sorcery",
+      "class_uri": "https://cmdoret.net/mtg_ontology/Sorcery",
       "@type": "ClassDefinition"
     },
     {
       "name": "Instant",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Instant",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/Instant",
       "description": "A card that represents an instant spell that can be cast.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "mappings": [
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "see_also": [
         "mtg:Instant"
+      ],
+      "mappings": [
+        "mtgo:Instant"
       ],
       "is_a": "Card",
       "slots": [
@@ -2235,20 +2379,23 @@
         "oracle_text"
       ],
       "slot_usage": {},
-      "class_uri": "https://mtg.fandom.com/wiki/Instant",
+      "class_uri": "https://cmdoret.net/mtg_ontology/Instant",
       "@type": "ClassDefinition"
     },
     {
       "name": "Enchantment",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Enchantment",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/Enchantment",
       "description": "A card that represents an enchantment that can be cast and put onto the battlefield.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "mappings": [
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "see_also": [
         "mtg:Enchantment"
       ],
+      "mappings": [
+        "mtgo:Enchantment"
+      ],
+      "is_a": "Card",
       "mixins": [
-        "AnyEnchantment",
-        "Card"
+        "AnyEnchantment"
       ],
       "slots": [
         "id",
@@ -2269,17 +2416,20 @@
         "oracle_text"
       ],
       "slot_usage": {},
-      "class_uri": "https://mtg.fandom.com/wiki/Enchantment",
+      "class_uri": "https://cmdoret.net/mtg_ontology/Enchantment",
       "@type": "ClassDefinition"
     },
     {
       "name": "EnchantmentToken",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/EnchantmentToken",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/EnchantmentToken",
       "description": "A token that represents an enchantment that can be placed onto the battlefield by other effects.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "mappings": [
+        "mtgo:EnchantmentToken"
+      ],
+      "is_a": "Token",
       "mixins": [
-        "AnyEnchantment",
-        "Token"
+        "AnyEnchantment"
       ],
       "slots": [
         "id",
@@ -2297,20 +2447,23 @@
         "oracle_text"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/EnchantmentToken",
+      "class_uri": "https://cmdoret.net/mtg_ontology/EnchantmentToken",
       "@type": "ClassDefinition"
     },
     {
       "name": "Artifact",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Artifact",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/Artifact",
       "description": "A card that represents an artifact that can be cast and put onto the battlefield.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "mappings": [
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "see_also": [
         "mtg:Artifact"
       ],
+      "mappings": [
+        "mtgo:Artifact"
+      ],
+      "is_a": "Card",
       "mixins": [
-        "AnyArtifact",
-        "Card"
+        "AnyArtifact"
       ],
       "slots": [
         "id",
@@ -2331,17 +2484,20 @@
         "oracle_text"
       ],
       "slot_usage": {},
-      "class_uri": "https://mtg.fandom.com/wiki/Artifact",
+      "class_uri": "https://cmdoret.net/mtg_ontology/Artifact",
       "@type": "ClassDefinition"
     },
     {
       "name": "ArtifactToken",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/ArtifactToken",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/ArtifactToken",
       "description": "A token that represents an artifact that can be placed onto the battlefield by other effects.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "mappings": [
+        "mtgo:ArtifactToken"
+      ],
+      "is_a": "Token",
       "mixins": [
-        "AnyArtifact",
-        "Token"
+        "AnyArtifact"
       ],
       "slots": [
         "id",
@@ -2359,19 +2515,22 @@
         "oracle_text"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/ArtifactToken",
+      "class_uri": "https://cmdoret.net/mtg_ontology/ArtifactToken",
       "@type": "ClassDefinition"
     },
     {
       "name": "Creature",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Creature",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/Creature",
       "description": "A card that represents a creature that can be cast and put onto the battlefield.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "mappings": [
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "see_also": [
         "mtg:Creature"
       ],
+      "mappings": [
+        "mtgo:Creature"
+      ],
+      "is_a": "Card",
       "mixins": [
-        "Card",
         "AnyCreature"
       ],
       "slots": [
@@ -2397,16 +2556,19 @@
         "variable_toughness"
       ],
       "slot_usage": {},
-      "class_uri": "https://mtg.fandom.com/wiki/Creature",
+      "class_uri": "https://cmdoret.net/mtg_ontology/Creature",
       "@type": "ClassDefinition"
     },
     {
       "name": "CreatureToken",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/CreatureToken",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/CreatureToken",
       "description": "A token that represents a creature that can be placed onto the battlefield by other effects.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "mappings": [
+        "mtgo:CreatureToken"
+      ],
+      "is_a": "Token",
       "mixins": [
-        "Token",
         "AnyCreature"
       ],
       "slots": [
@@ -2429,20 +2591,23 @@
         "variable_toughness"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/CreatureToken",
+      "class_uri": "https://cmdoret.net/mtg_ontology/CreatureToken",
       "@type": "ClassDefinition"
     },
     {
       "name": "Land",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Land",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/Land",
       "description": "A card that represents a land that can be tapped for mana.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "mappings": [
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "see_also": [
         "mtg:Land"
       ],
+      "mappings": [
+        "mtgo:Land"
+      ],
+      "is_a": "Card",
       "mixins": [
-        "Permanent",
-        "Card"
+        "Permanent"
       ],
       "slots": [
         "id",
@@ -2463,16 +2628,19 @@
         "oracle_text"
       ],
       "slot_usage": {},
-      "class_uri": "https://mtg.fandom.com/wiki/Land",
+      "class_uri": "https://cmdoret.net/mtg_ontology/Land",
       "@type": "ClassDefinition"
     },
     {
       "name": "Cost",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Cost",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/Cost",
       "description": "The cost of a card or ability.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "mappings": [
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "see_also": [
         "mtg:Cost"
+      ],
+      "mappings": [
+        "mtgo:Cost"
       ],
       "is_a": "Thing",
       "slots": [
@@ -2483,16 +2651,19 @@
         "variable_cost"
       ],
       "slot_usage": {},
-      "class_uri": "https://mtg.fandom.com/wiki/Cost",
+      "class_uri": "https://cmdoret.net/mtg_ontology/Cost",
       "@type": "ClassDefinition"
     },
     {
       "name": "Mana",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/Mana",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/Mana",
       "description": "A mana in the pool.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "mappings": [
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "see_also": [
         "mtg:Mana"
+      ],
+      "mappings": [
+        "mtgo:Mana"
       ],
       "is_a": "Thing",
       "slots": [
@@ -2503,19 +2674,22 @@
         "hybrid"
       ],
       "slot_usage": {},
-      "class_uri": "https://mtg.fandom.com/wiki/Mana",
+      "class_uri": "https://cmdoret.net/mtg_ontology/Mana",
       "@type": "ClassDefinition"
     },
     {
       "name": "ManaCost",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/ManaCost",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/ManaCost",
       "description": "The mana cost of a card or ability.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
-      "mappings": [
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "see_also": [
         "mtg:Mana_cost"
       ],
+      "mappings": [
+        "mtgo:ManaCost"
+      ],
+      "is_a": "Cost",
       "mixins": [
-        "Cost",
         "Mana"
       ],
       "slots": [
@@ -2530,16 +2704,16 @@
         "hybrid"
       ],
       "slot_usage": {},
-      "class_uri": "https://mtg.fandom.com/wiki/Mana_cost",
+      "class_uri": "https://cmdoret.net/mtg_ontology/ManaCost",
       "@type": "ClassDefinition"
     },
     {
       "name": "LifeCost",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/LifeCost",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/LifeCost",
       "description": "The life cost of a card or ability.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
       "mappings": [
-        "mtg:Life"
+        "mtgo:LifeCost"
       ],
       "is_a": "Cost",
       "slots": [
@@ -2550,14 +2724,17 @@
         "variable_cost"
       ],
       "slot_usage": {},
-      "class_uri": "https://mtg.fandom.com/wiki/Life",
+      "class_uri": "https://cmdoret.net/mtg_ontology/LifeCost",
       "@type": "ClassDefinition"
     },
     {
       "name": "CardCollection",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/CardCollection",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/CardCollection",
       "description": "A collection of cards and associated costs.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/cards",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "mappings": [
+        "mtgo:CardCollection"
+      ],
       "slots": [
         "cardCollection__cards",
         "cardCollection__costs"
@@ -2581,17 +2758,20 @@
           "@type": "SlotDefinition"
         }
       ],
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/cards/CardCollection",
+      "class_uri": "https://cmdoret.net/mtg_ontology/CardCollection",
       "tree_root": true,
       "@type": "ClassDefinition"
     },
     {
       "name": "Ability",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Ability",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/Ability",
       "description": "A card ability, activated, triggered or static.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "mappings": [
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "see_also": [
         "mtg:Ability"
+      ],
+      "mappings": [
+        "mtgo:Ability"
       ],
       "is_a": "Thing",
       "abstract": true,
@@ -2602,16 +2782,19 @@
         "ability_keyword"
       ],
       "slot_usage": {},
-      "class_uri": "https://mtg.fandom.com/wiki/Ability",
+      "class_uri": "https://cmdoret.net/mtg_ontology/Ability",
       "@type": "ClassDefinition"
     },
     {
       "name": "ActivatedAbility",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/ActivatedAbility",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/ActivatedAbility",
       "description": "A card ability which can be activated for a cost.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "mappings": [
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "see_also": [
         "mtg:Activated_ability"
+      ],
+      "mappings": [
+        "mtgo:ActivatedAbility"
       ],
       "is_a": "Ability",
       "slots": [
@@ -2623,16 +2806,19 @@
         "condition"
       ],
       "slot_usage": {},
-      "class_uri": "https://mtg.fandom.com/wiki/Activated_ability",
+      "class_uri": "https://cmdoret.net/mtg_ontology/ActivatedAbility",
       "@type": "ClassDefinition"
     },
     {
       "name": "StaticAbility",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/StaticAbility",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/StaticAbility",
       "description": "A card ability which remains active until endgame once put into effect.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "mappings": [
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "see_also": [
         "mtg:Static_ability"
+      ],
+      "mappings": [
+        "mtgo:StaticAbility"
       ],
       "is_a": "Ability",
       "slots": [
@@ -2642,16 +2828,19 @@
         "ability_keyword"
       ],
       "slot_usage": {},
-      "class_uri": "https://mtg.fandom.com/wiki/Static_ability",
+      "class_uri": "https://cmdoret.net/mtg_ontology/StaticAbility",
       "@type": "ClassDefinition"
     },
     {
       "name": "TriggeredAbility",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/TriggeredAbility",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/TriggeredAbility",
       "description": "A card ability, triggered by an event.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "mappings": [
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "see_also": [
         "mtg:Triggered_ability"
+      ],
+      "mappings": [
+        "mtgo:TriggeredAbility"
       ],
       "is_a": "Ability",
       "slots": [
@@ -2662,14 +2851,17 @@
         "condition"
       ],
       "slot_usage": {},
-      "class_uri": "https://mtg.fandom.com/wiki/Triggered_ability",
+      "class_uri": "https://cmdoret.net/mtg_ontology/TriggeredAbility",
       "@type": "ClassDefinition"
     },
     {
       "name": "Condition",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Condition",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/Condition",
       "description": "A condition expressed as constraints.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "mappings": [
+        "mtgo:Condition"
+      ],
       "is_a": "Thing",
       "slots": [
         "id",
@@ -2680,14 +2872,17 @@
         "time_spec"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Condition",
+      "class_uri": "https://cmdoret.net/mtg_ontology/Condition",
       "@type": "ClassDefinition"
     },
     {
       "name": "AbilityCollection",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/AbilityCollection",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/AbilityCollection",
       "description": "A collection of abilities and associated concepts.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "mappings": [
+        "mtgo:AbilityCollection"
+      ],
       "slots": [
         "abilityCollection__activated_abilities",
         "abilityCollection__conditions",
@@ -2747,15 +2942,18 @@
           "@type": "SlotDefinition"
         }
       ],
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/AbilityCollection",
+      "class_uri": "https://cmdoret.net/mtg_ontology/AbilityCollection",
       "tree_root": true,
       "@type": "ClassDefinition"
     },
     {
       "name": "Specification",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Specification",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/Specification",
       "description": "A specification for a thing.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "mappings": [
+        "mtgo:Specification"
+      ],
       "is_a": "Thing",
       "abstract": true,
       "slots": [
@@ -2765,14 +2963,17 @@
         "union"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Specification",
+      "class_uri": "https://cmdoret.net/mtg_ontology/Specification",
       "@type": "ClassDefinition"
     },
     {
       "name": "ActionSpecification",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/ActionSpecification",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/ActionSpecification",
       "description": "A specification for an action.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "mappings": [
+        "mtgo:ActionSpecification"
+      ],
       "is_a": "Specification",
       "slots": [
         "id",
@@ -2782,14 +2983,17 @@
         "ActionSpecification_constraint"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/ActionSpecification",
+      "class_uri": "https://cmdoret.net/mtg_ontology/ActionSpecification",
       "@type": "ClassDefinition"
     },
     {
       "name": "ValueSpecification",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/ValueSpecification",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/ValueSpecification",
       "description": "A specification for a quantitative value.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "mappings": [
+        "mtgo:ValueSpecification"
+      ],
       "is_a": "Specification",
       "slots": [
         "id",
@@ -2800,14 +3004,17 @@
         "ValueSpecification_constraint"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/ValueSpecification",
+      "class_uri": "https://cmdoret.net/mtg_ontology/ValueSpecification",
       "@type": "ClassDefinition"
     },
     {
       "name": "TimeSpecification",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/TimeSpecification",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/TimeSpecification",
       "description": "A specification for a time.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "mappings": [
+        "mtgo:TimeSpecification"
+      ],
       "is_a": "Thing",
       "slots": [
         "id",
@@ -2818,30 +3025,36 @@
         "TimeSpecification_constraint"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/TimeSpecification",
+      "class_uri": "https://cmdoret.net/mtg_ontology/TimeSpecification",
       "@type": "ClassDefinition"
     },
     {
       "name": "Counter",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/Counter",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/Counter",
       "description": "A counter, such as a +1/+1 counter.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-      "mappings": [
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "see_also": [
         "mtg:counters"
+      ],
+      "mappings": [
+        "mtgo:Counter"
       ],
       "is_a": "Thing",
       "slots": [
         "id"
       ],
       "slot_usage": {},
-      "class_uri": "https://mtg.fandom.com/wiki/counters",
+      "class_uri": "https://cmdoret.net/mtg_ontology/Counter",
       "@type": "ClassDefinition"
     },
     {
       "name": "PowerToughnessCounter",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/PowerToughnessCounter",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/PowerToughnessCounter",
       "description": "A counter that gives a power and toughness modifier to a creature.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "mappings": [
+        "mtgo:PowerToughnessCounter"
+      ],
       "is_a": "Counter",
       "slots": [
         "id",
@@ -2849,14 +3062,17 @@
         "toughness_modifier"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/PowerToughnessCounter",
+      "class_uri": "https://cmdoret.net/mtg_ontology/PowerToughnessCounter",
       "@type": "ClassDefinition"
     },
     {
       "name": "KeywordCounter",
-      "definition_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/KeywordCounter",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/KeywordCounter",
       "description": "A counter that gives a some ability to a permanent.",
-      "from_schema": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
+      "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
+      "mappings": [
+        "mtgo:KeywordCounter"
+      ],
       "is_a": "Counter",
       "slots": [
         "id",
@@ -2864,15 +3080,15 @@
         "value_spec"
       ],
       "slot_usage": {},
-      "class_uri": "https://w3id.org/cmdoret/mtg-ontology/abilities/KeywordCounter",
+      "class_uri": "https://cmdoret.net/mtg_ontology/KeywordCounter",
       "@type": "ClassDefinition"
     }
   ],
   "metamodel_version": "1.7.0",
   "source_file": "mtg_ontology.yaml",
-  "source_file_date": "2023-02-25T21:35:31",
-  "source_file_size": 1587,
-  "generation_date": "2023-03-01T01:37:07",
+  "source_file_date": "2023-03-02T05:41:05",
+  "source_file_size": 1540,
+  "generation_date": "2023-03-02T05:41:12",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/mtg_ontology.context.jsonld",
@@ -2880,7 +3096,7 @@
     "cards.context.jsonld",
     "abilities.context.jsonld",
     {
-      "@base": "https://w3id.org/cmdoret/mtg-ontology/"
+      "@base": "https://cmdoret.net/mtg_ontology/"
     }
   ]
 }

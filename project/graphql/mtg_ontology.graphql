@@ -60,7 +60,7 @@ interface AnyEnchantment
     description: String
   }
 
-type Artifact implements AnyArtifact, Card
+type Artifact implements AnyArtifact
   {
     id: Uriorcurie!
     name: String!
@@ -80,7 +80,7 @@ type Artifact implements AnyArtifact, Card
     oracleText: String
   }
 
-type ArtifactToken implements AnyArtifact, Token
+type ArtifactToken implements AnyArtifact
   {
     id: Uriorcurie!
     name: String!
@@ -147,7 +147,7 @@ type Counter
     id: Uriorcurie!
   }
 
-type Creature implements Card, AnyCreature
+type Creature implements AnyCreature
   {
     id: Uriorcurie!
     name: String!
@@ -171,7 +171,7 @@ type Creature implements Card, AnyCreature
     variableToughness: Boolean
   }
 
-type CreatureToken implements Token, AnyCreature
+type CreatureToken implements AnyCreature
   {
     id: Uriorcurie!
     name: String!
@@ -192,7 +192,7 @@ type CreatureToken implements Token, AnyCreature
     variableToughness: Boolean
   }
 
-type Enchantment implements AnyEnchantment, Card
+type Enchantment implements AnyEnchantment
   {
     id: Uriorcurie!
     name: String!
@@ -212,7 +212,7 @@ type Enchantment implements AnyEnchantment, Card
     oracleText: String
   }
 
-type EnchantmentToken implements AnyEnchantment, Token
+type EnchantmentToken implements AnyEnchantment
   {
     id: Uriorcurie!
     name: String!
@@ -256,7 +256,7 @@ type KeywordCounter
     valueSpec: [ValueSpecification]
   }
 
-type Land implements Permanent, Card
+type Land implements Permanent
   {
     id: Uriorcurie!
     name: String!
@@ -294,7 +294,7 @@ type Mana
     hybrid: Boolean
   }
 
-type ManaCost implements Cost, Mana
+type ManaCost implements Mana
   {
     id: Uriorcurie!
     value: Integer

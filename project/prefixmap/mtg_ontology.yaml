@@ -2,117 +2,13 @@
    "example": "http://www.example.org/rdf#",
    "linkml": "https://w3id.org/linkml/",
    "mtg": "https://mtg.fandom.com/wiki/",
-   "mtgo": "https://w3id.org/cmdoret/mtg-ontology/",
-   "mtgoa": "https://w3id.org/cmdoret/mtg-ontology/abilities/",
-   "mtgoc": "https://w3id.org/cmdoret/mtg-ontology/cards/",
+   "mtgo": "https://cmdoret.net/mtg_ontology/",
    "schema": "http://schema.org/",
-   "wiki": "http://en.wikipedia.org/wiki/",
-   "Ability": {
-      "@id": "mtg:Ability"
-   },
-   "AbilityCollection": {
-      "@id": "mtgoa:AbilityCollection"
-   },
-   "ActionSpecification": {
-      "@id": "mtgoa:ActionSpecification"
-   },
-   "ActivatedAbility": {
-      "@id": "mtg:Activated_ability"
-   },
-   "AnyArtifact": {
-      "@id": "mtg:Artifact"
-   },
-   "AnyCreature": {
-      "@id": "mtg:Creature"
-   },
-   "AnyEnchantment": {
-      "@id": "mtg:Enchantment"
-   },
-   "Artifact": {
-      "@id": "mtg:Artifact"
-   },
-   "ArtifactToken": {
-      "@id": "mtgoc:ArtifactToken"
-   },
-   "Card": {
-      "@id": "mtg:Card"
-   },
-   "CardCollection": {
-      "@id": "mtgoc:CardCollection"
-   },
-   "Condition": {
-      "@id": "mtgoa:Condition"
-   },
-   "Cost": {
-      "@id": "mtg:Cost"
-   },
-   "Counter": {
-      "@id": "mtg:counters"
-   },
-   "Creature": {
-      "@id": "mtg:Creature"
-   },
-   "CreatureToken": {
-      "@id": "mtgoc:CreatureToken"
-   },
-   "Enchantment": {
-      "@id": "mtg:Enchantment"
-   },
-   "EnchantmentToken": {
-      "@id": "mtgoc:EnchantmentToken"
-   },
-   "Instant": {
-      "@id": "mtg:Instant"
-   },
-   "KeywordCounter": {
-      "@id": "mtgoa:KeywordCounter"
-   },
-   "Land": {
-      "@id": "mtg:Land"
-   },
-   "LifeCost": {
-      "@id": "mtg:Life"
-   },
-   "Mana": {
-      "@id": "mtg:Mana"
-   },
-   "ManaCost": {
-      "@id": "mtg:Mana_cost"
-   },
+   "scryfall": "https://api.scryfall.com/cards/",
    "NamedThing": {
       "@id": "schema:Thing"
    },
-   "Permanent": {
-      "@id": "mtg:Permanent"
-   },
-   "PowerToughnessCounter": {
-      "@id": "mtgoa:PowerToughnessCounter"
-   },
-   "Sorcery": {
-      "@id": "mtg:Sorcery"
-   },
-   "Specification": {
-      "@id": "mtgoa:Specification"
-   },
-   "Spell": {
-      "@id": "mtg:Spell"
-   },
-   "StaticAbility": {
-      "@id": "mtg:Static_ability"
-   },
    "Thing": {
       "@id": "schema:Thing"
-   },
-   "TimeSpecification": {
-      "@id": "mtgoa:TimeSpecification"
-   },
-   "Token": {
-      "@id": "mtg:Token"
-   },
-   "TriggeredAbility": {
-      "@id": "mtg:Triggered_ability"
-   },
-   "ValueSpecification": {
-      "@id": "mtgoa:ValueSpecification"
    }
 }

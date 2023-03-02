@@ -1,9 +1,8 @@
 @prefix IAO: <http://purl.obolibrary.org/obo/IAO_> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix linkml: <https://w3id.org/linkml/> .
-@prefix mtgo: <https://w3id.org/cmdoret/mtg-ontology/> .
-@prefix mtgoa: <https://w3id.org/cmdoret/mtg-ontology/abilities/> .
-@prefix mtgoc: <https://w3id.org/cmdoret/mtg-ontology/cards/> .
+@prefix mtg: <https://mtg.fandom.com/wiki/> .
+@prefix mtgo: <https://cmdoret.net/mtg_ontology/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -15,575 +14,188 @@ mtgo: a owl:Ontology ;
     rdfs:label "mtgo" ;
     IAO:0000700 mtgo:NamedThing,
         mtgo:Thing,
-        mtgoa:AbilityCollection,
-        mtgoc:CardCollection ;
+        <https://cmdoret.net/mtg_ontology/abilities/AbilityCollection>,
+        <https://cmdoret.net/mtg_ontology/cards/CardCollection> ;
     dcterms:license "GNU GPL v3.0" ;
     dcterms:title "Magic The Gathering Ontology." ;
-    rdfs:seeAlso "https://cmdoret.github.io/mtg-ontology/abilities" ;
-    linkml:generation_date "2023-03-01T01:37:24" ;
+    rdfs:seeAlso "https://cmdoret.github.io/mtg_ontology/" ;
+    linkml:generation_date "2023-03-02T05:41:30" ;
     linkml:metamodel_version "1.7.0" ;
     linkml:source_file "mtg_ontology.yaml" ;
-    linkml:source_file_date "2023-02-25T21:35:31" ;
-    linkml:source_file_size 1587 .
+    linkml:source_file_date "2023-03-02T05:41:05" ;
+    linkml:source_file_size 1540 .
 
-mtgoa:KeywordCounter a owl:Class,
+<https://cmdoret.net/mtg_ontology/abilities/KeywordCounter> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "KeywordCounter" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom mtgoa:ValueSpecification ;
-            owl:onProperty mtgoa:value_spec ],
-        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
-            owl:onProperty mtgoa:ability_keyword ],
-        mtgoa:Counter ;
-    skos:definition "A counter that gives a some ability to a permanent." .
+            owl:onProperty mtgo:ability_keyword ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://cmdoret.net/mtg_ontology/abilities/ValueSpecification> ;
+            owl:onProperty mtgo:value_spec ],
+        <https://cmdoret.net/mtg_ontology/abilities/Counter> ;
+    skos:definition "A counter that gives a some ability to a permanent." ;
+    skos:exactMatch mtgo:KeywordCounter .
 
-mtgoa:PowerToughnessCounter a owl:Class,
+<https://cmdoret.net/mtg_ontology/abilities/PowerToughnessCounter> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "PowerToughnessCounter" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Integer ;
-            owl:onProperty mtgoa:toughness_modifier ],
+            owl:onProperty mtgo:toughness_modifier ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Integer ;
-            owl:onProperty mtgoa:power_modifier ],
-        mtgoa:Counter ;
-    skos:definition "A counter that gives a power and toughness modifier to a creature." .
+            owl:onProperty mtgo:power_modifier ],
+        <https://cmdoret.net/mtg_ontology/abilities/Counter> ;
+    skos:definition "A counter that gives a power and toughness modifier to a creature." ;
+    skos:exactMatch mtgo:PowerToughnessCounter .
 
-mtgoa:StaticAbility a owl:Class,
+<https://cmdoret.net/mtg_ontology/abilities/StaticAbility> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "StaticAbility" ;
-    rdfs:subClassOf mtgoa:Ability ;
+    rdfs:seeAlso "mtg:Static_ability" ;
+    rdfs:subClassOf <https://cmdoret.net/mtg_ontology/abilities/Ability> ;
     skos:definition "A card ability which remains active until endgame once put into effect." ;
-    skos:exactMatch <https://mtg.fandom.com/wiki/Static_ability> .
+    skos:exactMatch mtgo:StaticAbility .
 
-mtgoa:TriggeredAbility a owl:Class,
+<https://cmdoret.net/mtg_ontology/abilities/TriggeredAbility> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "TriggeredAbility" ;
+    rdfs:seeAlso "mtg:Triggered_ability" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgoa:Condition ;
-            owl:onProperty mtgoa:condition ],
-        mtgoa:Ability ;
+            owl:onClass <https://cmdoret.net/mtg_ontology/abilities/Condition> ;
+            owl:onProperty mtgo:condition ],
+        <https://cmdoret.net/mtg_ontology/abilities/Ability> ;
     skos:definition "A card ability, triggered by an event." ;
-    skos:exactMatch <https://mtg.fandom.com/wiki/Triggered_ability> .
+    skos:exactMatch mtgo:TriggeredAbility .
 
-mtgoc:Artifact a owl:Class,
+<https://cmdoret.net/mtg_ontology/cards/Artifact> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "Artifact" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:oracle_text ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:type_line ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:card_set ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom mtgoa:Ability ;
-            owl:onProperty mtgoc:ability ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:card_type ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:Uriorcurie ;
-            owl:onProperty schema:identifier ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty mtgoc:card_supertype ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty mtgoc:card_subtype ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty schema:description ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty schema:name ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Integer ;
-            owl:onProperty mtgoc:converted_mana_cost ],
-        [ a owl:Class ;
-            owl:intersectionOf ( [ a owl:Restriction ;
-                        owl:allValuesFrom mtgoc:Color ;
-                        owl:onProperty mtgoc:color ] [ a owl:Restriction ;
-                        owl:onProperty mtgoc:color ;
-                        owl:someValuesFrom mtgoc:Color ] ) ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:artist ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom mtgoc:ManaCost ;
-            owl:onProperty mtgoc:mana_cost ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgoc:Rarity ;
-            owl:onProperty mtgoc:rarity ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:flavor_text ],
-        mtgoc:AnyArtifact,
-        mtgoc:Card ;
+    rdfs:seeAlso "mtg:Artifact" ;
+    rdfs:subClassOf <https://cmdoret.net/mtg_ontology/cards/AnyArtifact>,
+        <https://cmdoret.net/mtg_ontology/cards/Card> ;
     skos:definition "A card that represents an artifact that can be cast and put onto the battlefield." ;
-    skos:exactMatch <https://mtg.fandom.com/wiki/Artifact> .
+    skos:exactMatch mtgo:Artifact .
 
-mtgoc:ArtifactToken a owl:Class,
+<https://cmdoret.net/mtg_ontology/cards/ArtifactToken> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "ArtifactToken" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:type_line ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:card_set ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:Uriorcurie ;
-            owl:onProperty schema:identifier ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:card_type ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom mtgoa:Ability ;
-            owl:onProperty mtgoc:ability ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty schema:description ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty schema:name ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:oracle_text ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:artist ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty mtgoc:card_subtype ],
-        [ a owl:Class ;
-            owl:intersectionOf ( [ a owl:Restriction ;
-                        owl:allValuesFrom mtgoc:Color ;
-                        owl:onProperty mtgoc:color ] [ a owl:Restriction ;
-                        owl:onProperty mtgoc:color ;
-                        owl:someValuesFrom mtgoc:Color ] ) ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:flavor_text ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty mtgoc:card_supertype ],
-        mtgoc:AnyArtifact,
-        mtgoc:Token ;
-    skos:definition "A token that represents an artifact that can be placed onto the battlefield by other effects." .
+    rdfs:subClassOf <https://cmdoret.net/mtg_ontology/cards/AnyArtifact>,
+        <https://cmdoret.net/mtg_ontology/cards/Token> ;
+    skos:definition "A token that represents an artifact that can be placed onto the battlefield by other effects." ;
+    skos:exactMatch mtgo:ArtifactToken .
 
-mtgoc:Creature a owl:Class,
+<https://cmdoret.net/mtg_ontology/cards/Creature> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "Creature" ;
+    rdfs:seeAlso "mtg:Creature" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty mtgoc:card_subtype ],
-        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:artist ],
+            owl:onClass linkml:Boolean ;
+            owl:onProperty mtgo:variable_power ],
         [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:card_type ;
+            owl:onClass linkml:Integer ;
+            owl:onProperty mtgo:toughness ;
             owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
             owl:onClass linkml:Integer ;
-            owl:onProperty mtgoc:power ;
+            owl:onProperty mtgo:power ;
             owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:card_set ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Boolean ;
-            owl:onProperty mtgoc:variable_toughness ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgoc:Rarity ;
-            owl:onProperty mtgoc:rarity ],
-        [ a owl:Class ;
-            owl:intersectionOf ( [ a owl:Restriction ;
-                        owl:allValuesFrom mtgoc:Color ;
-                        owl:onProperty mtgoc:color ] [ a owl:Restriction ;
-                        owl:onProperty mtgoc:color ;
-                        owl:someValuesFrom mtgoc:Color ] ) ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:type_line ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:oracle_text ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Boolean ;
-            owl:onProperty mtgoc:variable_power ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom mtgoa:Ability ;
-            owl:onProperty mtgoc:ability ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty schema:description ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty mtgoc:card_supertype ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:Uriorcurie ;
-            owl:onProperty schema:identifier ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom mtgoc:ManaCost ;
-            owl:onProperty mtgoc:mana_cost ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Integer ;
-            owl:onProperty mtgoc:converted_mana_cost ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty schema:name ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:flavor_text ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:Integer ;
-            owl:onProperty mtgoc:toughness ;
-            owl:qualifiedCardinality 1 ],
-        mtgoc:AnyCreature,
-        mtgoc:Card ;
+            owl:onProperty mtgo:variable_toughness ],
+        <https://cmdoret.net/mtg_ontology/cards/AnyCreature>,
+        <https://cmdoret.net/mtg_ontology/cards/Card> ;
     skos:definition "A card that represents a creature that can be cast and put onto the battlefield." ;
-    skos:exactMatch <https://mtg.fandom.com/wiki/Creature> .
+    skos:exactMatch mtgo:Creature .
 
-mtgoc:CreatureToken a owl:Class,
+<https://cmdoret.net/mtg_ontology/cards/CreatureToken> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "CreatureToken" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Boolean ;
+            owl:onProperty mtgo:variable_toughness ],
+        [ a owl:Restriction ;
             owl:onClass linkml:Integer ;
-            owl:onProperty mtgoc:toughness ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:type_line ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:Uriorcurie ;
-            owl:onProperty schema:identifier ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:flavor_text ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:artist ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom mtgoa:Ability ;
-            owl:onProperty mtgoc:ability ],
-        [ a owl:Class ;
-            owl:intersectionOf ( [ a owl:Restriction ;
-                        owl:allValuesFrom mtgoc:Color ;
-                        owl:onProperty mtgoc:color ] [ a owl:Restriction ;
-                        owl:onProperty mtgoc:color ;
-                        owl:someValuesFrom mtgoc:Color ] ) ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:oracle_text ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:card_set ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty schema:description ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty mtgoc:card_subtype ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty mtgoc:card_supertype ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Boolean ;
-            owl:onProperty mtgoc:variable_toughness ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Boolean ;
-            owl:onProperty mtgoc:variable_power ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:card_type ;
+            owl:onProperty mtgo:power ;
             owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
             owl:onClass linkml:Integer ;
-            owl:onProperty mtgoc:power ;
+            owl:onProperty mtgo:toughness ;
             owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty schema:name ;
-            owl:qualifiedCardinality 1 ],
-        mtgoc:AnyCreature,
-        mtgoc:Token ;
-    skos:definition "A token that represents a creature that can be placed onto the battlefield by other effects." .
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Boolean ;
+            owl:onProperty mtgo:variable_power ],
+        <https://cmdoret.net/mtg_ontology/cards/AnyCreature>,
+        <https://cmdoret.net/mtg_ontology/cards/Token> ;
+    skos:definition "A token that represents a creature that can be placed onto the battlefield by other effects." ;
+    skos:exactMatch mtgo:CreatureToken .
 
-mtgoc:Enchantment a owl:Class,
+<https://cmdoret.net/mtg_ontology/cards/Enchantment> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "Enchantment" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty schema:name ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom mtgoc:ManaCost ;
-            owl:onProperty mtgoc:mana_cost ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Integer ;
-            owl:onProperty mtgoc:converted_mana_cost ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgoc:Rarity ;
-            owl:onProperty mtgoc:rarity ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:card_set ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:Uriorcurie ;
-            owl:onProperty schema:identifier ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:flavor_text ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom mtgoa:Ability ;
-            owl:onProperty mtgoc:ability ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty mtgoc:card_subtype ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty schema:description ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:oracle_text ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:card_type ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty mtgoc:card_supertype ],
-        [ a owl:Class ;
-            owl:intersectionOf ( [ a owl:Restriction ;
-                        owl:allValuesFrom mtgoc:Color ;
-                        owl:onProperty mtgoc:color ] [ a owl:Restriction ;
-                        owl:onProperty mtgoc:color ;
-                        owl:someValuesFrom mtgoc:Color ] ) ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:artist ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:type_line ;
-            owl:qualifiedCardinality 1 ],
-        mtgoc:AnyEnchantment,
-        mtgoc:Card ;
+    rdfs:seeAlso "mtg:Enchantment" ;
+    rdfs:subClassOf <https://cmdoret.net/mtg_ontology/cards/AnyEnchantment>,
+        <https://cmdoret.net/mtg_ontology/cards/Card> ;
     skos:definition "A card that represents an enchantment that can be cast and put onto the battlefield." ;
-    skos:exactMatch <https://mtg.fandom.com/wiki/Enchantment> .
+    skos:exactMatch mtgo:Enchantment .
 
-mtgoc:EnchantmentToken a owl:Class,
+<https://cmdoret.net/mtg_ontology/cards/EnchantmentToken> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "EnchantmentToken" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:flavor_text ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty mtgoc:card_supertype ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:card_type ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Class ;
-            owl:intersectionOf ( [ a owl:Restriction ;
-                        owl:allValuesFrom mtgoc:Color ;
-                        owl:onProperty mtgoc:color ] [ a owl:Restriction ;
-                        owl:onProperty mtgoc:color ;
-                        owl:someValuesFrom mtgoc:Color ] ) ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty schema:name ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:type_line ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty mtgoc:card_subtype ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:Uriorcurie ;
-            owl:onProperty schema:identifier ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:artist ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:card_set ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:oracle_text ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty schema:description ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom mtgoa:Ability ;
-            owl:onProperty mtgoc:ability ],
-        mtgoc:AnyEnchantment,
-        mtgoc:Token ;
-    skos:definition "A token that represents an enchantment that can be placed onto the battlefield by other effects." .
+    rdfs:subClassOf <https://cmdoret.net/mtg_ontology/cards/AnyEnchantment>,
+        <https://cmdoret.net/mtg_ontology/cards/Token> ;
+    skos:definition "A token that represents an enchantment that can be placed onto the battlefield by other effects." ;
+    skos:exactMatch mtgo:EnchantmentToken .
 
-mtgoc:Instant a owl:Class,
+<https://cmdoret.net/mtg_ontology/cards/Instant> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "Instant" ;
-    rdfs:subClassOf mtgoc:Card ;
+    rdfs:seeAlso "mtg:Instant" ;
+    rdfs:subClassOf <https://cmdoret.net/mtg_ontology/cards/Card> ;
     skos:definition "A card that represents an instant spell that can be cast." ;
-    skos:exactMatch <https://mtg.fandom.com/wiki/Instant> .
+    skos:exactMatch mtgo:Instant .
 
-mtgoc:Land a owl:Class,
+<https://cmdoret.net/mtg_ontology/cards/Land> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "Land" ;
-    rdfs:subClassOf [ a owl:Class ;
-            owl:intersectionOf ( [ a owl:Restriction ;
-                        owl:allValuesFrom mtgoc:Color ;
-                        owl:onProperty mtgoc:color ] [ a owl:Restriction ;
-                        owl:onProperty mtgoc:color ;
-                        owl:someValuesFrom mtgoc:Color ] ) ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:artist ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty schema:description ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:oracle_text ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:Uriorcurie ;
-            owl:onProperty schema:identifier ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Integer ;
-            owl:onProperty mtgoc:converted_mana_cost ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:card_set ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom mtgoc:ManaCost ;
-            owl:onProperty mtgoc:mana_cost ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgoc:Rarity ;
-            owl:onProperty mtgoc:rarity ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom mtgoa:Ability ;
-            owl:onProperty mtgoc:ability ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty mtgoc:card_supertype ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:flavor_text ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty schema:name ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty mtgoc:card_subtype ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:card_type ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:type_line ;
-            owl:qualifiedCardinality 1 ],
-        mtgoc:Card,
-        mtgoc:Permanent ;
+    rdfs:seeAlso "mtg:Land" ;
+    rdfs:subClassOf <https://cmdoret.net/mtg_ontology/cards/Card>,
+        <https://cmdoret.net/mtg_ontology/cards/Permanent> ;
     skos:definition "A card that represents a land that can be tapped for mana." ;
-    skos:exactMatch <https://mtg.fandom.com/wiki/Land> .
+    skos:exactMatch mtgo:Land .
 
-mtgoc:LifeCost a owl:Class,
+<https://cmdoret.net/mtg_ontology/cards/LifeCost> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "LifeCost" ;
-    rdfs:subClassOf mtgoc:Cost ;
+    rdfs:subClassOf <https://cmdoret.net/mtg_ontology/cards/Cost> ;
     skos:definition "The life cost of a card or ability." ;
-    skos:exactMatch <https://mtg.fandom.com/wiki/Life> .
+    skos:exactMatch mtgo:LifeCost .
 
-mtgoc:Sorcery a owl:Class,
+<https://cmdoret.net/mtg_ontology/cards/Sorcery> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "Sorcery" ;
-    rdfs:subClassOf mtgoc:Card ;
+    rdfs:seeAlso "mtg:Sorcery" ;
+    rdfs:subClassOf <https://cmdoret.net/mtg_ontology/cards/Card> ;
     skos:definition "A card that represents a sorcery spell that can be cast." ;
-    skos:exactMatch <https://mtg.fandom.com/wiki/Sorcery> .
+    skos:exactMatch mtgo:Sorcery .
 
-mtgoc:Spell a owl:Class,
+<https://cmdoret.net/mtg_ontology/cards/Spell> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "Spell" ;
+    rdfs:seeAlso "mtg:Spell" ;
     rdfs:subClassOf mtgo:Thing ;
     skos:definition "An object on the stack. Either a card that has been cast, or a copy." ;
-    skos:exactMatch <https://mtg.fandom.com/wiki/Spell> .
+    skos:exactMatch mtgo:Spell .
 
 linkml:SubsetDefinition a owl:Class ;
     rdfs:label "subset_definition" .
@@ -594,1091 +206,115 @@ linkml:TypeDefinition a owl:Class ;
 linkml:topValue a owl:DatatypeProperty ;
     rdfs:label "value" .
 
-mtgoa:AbilityCollection a owl:Class,
+<https://cmdoret.net/mtg_ontology/abilities/AbilityCollection> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "AbilityCollection" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom mtgoa:TimeSpecification ;
-            owl:onProperty mtgoa:time_specifications ],
+            owl:allValuesFrom <https://cmdoret.net/mtg_ontology/abilities/Condition> ;
+            owl:onProperty mtgo:conditions ],
         [ a owl:Restriction ;
-            owl:allValuesFrom mtgoa:ValueSpecification ;
-            owl:onProperty mtgoa:value_specifications ],
+            owl:allValuesFrom <https://cmdoret.net/mtg_ontology/cards/ManaCost> ;
+            owl:onProperty mtgo:mana_costs ],
         [ a owl:Restriction ;
-            owl:allValuesFrom mtgoa:ActivatedAbility ;
-            owl:onProperty mtgoa:activated_abilities ],
+            owl:allValuesFrom <https://cmdoret.net/mtg_ontology/abilities/TimeSpecification> ;
+            owl:onProperty mtgo:time_specifications ],
         [ a owl:Restriction ;
-            owl:allValuesFrom mtgoa:ActionSpecification ;
-            owl:onProperty mtgoa:action_specifications ],
+            owl:allValuesFrom <https://cmdoret.net/mtg_ontology/abilities/ActionSpecification> ;
+            owl:onProperty mtgo:action_specifications ],
         [ a owl:Restriction ;
-            owl:allValuesFrom mtgoc:ManaCost ;
-            owl:onProperty mtgoa:mana_costs ],
+            owl:allValuesFrom <https://cmdoret.net/mtg_ontology/abilities/ActivatedAbility> ;
+            owl:onProperty mtgo:activated_abilities ],
         [ a owl:Restriction ;
-            owl:allValuesFrom mtgoa:Condition ;
-            owl:onProperty mtgoa:conditions ] ;
-    skos:definition "A collection of abilities and associated concepts." .
+            owl:allValuesFrom <https://cmdoret.net/mtg_ontology/abilities/ValueSpecification> ;
+            owl:onProperty mtgo:value_specifications ] ;
+    skos:definition "A collection of abilities and associated concepts." ;
+    skos:exactMatch mtgo:AbilityCollection .
 
-mtgoa:action a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "action" ;
-    rdfs:range mtgoa:Action ;
-    skos:definition "An action taken by a player or card." .
-
-mtgoa:action_spec a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "action_spec" ;
-    rdfs:range mtgoa:ActionSpecification ;
-    skos:definition "A specification of an action." .
-
-mtgoa:action_specifications a owl:ObjectProperty,
+mtgo:action_specifications a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "action_specifications" ;
-    rdfs:range mtgoa:ActionSpecification ;
+    rdfs:range <https://cmdoret.net/mtg_ontology/abilities/ActionSpecification> ;
     skos:definition "Action specifications in the collection." .
 
-mtgoa:activated_abilities a owl:ObjectProperty,
+mtgo:activated_abilities a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "activated_abilities" ;
-    rdfs:range mtgoa:ActivatedAbility ;
+    rdfs:range <https://cmdoret.net/mtg_ontology/abilities/ActivatedAbility> ;
     skos:definition "Activated abilities in the collection." .
 
-mtgoa:conditions a owl:ObjectProperty,
+mtgo:cards a owl:ObjectProperty,
         linkml:SlotDefinition ;
-    rdfs:label "conditions" ;
-    rdfs:range mtgoa:Condition ;
-    skos:definition "Conditions in the collection." .
+    rdfs:label "cards" ;
+    rdfs:range <https://cmdoret.net/mtg_ontology/cards/Card> ;
+    skos:definition "Cards in the collection." .
 
-mtgoa:cost a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "cost" ;
-    rdfs:range linkml:String ;
-    skos:definition "A cost to play a card or ability." .
-
-mtgoa:effect a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "effect" ;
-    rdfs:range mtgoa:Condition ;
-    skos:definition "The effect of an ability." .
-
-mtgoa:mana_costs a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "mana_costs" ;
-    rdfs:range mtgoc:ManaCost ;
-    skos:definition "Mana costs in the collection." .
-
-mtgoa:player a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "player" ;
-    rdfs:range mtgoa:Player ;
-    skos:definition "A player." .
-
-mtgoa:power_modifier a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "power_modifier" ;
-    rdfs:range linkml:Integer ;
-    skos:definition "A numeric modifier to apply to a creature's power." .
-
-mtgoa:rules_text a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "rules_text" ;
-    rdfs:range linkml:String ;
-    skos:definition "The text describing what an ability does." .
-
-mtgoa:source a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "source" ;
-    rdfs:range linkml:String ;
-    skos:definition "The entity responsible for an action." .
-
-mtgoa:target a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "target" ;
-    rdfs:range linkml:String ;
-    skos:definition "The entity targeted by an action or constraint." .
-
-mtgoa:time_spec a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "time_spec" ;
-    rdfs:range mtgoa:TimeSpecification ;
-    skos:definition "A specification of the time of an event." .
-
-mtgoa:time_specifications a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "time_specifications" ;
-    rdfs:range mtgoa:TimeSpecification ;
-    skos:definition "Time specifications in the collection." .
-
-mtgoa:toughness_modifier a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "toughness_modifier" ;
-    rdfs:range linkml:Integer ;
-    skos:definition "A numeric modifier to apply to a creature's toughness." .
-
-mtgoa:turn_phase a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "turn_phase" ;
-    rdfs:range mtgoa:TurnPhase ;
-    skos:definition "A phase of the game." .
-
-mtgoa:unit a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "unit" ;
-    rdfs:range linkml:String ;
-    skos:definition "The type of quantity described by a value." .
-
-mtgoa:value_specifications a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "value_specifications" ;
-    rdfs:range mtgoa:ValueSpecification ;
-    skos:definition "Values in the collection." .
-
-mtgoc:CardCollection a owl:Class,
+<https://cmdoret.net/mtg_ontology/cards/CardCollection> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "CardCollection" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom mtgoc:Cost ;
-            owl:onProperty mtgoc:costs ],
+            owl:allValuesFrom <https://cmdoret.net/mtg_ontology/cards/Cost> ;
+            owl:onProperty mtgo:costs ],
         [ a owl:Restriction ;
-            owl:allValuesFrom mtgoc:Card ;
-            owl:onProperty mtgoc:cards ] ;
-    skos:definition "A collection of cards and associated costs." .
+            owl:allValuesFrom <https://cmdoret.net/mtg_ontology/cards/Card> ;
+            owl:onProperty mtgo:cards ] ;
+    skos:definition "A collection of cards and associated costs." ;
+    skos:exactMatch mtgo:CardCollection .
 
-mtgoc:Mana a owl:Class,
+<https://cmdoret.net/mtg_ontology/cards/Mana> a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "Mana" ;
-    rdfs:subClassOf [ a owl:Class ;
+    rdfs:seeAlso "mtg:Mana" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Boolean ;
+            owl:onProperty mtgo:phyrexian ],
+        [ a owl:Class ;
             owl:intersectionOf ( [ a owl:Restriction ;
-                        owl:allValuesFrom mtgoc:Color ;
-                        owl:onProperty mtgoc:color ] [ a owl:Restriction ;
-                        owl:onProperty mtgoc:color ;
-                        owl:someValuesFrom mtgoc:Color ] ) ],
+                        owl:allValuesFrom <https://cmdoret.net/mtg_ontology/cards/Color> ;
+                        owl:onProperty mtgo:color ] [ a owl:Restriction ;
+                        owl:onProperty mtgo:color ;
+                        owl:someValuesFrom <https://cmdoret.net/mtg_ontology/cards/Color> ] ) ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Boolean ;
-            owl:onProperty <https://mtg.fandom.com/wiki/snow> ],
+            owl:onProperty mtgo:hybrid ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Boolean ;
-            owl:onProperty <https://mtg.fandom.com/wiki/hybrid_mana> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Boolean ;
-            owl:onProperty <https://mtg.fandom.com/wiki/phyrexian_mana> ],
+            owl:onProperty mtgo:snow ],
         mtgo:Thing ;
     skos:definition "A mana in the pool." ;
-    skos:exactMatch <https://mtg.fandom.com/wiki/Mana> .
+    skos:exactMatch mtgo:Mana .
 
-mtgoc:cards a owl:ObjectProperty,
+mtgo:conditions a owl:ObjectProperty,
         linkml:SlotDefinition ;
-    rdfs:label "cards" ;
-    rdfs:range mtgoc:Card ;
-    skos:definition "Cards in the collection." .
+    rdfs:label "conditions" ;
+    rdfs:range <https://cmdoret.net/mtg_ontology/abilities/Condition> ;
+    skos:definition "Conditions in the collection." .
 
-mtgoc:costs a owl:ObjectProperty,
+mtgo:costs a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "costs" ;
-    rdfs:range mtgoc:Cost ;
+    rdfs:range <https://cmdoret.net/mtg_ontology/cards/Cost> ;
     skos:definition "Costs in the collection." .
 
-<https://mtg.fandom.com/wiki/activate> a owl:Class,
-        mtgoa:Action ;
-    rdfs:label "activate" .
-
-<https://mtg.fandom.com/wiki/attach> a owl:Class,
-        mtgoa:Action ;
-    rdfs:label "attach" .
-
-<https://mtg.fandom.com/wiki/beggining_phase> a owl:Class,
-        mtgoa:TurnPhase ;
-    rdfs:label "beginning_phase" .
-
-<https://mtg.fandom.com/wiki/beginning_of_combat_step> a owl:Class,
-        mtgoa:TurnPhase ;
-    rdfs:label "beginning_of_combat_step" .
-
-<https://mtg.fandom.com/wiki/black> a owl:Class,
-        mtgoc:Color ;
-    rdfs:label "black" .
-
-<https://mtg.fandom.com/wiki/blue> a owl:Class,
-        mtgoc:Color ;
-    rdfs:label "blue" .
-
-<https://mtg.fandom.com/wiki/cast> a owl:Class,
-        mtgoa:Action ;
-    rdfs:label "cast" .
-
-<https://mtg.fandom.com/wiki/cleanup_step> a owl:Class,
-        mtgoa:TurnPhase ;
-    rdfs:label "cleanup_step" .
-
-<https://mtg.fandom.com/wiki/colorless> a owl:Class,
-        mtgoc:Color ;
-    rdfs:label "colorless" .
-
-<https://mtg.fandom.com/wiki/combat_damage_step> a owl:Class,
-        mtgoa:TurnPhase ;
-    rdfs:label "combat_damage_step" .
-
-<https://mtg.fandom.com/wiki/combat_phase> a owl:Class,
-        mtgoa:TurnPhase ;
-    rdfs:label "combat_phase" .
-
-<https://mtg.fandom.com/wiki/common> a owl:Class,
-        mtgoc:Rarity ;
-    rdfs:label "common" .
-
-<https://mtg.fandom.com/wiki/control_and_ownership> a owl:Class,
-        mtgoa:Action ;
-    rdfs:label "control" .
-
-<https://mtg.fandom.com/wiki/counter> a owl:Class,
-        mtgoa:Action ;
-    rdfs:label "counter" .
-
-<https://mtg.fandom.com/wiki/create> a owl:Class,
-        mtgoa:Action ;
-    rdfs:label "create" .
-
-<https://mtg.fandom.com/wiki/deathtouch> a owl:Class,
-        mtgoa:AbilityKeyword ;
-    rdfs:label "deathtouch" .
-
-<https://mtg.fandom.com/wiki/declare_attackers_step> a owl:Class,
-        mtgoa:TurnPhase ;
-    rdfs:label "declare_attackers_step" .
-
-<https://mtg.fandom.com/wiki/declare_blockers_step> a owl:Class,
-        mtgoa:TurnPhase ;
-    rdfs:label "declare_blockers_step" .
-
-<https://mtg.fandom.com/wiki/defender> a owl:Class,
-        mtgoa:AbilityKeyword ;
-    rdfs:label "defender" .
-
-<https://mtg.fandom.com/wiki/destroy> a owl:Class,
-        mtgoa:Action ;
-    rdfs:label "destroy" .
-
-<https://mtg.fandom.com/wiki/discard> a owl:Class,
-        mtgoa:Action ;
-    rdfs:label "discard" .
-
-<https://mtg.fandom.com/wiki/double_strike> a owl:Class,
-        mtgoa:AbilityKeyword ;
-    rdfs:label "double_strike" .
-
-<https://mtg.fandom.com/wiki/draw> a owl:Class,
-        mtgoa:Action ;
-    rdfs:label "draw" .
-
-<https://mtg.fandom.com/wiki/draw_step> a owl:Class,
-        mtgoa:TurnPhase ;
-    rdfs:label "draw_step" .
-
-<https://mtg.fandom.com/wiki/enchant> a owl:Class,
-        mtgoa:AbilityKeyword ;
-    rdfs:label "enchant" .
-
-<https://mtg.fandom.com/wiki/end_of_combat_step> a owl:Class,
-        mtgoa:TurnPhase ;
-    rdfs:label "end_of_combat_step" .
-
-<https://mtg.fandom.com/wiki/ending_phase> a owl:Class,
-        mtgoa:TurnPhase ;
-    rdfs:label "ending_phase" .
-
-<https://mtg.fandom.com/wiki/equip> a owl:Class,
-        mtgoa:AbilityKeyword ;
-    rdfs:label "equip" ;
-    skos:editorialNote "activated" .
-
-<https://mtg.fandom.com/wiki/exchange> a owl:Class,
-        mtgoa:Action ;
-    rdfs:label "exchange" .
-
-<https://mtg.fandom.com/wiki/exile> a owl:Class,
-        mtgoa:Action ;
-    rdfs:label "exile" .
-
-<https://mtg.fandom.com/wiki/fight> a owl:Class,
-        mtgoa:Action ;
-    rdfs:label "fight" .
-
-<https://mtg.fandom.com/wiki/first_strike> a owl:Class,
-        mtgoa:AbilityKeyword ;
-    rdfs:label "first_strike" .
-
-<https://mtg.fandom.com/wiki/flash> a owl:Class,
-        mtgoa:AbilityKeyword ;
-    rdfs:label "flash" ;
-    skos:editorialNote "activated" .
-
-<https://mtg.fandom.com/wiki/flying> a owl:Class,
-        mtgoa:AbilityKeyword ;
-    rdfs:label "flying" .
-
-<https://mtg.fandom.com/wiki/green> a owl:Class,
-        mtgoc:Color ;
-    rdfs:label "green" .
-
-<https://mtg.fandom.com/wiki/haste> a owl:Class,
-        mtgoa:AbilityKeyword ;
-    rdfs:label "haste" .
-
-<https://mtg.fandom.com/wiki/hexproof> a owl:Class,
-        mtgoa:AbilityKeyword ;
-    rdfs:label "hexproof" .
-
-<https://mtg.fandom.com/wiki/indestructible> a owl:Class,
-        mtgoa:AbilityKeyword ;
-    rdfs:label "indestructible" .
-
-<https://mtg.fandom.com/wiki/lifelink> a owl:Class,
-        mtgoa:AbilityKeyword ;
-    rdfs:label "lifelink" .
-
-<https://mtg.fandom.com/wiki/menace> a owl:Class,
-        mtgoa:AbilityKeyword ;
-    rdfs:label "menace" .
-
-<https://mtg.fandom.com/wiki/mill> a owl:Class,
-        mtgoa:Action ;
-    rdfs:label "mill" .
-
-<https://mtg.fandom.com/wiki/mythic_rare> a owl:Class,
-        mtgoc:Rarity ;
-    rdfs:label "mythic" .
-
-<https://mtg.fandom.com/wiki/play> a owl:Class,
-        mtgoa:Action ;
-    rdfs:label "play" .
-
-<https://mtg.fandom.com/wiki/protection> a owl:Class,
-        mtgoa:AbilityKeyword ;
-    rdfs:label "protection" .
-
-<https://mtg.fandom.com/wiki/rare> a owl:Class,
-        mtgoc:Rarity ;
-    rdfs:label "rare" .
-
-<https://mtg.fandom.com/wiki/reach> a owl:Class,
-        mtgoa:AbilityKeyword ;
-    rdfs:label "reach" .
-
-<https://mtg.fandom.com/wiki/red> a owl:Class,
-        mtgoc:Color ;
-    rdfs:label "red" .
-
-<https://mtg.fandom.com/wiki/reveal> a owl:Class,
-        mtgoa:Action ;
-    rdfs:label "reveal" .
-
-<https://mtg.fandom.com/wiki/sacrifice> a owl:Class,
-        mtgoa:Action ;
-    rdfs:label "sacrifice" .
-
-<https://mtg.fandom.com/wiki/scry> a owl:Class,
-        mtgoa:Action ;
-    rdfs:label "scry" .
-
-<https://mtg.fandom.com/wiki/search> a owl:Class,
-        mtgoa:Action ;
-    rdfs:label "search" .
-
-<https://mtg.fandom.com/wiki/shuffle> a owl:Class,
-        mtgoa:Action ;
-    rdfs:label "shuffle" .
-
-<https://mtg.fandom.com/wiki/tap> a owl:Class,
-        mtgoa:Action ;
-    rdfs:label "tap" .
-
-<https://mtg.fandom.com/wiki/trample> a owl:Class,
-        mtgoa:AbilityKeyword ;
-    rdfs:label "trample" .
-
-<https://mtg.fandom.com/wiki/turn> a owl:Class,
-        mtgoa:TurnPhase ;
-    rdfs:label "turn" .
-
-<https://mtg.fandom.com/wiki/uncommon> a owl:Class,
-        mtgoc:Rarity ;
-    rdfs:label "uncommon" .
-
-<https://mtg.fandom.com/wiki/untap> a owl:Class,
-        mtgoa:Action ;
-    rdfs:label "untap" .
-
-<https://mtg.fandom.com/wiki/untap_step> a owl:Class,
-        mtgoa:TurnPhase ;
-    rdfs:label "untap_step" .
-
-<https://mtg.fandom.com/wiki/upkeep_step> a owl:Class,
-        mtgoa:TurnPhase ;
-    rdfs:label "upkeep_step" .
-
-<https://mtg.fandom.com/wiki/vigilance> a owl:Class,
-        mtgoa:AbilityKeyword ;
-    rdfs:label "vigilance" .
-
-<https://mtg.fandom.com/wiki/ward> a owl:Class,
-        mtgoa:AbilityKeyword ;
-    rdfs:label "ward" .
-
-<https://mtg.fandom.com/wiki/white> a owl:Class,
-        mtgoc:Color ;
-    rdfs:label "white" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/Action#add_mana> a owl:Class,
-        mtgoa:Action ;
-    rdfs:label "add_mana" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/Action#deal_damage> a owl:Class,
-        mtgoa:Action ;
-    rdfs:label "deal_damage" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/ActionConstraint#may> a owl:Class,
-        mtgoa:ActionConstraint ;
-    rdfs:label "may" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/ActionConstraint#may_not> a owl:Class,
-        mtgoa:ActionConstraint ;
-    rdfs:label "may_not" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/ActionConstraint#must> a owl:Class,
-        mtgoa:ActionConstraint ;
-    rdfs:label "must" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/ActionConstraint#must_not> a owl:Class,
-        mtgoa:ActionConstraint ;
-    rdfs:label "must_not" .
-
-mtgoa:ActivatedAbility a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "ActivatedAbility" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty mtgoa:cost ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgoa:Condition ;
-            owl:onProperty mtgoa:condition ],
-        mtgoa:Ability ;
-    skos:definition "A card ability which can be activated for a cost." ;
-    skos:exactMatch <https://mtg.fandom.com/wiki/Activated_ability> .
-
-mtgoa:Counter a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "Counter" ;
-    rdfs:subClassOf mtgo:Thing ;
-    skos:definition "A counter, such as a +1/+1 counter." ;
-    skos:exactMatch <https://mtg.fandom.com/wiki/counters> .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/Player#active_player> a owl:Class,
-        mtgoa:Player ;
-    rdfs:label "active_player" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/Player#attacking_player> a owl:Class,
-        mtgoa:Player ;
-    rdfs:label "attacking_player" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/Player#controller> a owl:Class,
-        mtgoa:Player ;
-    rdfs:label "controller" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/Player#defending_player> a owl:Class,
-        mtgoa:Player ;
-    rdfs:label "defending_player" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/Player#non_active_player> a owl:Class,
-        mtgoa:Player ;
-    rdfs:label "non_active_player" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/Player#opponent> a owl:Class,
-        mtgoa:Player ;
-    rdfs:label "opponent" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/Player#opponents> a owl:Class,
-        mtgoa:Player ;
-    rdfs:label "opponents" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/Player#owner> a owl:Class,
-        mtgoa:Player ;
-    rdfs:label "owner" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/Player#players> a owl:Class,
-        mtgoa:Player ;
-    rdfs:label "players" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/Player#you> a owl:Class,
-        mtgoa:Player ;
-    rdfs:label "you" .
-
-mtgoa:Specification a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "Specification" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgo:NamedThing ;
-            owl:onProperty mtgo:intersection ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoa:constraint ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgo:NamedThing ;
-            owl:onProperty mtgo:union ],
-        mtgo:Thing ;
-    skos:definition "A specification for a thing." .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/TimeConstraint#after> a owl:Class,
-        mtgoa:TimeConstraint ;
-    rdfs:label "after" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/TimeConstraint#before> a owl:Class,
-        mtgoa:TimeConstraint ;
-    rdfs:label "before" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/TimeConstraint#during> a owl:Class,
-        mtgoa:TimeConstraint ;
-    rdfs:label "during" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/TimeConstraint#each> a owl:Class,
-        mtgoa:TimeConstraint ;
-    rdfs:label "each" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/TimeConstraint#next> a owl:Class,
-        mtgoa:TimeConstraint ;
-    rdfs:label "next" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/TimeConstraint#previous> a owl:Class,
-        mtgoa:TimeConstraint ;
-    rdfs:label "previous" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/TimeConstraint#this> a owl:Class,
-        mtgoa:TimeConstraint ;
-    rdfs:label "this" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#between> a owl:Class,
-        mtgoa:ValueConstraint ;
-    rdfs:label "between" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#equal> a owl:Class,
-        mtgoa:ValueConstraint ;
-    rdfs:label "equal" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#greater_than> a owl:Class,
-        mtgoa:ValueConstraint ;
-    rdfs:label "greater_than" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#greater_than_or_equal> a owl:Class,
-        mtgoa:ValueConstraint ;
-    rdfs:label "greater_than_or_equal" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#is> a owl:Class,
-        mtgoa:ValueConstraint ;
-    rdfs:label "is" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#is_not> a owl:Class,
-        mtgoa:ValueConstraint ;
-    rdfs:label "is_not" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#is_not_one_of> a owl:Class,
-        mtgoa:ValueConstraint ;
-    rdfs:label "is_not_one_of" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#is_one_of> a owl:Class,
-        mtgoa:ValueConstraint ;
-    rdfs:label "is_one_of" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#less_than> a owl:Class,
-        mtgoa:ValueConstraint ;
-    rdfs:label "less_than" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#less_than_or_equal> a owl:Class,
-        mtgoa:ValueConstraint ;
-    rdfs:label "less_than_or_equal" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#not_between> a owl:Class,
-        mtgoa:ValueConstraint ;
-    rdfs:label "not_between" .
-
-<https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#not_equal> a owl:Class,
-        mtgoa:ValueConstraint ;
-    rdfs:label "not_equal" .
-
-mtgoa:ability_keyword a owl:ObjectProperty,
+mtgo:mana_costs a owl:ObjectProperty,
         linkml:SlotDefinition ;
-    rdfs:label "ability_keyword" ;
-    rdfs:range linkml:String ;
-    skos:definition "An ability keyword." .
+    rdfs:label "mana_costs" ;
+    rdfs:range <https://cmdoret.net/mtg_ontology/cards/ManaCost> ;
+    skos:definition "Mana costs in the collection." .
 
-mtgoa:condition a owl:ObjectProperty,
+mtgo:time_specifications a owl:ObjectProperty,
         linkml:SlotDefinition ;
-    rdfs:label "condition" ;
-    rdfs:range mtgoa:Condition ;
-    skos:definition "A condition required for an activation." .
+    rdfs:label "time_specifications" ;
+    rdfs:range <https://cmdoret.net/mtg_ontology/abilities/TimeSpecification> ;
+    skos:definition "Time specifications in the collection." .
 
-mtgoa:value_spec a owl:ObjectProperty,
+mtgo:value_specifications a owl:ObjectProperty,
         linkml:SlotDefinition ;
-    rdfs:label "value_spec" ;
-    rdfs:range mtgoa:ValueSpecification ;
-    skos:definition "A specification for the value of a property." .
-
-mtgoc:AnyArtifact a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "AnyArtifact" ;
-    rdfs:subClassOf mtgoc:Permanent ;
-    skos:definition "A permanent representing a magical item, animated construct, or other objects and devices." ;
-    skos:exactMatch <https://mtg.fandom.com/wiki/Artifact> .
-
-mtgoc:AnyCreature a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "AnyCreature" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Boolean ;
-            owl:onProperty mtgoc:variable_power ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:Integer ;
-            owl:onProperty mtgoc:toughness ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:Integer ;
-            owl:onProperty mtgoc:power ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Boolean ;
-            owl:onProperty mtgoc:variable_toughness ],
-        mtgoc:Permanent ;
-    skos:definition "A creature that can be summoned to the battlefield." ;
-    skos:exactMatch <https://mtg.fandom.com/wiki/Creature> .
-
-mtgoc:AnyEnchantment a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "AnyEnchantment" ;
-    rdfs:subClassOf mtgoc:Permanent ;
-    skos:definition "A permanent which applies persistent magical effects." ;
-    skos:exactMatch <https://mtg.fandom.com/wiki/Enchantment> .
-
-<https://mtg.fandom.com/wiki/hybrid_mana> a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "hybrid" ;
-    rdfs:range linkml:Boolean ;
-    skos:definition "A hybrid mana cost can be paid with 1 mana of either of its component colors." ;
-    skos:exactMatch <https://mtg.fandom.com/wiki/hybrid_mana> .
-
-<https://mtg.fandom.com/wiki/phyrexian_mana> a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "phyrexian" ;
-    rdfs:range linkml:Boolean ;
-    skos:definition "A phyrexian mana cost can be paid with either 2 life or 1 mana of its component color(s)." ;
-    skos:exactMatch <https://mtg.fandom.com/wiki/phyrexian_mana> .
-
-<https://mtg.fandom.com/wiki/snow> a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "snow" ;
-    rdfs:range linkml:Boolean ;
-    skos:definition "A snow mana cost can be paid with a snow source, regardless of its color." ;
-    skos:exactMatch <https://mtg.fandom.com/wiki/snow> .
-
-<https://mtg.fandom.com/wiki/x> a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "variable_cost" ;
-    rdfs:range linkml:Boolean ;
-    skos:definition "Whether a cost is variable. Denoted as X on cards." ;
-    skos:exactMatch <https://mtg.fandom.com/wiki/x> .
-
-mtgoc:Token a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "Token" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:card_set ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty mtgoc:card_supertype ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:oracle_text ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:card_type ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom mtgoa:Ability ;
-            owl:onProperty mtgoc:ability ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:artist ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:type_line ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty mtgoc:card_subtype ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:flavor_text ],
-        [ a owl:Class ;
-            owl:intersectionOf ( [ a owl:Restriction ;
-                        owl:allValuesFrom mtgoc:Color ;
-                        owl:onProperty mtgoc:color ] [ a owl:Restriction ;
-                        owl:onProperty mtgoc:color ;
-                        owl:someValuesFrom mtgoc:Color ] ) ],
-        mtgoc:Permanent ;
-    skos:definition "A permanent that is not represented by a regular card and does not have a casting cost." ;
-    skos:exactMatch <https://mtg.fandom.com/wiki/Token> .
-
-mtgoc:power a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "power" ;
-    rdfs:range linkml:Integer ;
-    skos:definition "The amount of damage dealt in combat. This is the first number in the lower right corner of a creature card." .
-
-mtgoc:toughness a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "toughness" ;
-    rdfs:range linkml:Integer ;
-    skos:definition "The amount of damage needed to destroy a creature. This is the second number in the lower right corner of a creature card." .
-
-mtgoc:value a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "value" ;
-    rdfs:range linkml:Integer ;
-    skos:definition "The numeric part of a quantitative value." .
-
-mtgoc:variable_power a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "variable_power" ;
-    rdfs:range linkml:Boolean ;
-    skos:definition "Whether a creature's power is variable. Denoted as * on cards." .
-
-mtgoc:variable_toughness a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "variable_toughness" ;
-    rdfs:range linkml:Boolean ;
-    skos:definition "Whether a creature's toughness is variable. Denoted as * on cards." .
-
-<https://mtg.fandom.com/wiki/main_phase> a owl:Class,
-        mtgoa:TurnPhase ;
-    rdfs:label "main_phase",
-        "post_combat_main_phase",
-        "pre_combat_main_phase" .
-
-mtgoa:constraint a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "constraint" ;
-    rdfs:range linkml:String ;
-    skos:definition "A constraint on a time, quantity or action." .
-
-mtgoa:ActionConstraint a owl:Class,
-        linkml:EnumDefinition ;
-    rdfs:label "ActionConstraint" ;
-    owl:unionOf ( <https://w3id.org/cmdoret/mtg-ontology/abilities/ActionConstraint#must> <https://w3id.org/cmdoret/mtg-ontology/abilities/ActionConstraint#may> <https://w3id.org/cmdoret/mtg-ontology/abilities/ActionConstraint#must_not> <https://w3id.org/cmdoret/mtg-ontology/abilities/ActionConstraint#may_not> ) ;
-    linkml:permissible_values <https://w3id.org/cmdoret/mtg-ontology/abilities/ActionConstraint#may>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/ActionConstraint#may_not>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/ActionConstraint#must>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/ActionConstraint#must_not> .
-
-mtgoc:Permanent a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "Permanent" ;
-    rdfs:subClassOf mtgo:NamedThing ;
-    skos:definition "A card or token that can be put onto the battlefield." ;
-    skos:exactMatch <https://mtg.fandom.com/wiki/Permanent> .
-
-mtgoc:converted_mana_cost a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "converted_mana_cost" ;
-    rdfs:range linkml:Integer ;
-    skos:definition "The total mana cost for a card or ability, summed across all colors." .
-
-mtgoc:mana_cost a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "mana_cost" ;
-    rdfs:range mtgoc:ManaCost ;
-    skos:definition "A mana cost for a card or ability." .
-
-mtgoc:rarity a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "rarity" ;
-    rdfs:range mtgoc:Rarity ;
-    skos:definition "An ability associated with a card." .
-
-mtgoa:ActionSpecification a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "ActionSpecification" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgoa:ActionSpecification ;
-            owl:onProperty mtgo:intersection ],
-        [ a owl:Restriction ;
-            owl:onClass mtgoa:Action ;
-            owl:onProperty mtgoa:action ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgoa:ActionSpecification ;
-            owl:onProperty mtgo:union ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgoa:ActionConstraint ;
-            owl:onProperty mtgoa:constraint ],
-        mtgoa:Specification ;
-    skos:definition "A specification for an action." .
-
-mtgoa:TimeSpecification a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "TimeSpecification" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgoa:TurnPhase ;
-            owl:onProperty mtgoa:turn_phase ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgoa:TimeSpecification ;
-            owl:onProperty mtgo:union ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgoa:TimeConstraint ;
-            owl:onProperty mtgoa:constraint ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgoa:TimeSpecification ;
-            owl:onProperty mtgo:intersection ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgoa:Player ;
-            owl:onProperty mtgoa:player ],
-        mtgo:Thing ;
-    skos:definition "A specification for a time." .
-
-mtgo:intersection a owl:ObjectProperty,
-        owl:SymmetricProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "intersection" ;
-    rdfs:range mtgo:NamedThing ;
-    skos:definition "A conjunction of two objects (a and b)." .
-
-mtgo:union a owl:ObjectProperty,
-        owl:SymmetricProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "union" ;
-    rdfs:range mtgo:NamedThing ;
-    skos:definition "A disjunction of two objects (a or b)." .
-
-mtgo:NamedThing a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "NamedThing" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty schema:name ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty schema:description ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:Uriorcurie ;
-            owl:onProperty schema:identifier ;
-            owl:qualifiedCardinality 1 ] ;
-    skos:definition "A generic grouping for any identifiable entity" ;
-    skos:exactMatch schema:Thing .
-
-mtgoa:Condition a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "Condition" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom mtgoa:ValueSpecification ;
-            owl:onProperty mtgoa:value_spec ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom mtgoa:ActionSpecification ;
-            owl:onProperty mtgoa:action_spec ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoa:source ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom mtgoa:TimeSpecification ;
-            owl:onProperty mtgoa:time_spec ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoa:target ],
-        mtgo:Thing ;
-    skos:definition "A condition expressed as constraints." .
-
-mtgoa:ValueSpecification a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "ValueSpecification" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgoa:ValueSpecification ;
-            owl:onProperty mtgo:union ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoa:unit ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgoa:ValueConstraint ;
-            owl:onProperty mtgoa:constraint ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgoa:ValueSpecification ;
-            owl:onProperty mtgo:intersection ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Integer ;
-            owl:onProperty mtgoc:value ],
-        mtgoa:Specification ;
-    skos:definition "A specification for a quantitative value." .
-
-mtgoa:TimeConstraint a owl:Class,
-        linkml:EnumDefinition ;
-    rdfs:label "TimeConstraint" ;
-    owl:unionOf ( <https://w3id.org/cmdoret/mtg-ontology/abilities/TimeConstraint#before> <https://w3id.org/cmdoret/mtg-ontology/abilities/TimeConstraint#after> <https://w3id.org/cmdoret/mtg-ontology/abilities/TimeConstraint#during> <https://w3id.org/cmdoret/mtg-ontology/abilities/TimeConstraint#next> <https://w3id.org/cmdoret/mtg-ontology/abilities/TimeConstraint#previous> <https://w3id.org/cmdoret/mtg-ontology/abilities/TimeConstraint#this> <https://w3id.org/cmdoret/mtg-ontology/abilities/TimeConstraint#each> ) ;
-    linkml:permissible_values <https://w3id.org/cmdoret/mtg-ontology/abilities/TimeConstraint#after>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/TimeConstraint#before>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/TimeConstraint#during>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/TimeConstraint#each>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/TimeConstraint#next>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/TimeConstraint#previous>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/TimeConstraint#this> .
-
-mtgoc:Card a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "Card" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom mtgoc:ManaCost ;
-            owl:onProperty mtgoc:mana_cost ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:flavor_text ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty mtgoc:card_supertype ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:card_set ],
-        [ a owl:Class ;
-            owl:intersectionOf ( [ a owl:Restriction ;
-                        owl:allValuesFrom mtgoc:Color ;
-                        owl:onProperty mtgoc:color ] [ a owl:Restriction ;
-                        owl:onProperty mtgoc:color ;
-                        owl:someValuesFrom mtgoc:Color ] ) ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:card_type ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgoc:Rarity ;
-            owl:onProperty mtgoc:rarity ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty mtgoc:card_subtype ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:type_line ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:artist ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Integer ;
-            owl:onProperty mtgoc:converted_mana_cost ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoc:oracle_text ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom mtgoa:Ability ;
-            owl:onProperty mtgoc:ability ],
-        mtgo:NamedThing ;
-    skos:definition "A card in the Magic The Gathering game." ;
-    skos:exactMatch <https://mtg.fandom.com/wiki/Card> .
-
-mtgoc:Cost a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "Cost" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Boolean ;
-            owl:onProperty <https://mtg.fandom.com/wiki/x> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Integer ;
-            owl:onProperty mtgoc:value ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgoc:Cost ;
-            owl:onProperty mtgo:union ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgoc:Cost ;
-            owl:onProperty mtgo:intersection ],
-        mtgo:Thing ;
-    skos:definition "The cost of a card or ability." ;
-    skos:exactMatch <https://mtg.fandom.com/wiki/Cost> .
-
-mtgoc:ManaCost a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "ManaCost" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass linkml:Uriorcurie ;
-            owl:onProperty schema:identifier ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Boolean ;
-            owl:onProperty <https://mtg.fandom.com/wiki/x> ],
-        [ a owl:Class ;
-            owl:intersectionOf ( [ a owl:Restriction ;
-                        owl:allValuesFrom mtgoc:Color ;
-                        owl:onProperty mtgoc:color ] [ a owl:Restriction ;
-                        owl:onProperty mtgoc:color ;
-                        owl:someValuesFrom mtgoc:Color ] ) ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgoc:Cost ;
-            owl:onProperty mtgo:union ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgoc:Cost ;
-            owl:onProperty mtgo:intersection ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Boolean ;
-            owl:onProperty <https://mtg.fandom.com/wiki/hybrid_mana> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Integer ;
-            owl:onProperty mtgoc:value ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Boolean ;
-            owl:onProperty <https://mtg.fandom.com/wiki/phyrexian_mana> ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Boolean ;
-            owl:onProperty <https://mtg.fandom.com/wiki/snow> ],
-        mtgoc:Cost,
-        mtgoc:Mana ;
-    skos:definition "The mana cost of a card or ability." ;
-    skos:exactMatch <https://mtg.fandom.com/wiki/Mana_cost> .
+    rdfs:label "value_specifications" ;
+    rdfs:range <https://cmdoret.net/mtg_ontology/abilities/ValueSpecification> ;
+    skos:definition "Values in the collection." .
 
 schema:description a owl:ObjectProperty,
         linkml:SlotDefinition ;
@@ -1694,6 +330,1105 @@ schema:name a owl:ObjectProperty,
     skos:definition "A human-readable name for a thing" ;
     skos:exactMatch schema:name .
 
+<https://cmdoret.net/mtg_ontology/abilities/Action#add_mana> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Action> ;
+    rdfs:label "add_mana" .
+
+<https://cmdoret.net/mtg_ontology/abilities/Action#deal_damage> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Action> ;
+    rdfs:label "deal_damage" .
+
+<https://cmdoret.net/mtg_ontology/abilities/ActionConstraint#may> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/ActionConstraint> ;
+    rdfs:label "may" .
+
+<https://cmdoret.net/mtg_ontology/abilities/ActionConstraint#may_not> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/ActionConstraint> ;
+    rdfs:label "may_not" .
+
+<https://cmdoret.net/mtg_ontology/abilities/ActionConstraint#must> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/ActionConstraint> ;
+    rdfs:label "must" .
+
+<https://cmdoret.net/mtg_ontology/abilities/ActionConstraint#must_not> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/ActionConstraint> ;
+    rdfs:label "must_not" .
+
+<https://cmdoret.net/mtg_ontology/abilities/ActivatedAbility> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "ActivatedAbility" ;
+    rdfs:seeAlso "mtg:Activated_ability" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://cmdoret.net/mtg_ontology/abilities/Condition> ;
+            owl:onProperty mtgo:condition ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty mtgo:cost ],
+        <https://cmdoret.net/mtg_ontology/abilities/Ability> ;
+    skos:definition "A card ability which can be activated for a cost." ;
+    skos:exactMatch mtgo:ActivatedAbility .
+
+<https://cmdoret.net/mtg_ontology/abilities/Counter> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Counter" ;
+    rdfs:seeAlso "mtg:counters" ;
+    rdfs:subClassOf mtgo:Thing ;
+    skos:definition "A counter, such as a +1/+1 counter." ;
+    skos:exactMatch mtgo:Counter .
+
+<https://cmdoret.net/mtg_ontology/abilities/Player#active_player> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Player> ;
+    rdfs:label "active_player" .
+
+<https://cmdoret.net/mtg_ontology/abilities/Player#attacking_player> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Player> ;
+    rdfs:label "attacking_player" .
+
+<https://cmdoret.net/mtg_ontology/abilities/Player#controller> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Player> ;
+    rdfs:label "controller" .
+
+<https://cmdoret.net/mtg_ontology/abilities/Player#defending_player> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Player> ;
+    rdfs:label "defending_player" .
+
+<https://cmdoret.net/mtg_ontology/abilities/Player#non_active_player> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Player> ;
+    rdfs:label "non_active_player" .
+
+<https://cmdoret.net/mtg_ontology/abilities/Player#opponent> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Player> ;
+    rdfs:label "opponent" .
+
+<https://cmdoret.net/mtg_ontology/abilities/Player#opponents> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Player> ;
+    rdfs:label "opponents" .
+
+<https://cmdoret.net/mtg_ontology/abilities/Player#owner> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Player> ;
+    rdfs:label "owner" .
+
+<https://cmdoret.net/mtg_ontology/abilities/Player#players> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Player> ;
+    rdfs:label "players" .
+
+<https://cmdoret.net/mtg_ontology/abilities/Player#you> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Player> ;
+    rdfs:label "you" .
+
+<https://cmdoret.net/mtg_ontology/abilities/Specification> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Specification" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty mtgo:constraint ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass mtgo:NamedThing ;
+            owl:onProperty mtgo:union ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass mtgo:NamedThing ;
+            owl:onProperty mtgo:intersection ],
+        mtgo:Thing ;
+    skos:definition "A specification for a thing." ;
+    skos:exactMatch mtgo:Specification .
+
+<https://cmdoret.net/mtg_ontology/abilities/TimeConstraint#after> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/TimeConstraint> ;
+    rdfs:label "after" .
+
+<https://cmdoret.net/mtg_ontology/abilities/TimeConstraint#before> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/TimeConstraint> ;
+    rdfs:label "before" .
+
+<https://cmdoret.net/mtg_ontology/abilities/TimeConstraint#during> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/TimeConstraint> ;
+    rdfs:label "during" .
+
+<https://cmdoret.net/mtg_ontology/abilities/TimeConstraint#each> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/TimeConstraint> ;
+    rdfs:label "each" .
+
+<https://cmdoret.net/mtg_ontology/abilities/TimeConstraint#next> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/TimeConstraint> ;
+    rdfs:label "next" .
+
+<https://cmdoret.net/mtg_ontology/abilities/TimeConstraint#previous> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/TimeConstraint> ;
+    rdfs:label "previous" .
+
+<https://cmdoret.net/mtg_ontology/abilities/TimeConstraint#this> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/TimeConstraint> ;
+    rdfs:label "this" .
+
+<https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#between> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint> ;
+    rdfs:label "between" .
+
+<https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#equal> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint> ;
+    rdfs:label "equal" .
+
+<https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#greater_than> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint> ;
+    rdfs:label "greater_than" .
+
+<https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#greater_than_or_equal> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint> ;
+    rdfs:label "greater_than_or_equal" .
+
+<https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#is> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint> ;
+    rdfs:label "is" .
+
+<https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#is_not> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint> ;
+    rdfs:label "is_not" .
+
+<https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#is_not_one_of> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint> ;
+    rdfs:label "is_not_one_of" .
+
+<https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#is_one_of> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint> ;
+    rdfs:label "is_one_of" .
+
+<https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#less_than> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint> ;
+    rdfs:label "less_than" .
+
+<https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#less_than_or_equal> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint> ;
+    rdfs:label "less_than_or_equal" .
+
+<https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#not_between> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint> ;
+    rdfs:label "not_between" .
+
+<https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#not_equal> a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint> ;
+    rdfs:label "not_equal" .
+
+mtgo:action a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "action" ;
+    rdfs:range <https://cmdoret.net/mtg_ontology/abilities/Action> ;
+    skos:definition "An action taken by a player or card." ;
+    skos:exactMatch mtgo:action .
+
+mtgo:action_spec a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "action_spec" ;
+    rdfs:range <https://cmdoret.net/mtg_ontology/abilities/ActionSpecification> ;
+    skos:definition "A specification of an action." ;
+    skos:exactMatch mtgo:action_spec .
+
+<https://cmdoret.net/mtg_ontology/cards/AnyArtifact> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "AnyArtifact" ;
+    rdfs:subClassOf <https://cmdoret.net/mtg_ontology/cards/Permanent> ;
+    skos:definition "A permanent representing a magical item, animated construct, or other objects and devices." ;
+    skos:exactMatch mtgo:AnyArtifact .
+
+<https://cmdoret.net/mtg_ontology/cards/AnyCreature> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "AnyCreature" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Boolean ;
+            owl:onProperty mtgo:variable_power ],
+        [ a owl:Restriction ;
+            owl:onClass linkml:Integer ;
+            owl:onProperty mtgo:toughness ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Boolean ;
+            owl:onProperty mtgo:variable_toughness ],
+        [ a owl:Restriction ;
+            owl:onClass linkml:Integer ;
+            owl:onProperty mtgo:power ;
+            owl:qualifiedCardinality 1 ],
+        <https://cmdoret.net/mtg_ontology/cards/Permanent> ;
+    skos:definition "A creature that can be summoned to the battlefield." ;
+    skos:exactMatch mtgo:AnyCreature .
+
+<https://cmdoret.net/mtg_ontology/cards/AnyEnchantment> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "AnyEnchantment" ;
+    rdfs:subClassOf <https://cmdoret.net/mtg_ontology/cards/Permanent> ;
+    skos:definition "A permanent which applies persistent magical effects." ;
+    skos:exactMatch mtgo:AnyEnchantment .
+
+mtgo:converted_mana_cost a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "converted_mana_cost" ;
+    rdfs:range linkml:Integer ;
+    skos:definition "The total mana cost for a card or ability, summed across all colors." ;
+    skos:exactMatch mtgo:converted_mana_cost .
+
+mtgo:cost a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "cost" ;
+    rdfs:range linkml:String ;
+    skos:definition "A cost to play a card or ability." ;
+    skos:exactMatch mtgo:cost .
+
+mtgo:effect a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "effect" ;
+    rdfs:range <https://cmdoret.net/mtg_ontology/abilities/Condition> ;
+    skos:definition "The effect of an ability." ;
+    skos:exactMatch mtgo:effect .
+
+mtgo:mana_cost a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "mana_cost" ;
+    rdfs:range <https://cmdoret.net/mtg_ontology/cards/ManaCost> ;
+    skos:definition "A mana cost for a card or ability." ;
+    skos:exactMatch mtgo:mana_cost .
+
+mtgo:player a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "player" ;
+    rdfs:range <https://cmdoret.net/mtg_ontology/abilities/Player> ;
+    skos:definition "A player." ;
+    skos:exactMatch mtgo:player .
+
+mtgo:power_modifier a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "power_modifier" ;
+    rdfs:range linkml:Integer ;
+    skos:definition "A numeric modifier to apply to a creature's power." ;
+    skos:exactMatch mtgo:power_modifier .
+
+mtgo:rarity a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "rarity" ;
+    rdfs:range <https://cmdoret.net/mtg_ontology/cards/Rarity> ;
+    skos:definition "An ability associated with a card." ;
+    skos:exactMatch mtgo:rarity .
+
+mtgo:rules_text a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "rules_text" ;
+    rdfs:range linkml:String ;
+    skos:definition "The text describing what an ability does." ;
+    skos:exactMatch mtgo:rules_text .
+
+mtgo:source a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "source" ;
+    rdfs:range linkml:String ;
+    skos:definition "The entity responsible for an action." ;
+    skos:exactMatch mtgo:source .
+
+mtgo:target a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "target" ;
+    rdfs:range linkml:String ;
+    skos:definition "The entity targeted by an action or constraint." ;
+    skos:exactMatch mtgo:target .
+
+mtgo:time_spec a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "time_spec" ;
+    rdfs:range <https://cmdoret.net/mtg_ontology/abilities/TimeSpecification> ;
+    skos:definition "A specification of the time of an event." ;
+    skos:exactMatch mtgo:time_spec .
+
+mtgo:toughness_modifier a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "toughness_modifier" ;
+    rdfs:range linkml:Integer ;
+    skos:definition "A numeric modifier to apply to a creature's toughness." ;
+    skos:exactMatch mtgo:toughness_modifier .
+
+mtgo:turn_phase a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "turn_phase" ;
+    rdfs:range <https://cmdoret.net/mtg_ontology/abilities/TurnPhase> ;
+    skos:definition "A phase of the game." ;
+    skos:exactMatch mtgo:turn_phase .
+
+mtgo:unit a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "unit" ;
+    rdfs:range linkml:String ;
+    skos:definition "The type of quantity described by a value." ;
+    skos:exactMatch mtgo:unit .
+
+mtgo:variable_cost a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "variable_cost" ;
+    rdfs:range linkml:Boolean ;
+    rdfs:seeAlso "mtg:x" ;
+    skos:definition "Whether a cost is variable. Denoted as X on cards." ;
+    skos:exactMatch mtgo:variable_cost .
+
+mtg:activate a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Action> ;
+    rdfs:label "activate" .
+
+mtg:attach a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Action> ;
+    rdfs:label "attach" .
+
+mtg:beggining_phase a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/TurnPhase> ;
+    rdfs:label "beginning_phase" .
+
+mtg:beginning_of_combat_step a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/TurnPhase> ;
+    rdfs:label "beginning_of_combat_step" .
+
+mtg:black a owl:Class,
+        <https://cmdoret.net/mtg_ontology/cards/Color> ;
+    rdfs:label "black" .
+
+mtg:blue a owl:Class,
+        <https://cmdoret.net/mtg_ontology/cards/Color> ;
+    rdfs:label "blue" .
+
+mtg:cast a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Action> ;
+    rdfs:label "cast" .
+
+mtg:cleanup_step a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/TurnPhase> ;
+    rdfs:label "cleanup_step" .
+
+mtg:colorless a owl:Class,
+        <https://cmdoret.net/mtg_ontology/cards/Color> ;
+    rdfs:label "colorless" .
+
+mtg:combat_damage_step a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/TurnPhase> ;
+    rdfs:label "combat_damage_step" .
+
+mtg:combat_phase a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/TurnPhase> ;
+    rdfs:label "combat_phase" .
+
+mtg:common a owl:Class,
+        <https://cmdoret.net/mtg_ontology/cards/Rarity> ;
+    rdfs:label "common" .
+
+mtg:control_and_ownership a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Action> ;
+    rdfs:label "control" .
+
+mtg:counter a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Action> ;
+    rdfs:label "counter" .
+
+mtg:create a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Action> ;
+    rdfs:label "create" .
+
+mtg:deathtouch a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/AbilityKeyword> ;
+    rdfs:label "deathtouch" .
+
+mtg:declare_attackers_step a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/TurnPhase> ;
+    rdfs:label "declare_attackers_step" .
+
+mtg:declare_blockers_step a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/TurnPhase> ;
+    rdfs:label "declare_blockers_step" .
+
+mtg:defender a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/AbilityKeyword> ;
+    rdfs:label "defender" .
+
+mtg:destroy a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Action> ;
+    rdfs:label "destroy" .
+
+mtg:discard a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Action> ;
+    rdfs:label "discard" .
+
+mtg:double_strike a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/AbilityKeyword> ;
+    rdfs:label "double_strike" .
+
+mtg:draw a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Action> ;
+    rdfs:label "draw" .
+
+mtg:draw_step a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/TurnPhase> ;
+    rdfs:label "draw_step" .
+
+mtg:enchant a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/AbilityKeyword> ;
+    rdfs:label "enchant" .
+
+mtg:end_of_combat_step a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/TurnPhase> ;
+    rdfs:label "end_of_combat_step" .
+
+mtg:ending_phase a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/TurnPhase> ;
+    rdfs:label "ending_phase" .
+
+mtg:equip a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/AbilityKeyword> ;
+    rdfs:label "equip" ;
+    skos:editorialNote "activated" .
+
+mtg:exchange a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Action> ;
+    rdfs:label "exchange" .
+
+mtg:exile a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Action> ;
+    rdfs:label "exile" .
+
+mtg:fight a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Action> ;
+    rdfs:label "fight" .
+
+mtg:first_strike a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/AbilityKeyword> ;
+    rdfs:label "first_strike" .
+
+mtg:flash a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/AbilityKeyword> ;
+    rdfs:label "flash" ;
+    skos:editorialNote "activated" .
+
+mtg:flying a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/AbilityKeyword> ;
+    rdfs:label "flying" .
+
+mtg:green a owl:Class,
+        <https://cmdoret.net/mtg_ontology/cards/Color> ;
+    rdfs:label "green" .
+
+mtg:haste a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/AbilityKeyword> ;
+    rdfs:label "haste" .
+
+mtg:hexproof a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/AbilityKeyword> ;
+    rdfs:label "hexproof" .
+
+mtg:indestructible a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/AbilityKeyword> ;
+    rdfs:label "indestructible" .
+
+mtg:lifelink a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/AbilityKeyword> ;
+    rdfs:label "lifelink" .
+
+mtg:menace a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/AbilityKeyword> ;
+    rdfs:label "menace" .
+
+mtg:mill a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Action> ;
+    rdfs:label "mill" .
+
+mtg:mythic_rare a owl:Class,
+        <https://cmdoret.net/mtg_ontology/cards/Rarity> ;
+    rdfs:label "mythic" .
+
+mtg:play a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Action> ;
+    rdfs:label "play" .
+
+mtg:protection a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/AbilityKeyword> ;
+    rdfs:label "protection" .
+
+mtg:rare a owl:Class,
+        <https://cmdoret.net/mtg_ontology/cards/Rarity> ;
+    rdfs:label "rare" .
+
+mtg:reach a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/AbilityKeyword> ;
+    rdfs:label "reach" .
+
+mtg:red a owl:Class,
+        <https://cmdoret.net/mtg_ontology/cards/Color> ;
+    rdfs:label "red" .
+
+mtg:reveal a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Action> ;
+    rdfs:label "reveal" .
+
+mtg:sacrifice a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Action> ;
+    rdfs:label "sacrifice" .
+
+mtg:scry a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Action> ;
+    rdfs:label "scry" .
+
+mtg:search a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Action> ;
+    rdfs:label "search" .
+
+mtg:shuffle a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Action> ;
+    rdfs:label "shuffle" .
+
+mtg:tap a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Action> ;
+    rdfs:label "tap" .
+
+mtg:trample a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/AbilityKeyword> ;
+    rdfs:label "trample" .
+
+mtg:turn a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/TurnPhase> ;
+    rdfs:label "turn" .
+
+mtg:uncommon a owl:Class,
+        <https://cmdoret.net/mtg_ontology/cards/Rarity> ;
+    rdfs:label "uncommon" .
+
+mtg:untap a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/Action> ;
+    rdfs:label "untap" .
+
+mtg:untap_step a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/TurnPhase> ;
+    rdfs:label "untap_step" .
+
+mtg:upkeep_step a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/TurnPhase> ;
+    rdfs:label "upkeep_step" .
+
+mtg:vigilance a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/AbilityKeyword> ;
+    rdfs:label "vigilance" .
+
+mtg:ward a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/AbilityKeyword> ;
+    rdfs:label "ward" .
+
+mtg:white a owl:Class,
+        <https://cmdoret.net/mtg_ontology/cards/Color> ;
+    rdfs:label "white" .
+
+schema:identifier a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "id" ;
+    rdfs:range linkml:Uriorcurie ;
+    skos:definition "A unique identifier for a thing" ;
+    skos:exactMatch schema:identifier .
+
+mtgo:ability a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "ability" ;
+    rdfs:range <https://cmdoret.net/mtg_ontology/abilities/Ability> ;
+    skos:definition "An ability associated with a card." ;
+    skos:exactMatch mtgo:ability .
+
+mtgo:ability_keyword a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "ability_keyword" ;
+    rdfs:range linkml:String ;
+    skos:definition "An ability keyword." ;
+    skos:exactMatch mtgo:ability_keyword .
+
+mtgo:artist a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "artist" ;
+    rdfs:range linkml:String ;
+    skos:definition "The artist who drew a card's illustration." ;
+    skos:exactMatch mtgo:artist .
+
+mtgo:card_set a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "card_set" ;
+    rdfs:range linkml:String ;
+    skos:definition "A pool of cards released together and designed for the same play environment." ;
+    skos:exactMatch mtgo:card_set .
+
+mtgo:card_subtype a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "card_subtype" ;
+    rdfs:range linkml:String ;
+    skos:definition "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line." ;
+    skos:exactMatch mtgo:card_subtype .
+
+mtgo:card_supertype a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "card_supertype" ;
+    rdfs:range linkml:String ;
+    skos:definition "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type." ;
+    skos:exactMatch mtgo:card_supertype .
+
+mtgo:card_type a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "card_type" ;
+    rdfs:range linkml:String ;
+    skos:definition "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." ;
+    skos:exactMatch mtgo:card_type .
+
+<https://cmdoret.net/mtg_ontology/cards/Token> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Token" ;
+    rdfs:seeAlso "mtg:Token" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom <https://cmdoret.net/mtg_ontology/abilities/Ability> ;
+            owl:onProperty mtgo:ability ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty mtgo:flavor_text ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty mtgo:card_set ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty mtgo:oracle_text ],
+        [ a owl:Restriction ;
+            owl:onClass linkml:String ;
+            owl:onProperty mtgo:card_type ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:onClass linkml:String ;
+            owl:onProperty mtgo:type_line ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty mtgo:artist ],
+        [ a owl:Class ;
+            owl:intersectionOf ( [ a owl:Restriction ;
+                        owl:allValuesFrom <https://cmdoret.net/mtg_ontology/cards/Color> ;
+                        owl:onProperty mtgo:color ] [ a owl:Restriction ;
+                        owl:onProperty mtgo:color ;
+                        owl:someValuesFrom <https://cmdoret.net/mtg_ontology/cards/Color> ] ) ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty mtgo:card_supertype ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty mtgo:card_subtype ],
+        <https://cmdoret.net/mtg_ontology/cards/Permanent> ;
+    skos:definition "A permanent that is not represented by a regular card and does not have a casting cost." ;
+    skos:exactMatch mtgo:Token .
+
+mtgo:condition a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "condition" ;
+    rdfs:range <https://cmdoret.net/mtg_ontology/abilities/Condition> ;
+    skos:definition "A condition required for an activation." ;
+    skos:exactMatch mtgo:condition .
+
+mtgo:flavor_text a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "flavor_text" ;
+    rdfs:range linkml:String ;
+    skos:definition "The lore text at the bottom of a card." ;
+    skos:exactMatch mtgo:flavor_text .
+
+mtgo:hybrid a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "hybrid" ;
+    rdfs:range linkml:Boolean ;
+    rdfs:seeAlso "mtg:hybrid_mana" ;
+    skos:definition "A hybrid mana cost can be paid with 1 mana of either of its component colors." ;
+    skos:exactMatch mtgo:hybrid .
+
+mtgo:oracle_text a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "oracle_text" ;
+    rdfs:range linkml:String ;
+    skos:definition "The official wording for the card effects." ;
+    skos:exactMatch mtgo:oracle_text .
+
+mtgo:phyrexian a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "phyrexian" ;
+    rdfs:range linkml:Boolean ;
+    rdfs:seeAlso "mtg:phyrexian_mana" ;
+    skos:definition "A phyrexian mana cost can be paid with either 2 life or 1 mana of its component color(s)." ;
+    skos:exactMatch mtgo:phyrexian .
+
+mtgo:snow a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "snow" ;
+    rdfs:range linkml:Boolean ;
+    rdfs:seeAlso "mtg:snow" ;
+    skos:definition "A snow mana cost can be paid with a snow source, regardless of its color." ;
+    skos:exactMatch mtgo:snow .
+
+mtgo:type_line a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "type_line" ;
+    rdfs:range linkml:String ;
+    skos:definition "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." ;
+    skos:exactMatch mtgo:type_line .
+
+mtgo:value a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "value" ;
+    rdfs:range linkml:Integer ;
+    skos:definition "The numeric part of a quantitative value." ;
+    skos:exactMatch mtgo:value .
+
+mtgo:value_spec a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "value_spec" ;
+    rdfs:range <https://cmdoret.net/mtg_ontology/abilities/ValueSpecification> ;
+    skos:definition "A specification for the value of a property." ;
+    skos:exactMatch mtgo:value_spec .
+
+<https://cmdoret.net/mtg_ontology/cards/ManaCost> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "ManaCost" ;
+    rdfs:seeAlso "mtg:Mana_cost" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Boolean ;
+            owl:onProperty mtgo:hybrid ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Boolean ;
+            owl:onProperty mtgo:snow ],
+        [ a owl:Class ;
+            owl:intersectionOf ( [ a owl:Restriction ;
+                        owl:allValuesFrom <https://cmdoret.net/mtg_ontology/cards/Color> ;
+                        owl:onProperty mtgo:color ] [ a owl:Restriction ;
+                        owl:onProperty mtgo:color ;
+                        owl:someValuesFrom <https://cmdoret.net/mtg_ontology/cards/Color> ] ) ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Boolean ;
+            owl:onProperty mtgo:phyrexian ],
+        <https://cmdoret.net/mtg_ontology/cards/Cost>,
+        <https://cmdoret.net/mtg_ontology/cards/Mana> ;
+    skos:definition "The mana cost of a card or ability." ;
+    skos:exactMatch mtgo:ManaCost .
+
+mtgo:power a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "power" ;
+    rdfs:range linkml:Integer ;
+    skos:definition "The amount of damage dealt in combat. This is the first number in the lower right corner of a creature card." ;
+    skos:exactMatch mtgo:power .
+
+mtgo:toughness a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "toughness" ;
+    rdfs:range linkml:Integer ;
+    skos:definition "The amount of damage needed to destroy a creature. This is the second number in the lower right corner of a creature card." ;
+    skos:exactMatch mtgo:toughness .
+
+mtgo:variable_power a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "variable_power" ;
+    rdfs:range linkml:Boolean ;
+    skos:definition "Whether a creature's power is variable. Denoted as * on cards." ;
+    skos:exactMatch mtgo:variable_power .
+
+mtgo:variable_toughness a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "variable_toughness" ;
+    rdfs:range linkml:Boolean ;
+    skos:definition "Whether a creature's toughness is variable. Denoted as * on cards." ;
+    skos:exactMatch mtgo:variable_toughness .
+
+mtg:main_phase a owl:Class,
+        <https://cmdoret.net/mtg_ontology/abilities/TurnPhase> ;
+    rdfs:label "main_phase",
+        "post_combat_main_phase",
+        "pre_combat_main_phase" .
+
+<https://cmdoret.net/mtg_ontology/abilities/ActionConstraint> a owl:Class,
+        linkml:EnumDefinition ;
+    rdfs:label "ActionConstraint" ;
+    owl:unionOf ( <https://cmdoret.net/mtg_ontology/abilities/ActionConstraint#must> <https://cmdoret.net/mtg_ontology/abilities/ActionConstraint#may> <https://cmdoret.net/mtg_ontology/abilities/ActionConstraint#must_not> <https://cmdoret.net/mtg_ontology/abilities/ActionConstraint#may_not> ) ;
+    linkml:permissible_values <https://cmdoret.net/mtg_ontology/abilities/ActionConstraint#may>,
+        <https://cmdoret.net/mtg_ontology/abilities/ActionConstraint#may_not>,
+        <https://cmdoret.net/mtg_ontology/abilities/ActionConstraint#must>,
+        <https://cmdoret.net/mtg_ontology/abilities/ActionConstraint#must_not> .
+
+<https://cmdoret.net/mtg_ontology/cards/Permanent> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Permanent" ;
+    rdfs:seeAlso "mtg:Permanent" ;
+    rdfs:subClassOf mtgo:NamedThing ;
+    skos:definition "A card or token that can be put onto the battlefield." ;
+    skos:exactMatch mtgo:Permanent .
+
+mtgo:constraint a owl:ObjectProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "constraint" ;
+    rdfs:range linkml:String ;
+    skos:definition "A constraint on a time, quantity or action." ;
+    skos:exactMatch mtgo:constraint .
+
+mtgo:intersection a owl:ObjectProperty,
+        owl:SymmetricProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "intersection" ;
+    rdfs:range mtgo:NamedThing ;
+    skos:definition "A conjunction of two objects (a and b)." .
+
+mtgo:union a owl:ObjectProperty,
+        owl:SymmetricProperty,
+        linkml:SlotDefinition ;
+    rdfs:label "union" ;
+    rdfs:range mtgo:NamedThing ;
+    skos:definition "A disjunction of two objects (a or b)." .
+
+<https://cmdoret.net/mtg_ontology/abilities/Ability> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Ability" ;
+    rdfs:seeAlso "mtg:Ability" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty mtgo:ability_keyword ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://cmdoret.net/mtg_ontology/abilities/Condition> ;
+            owl:onProperty mtgo:effect ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty mtgo:rules_text ],
+        mtgo:Thing ;
+    skos:definition "A card ability, activated, triggered or static." ;
+    skos:exactMatch mtgo:Ability .
+
+<https://cmdoret.net/mtg_ontology/abilities/ActionSpecification> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "ActionSpecification" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://cmdoret.net/mtg_ontology/abilities/ActionSpecification> ;
+            owl:onProperty mtgo:union ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://cmdoret.net/mtg_ontology/abilities/ActionSpecification> ;
+            owl:onProperty mtgo:intersection ],
+        [ a owl:Restriction ;
+            owl:onClass <https://cmdoret.net/mtg_ontology/abilities/Action> ;
+            owl:onProperty mtgo:action ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://cmdoret.net/mtg_ontology/abilities/ActionConstraint> ;
+            owl:onProperty mtgo:constraint ],
+        <https://cmdoret.net/mtg_ontology/abilities/Specification> ;
+    skos:definition "A specification for an action." ;
+    skos:exactMatch mtgo:ActionSpecification .
+
+<https://cmdoret.net/mtg_ontology/abilities/TimeSpecification> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "TimeSpecification" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://cmdoret.net/mtg_ontology/abilities/TimeSpecification> ;
+            owl:onProperty mtgo:union ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://cmdoret.net/mtg_ontology/abilities/TimeConstraint> ;
+            owl:onProperty mtgo:constraint ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://cmdoret.net/mtg_ontology/abilities/Player> ;
+            owl:onProperty mtgo:player ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://cmdoret.net/mtg_ontology/abilities/TurnPhase> ;
+            owl:onProperty mtgo:turn_phase ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://cmdoret.net/mtg_ontology/abilities/TimeSpecification> ;
+            owl:onProperty mtgo:intersection ],
+        mtgo:Thing ;
+    skos:definition "A specification for a time." ;
+    skos:exactMatch mtgo:TimeSpecification .
+
+<https://cmdoret.net/mtg_ontology/cards/Cost> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Cost" ;
+    rdfs:seeAlso "mtg:Cost" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://cmdoret.net/mtg_ontology/cards/Cost> ;
+            owl:onProperty mtgo:union ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://cmdoret.net/mtg_ontology/cards/Cost> ;
+            owl:onProperty mtgo:intersection ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Integer ;
+            owl:onProperty mtgo:value ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Boolean ;
+            owl:onProperty mtgo:variable_cost ],
+        mtgo:Thing ;
+    skos:definition "The cost of a card or ability." ;
+    skos:exactMatch mtgo:Cost .
+
+<https://cmdoret.net/mtg_ontology/cards/Rarity> a owl:Class,
+        linkml:EnumDefinition ;
+    rdfs:label "Rarity" ;
+    owl:unionOf ( mtg:common mtg:uncommon mtg:rare mtg:mythic_rare ) ;
+    linkml:permissible_values mtg:common,
+        mtg:mythic_rare,
+        mtg:rare,
+        mtg:uncommon .
+
+mtgo:NamedThing a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "NamedThing" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty schema:description ],
+        [ a owl:Restriction ;
+            owl:onClass linkml:Uriorcurie ;
+            owl:onProperty schema:identifier ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:onClass linkml:String ;
+            owl:onProperty schema:name ;
+            owl:qualifiedCardinality 1 ] ;
+    skos:definition "A generic grouping for any identifiable entity" ;
+    skos:exactMatch schema:Thing .
+
+<https://cmdoret.net/mtg_ontology/abilities/Condition> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Condition" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom <https://cmdoret.net/mtg_ontology/abilities/ValueSpecification> ;
+            owl:onProperty mtgo:value_spec ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://cmdoret.net/mtg_ontology/abilities/ActionSpecification> ;
+            owl:onProperty mtgo:action_spec ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://cmdoret.net/mtg_ontology/abilities/TimeSpecification> ;
+            owl:onProperty mtgo:time_spec ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty mtgo:target ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty mtgo:source ],
+        mtgo:Thing ;
+    skos:definition "A condition expressed as constraints." ;
+    skos:exactMatch mtgo:Condition .
+
+<https://cmdoret.net/mtg_ontology/abilities/ValueSpecification> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "ValueSpecification" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty mtgo:unit ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://cmdoret.net/mtg_ontology/abilities/ValueSpecification> ;
+            owl:onProperty mtgo:union ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Integer ;
+            owl:onProperty mtgo:value ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://cmdoret.net/mtg_ontology/abilities/ValueSpecification> ;
+            owl:onProperty mtgo:intersection ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint> ;
+            owl:onProperty mtgo:constraint ],
+        <https://cmdoret.net/mtg_ontology/abilities/Specification> ;
+    skos:definition "A specification for a quantitative value." ;
+    skos:exactMatch mtgo:ValueSpecification .
+
+<https://cmdoret.net/mtg_ontology/abilities/TimeConstraint> a owl:Class,
+        linkml:EnumDefinition ;
+    rdfs:label "TimeConstraint" ;
+    owl:unionOf ( <https://cmdoret.net/mtg_ontology/abilities/TimeConstraint#before> <https://cmdoret.net/mtg_ontology/abilities/TimeConstraint#after> <https://cmdoret.net/mtg_ontology/abilities/TimeConstraint#during> <https://cmdoret.net/mtg_ontology/abilities/TimeConstraint#next> <https://cmdoret.net/mtg_ontology/abilities/TimeConstraint#previous> <https://cmdoret.net/mtg_ontology/abilities/TimeConstraint#this> <https://cmdoret.net/mtg_ontology/abilities/TimeConstraint#each> ) ;
+    linkml:permissible_values <https://cmdoret.net/mtg_ontology/abilities/TimeConstraint#after>,
+        <https://cmdoret.net/mtg_ontology/abilities/TimeConstraint#before>,
+        <https://cmdoret.net/mtg_ontology/abilities/TimeConstraint#during>,
+        <https://cmdoret.net/mtg_ontology/abilities/TimeConstraint#each>,
+        <https://cmdoret.net/mtg_ontology/abilities/TimeConstraint#next>,
+        <https://cmdoret.net/mtg_ontology/abilities/TimeConstraint#previous>,
+        <https://cmdoret.net/mtg_ontology/abilities/TimeConstraint#this> .
+
+<https://cmdoret.net/mtg_ontology/cards/Card> a owl:Class,
+        linkml:ClassDefinition ;
+    rdfs:label "Card" ;
+    rdfs:seeAlso "mtg:Card" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty mtgo:artist ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://cmdoret.net/mtg_ontology/abilities/Ability> ;
+            owl:onProperty mtgo:ability ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty mtgo:flavor_text ],
+        [ a owl:Restriction ;
+            owl:onClass linkml:String ;
+            owl:onProperty mtgo:card_type ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom <https://cmdoret.net/mtg_ontology/cards/ManaCost> ;
+            owl:onProperty mtgo:mana_cost ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Integer ;
+            owl:onProperty mtgo:converted_mana_cost ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass <https://cmdoret.net/mtg_ontology/cards/Rarity> ;
+            owl:onProperty mtgo:rarity ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty mtgo:card_supertype ],
+        [ a owl:Restriction ;
+            owl:onClass linkml:String ;
+            owl:onProperty mtgo:type_line ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty mtgo:oracle_text ],
+        [ a owl:Class ;
+            owl:intersectionOf ( [ a owl:Restriction ;
+                        owl:allValuesFrom <https://cmdoret.net/mtg_ontology/cards/Color> ;
+                        owl:onProperty mtgo:color ] [ a owl:Restriction ;
+                        owl:onProperty mtgo:color ;
+                        owl:someValuesFrom <https://cmdoret.net/mtg_ontology/cards/Color> ] ) ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty mtgo:card_subtype ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty mtgo:card_set ],
+        mtgo:NamedThing ;
+    skos:definition "A card in the Magic The Gathering game." ;
+    skos:exactMatch mtgo:Card .
+
 mtgo:Thing a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "Thing" ;
@@ -1704,213 +1439,127 @@ mtgo:Thing a owl:Class,
     skos:definition "A generic grouping for any identifiable entity" ;
     skos:exactMatch schema:Thing .
 
-mtgoc:ability a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "ability" ;
-    rdfs:range mtgoa:Ability ;
-    skos:definition "An ability associated with a card." .
-
-mtgoc:artist a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "artist" ;
-    rdfs:range linkml:String ;
-    skos:definition "The artist who drew a card's illustration." .
-
-mtgoc:card_set a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "card_set" ;
-    rdfs:range linkml:String ;
-    skos:definition "A pool of cards released together and designed for the same play environment." .
-
-mtgoc:card_subtype a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "card_subtype" ;
-    rdfs:range linkml:String ;
-    skos:definition "The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears on the right of the type line." .
-
-mtgoc:card_supertype a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "card_supertype" ;
-    rdfs:range linkml:String ;
-    skos:definition "The supertype(s) of a card, such as Basic, Legendary or Snow. Appears on the left of the type line, before the type." .
-
-mtgoc:card_type a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "card_type" ;
-    rdfs:range linkml:String ;
-    skos:definition "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." .
-
-mtgoc:flavor_text a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "flavor_text" ;
-    rdfs:range linkml:String ;
-    skos:definition "The lore text at the bottom of a card." .
-
-mtgoc:oracle_text a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "oracle_text" ;
-    rdfs:range linkml:String ;
-    skos:definition "The official wording for the card effects." .
-
-mtgoc:type_line a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "type_line" ;
-    rdfs:range linkml:String ;
-    skos:definition "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable)." .
-
-mtgoc:Rarity a owl:Class,
-        linkml:EnumDefinition ;
-    rdfs:label "Rarity" ;
-    owl:unionOf ( <https://mtg.fandom.com/wiki/common> <https://mtg.fandom.com/wiki/uncommon> <https://mtg.fandom.com/wiki/rare> <https://mtg.fandom.com/wiki/mythic_rare> ) ;
-    linkml:permissible_values <https://mtg.fandom.com/wiki/common>,
-        <https://mtg.fandom.com/wiki/mythic_rare>,
-        <https://mtg.fandom.com/wiki/rare>,
-        <https://mtg.fandom.com/wiki/uncommon> .
-
-schema:identifier a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "id" ;
-    rdfs:range linkml:Uriorcurie ;
-    skos:definition "A unique identifier for a thing" ;
-    skos:exactMatch schema:identifier .
-
-mtgoa:Player a owl:Class,
-        linkml:EnumDefinition ;
-    rdfs:label "Player" ;
-    owl:unionOf ( <https://w3id.org/cmdoret/mtg-ontology/abilities/Player#you> <https://w3id.org/cmdoret/mtg-ontology/abilities/Player#active_player> <https://w3id.org/cmdoret/mtg-ontology/abilities/Player#non_active_player> <https://w3id.org/cmdoret/mtg-ontology/abilities/Player#defending_player> <https://w3id.org/cmdoret/mtg-ontology/abilities/Player#attacking_player> <https://w3id.org/cmdoret/mtg-ontology/abilities/Player#owner> <https://w3id.org/cmdoret/mtg-ontology/abilities/Player#controller> <https://w3id.org/cmdoret/mtg-ontology/abilities/Player#opponent> <https://w3id.org/cmdoret/mtg-ontology/abilities/Player#opponents> <https://w3id.org/cmdoret/mtg-ontology/abilities/Player#players> ) ;
-    linkml:permissible_values <https://w3id.org/cmdoret/mtg-ontology/abilities/Player#active_player>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/Player#attacking_player>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/Player#controller>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/Player#defending_player>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/Player#non_active_player>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/Player#opponent>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/Player#opponents>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/Player#owner>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/Player#players>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/Player#you> .
-
-mtgoa:Ability a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "Ability" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoa:ability_keyword ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgoa:Condition ;
-            owl:onProperty mtgoa:effect ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgoa:rules_text ],
-        mtgo:Thing ;
-    skos:definition "A card ability, activated, triggered or static." ;
-    skos:exactMatch <https://mtg.fandom.com/wiki/Ability> .
-
-mtgoa:ValueConstraint a owl:Class,
-        linkml:EnumDefinition ;
-    rdfs:label "ValueConstraint" ;
-    owl:unionOf ( <https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#equal> <https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#greater_than> <https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#less_than> <https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#greater_than_or_equal> <https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#less_than_or_equal> <https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#not_equal> <https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#between> <https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#not_between> <https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#is> <https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#is_not> <https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#is_one_of> <https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#is_not_one_of> ) ;
-    linkml:permissible_values <https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#between>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#equal>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#greater_than>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#greater_than_or_equal>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#is>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#is_not>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#is_not_one_of>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#is_one_of>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#less_than>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#less_than_or_equal>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#not_between>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/ValueConstraint#not_equal> .
-
-mtgoa:TurnPhase a owl:Class,
-        linkml:EnumDefinition ;
-    rdfs:label "TurnPhase" ;
-    owl:unionOf ( <https://mtg.fandom.com/wiki/beggining_phase> <https://mtg.fandom.com/wiki/untap_step> <https://mtg.fandom.com/wiki/upkeep_step> <https://mtg.fandom.com/wiki/draw_step> <https://mtg.fandom.com/wiki/main_phase> <https://mtg.fandom.com/wiki/main_phase> <https://mtg.fandom.com/wiki/main_phase> <https://mtg.fandom.com/wiki/combat_phase> <https://mtg.fandom.com/wiki/beginning_of_combat_step> <https://mtg.fandom.com/wiki/declare_attackers_step> <https://mtg.fandom.com/wiki/declare_blockers_step> <https://mtg.fandom.com/wiki/combat_damage_step> <https://mtg.fandom.com/wiki/end_of_combat_step> <https://mtg.fandom.com/wiki/ending_phase> <https://mtg.fandom.com/wiki/cleanup_step> <https://mtg.fandom.com/wiki/turn> ) ;
-    linkml:permissible_values <https://mtg.fandom.com/wiki/beggining_phase>,
-        <https://mtg.fandom.com/wiki/beginning_of_combat_step>,
-        <https://mtg.fandom.com/wiki/cleanup_step>,
-        <https://mtg.fandom.com/wiki/combat_damage_step>,
-        <https://mtg.fandom.com/wiki/combat_phase>,
-        <https://mtg.fandom.com/wiki/declare_attackers_step>,
-        <https://mtg.fandom.com/wiki/declare_blockers_step>,
-        <https://mtg.fandom.com/wiki/draw_step>,
-        <https://mtg.fandom.com/wiki/end_of_combat_step>,
-        <https://mtg.fandom.com/wiki/ending_phase>,
-        <https://mtg.fandom.com/wiki/main_phase>,
-        <https://mtg.fandom.com/wiki/turn>,
-        <https://mtg.fandom.com/wiki/untap_step>,
-        <https://mtg.fandom.com/wiki/upkeep_step> .
-
-mtgoa:AbilityKeyword a owl:Class,
-        linkml:EnumDefinition ;
-    rdfs:label "AbilityKeyword" ;
-    owl:unionOf ( <https://mtg.fandom.com/wiki/deathtouch> <https://mtg.fandom.com/wiki/defender> <https://mtg.fandom.com/wiki/double_strike> <https://mtg.fandom.com/wiki/enchant> <https://mtg.fandom.com/wiki/equip> <https://mtg.fandom.com/wiki/first_strike> <https://mtg.fandom.com/wiki/flash> <https://mtg.fandom.com/wiki/flying> <https://mtg.fandom.com/wiki/haste> <https://mtg.fandom.com/wiki/hexproof> <https://mtg.fandom.com/wiki/indestructible> <https://mtg.fandom.com/wiki/lifelink> <https://mtg.fandom.com/wiki/menace> <https://mtg.fandom.com/wiki/protection> <https://mtg.fandom.com/wiki/reach> <https://mtg.fandom.com/wiki/trample> <https://mtg.fandom.com/wiki/vigilance> <https://mtg.fandom.com/wiki/ward> ) ;
-    linkml:permissible_values <https://mtg.fandom.com/wiki/deathtouch>,
-        <https://mtg.fandom.com/wiki/defender>,
-        <https://mtg.fandom.com/wiki/double_strike>,
-        <https://mtg.fandom.com/wiki/enchant>,
-        <https://mtg.fandom.com/wiki/equip>,
-        <https://mtg.fandom.com/wiki/first_strike>,
-        <https://mtg.fandom.com/wiki/flash>,
-        <https://mtg.fandom.com/wiki/flying>,
-        <https://mtg.fandom.com/wiki/haste>,
-        <https://mtg.fandom.com/wiki/hexproof>,
-        <https://mtg.fandom.com/wiki/indestructible>,
-        <https://mtg.fandom.com/wiki/lifelink>,
-        <https://mtg.fandom.com/wiki/menace>,
-        <https://mtg.fandom.com/wiki/protection>,
-        <https://mtg.fandom.com/wiki/reach>,
-        <https://mtg.fandom.com/wiki/trample>,
-        <https://mtg.fandom.com/wiki/vigilance>,
-        <https://mtg.fandom.com/wiki/ward> .
-
-mtgoc:color a owl:ObjectProperty,
+mtgo:color a owl:ObjectProperty,
         linkml:SlotDefinition ;
     rdfs:label "color" ;
-    rdfs:range mtgoc:Color ;
-    skos:definition "The color of a card." .
+    rdfs:range <https://cmdoret.net/mtg_ontology/cards/Color> ;
+    skos:definition "The color of a card." ;
+    skos:exactMatch mtgo:color .
 
-mtgoa:Action a owl:Class,
+<https://cmdoret.net/mtg_ontology/abilities/Player> a owl:Class,
         linkml:EnumDefinition ;
-    rdfs:label "Action" ;
-    owl:unionOf ( <https://mtg.fandom.com/wiki/activate> <https://w3id.org/cmdoret/mtg-ontology/abilities/Action#add_mana> <https://mtg.fandom.com/wiki/attach> <https://mtg.fandom.com/wiki/cast> <https://mtg.fandom.com/wiki/control_and_ownership> <https://mtg.fandom.com/wiki/counter> <https://mtg.fandom.com/wiki/create> <https://w3id.org/cmdoret/mtg-ontology/abilities/Action#deal_damage> <https://mtg.fandom.com/wiki/destroy> <https://mtg.fandom.com/wiki/discard> <https://mtg.fandom.com/wiki/draw> <https://mtg.fandom.com/wiki/exchange> <https://mtg.fandom.com/wiki/exile> <https://mtg.fandom.com/wiki/fight> <https://mtg.fandom.com/wiki/mill> <https://mtg.fandom.com/wiki/play> <https://mtg.fandom.com/wiki/reveal> <https://mtg.fandom.com/wiki/sacrifice> <https://mtg.fandom.com/wiki/scry> <https://mtg.fandom.com/wiki/search> <https://mtg.fandom.com/wiki/shuffle> <https://mtg.fandom.com/wiki/tap> <https://mtg.fandom.com/wiki/untap> ) ;
-    linkml:permissible_values <https://mtg.fandom.com/wiki/activate>,
-        <https://mtg.fandom.com/wiki/attach>,
-        <https://mtg.fandom.com/wiki/cast>,
-        <https://mtg.fandom.com/wiki/control_and_ownership>,
-        <https://mtg.fandom.com/wiki/counter>,
-        <https://mtg.fandom.com/wiki/create>,
-        <https://mtg.fandom.com/wiki/destroy>,
-        <https://mtg.fandom.com/wiki/discard>,
-        <https://mtg.fandom.com/wiki/draw>,
-        <https://mtg.fandom.com/wiki/exchange>,
-        <https://mtg.fandom.com/wiki/exile>,
-        <https://mtg.fandom.com/wiki/fight>,
-        <https://mtg.fandom.com/wiki/mill>,
-        <https://mtg.fandom.com/wiki/play>,
-        <https://mtg.fandom.com/wiki/reveal>,
-        <https://mtg.fandom.com/wiki/sacrifice>,
-        <https://mtg.fandom.com/wiki/scry>,
-        <https://mtg.fandom.com/wiki/search>,
-        <https://mtg.fandom.com/wiki/shuffle>,
-        <https://mtg.fandom.com/wiki/tap>,
-        <https://mtg.fandom.com/wiki/untap>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/Action#add_mana>,
-        <https://w3id.org/cmdoret/mtg-ontology/abilities/Action#deal_damage> .
+    rdfs:label "Player" ;
+    owl:unionOf ( <https://cmdoret.net/mtg_ontology/abilities/Player#you> <https://cmdoret.net/mtg_ontology/abilities/Player#active_player> <https://cmdoret.net/mtg_ontology/abilities/Player#non_active_player> <https://cmdoret.net/mtg_ontology/abilities/Player#defending_player> <https://cmdoret.net/mtg_ontology/abilities/Player#attacking_player> <https://cmdoret.net/mtg_ontology/abilities/Player#owner> <https://cmdoret.net/mtg_ontology/abilities/Player#controller> <https://cmdoret.net/mtg_ontology/abilities/Player#opponent> <https://cmdoret.net/mtg_ontology/abilities/Player#opponents> <https://cmdoret.net/mtg_ontology/abilities/Player#players> ) ;
+    linkml:permissible_values <https://cmdoret.net/mtg_ontology/abilities/Player#active_player>,
+        <https://cmdoret.net/mtg_ontology/abilities/Player#attacking_player>,
+        <https://cmdoret.net/mtg_ontology/abilities/Player#controller>,
+        <https://cmdoret.net/mtg_ontology/abilities/Player#defending_player>,
+        <https://cmdoret.net/mtg_ontology/abilities/Player#non_active_player>,
+        <https://cmdoret.net/mtg_ontology/abilities/Player#opponent>,
+        <https://cmdoret.net/mtg_ontology/abilities/Player#opponents>,
+        <https://cmdoret.net/mtg_ontology/abilities/Player#owner>,
+        <https://cmdoret.net/mtg_ontology/abilities/Player#players>,
+        <https://cmdoret.net/mtg_ontology/abilities/Player#you> .
 
-mtgoc:Color a owl:Class,
+<https://cmdoret.net/mtg_ontology/abilities/ValueConstraint> a owl:Class,
+        linkml:EnumDefinition ;
+    rdfs:label "ValueConstraint" ;
+    owl:unionOf ( <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#equal> <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#greater_than> <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#less_than> <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#greater_than_or_equal> <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#less_than_or_equal> <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#not_equal> <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#between> <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#not_between> <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#is> <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#is_not> <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#is_one_of> <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#is_not_one_of> ) ;
+    linkml:permissible_values <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#between>,
+        <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#equal>,
+        <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#greater_than>,
+        <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#greater_than_or_equal>,
+        <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#is>,
+        <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#is_not>,
+        <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#is_not_one_of>,
+        <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#is_one_of>,
+        <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#less_than>,
+        <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#less_than_or_equal>,
+        <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#not_between>,
+        <https://cmdoret.net/mtg_ontology/abilities/ValueConstraint#not_equal> .
+
+<https://cmdoret.net/mtg_ontology/cards/Color> a owl:Class,
         linkml:EnumDefinition ;
     rdfs:label "Color" ;
-    owl:unionOf ( <https://mtg.fandom.com/wiki/black> <https://mtg.fandom.com/wiki/blue> <https://mtg.fandom.com/wiki/green> <https://mtg.fandom.com/wiki/red> <https://mtg.fandom.com/wiki/white> <https://mtg.fandom.com/wiki/colorless> ) ;
-    linkml:permissible_values <https://mtg.fandom.com/wiki/black>,
-        <https://mtg.fandom.com/wiki/blue>,
-        <https://mtg.fandom.com/wiki/colorless>,
-        <https://mtg.fandom.com/wiki/green>,
-        <https://mtg.fandom.com/wiki/red>,
-        <https://mtg.fandom.com/wiki/white> .
+    owl:unionOf ( mtg:black mtg:blue mtg:green mtg:red mtg:white mtg:colorless ) ;
+    linkml:permissible_values mtg:black,
+        mtg:blue,
+        mtg:colorless,
+        mtg:green,
+        mtg:red,
+        mtg:white .
+
+<https://cmdoret.net/mtg_ontology/abilities/TurnPhase> a owl:Class,
+        linkml:EnumDefinition ;
+    rdfs:label "TurnPhase" ;
+    owl:unionOf ( mtg:beggining_phase mtg:untap_step mtg:upkeep_step mtg:draw_step mtg:main_phase mtg:main_phase mtg:main_phase mtg:combat_phase mtg:beginning_of_combat_step mtg:declare_attackers_step mtg:declare_blockers_step mtg:combat_damage_step mtg:end_of_combat_step mtg:ending_phase mtg:cleanup_step mtg:turn ) ;
+    linkml:permissible_values mtg:beggining_phase,
+        mtg:beginning_of_combat_step,
+        mtg:cleanup_step,
+        mtg:combat_damage_step,
+        mtg:combat_phase,
+        mtg:declare_attackers_step,
+        mtg:declare_blockers_step,
+        mtg:draw_step,
+        mtg:end_of_combat_step,
+        mtg:ending_phase,
+        mtg:main_phase,
+        mtg:turn,
+        mtg:untap_step,
+        mtg:upkeep_step .
+
+<https://cmdoret.net/mtg_ontology/abilities/AbilityKeyword> a owl:Class,
+        linkml:EnumDefinition ;
+    rdfs:label "AbilityKeyword" ;
+    rdfs:seeAlso "mtg:Keyword_ability" ;
+    owl:unionOf ( mtg:deathtouch mtg:defender mtg:double_strike mtg:enchant mtg:equip mtg:first_strike mtg:flash mtg:flying mtg:haste mtg:hexproof mtg:indestructible mtg:lifelink mtg:menace mtg:protection mtg:reach mtg:trample mtg:vigilance mtg:ward ) ;
+    linkml:permissible_values mtg:deathtouch,
+        mtg:defender,
+        mtg:double_strike,
+        mtg:enchant,
+        mtg:equip,
+        mtg:first_strike,
+        mtg:flash,
+        mtg:flying,
+        mtg:haste,
+        mtg:hexproof,
+        mtg:indestructible,
+        mtg:lifelink,
+        mtg:menace,
+        mtg:protection,
+        mtg:reach,
+        mtg:trample,
+        mtg:vigilance,
+        mtg:ward .
+
+<https://cmdoret.net/mtg_ontology/abilities/Action> a owl:Class,
+        linkml:EnumDefinition ;
+    rdfs:label "Action" ;
+    rdfs:seeAlso "mtg:keyword_action" ;
+    owl:unionOf ( mtg:activate <https://cmdoret.net/mtg_ontology/abilities/Action#add_mana> mtg:attach mtg:cast mtg:control_and_ownership mtg:counter mtg:create <https://cmdoret.net/mtg_ontology/abilities/Action#deal_damage> mtg:destroy mtg:discard mtg:draw mtg:exchange mtg:exile mtg:fight mtg:mill mtg:play mtg:reveal mtg:sacrifice mtg:scry mtg:search mtg:shuffle mtg:tap mtg:untap ) ;
+    linkml:permissible_values <https://cmdoret.net/mtg_ontology/abilities/Action#add_mana>,
+        <https://cmdoret.net/mtg_ontology/abilities/Action#deal_damage>,
+        mtg:activate,
+        mtg:attach,
+        mtg:cast,
+        mtg:control_and_ownership,
+        mtg:counter,
+        mtg:create,
+        mtg:destroy,
+        mtg:discard,
+        mtg:draw,
+        mtg:exchange,
+        mtg:exile,
+        mtg:fight,
+        mtg:mill,
+        mtg:play,
+        mtg:reveal,
+        mtg:sacrifice,
+        mtg:scry,
+        mtg:search,
+        mtg:shuffle,
+        mtg:tap,
+        mtg:untap .
 
 linkml:ClassDefinition a owl:Class ;
     rdfs:label "class_definition" .

@@ -477,7 +477,7 @@
             "type": "object"
         },
         "Color": {
-            "description": "A color, such as Black, Blue, Red, Green, White or Colorless. enum_uri: mtg:color",
+            "description": "A color, such as Black, Blue, Red, Green, White or Colorless. see_also: mtg:color",
             "enum": [
                 "black",
                 "blue",
@@ -779,11 +779,11 @@
                 }
             },
             "required": [
+                "power",
+                "toughness",
                 "color",
                 "type_line",
                 "card_type",
-                "power",
-                "toughness",
                 "id",
                 "name"
             ],
@@ -876,11 +876,11 @@
                 }
             },
             "required": [
+                "power",
+                "toughness",
                 "color",
                 "type_line",
                 "card_type",
-                "power",
-                "toughness",
                 "id",
                 "name"
             ],
@@ -1513,7 +1513,7 @@
             "type": "object"
         },
         "Rarity": {
-            "description": "The rarity of the card, may be one of Common, Uncommon, Rare or Mythic. enum_uri: mtg:rarity",
+            "description": "The rarity of the card, may be one of Common, Uncommon, Rare or Mythic. see_also: mtg:rarity",
             "enum": [
                 "common",
                 "uncommon",
@@ -1981,7 +1981,7 @@
             "type": "object"
         }
     },
-    "$id": "https://w3id.org/cmdoret/mtg-ontology/",
+    "$id": "https://cmdoret.net/mtg_ontology/",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "additionalProperties": true,
     "metamodel_version": "1.7.0",
