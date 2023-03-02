@@ -1,17 +1,16 @@
-id: https://w3id.org/cmdoret/mtg-ontology/
+id: https://cmdoret.net/mtg_ontology/
 name: mtgo
 title: Magic The Gathering Ontology.
 description: |-
   An ontology describing Magic: The Gathering. It provides
-  the basic features needed to describe cards.
+  the concepts and relationships needed to represent cards,
+  their cost and abilities.
 license: GNU GPL v3.0
 see_also:
-  - https://cmdoret.github.io/mtg-ontology/abilities
+  - https://cmdoret.github.io/mtg_ontology/
 
 prefixes:
-  mtgo: https://w3id.org/cmdoret/mtg-ontology/
-  mtgoa: https://w3id.org/cmdoret/mtg-ontology/abilities/
-  mtgoc: https://w3id.org/cmdoret/mtg-ontology/cards/
+  mtgo: https://cmdoret.net/mtg_ontology/
   linkml: https://w3id.org/linkml/
   schema: http://schema.org/
   wiki: http://en.wikipedia.org/wiki/

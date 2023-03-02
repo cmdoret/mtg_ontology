@@ -1,20 +1,21 @@
-id: https://w3id.org/cmdoret/mtg-ontology/cards
-name: mtgo-cards
+id: https://cmdoret.net/mtg_ontology/
+name: mtgo
+title: Magic The Gathering Ontology.
 description: |-
-  An ontology describing Magic: The Gathering cards.
+  An ontology describing Magic: The Gathering. It provides
+  the concepts and relationships needed to represent cards,
+  their cost and abilities.
 license: GNU GPL v3.0
 see_also:
-  - https://cmdoret.github.io/mtg-ontology/cards
+  - https://cmdoret.github.io/mtg_ontology/
 
 prefixes:
   mtg: https://mtg.fandom.com/wiki/
-  mtgo: https://w3id.org/cmdoret/mtg-ontology/
-  mtgoa: https://w3id.org/cmdoret/mtg-ontology/abilities/
-  mtgoc: https://w3id.org/cmdoret/mtg-ontology/cards/
+  mtgo: https://cmdoret.net/mtg_ontology/
   linkml: https://w3id.org/linkml/
   schema: http://schema.org/
   wiki: http://en.wikipedia.org/wiki/
-default_prefix: mtgoc
+default_prefix: mtgo
 default_range: string
 
 imports:
@@ -76,12 +77,10 @@ classes:
   AnyEnchantment:
     is_a: Permanent
     abstract: true
-    class_uri: mtg:Enchantment
     description: >-
       A permanent which applies persistent magical effects.
   AnyCreature:
     is_a: Permanent
-    class_uri: mtg:Creature
     abstract: true
     description: >-
       A creature that can be summoned to the battlefield.
@@ -93,7 +92,6 @@ classes:
   AnyArtifact:
     is_a: Permanent
     abstract: true
-    class_uri: mtg:Artifact
     description: >-
       A permanent representing a magical item, animated construct, or other objects and devices.
 
@@ -108,49 +106,49 @@ classes:
     description: >-
       A card that represents an instant spell that can be cast.
   Enchantment:
+    is_a: Card
     mixins:
       - AnyEnchantment
-      - Card
     class_uri: mtg:Enchantment
     description: >-
       A card that represents an enchantment that can be cast and put onto the battlefield.
   EnchantmentToken:
+    is_a: Token
     mixins:
       - AnyEnchantment
-      - Token
     description: >-
       A token that represents an enchantment that can be placed onto the battlefield by other effects.
   Artifact:
+    is_a: Card
     mixins:
       - AnyArtifact
-      - Card
     class_uri: mtg:Artifact
     description: >-
       A card that represents an artifact that can be cast and put onto the battlefield.
   ArtifactToken:
+    is_a: Token
     mixins:
       - AnyArtifact
-      - Token
     description: >-
       A token that represents an artifact that can be placed onto the battlefield by other effects.
   Creature:
+    is_a: Card
     mixins:
-      - Card
       - AnyCreature
     class_uri: mtg:Creature
     description: >-
       A card that represents a creature that can be cast and put onto the battlefield.
   CreatureToken:
+    is_a: Token
     mixins:
-      - Token
       - AnyCreature
     description: >-
       A token that represents a creature that can be placed onto the battlefield by other effects.
     
   Land:
+    is_a: Card
     mixins:
       - Permanent
-      - Card
     class_uri: mtg:Land
     description: >-
       A card that represents a land that can be tapped for mana.
@@ -183,8 +181,8 @@ classes:
       - hybrid
 
   ManaCost:
+    is_a: Cost
     mixins:
-      - Cost
       - Mana
     class_uri: mtg:Mana_cost
     description: >-
@@ -192,7 +190,6 @@ classes:
 
   LifeCost:
     is_a: Cost
-    class_uri: mtg:Life
     description: >-
       The life cost of a card or ability.
 
