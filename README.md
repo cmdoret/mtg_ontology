@@ -1,6 +1,14 @@
 # mtg-ontology
 
-An ontology describing Magic: The Gathering.
+An ontology describing Magic: The Gathering. It provides a data model to represent cards, their costs and rules.
+
+The ontology is available in multiple representations in the [project/](project/) folder. It is also distributed as a python package providing dataclasses for the different concepts, and helpers to convert them to RDF graphs.
+
+It can be installed wjth
+
+```python
+pip install mtg-ontology
+```
 
 ## Website
 
