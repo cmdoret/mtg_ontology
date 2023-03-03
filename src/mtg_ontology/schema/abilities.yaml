@@ -59,10 +59,14 @@ classes:
     slots:
       - condition
 
-  Condition:
+  RuleStatement:
     is_a: Thing
-    class_uri: mtgo:Condition
-    description: A condition expressed as constraints.
+    class_uri: mtgo:RuleStatement
+    description: >-
+      A statement in the rules text of a card or ability.
+      It consists of an action, with optional sources and targets
+      (e.g. players or cards), and specifications constraining the
+      action in time, quantity or otherwise.
     slots:
       - source
       - target
@@ -82,8 +86,8 @@ classes:
         multivalued: true
         inlined: true
       conditions:
-        description: Conditions in the collection.
-        range: Condition
+        description: RuleStatements in the collection.
+        range: RuleStatement
         multivalued: true
         inlined: true
       mana_costs:
@@ -198,11 +202,11 @@ slots:
     description: A cost to play a card or ability.
     any_of:
       - range: Cost
-      - range: Condition
+      - range: RuleStatement
     multivalued: true
   effect:
     slot_uri: mtgo:effect
-    range: Condition
+    range: RuleStatement
     description: The effect of an ability.
   action:
     slot_uri: mtgo:action
@@ -223,7 +227,7 @@ slots:
     description: The entity targeted by an action or constraint.
   condition:
     slot_uri: mtgo:condition
-    range: Condition
+    range: RuleStatement
     description: A condition required for an activation.
   value_spec:
     slot_uri: mtgo:value_spec
