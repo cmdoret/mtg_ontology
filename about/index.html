@@ -314,6 +314,21 @@
   
 
     
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api/" class="md-nav__link">
+        API
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -355,47 +370,6 @@
 <h1 id="mtg-ontology">mtg-ontology</h1>
 <p>An ontology describing Magic: The Gathering.</p>
 <p>The aim of this ontology is to provide a formal description of cards and their abilities. It is built using <a href="linkml.io">linkml</a>, which automatically generates a schema representation in multiple formats (jsonschema, RDF, SQLschema, SHACL, graphQL, ...).</p>
-<p>In addition, python dataclasses are generated for each class in the ontology. They can be used to load or dump instances for various tasks.</p>
-<div class="language-yaml highlight"><span class="filename">plains.yaml</span><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">example:plains</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Plains</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nt">color</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">white</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nt">type_line</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Basic Land - Plains</span>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nt">card_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Land</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nt">card_subtype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Plains</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="nt">card_supertype</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Basic</span>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nt">artist</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Titus Lunter</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="nt">flavor_text</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Searching</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">vanished</span><span class="nv"> </span><span class="s">caravan</span><span class="nv"> </span><span class="s">that</span><span class="nv"> </span><span class="s">was</span><span class="nv"> </span><span class="s">bound</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">Silverymoon,</span><span class="nv"> </span><span class="s">you’ve</span><span class="nv"> </span><span class="s">come</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">bank</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">mysterious</span><span class="nv"> </span><span class="s">fog.&quot;</span>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="nt">card_set</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Adventures in the Forgotten Realms</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="nt">rarity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">common</span>
-</span></code></pre></div>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span> <span class="nn">linkml_runtime.loaders</span> <span class="kn">import</span> <span class="n">yaml_loader</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">from</span> <span class="nn">mtg_ontology.datamodel</span> <span class="kn">import</span> <span class="n">Land</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kn">from</span> <span class="nn">mtg_ontology.helpers</span> <span class="kn">import</span> <span class="n">instance_to_graph</span> 
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">plains</span> <span class="o">=</span> <span class="n">yaml_loader</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;plains.yaml&#39;</span><span class="p">,</span> <span class="n">target_class</span><span class="o">=</span><span class="n">Land</span><span class="p">)</span>
-</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">island_graph</span> <span class="o">=</span> <span class="n">instance_to_graph</span><span class="p">(</span><span class="n">plains</span><span class="p">)</span>
-</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">plains_graph</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="nb">format</span><span class="o">=</span><span class="s1">&#39;ttl&#39;</span><span class="p">))</span>
-</span></code></pre></div>
-<div class="language-turtle highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">@prefix</span><span class="w"> </span><span class="nn">example1:</span><span class="w"> </span><span class="nv">&lt;http://www.example.org/rdf#&gt;</span><span class="w"> </span><span class="p">.</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">@prefix</span><span class="w"> </span><span class="nn">mtgo1:</span><span class="w"> </span><span class="nv">&lt;https://cmdoret.net/mtg_ontology/&gt;</span><span class="w"> </span><span class="p">.</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">@prefix</span><span class="w"> </span><span class="nn">schema1:</span><span class="w"> </span><span class="nv">&lt;http://schema.org/&gt;</span><span class="w"> </span><span class="p">.</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="nn">example1</span><span class="p">:</span><span class="nt">plains</span> <span class="kt">a</span> <span class="nv">&lt;mtg:Land&gt;</span> <span class="p">;</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="nn">schema1</span><span class="p">:</span><span class="nt">name</span> <span class="s">&quot;Plains&quot;</span> <span class="p">;</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="nn">mtgo1</span><span class="p">:</span><span class="nt">artist</span> <span class="s">&quot;Titus Lunter&quot;</span> <span class="p">;</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="nn">mtgo1</span><span class="p">:</span><span class="nt">card_set</span> <span class="s">&quot;Adventures in the Forgotten Realms&quot;</span> <span class="p">;</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="nn">mtgo1</span><span class="p">:</span><span class="nt">card_subtype</span> <span class="s">&quot;Plains&quot;</span> <span class="p">;</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="nn">mtgo1</span><span class="p">:</span><span class="nt">card_supertype</span> <span class="s">&quot;Basic&quot;</span> <span class="p">;</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="nn">mtgo1</span><span class="p">:</span><span class="nt">card_type</span> <span class="s">&quot;Land&quot;</span> <span class="p">;</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    <span class="nn">mtgo1</span><span class="p">:</span><span class="nt">color</span> <span class="nv">&lt;https://mtg.fandom.com/wiki/white&gt;</span> <span class="p">;</span>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="nn">mtgo1</span><span class="p">:</span><span class="nt">flavor_text</span> <span class="s">&quot;Searching for a vanished caravan that was bound for Silverymoon, you’ve come to a bank of mysterious fog.&quot;</span> <span class="p">;</span>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    <span class="nn">mtgo1</span><span class="p">:</span><span class="nt">rarity</span> <span class="nv">&lt;https://mtg.fandom.com/wiki/common&gt;</span> <span class="p">;</span>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>    <span class="nn">mtgo1</span><span class="p">:</span><span class="nt">type_line</span> <span class="s">&quot;Basic Land - Plains&quot;</span> <span class="p">.</span>
-</span></code></pre></div>
-<p>The whole (owl) schema can also be loaded into rdflib using:</p>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span> <span class="nn">mtg_ontology.helpers</span> <span class="kn">import</span> <span class="n">load_schema_rdflib_graph</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">mtgo_graph</span> <span class="o">=</span> <span class="n">load_schema_rdflib_graph</span><span class="p">()</span>
-</span></code></pre></div>
 
 
 
