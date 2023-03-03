@@ -3088,7 +3088,7 @@
   "source_file": "mtg_ontology.yaml",
   "source_file_date": "2023-03-02T05:41:05",
   "source_file_size": 1540,
-  "generation_date": "2023-03-03T01:18:56",
+  "generation_date": "2023-03-03T01:24:31",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/mtg_ontology.context.jsonld",
