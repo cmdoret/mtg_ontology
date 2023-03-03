@@ -43,7 +43,7 @@ ex:peg-abi a :TriggeredAbility ;
     :condition ex:peg-dmg-player ;
     :condition ex:you-place-ge2-crea .
 
-ex:you-draw-1 a :Condition ;
+ex:you-draw-1 a :RuleStatement ;
        :target :you ;
        :action_spec ex:draw ;
        :value_spec ex:val-1 .
@@ -54,7 +54,7 @@ ex:draw a :ActionSpecification ;
 ex:val-1 a :ValueSpecification ;
        :value 1 .
 
-ex:peg-dmg-player a :Condition ;
+ex:peg-dmg-player a :RuleStatement ;
        :source ex:peg ;
        :target :players ;
        :action_spec ex:deal-dmg ;
@@ -63,7 +63,7 @@ ex:peg-dmg-player a :Condition ;
 ex:deal-dmg a :ActionSpecification ;
        :action :deal_damage .
 
-ex:you-place-ge2-crea a :Condition ;
+ex:you-place-ge2-crea a :RuleStatement ;
        :source :you ;
        :action_spec ex:place-crea ;
        :time_spec ex:this-turn ;
