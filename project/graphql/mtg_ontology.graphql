@@ -2,14 +2,14 @@ interface Ability
   {
     id: Uriorcurie!
     rulesText: String
-    effect: Condition
+    effect: RuleStatement
     abilityKeyword: String
   }
 
 type AbilityCollection
   {
     activatedAbilities: [ActivatedAbility]
-    conditions: [Condition]
+    conditions: [RuleStatement]
     manaCosts: [ManaCost]
     valueSpecifications: [ValueSpecification]
     actionSpecifications: [ActionSpecification]
@@ -29,10 +29,10 @@ type ActivatedAbility
   {
     id: Uriorcurie!
     rulesText: String
-    effect: Condition
+    effect: RuleStatement
     abilityKeyword: String
     cost: [String]
-    condition: Condition
+    condition: RuleStatement
   }
 
 interface AnyArtifact
@@ -121,16 +121,6 @@ type CardCollection
   {
     cards: [Card]
     costs: [Cost]
-  }
-
-type Condition
-  {
-    id: Uriorcurie!
-    source: String
-    target: String
-    actionSpec: [ActionSpecification]
-    valueSpec: [ValueSpecification]
-    timeSpec: [TimeSpecification]
   }
 
 type Cost
@@ -328,6 +318,16 @@ type PowerToughnessCounter
     toughnessModifier: Integer
   }
 
+type RuleStatement
+  {
+    id: Uriorcurie!
+    source: String
+    target: String
+    actionSpec: [ActionSpecification]
+    valueSpec: [ValueSpecification]
+    timeSpec: [TimeSpecification]
+  }
+
 type Sorcery
   {
     id: Uriorcurie!
@@ -365,7 +365,7 @@ type StaticAbility
   {
     id: Uriorcurie!
     rulesText: String
-    effect: Condition
+    effect: RuleStatement
     abilityKeyword: String
   }
 
@@ -405,9 +405,9 @@ type TriggeredAbility
   {
     id: Uriorcurie!
     rulesText: String
-    effect: Condition
+    effect: RuleStatement
     abilityKeyword: String
-    condition: Condition
+    condition: RuleStatement
   }
 
 type ValueSpecification

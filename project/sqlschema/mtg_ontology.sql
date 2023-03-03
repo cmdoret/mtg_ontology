@@ -56,16 +56,6 @@ CREATE TABLE "CardCollection" (
 	PRIMARY KEY (cards, costs)
 );
 
-CREATE TABLE "Condition" (
-	id TEXT NOT NULL, 
-	source TEXT, 
-	target TEXT, 
-	action_spec TEXT, 
-	value_spec TEXT, 
-	time_spec TEXT, 
-	PRIMARY KEY (id)
-);
-
 CREATE TABLE "Cost" (
 	id TEXT NOT NULL, 
 	value INTEGER, 
@@ -209,6 +199,16 @@ CREATE TABLE "PowerToughnessCounter" (
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE "RuleStatement" (
+	id TEXT NOT NULL, 
+	source TEXT, 
+	target TEXT, 
+	action_spec TEXT, 
+	value_spec TEXT, 
+	time_spec TEXT, 
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE "Sorcery" (
 	id TEXT NOT NULL, 
 	name TEXT NOT NULL, 
@@ -279,8 +279,8 @@ CREATE TABLE "ActivatedAbility" (
 	ability_keyword TEXT, 
 	condition TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(effect) REFERENCES "Condition" (id), 
-	FOREIGN KEY(condition) REFERENCES "Condition" (id)
+	FOREIGN KEY(effect) REFERENCES "RuleStatement" (id), 
+	FOREIGN KEY(condition) REFERENCES "RuleStatement" (id)
 );
 
 CREATE TABLE "LifeCost" (
@@ -314,7 +314,7 @@ CREATE TABLE "StaticAbility" (
 	effect TEXT, 
 	ability_keyword TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(effect) REFERENCES "Condition" (id)
+	FOREIGN KEY(effect) REFERENCES "RuleStatement" (id)
 );
 
 CREATE TABLE "TriggeredAbility" (
@@ -324,8 +324,8 @@ CREATE TABLE "TriggeredAbility" (
 	ability_keyword TEXT, 
 	condition TEXT, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(effect) REFERENCES "Condition" (id), 
-	FOREIGN KEY(condition) REFERENCES "Condition" (id)
+	FOREIGN KEY(effect) REFERENCES "RuleStatement" (id), 
+	FOREIGN KEY(condition) REFERENCES "RuleStatement" (id)
 );
 
 CREATE TABLE "Artifact_color" (

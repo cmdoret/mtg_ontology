@@ -2,7 +2,7 @@
 message AbilityCollection
  {
  repeated  activatedAbility activatedAbilities = 0
- repeated  condition conditions = 0
+ repeated  ruleStatement conditions = 0
  repeated  manaCost manaCosts = 0
  repeated  valueSpecification valueSpecifications = 0
  repeated  actionSpecification actionSpecifications = 0
@@ -22,10 +22,10 @@ message ActivatedAbility
  {
   uriorcurie id = 0
   string rulesText = 0
-  condition effect = 0
+  ruleStatement effect = 0
   string abilityKeyword = 0
  repeated  string cost = 0
-  condition condition = 0
+  ruleStatement condition = 0
  }
 // A card that represents an artifact that can be cast and put onto the battlefield.
 message Artifact
@@ -69,16 +69,6 @@ message CardCollection
  {
  repeated  card cards = 0
  repeated  cost costs = 0
- }
-// A condition expressed as constraints.
-message Condition
- {
-  uriorcurie id = 0
-  string source = 0
-  string target = 0
- repeated  actionSpecification actionSpec = 0
- repeated  valueSpecification valueSpec = 0
- repeated  timeSpecification timeSpec = 0
  }
 // The cost of a card or ability.
 message Cost
@@ -268,6 +258,16 @@ message PowerToughnessCounter
   integer powerModifier = 0
   integer toughnessModifier = 0
  }
+// A statement in the rules text of a card or ability. It consists of an action, with optional sources and targets (e.g. players or cards), and specifications constraining the action in time, quantity or otherwise.
+message RuleStatement
+ {
+  uriorcurie id = 0
+  string source = 0
+  string target = 0
+ repeated  actionSpecification actionSpec = 0
+ repeated  valueSpecification valueSpec = 0
+ repeated  timeSpecification timeSpec = 0
+ }
 // A card that represents a sorcery spell that can be cast.
 message Sorcery
  {
@@ -298,7 +298,7 @@ message StaticAbility
  {
   uriorcurie id = 0
   string rulesText = 0
-  condition effect = 0
+  ruleStatement effect = 0
   string abilityKeyword = 0
  }
 // A generic grouping for any identifiable entity
@@ -338,9 +338,9 @@ message TriggeredAbility
  {
   uriorcurie id = 0
   string rulesText = 0
-  condition effect = 0
+  ruleStatement effect = 0
   string abilityKeyword = 0
-  condition condition = 0
+  ruleStatement condition = 0
  }
 // A specification for a quantitative value.
 message ValueSpecification

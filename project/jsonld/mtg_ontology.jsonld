@@ -1428,7 +1428,7 @@
           "@type": "AnonymousSlotExpression"
         },
         {
-          "range": "Condition",
+          "range": "RuleStatement",
           "@type": "AnonymousSlotExpression"
         }
       ],
@@ -1447,7 +1447,7 @@
       "domain_of": [
         "Ability"
       ],
-      "range": "Condition",
+      "range": "RuleStatement",
       "@type": "SlotDefinition"
     },
     {
@@ -1476,9 +1476,9 @@
         "https://cmdoret.net/mtg_ontology/source"
       ],
       "slot_uri": "https://cmdoret.net/mtg_ontology/source",
-      "owner": "Condition",
+      "owner": "RuleStatement",
       "domain_of": [
-        "Condition"
+        "RuleStatement"
       ],
       "range": "string",
       "any_of": [
@@ -1502,9 +1502,9 @@
         "https://cmdoret.net/mtg_ontology/target"
       ],
       "slot_uri": "https://cmdoret.net/mtg_ontology/target",
-      "owner": "Condition",
+      "owner": "RuleStatement",
       "domain_of": [
-        "Condition"
+        "RuleStatement"
       ],
       "range": "string",
       "any_of": [
@@ -1533,7 +1533,7 @@
         "ActivatedAbility",
         "TriggeredAbility"
       ],
-      "range": "Condition",
+      "range": "RuleStatement",
       "@type": "SlotDefinition"
     },
     {
@@ -1548,7 +1548,7 @@
       "multivalued": true,
       "owner": "KeywordCounter",
       "domain_of": [
-        "Condition",
+        "RuleStatement",
         "KeywordCounter"
       ],
       "range": "ValueSpecification",
@@ -1564,9 +1564,9 @@
       ],
       "slot_uri": "https://cmdoret.net/mtg_ontology/time_spec",
       "multivalued": true,
-      "owner": "Condition",
+      "owner": "RuleStatement",
       "domain_of": [
-        "Condition"
+        "RuleStatement"
       ],
       "range": "TimeSpecification",
       "@type": "SlotDefinition"
@@ -1581,9 +1581,9 @@
       ],
       "slot_uri": "https://cmdoret.net/mtg_ontology/action_spec",
       "multivalued": true,
-      "owner": "Condition",
+      "owner": "RuleStatement",
       "domain_of": [
-        "Condition"
+        "RuleStatement"
       ],
       "range": "ActionSpecification",
       "@type": "SlotDefinition"
@@ -1782,7 +1782,7 @@
     },
     {
       "name": "abilityCollection__conditions",
-      "description": "Conditions in the collection.",
+      "description": "RuleStatements in the collection.",
       "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
       "slot_uri": "https://cmdoret.net/mtg_ontology/conditions",
       "multivalued": true,
@@ -1791,7 +1791,7 @@
       "domain_of": [
         "AbilityCollection"
       ],
-      "range": "Condition",
+      "range": "RuleStatement",
       "inlined": true,
       "@type": "SlotDefinition"
     },
@@ -2855,12 +2855,12 @@
       "@type": "ClassDefinition"
     },
     {
-      "name": "Condition",
-      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/Condition",
-      "description": "A condition expressed as constraints.",
+      "name": "RuleStatement",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/abilities/RuleStatement",
+      "description": "A statement in the rules text of a card or ability. It consists of an action, with optional sources and targets (e.g. players or cards), and specifications constraining the action in time, quantity or otherwise.",
       "from_schema": "https://cmdoret.net/mtg_ontology/abilities",
       "mappings": [
-        "mtgo:Condition"
+        "mtgo:RuleStatement"
       ],
       "is_a": "Thing",
       "slots": [
@@ -2872,7 +2872,7 @@
         "time_spec"
       ],
       "slot_usage": {},
-      "class_uri": "https://cmdoret.net/mtg_ontology/Condition",
+      "class_uri": "https://cmdoret.net/mtg_ontology/RuleStatement",
       "@type": "ClassDefinition"
     },
     {
@@ -2903,9 +2903,9 @@
         },
         {
           "name": "conditions",
-          "description": "Conditions in the collection.",
+          "description": "RuleStatements in the collection.",
           "multivalued": true,
-          "range": "Condition",
+          "range": "RuleStatement",
           "inlined": true,
           "@type": "SlotDefinition"
         },
@@ -3088,7 +3088,7 @@
   "source_file": "mtg_ontology.yaml",
   "source_file_date": "2023-03-02T05:41:05",
   "source_file_size": 1540,
-  "generation_date": "2023-03-02T05:41:12",
+  "generation_date": "2023-03-03T01:18:56",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/mtg_ontology.context.jsonld",

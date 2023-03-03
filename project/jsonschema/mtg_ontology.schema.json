@@ -20,9 +20,9 @@
                 },
                 "conditions": {
                     "additionalProperties": {
-                        "$ref": "#/$defs/Condition__identifier_optional"
+                        "$ref": "#/$defs/RuleStatement__identifier_optional"
                     },
-                    "description": "Conditions in the collection.",
+                    "description": "RuleStatements in the collection.",
                     "type": "object"
                 },
                 "mana_costs": {
@@ -488,120 +488,6 @@
             ],
             "title": "Color",
             "type": "string"
-        },
-        "Condition": {
-            "additionalProperties": false,
-            "description": "A condition expressed as constraints.",
-            "properties": {
-                "action_spec": {
-                    "description": "A specification of an action.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "id": {
-                    "description": "A unique identifier for a thing",
-                    "type": "string"
-                },
-                "source": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/Player"
-                        },
-                        {
-                            "type": "string"
-                        }
-                    ],
-                    "description": "The entity responsible for an action."
-                },
-                "target": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/Player"
-                        },
-                        {
-                            "type": "string"
-                        }
-                    ],
-                    "description": "The entity targeted by an action or constraint."
-                },
-                "time_spec": {
-                    "description": "A specification of the time of an event.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "value_spec": {
-                    "description": "A specification for the value of a property.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                }
-            },
-            "required": [
-                "id"
-            ],
-            "title": "Condition",
-            "type": "object"
-        },
-        "Condition__identifier_optional": {
-            "additionalProperties": false,
-            "description": "A condition expressed as constraints.",
-            "properties": {
-                "action_spec": {
-                    "description": "A specification of an action.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "id": {
-                    "description": "A unique identifier for a thing",
-                    "type": "string"
-                },
-                "source": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/Player"
-                        },
-                        {
-                            "type": "string"
-                        }
-                    ],
-                    "description": "The entity responsible for an action."
-                },
-                "target": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/Player"
-                        },
-                        {
-                            "type": "string"
-                        }
-                    ],
-                    "description": "The entity targeted by an action or constraint."
-                },
-                "time_spec": {
-                    "description": "A specification of the time of an event.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "value_spec": {
-                    "description": "A specification for the value of a property.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                }
-            },
-            "required": [],
-            "title": "Condition",
-            "type": "object"
         },
         "Cost": {
             "additionalProperties": false,
@@ -1523,6 +1409,120 @@
             "title": "Rarity",
             "type": "string"
         },
+        "RuleStatement": {
+            "additionalProperties": false,
+            "description": "A statement in the rules text of a card or ability. It consists of an action, with optional sources and targets (e.g. players or cards), and specifications constraining the action in time, quantity or otherwise.",
+            "properties": {
+                "action_spec": {
+                    "description": "A specification of an action.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "source": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Player"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "The entity responsible for an action."
+                },
+                "target": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Player"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "The entity targeted by an action or constraint."
+                },
+                "time_spec": {
+                    "description": "A specification of the time of an event.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "value_spec": {
+                    "description": "A specification for the value of a property.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id"
+            ],
+            "title": "RuleStatement",
+            "type": "object"
+        },
+        "RuleStatement__identifier_optional": {
+            "additionalProperties": false,
+            "description": "A statement in the rules text of a card or ability. It consists of an action, with optional sources and targets (e.g. players or cards), and specifications constraining the action in time, quantity or otherwise.",
+            "properties": {
+                "action_spec": {
+                    "description": "A specification of an action.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for a thing",
+                    "type": "string"
+                },
+                "source": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Player"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "The entity responsible for an action."
+                },
+                "target": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Player"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ],
+                    "description": "The entity targeted by an action or constraint."
+                },
+                "time_spec": {
+                    "description": "A specification of the time of an event.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "value_spec": {
+                    "description": "A specification for the value of a property.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [],
+            "title": "RuleStatement",
+            "type": "object"
+        },
         "Sorcery": {
             "additionalProperties": false,
             "description": "A card that represents a sorcery spell that can be cast.",
@@ -2009,9 +2009,9 @@
         },
         "conditions": {
             "additionalProperties": {
-                "$ref": "#/$defs/Condition__identifier_optional"
+                "$ref": "#/$defs/RuleStatement__identifier_optional"
             },
-            "description": "Conditions in the collection.",
+            "description": "RuleStatements in the collection.",
             "type": "object"
         },
         "costs": {

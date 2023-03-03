@@ -45,7 +45,7 @@ linkml:Nodeidentifier NONLITERAL
     (  $<Ability_tes> (  &<Thing_tes> ;
           rdf:type [ schema:Thing ] ? ;
           <rules_text> @linkml:String ? ;
-          <effect> @<Condition> ? ;
+          <effect> @<RuleStatement> ? ;
           <ability_keyword> @linkml:String ?
        ) ;
        rdf:type [ <Ability> ]
@@ -54,7 +54,7 @@ linkml:Nodeidentifier NONLITERAL
 
 <AbilityCollection> CLOSED {
     (  $<AbilityCollection_tes> (  <activated_abilities> @<ActivatedAbility> * ;
-          <conditions> @<Condition> * ;
+          <conditions> @<RuleStatement> * ;
           <mana_costs> @<ManaCost> * ;
           <value_specifications> @<ValueSpecification> * ;
           <action_specifications> @<ActionSpecification> * ;
@@ -80,7 +80,7 @@ linkml:Nodeidentifier NONLITERAL
     (  $<ActivatedAbility_tes> (  &<Ability_tes> ;
           rdf:type [ <Ability> ] ? ;
           <cost> @linkml:String * ;
-          <condition> @<Condition> ?
+          <condition> @<RuleStatement> ?
        ) ;
        rdf:type [ <ActivatedAbility> ]
     )
@@ -164,19 +164,6 @@ linkml:Nodeidentifier NONLITERAL
           <costs> @<Cost> *
        ) ;
        rdf:type [ <CardCollection> ] ?
-    )
-}
-
-<Condition> CLOSED {
-    (  $<Condition_tes> (  &<Thing_tes> ;
-          rdf:type [ schema:Thing ] ? ;
-          <source> @linkml:String ? ;
-          <target> @linkml:String ? ;
-          <action_spec> @<ActionSpecification> * ;
-          <value_spec> @<ValueSpecification> * ;
-          <time_spec> @<TimeSpecification> *
-       ) ;
-       rdf:type [ <Condition> ]
     )
 }
 
@@ -346,6 +333,19 @@ linkml:Nodeidentifier NONLITERAL
     )
 }
 
+<RuleStatement> CLOSED {
+    (  $<RuleStatement_tes> (  &<Thing_tes> ;
+          rdf:type [ schema:Thing ] ? ;
+          <source> @linkml:String ? ;
+          <target> @linkml:String ? ;
+          <action_spec> @<ActionSpecification> * ;
+          <value_spec> @<ValueSpecification> * ;
+          <time_spec> @<TimeSpecification> *
+       ) ;
+       rdf:type [ <RuleStatement> ]
+    )
+}
+
 <Sorcery> CLOSED {
     (  $<Sorcery_tes> (  &<Card_tes> ;
           rdf:type [ <Card> ] ?
@@ -390,7 +390,7 @@ linkml:Nodeidentifier NONLITERAL
        (  $<Thing_tes> rdf:type . * ;
           rdf:type [ schema:Thing ]
        )
-    } OR @<Ability> OR @<Condition> OR @<Cost> OR @<Counter> OR @<Mana> OR @<Specification> OR @<Spell> OR @<TimeSpecification>
+    } OR @<Ability> OR @<Cost> OR @<Counter> OR @<Mana> OR @<RuleStatement> OR @<Specification> OR @<Spell> OR @<TimeSpecification>
 )
 
 <TimeSpecification> CLOSED {
@@ -429,7 +429,7 @@ linkml:Nodeidentifier NONLITERAL
 <TriggeredAbility> CLOSED {
     (  $<TriggeredAbility_tes> (  &<Ability_tes> ;
           rdf:type [ <Ability> ] ? ;
-          <condition> @<Condition> ?
+          <condition> @<RuleStatement> ?
        ) ;
        rdf:type [ <TriggeredAbility> ]
     )

@@ -1,5 +1,5 @@
 # Auto generated from mtg_ontology.yaml by pythongen.py version: 0.9.0
-# Generation date: 2023-03-02T05:41:34
+# Generation date: 2023-03-03T01:19:19
 # Schema: mtgo
 #
 # id: https://cmdoret.net/mtg_ontology/
@@ -149,7 +149,7 @@ class TriggeredAbilityId(AbilityId):
     pass
 
 
-class ConditionId(ThingId):
+class RuleStatementId(ThingId):
     pass
 
 
@@ -966,15 +966,15 @@ class Ability(Thing):
 
     id: Union[str, AbilityId] = None
     rules_text: Optional[str] = None
-    effect: Optional[Union[str, ConditionId]] = None
+    effect: Optional[Union[str, RuleStatementId]] = None
     ability_keyword: Optional[str] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self.rules_text is not None and not isinstance(self.rules_text, str):
             self.rules_text = str(self.rules_text)
 
-        if self.effect is not None and not isinstance(self.effect, ConditionId):
-            self.effect = ConditionId(self.effect)
+        if self.effect is not None and not isinstance(self.effect, RuleStatementId):
+            self.effect = RuleStatementId(self.effect)
 
         if self.ability_keyword is not None and not isinstance(self.ability_keyword, str):
             self.ability_keyword = str(self.ability_keyword)
@@ -996,7 +996,7 @@ class ActivatedAbility(Ability):
 
     id: Union[str, ActivatedAbilityId] = None
     cost: Optional[Union[str, List[str]]] = empty_list()
-    condition: Optional[Union[str, ConditionId]] = None
+    condition: Optional[Union[str, RuleStatementId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -1008,8 +1008,8 @@ class ActivatedAbility(Ability):
             self.cost = [self.cost] if self.cost is not None else []
         self.cost = [v if isinstance(v, str) else str(v) for v in self.cost]
 
-        if self.condition is not None and not isinstance(self.condition, ConditionId):
-            self.condition = ConditionId(self.condition)
+        if self.condition is not None and not isinstance(self.condition, RuleStatementId):
+            self.condition = RuleStatementId(self.condition)
 
         super().__post_init__(**kwargs)
 
@@ -1050,7 +1050,7 @@ class TriggeredAbility(Ability):
     class_model_uri: ClassVar[URIRef] = MTGO.TriggeredAbility
 
     id: Union[str, TriggeredAbilityId] = None
-    condition: Optional[Union[str, ConditionId]] = None
+    condition: Optional[Union[str, RuleStatementId]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -1058,25 +1058,26 @@ class TriggeredAbility(Ability):
         if not isinstance(self.id, TriggeredAbilityId):
             self.id = TriggeredAbilityId(self.id)
 
-        if self.condition is not None and not isinstance(self.condition, ConditionId):
-            self.condition = ConditionId(self.condition)
+        if self.condition is not None and not isinstance(self.condition, RuleStatementId):
+            self.condition = RuleStatementId(self.condition)
 
         super().__post_init__(**kwargs)
 
 
 @dataclass
-class Condition(Thing):
+class RuleStatement(Thing):
     """
-    A condition expressed as constraints.
+    A statement in the rules text of a card or ability. It consists of an action, with optional sources and targets
+    (e.g. players or cards), and specifications constraining the action in time, quantity or otherwise.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = MTGO.Condition
-    class_class_curie: ClassVar[str] = "mtgo:Condition"
-    class_name: ClassVar[str] = "Condition"
-    class_model_uri: ClassVar[URIRef] = MTGO.Condition
+    class_class_uri: ClassVar[URIRef] = MTGO.RuleStatement
+    class_class_curie: ClassVar[str] = "mtgo:RuleStatement"
+    class_name: ClassVar[str] = "RuleStatement"
+    class_model_uri: ClassVar[URIRef] = MTGO.RuleStatement
 
-    id: Union[str, ConditionId] = None
+    id: Union[str, RuleStatementId] = None
     source: Optional[str] = None
     target: Optional[str] = None
     action_spec: Optional[Union[Union[str, ActionSpecificationId], List[Union[str, ActionSpecificationId]]]] = empty_list()
@@ -1086,8 +1087,8 @@ class Condition(Thing):
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
             self.MissingRequiredField("id")
-        if not isinstance(self.id, ConditionId):
-            self.id = ConditionId(self.id)
+        if not isinstance(self.id, RuleStatementId):
+            self.id = RuleStatementId(self.id)
 
         if self.source is not None and not isinstance(self.source, str):
             self.source = str(self.source)
@@ -1123,7 +1124,7 @@ class AbilityCollection(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = MTGO.AbilityCollection
 
     activated_abilities: Optional[Union[Dict[Union[str, ActivatedAbilityId], Union[dict, ActivatedAbility]], List[Union[dict, ActivatedAbility]]]] = empty_dict()
-    conditions: Optional[Union[Dict[Union[str, ConditionId], Union[dict, Condition]], List[Union[dict, Condition]]]] = empty_dict()
+    conditions: Optional[Union[Dict[Union[str, RuleStatementId], Union[dict, RuleStatement]], List[Union[dict, RuleStatement]]]] = empty_dict()
     mana_costs: Optional[Union[Dict[Union[str, ManaCostId], Union[dict, ManaCost]], List[Union[dict, ManaCost]]]] = empty_dict()
     value_specifications: Optional[Union[Dict[Union[str, ValueSpecificationId], Union[dict, "ValueSpecification"]], List[Union[dict, "ValueSpecification"]]]] = empty_dict()
     action_specifications: Optional[Union[Dict[Union[str, ActionSpecificationId], Union[dict, "ActionSpecification"]], List[Union[dict, "ActionSpecification"]]]] = empty_dict()
@@ -1132,7 +1133,7 @@ class AbilityCollection(YAMLRoot):
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         self._normalize_inlined_as_dict(slot_name="activated_abilities", slot_type=ActivatedAbility, key_name="id", keyed=True)
 
-        self._normalize_inlined_as_dict(slot_name="conditions", slot_type=Condition, key_name="id", keyed=True)
+        self._normalize_inlined_as_dict(slot_name="conditions", slot_type=RuleStatement, key_name="id", keyed=True)
 
         self._normalize_inlined_as_dict(slot_name="mana_costs", slot_type=ManaCost, key_name="id", keyed=True)
 
@@ -1834,7 +1835,7 @@ slots.cost = Slot(uri=MTGO.cost, name="cost", curie=MTGO.curie('cost'),
                    model_uri=MTGO.cost, domain=None, range=Optional[Union[str, List[str]]])
 
 slots.effect = Slot(uri=MTGO.effect, name="effect", curie=MTGO.curie('effect'),
-                   model_uri=MTGO.effect, domain=None, range=Optional[Union[str, ConditionId]])
+                   model_uri=MTGO.effect, domain=None, range=Optional[Union[str, RuleStatementId]])
 
 slots.action = Slot(uri=MTGO.action, name="action", curie=MTGO.curie('action'),
                    model_uri=MTGO.action, domain=None, range=Union[str, "Action"])
@@ -1846,7 +1847,7 @@ slots.target = Slot(uri=MTGO.target, name="target", curie=MTGO.curie('target'),
                    model_uri=MTGO.target, domain=None, range=Optional[str])
 
 slots.condition = Slot(uri=MTGO.condition, name="condition", curie=MTGO.curie('condition'),
-                   model_uri=MTGO.condition, domain=None, range=Optional[Union[str, ConditionId]])
+                   model_uri=MTGO.condition, domain=None, range=Optional[Union[str, RuleStatementId]])
 
 slots.value_spec = Slot(uri=MTGO.value_spec, name="value_spec", curie=MTGO.curie('value_spec'),
                    model_uri=MTGO.value_spec, domain=None, range=Optional[Union[Union[str, ValueSpecificationId], List[Union[str, ValueSpecificationId]]]])
@@ -1888,7 +1889,7 @@ slots.abilityCollection__activated_abilities = Slot(uri=MTGO.activated_abilities
                    model_uri=MTGO.abilityCollection__activated_abilities, domain=None, range=Optional[Union[Dict[Union[str, ActivatedAbilityId], Union[dict, ActivatedAbility]], List[Union[dict, ActivatedAbility]]]])
 
 slots.abilityCollection__conditions = Slot(uri=MTGO.conditions, name="abilityCollection__conditions", curie=MTGO.curie('conditions'),
-                   model_uri=MTGO.abilityCollection__conditions, domain=None, range=Optional[Union[Dict[Union[str, ConditionId], Union[dict, Condition]], List[Union[dict, Condition]]]])
+                   model_uri=MTGO.abilityCollection__conditions, domain=None, range=Optional[Union[Dict[Union[str, RuleStatementId], Union[dict, RuleStatement]], List[Union[dict, RuleStatement]]]])
 
 slots.abilityCollection__mana_costs = Slot(uri=MTGO.mana_costs, name="abilityCollection__mana_costs", curie=MTGO.curie('mana_costs'),
                    model_uri=MTGO.abilityCollection__mana_costs, domain=None, range=Optional[Union[Dict[Union[str, ManaCostId], Union[dict, ManaCost]], List[Union[dict, ManaCost]]]])
