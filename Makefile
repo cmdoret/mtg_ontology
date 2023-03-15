@@ -61,7 +61,7 @@ setup: install gen-project gen-examples gendoc git-init-add
 # install any dependencies required for building
 install:
 	git init     # issues/33
-	poetry install
+	poetry install --with=dev
 .PHONY: install
 
 # ---
@@ -81,7 +81,7 @@ update-template:
 
 # todo: consider pinning to template
 update-linkml:
-	poetry add -D linkml@latest
+	poetry add --group dev linkml@latest
 
 # EXPERIMENTAL
 create-data-harmonizer:
