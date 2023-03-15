@@ -1,46 +1,46 @@
 from functools import reduce
+import matplotlib.pyplot as plt
+import networkx as nx
 import rdflib
 from rdflib.namespace import Namespace, OWL, RDF, RDFS
-
-from mtg_ontology.datamodel import LINKML
-from mtg_ontology.helpers import load_schema_rdflib_graph
+from rdflib.namespace._SKOS import SKOS
+from rdflib.term import URIRef
+from mtg_ontology.datamodel import LINKML, MTGO
+from mtg_ontology.helpers import load_schema_rdflib_graph, SCHEMAVIEW
 
 schema = load_schema_rdflib_graph()
 
 all_classes = set(schema.subjects(RDF.type, Namespace(LINKML).ClassDefinition))
-[(s, p, o) for s, p, o in schema if (s in all_classes) and (o in all_classes)]
+SCHEMAVIEW.slot_descendants
 
+selected_classes = [
+    "Ability",
+    "Card",
+    "Cost",
+    "Permanent",
+    "Player",
+    "RuleStatement",
+    "Token",
+]
 
-result = schema.query("""
-CONSTRUCT {?s ?p ?o}
-WHERE {
-    ?s a linkml:ClassDefinition .
-    {
-        ?s rdfs:subClassOf ?o .
-    }
-    UNION
-    {
-        ?class rdfs:subClassOf ?blank .
-        ?blank owl:onProperty ?p ;
-            owl:allValuesFrom|owl:someValuesFrom ?o .
-    }
-    ?o a linkml:ClassDefinition .
-}
-""", initNs={"linkml": LINKML, "owl": OWL, 'rdfs': RDFS})
-g = rdflib.Graph().parse(data=result.serialize(format='turtle'))
-
-# convert graph to networkx
-import networkx as nx
-G = nx.DiGraph()
-for s, p, o in g:
-    if 'subClassOf' not in p:
-        G.add_edge(str(s).split('/')[-1], str(o).split('/')[-1])
-# Visualize networkx graph
-import matplotlib.pyplot as plt
-plt.figure(figsize=(20, 20))
-pos = nx.spring_layout(G, k=0.3, iterations=20)
-nx.draw_networkx_nodes(G, pos, node_size=100, node_color='lightblue')
-nx.draw_networkx_edges(G, pos, width=1, alpha=0.5, edge_color='grey', arrowsize=20, arrowstyle='->')
-nx.draw_networkx_labels(G, pos, font_size=10, font_family='sans-serif')
-plt.axis('off')
-plt.show()
+g = rdflib.Graph()
+for entity in selected_classes:
+    subject = SCHEMAVIEW.get_class(entity)
+    predicates = SCHEMAVIEW.class_slots(subject.name)
+    if subject is None:
+        continue
+    print(subject.name, subject.class_uri)
+    for pred_name in predicates:
+        pred = SCHEMAVIEW.get_slot(pred_name)
+        objects = SCHEMAVIEW.slot_range_as_union(pred)
+        if pred is None:
+            continue
+        print(pred.name, pred.slot_uri)
+        for obj_name in objects:
+            obj = SCHEMAVIEW.get_class(obj_name)
+            if obj_name not in selected_classes:
+                continue
+            print(obj.name, obj.class_uri)
+            print('---'*10)
+            g.add((URIRef(subject.class_uri), URIRef(pred.name), URIRef(obj.class_uri)))
+print(g.serialize(format='nt'))
