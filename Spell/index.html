@@ -233,12 +233,11 @@
 <h1 id="class-spell">Class: Spell</h1>
 <p><em>An object on the stack. Either a card that has been cast, or a copy.</em></p>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/Spell">mtgo:Spell</a></p>
-<pre class="mermaid"><code>erDiagram
-Spell {
-    uriorcurie id  
-}
+<pre class="mermaid"><code> classDiagram
+    class Spell
+      Thing &lt;|-- Spell
 
-
+      Spell : id
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>

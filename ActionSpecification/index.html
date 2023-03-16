@@ -233,15 +233,15 @@
 <h1 id="class-actionspecification">Class: ActionSpecification</h1>
 <p><em>A specification for an action.</em></p>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/ActionSpecification">mtgo:ActionSpecification</a></p>
-<pre class="mermaid"><code>erDiagram
-ActionSpecification {
-    Action action  
-    ActionConstraint constraint  
-    uriorcurie id  
-}
+<pre class="mermaid"><code> classDiagram
+    class ActionSpecification
+      Specification &lt;|-- ActionSpecification
 
-ActionSpecification ||--|o ActionSpecification : "intersection"
-ActionSpecification ||--|o ActionSpecification : "union"
+      ActionSpecification : action
+      ActionSpecification : constraint
+      ActionSpecification : id
+      ActionSpecification : intersection
+      ActionSpecification : union
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>

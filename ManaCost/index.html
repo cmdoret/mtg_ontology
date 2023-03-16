@@ -238,26 +238,20 @@
 <h1 id="class-manacost">Class: ManaCost</h1>
 <p><em>The mana cost of a card or ability.</em></p>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/ManaCost">mtgo:ManaCost</a></p>
-<pre class="mermaid"><code>erDiagram
-ManaCost {
-    ColorList color  
-    boolean snow  
-    boolean phyrexian  
-    boolean hybrid  
-    integer value  
-    boolean variable_cost  
-    uriorcurie id  
-}
-Cost {
-    integer value  
-    boolean variable_cost  
-    uriorcurie id  
-}
+<pre class="mermaid"><code> classDiagram
+    class ManaCost
+      Mana &lt;|-- ManaCost
+      Cost &lt;|-- ManaCost
 
-ManaCost ||--|o Cost : "intersection"
-ManaCost ||--|o Cost : "union"
-Cost ||--|o Cost : "intersection"
-Cost ||--|o Cost : "union"
+      ManaCost : color
+      ManaCost : hybrid
+      ManaCost : id
+      ManaCost : intersection
+      ManaCost : phyrexian
+      ManaCost : snow
+      ManaCost : union
+      ManaCost : value
+      ManaCost : variable_cost
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>

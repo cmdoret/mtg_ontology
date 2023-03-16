@@ -233,16 +233,16 @@
 <h1 id="class-valuespecification">Class: ValueSpecification</h1>
 <p><em>A specification for a quantitative value.</em></p>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/ValueSpecification">mtgo:ValueSpecification</a></p>
-<pre class="mermaid"><code>erDiagram
-ValueSpecification {
-    integer value  
-    string unit  
-    ValueConstraint constraint  
-    uriorcurie id  
-}
+<pre class="mermaid"><code> classDiagram
+    class ValueSpecification
+      Specification &lt;|-- ValueSpecification
 
-ValueSpecification ||--|o ValueSpecification : "intersection"
-ValueSpecification ||--|o ValueSpecification : "union"
+      ValueSpecification : constraint
+      ValueSpecification : id
+      ValueSpecification : intersection
+      ValueSpecification : union
+      ValueSpecification : unit
+      ValueSpecification : value
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>

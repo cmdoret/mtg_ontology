@@ -231,18 +231,29 @@
 <li><strong>NOTE</strong>: this is an abstract class and should not be instantiated directly</li>
 </ul>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/AnyCreature">mtgo:AnyCreature</a></p>
-<pre class="mermaid"><code>erDiagram
-AnyCreature {
-    integer power  
-    integer toughness  
-    boolean variable_power  
-    boolean variable_toughness  
-    uriorcurie id  
-    string name  
-    string description  
-}
+<pre class="mermaid"><code> classDiagram
+    class AnyCreature
+      Permanent &lt;|-- AnyCreature
+
+      AnyCreature : description
+      AnyCreature : id
+      AnyCreature : name
+      AnyCreature : power
+      AnyCreature : toughness
+      AnyCreature : variable_power
+      AnyCreature : variable_toughness
 
 
+      AnyCreature &lt;|-- Creature
+      AnyCreature &lt;|-- CreatureToken
+
+      AnyCreature : description
+      AnyCreature : id
+      AnyCreature : name
+      AnyCreature : power
+      AnyCreature : toughness
+      AnyCreature : variable_power
+      AnyCreature : variable_toughness
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>

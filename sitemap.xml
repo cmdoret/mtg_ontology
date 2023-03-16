@@ -81,11 +81,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://cmdoret.github.io/mtg_ontology/Condition/</loc>
-         <lastmod>2023-03-16</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://cmdoret.github.io/mtg_ontology/Cost/</loc>
          <lastmod>2023-03-16</lastmod>
          <changefreq>daily</changefreq>
@@ -281,6 +276,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://cmdoret.github.io/mtg_ontology/back_face/</loc>
+         <lastmod>2023-03-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://cmdoret.github.io/mtg_ontology/card_set/</loc>
          <lastmod>2023-03-16</lastmod>
          <changefreq>daily</changefreq>
@@ -356,6 +356,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://cmdoret.github.io/mtg_ontology/front_face/</loc>
+         <lastmod>2023-03-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://cmdoret.github.io/mtg_ontology/hybrid/</loc>
          <lastmod>2023-03-16</lastmod>
          <changefreq>daily</changefreq>
@@ -377,16 +382,6 @@
     </url>
     <url>
          <loc>https://cmdoret.github.io/mtg_ontology/mana_costs/</loc>
-         <lastmod>2023-03-16</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://cmdoret.github.io/mtg_ontology/mtgo-abilities/</loc>
-         <lastmod>2023-03-16</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://cmdoret.github.io/mtg_ontology/mtgo-cards/</loc>
          <lastmod>2023-03-16</lastmod>
          <changefreq>daily</changefreq>
     </url>

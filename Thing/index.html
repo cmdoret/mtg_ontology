@@ -228,12 +228,18 @@
 <h1 id="class-thing">Class: Thing</h1>
 <p><em>A generic grouping for any identifiable entity</em></p>
 <p>URI: <a href="http://schema.org/Thing">schema:Thing</a></p>
-<pre class="mermaid"><code>erDiagram
-Thing {
-    uriorcurie id  
-}
+<pre class="mermaid"><code> classDiagram
+    class Thing
+      Thing &lt;|-- Ability
+      Thing &lt;|-- RuleStatement
+      Thing &lt;|-- Specification
+      Thing &lt;|-- TimeSpecification
+      Thing &lt;|-- Counter
+      Thing &lt;|-- Spell
+      Thing &lt;|-- Cost
+      Thing &lt;|-- Mana
 
-
+      Thing : id
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>

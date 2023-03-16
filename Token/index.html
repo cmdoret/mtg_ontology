@@ -233,37 +233,42 @@
 <h1 id="class-token">Class: Token</h1>
 <p><em>A permanent that is not represented by a regular card and does not have a casting cost.</em></p>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/Token">mtgo:Token</a></p>
-<pre class="mermaid"><code>erDiagram
-Token {
-    ColorList color  
-    string card_set  
-    string artist  
-    string flavor_text  
-    string type_line  
-    string card_type  
-    stringList card_subtype  
-    stringList card_supertype  
-    string oracle_text  
-    uriorcurie id  
-    string name  
-    string description  
-}
-Ability {
-    string rules_text  
-    string ability_keyword  
-    uriorcurie id  
-}
-RuleStatement {
-    string source  
-    string target  
-    uriorcurie id  
-}
+<pre class="mermaid"><code> classDiagram
+    class Token
+      Permanent &lt;|-- Token
 
-Token ||--}o Ability : "ability"
-Ability ||--|o RuleStatement : "effect"
-RuleStatement ||--}o ActionSpecification : "action_spec"
-RuleStatement ||--}o ValueSpecification : "value_spec"
-RuleStatement ||--}o TimeSpecification : "time_spec"
+      Token : ability
+      Token : artist
+      Token : card_set
+      Token : card_subtype
+      Token : card_supertype
+      Token : card_type
+      Token : color
+      Token : description
+      Token : flavor_text
+      Token : id
+      Token : name
+      Token : oracle_text
+      Token : type_line
+
+
+      Token &lt;|-- EnchantmentToken
+      Token &lt;|-- ArtifactToken
+      Token &lt;|-- CreatureToken
+
+      Token : ability
+      Token : artist
+      Token : card_set
+      Token : card_subtype
+      Token : card_supertype
+      Token : card_type
+      Token : color
+      Token : description
+      Token : flavor_text
+      Token : id
+      Token : name
+      Token : oracle_text
+      Token : type_line
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>

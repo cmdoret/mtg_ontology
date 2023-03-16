@@ -233,16 +233,24 @@
 <h1 id="class-mana">Class: Mana</h1>
 <p><em>A mana in the pool.</em></p>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/Mana">mtgo:Mana</a></p>
-<pre class="mermaid"><code>erDiagram
-Mana {
-    ColorList color  
-    boolean snow  
-    boolean phyrexian  
-    boolean hybrid  
-    uriorcurie id  
-}
+<pre class="mermaid"><code> classDiagram
+    class Mana
+      Thing &lt;|-- Mana
+
+      Mana : color
+      Mana : hybrid
+      Mana : id
+      Mana : phyrexian
+      Mana : snow
 
 
+      Mana &lt;|-- ManaCost
+
+      Mana : color
+      Mana : hybrid
+      Mana : id
+      Mana : phyrexian
+      Mana : snow
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>

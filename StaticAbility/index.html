@@ -233,42 +233,14 @@
 <h1 id="class-staticability">Class: StaticAbility</h1>
 <p><em>A card ability which remains active until endgame once put into effect.</em></p>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/StaticAbility">mtgo:StaticAbility</a></p>
-<pre class="mermaid"><code>erDiagram
-StaticAbility {
-    string rules_text  
-    string ability_keyword  
-    uriorcurie id  
-}
-RuleStatement {
-    string source  
-    string target  
-    uriorcurie id  
-}
-TimeSpecification {
-    TurnPhase turn_phase  
-    Player player  
-    uriorcurie id  
-}
-ValueSpecification {
-    integer value  
-    string unit  
-    ValueConstraint constraint  
-    uriorcurie id  
-}
-ActionSpecification {
-    Action action  
-    ActionConstraint constraint  
-    uriorcurie id  
-}
+<pre class="mermaid"><code> classDiagram
+    class StaticAbility
+      Ability &lt;|-- StaticAbility
 
-StaticAbility ||--|o RuleStatement : "effect"
-RuleStatement ||--}o ActionSpecification : "action_spec"
-RuleStatement ||--}o ValueSpecification : "value_spec"
-RuleStatement ||--}o TimeSpecification : "time_spec"
-ValueSpecification ||--|o ValueSpecification : "intersection"
-ValueSpecification ||--|o ValueSpecification : "union"
-ActionSpecification ||--|o ActionSpecification : "intersection"
-ActionSpecification ||--|o ActionSpecification : "union"
+      StaticAbility : ability_keyword
+      StaticAbility : effect
+      StaticAbility : id
+      StaticAbility : rules_text
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>

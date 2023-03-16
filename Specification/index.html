@@ -231,19 +231,23 @@
 <li><strong>NOTE</strong>: this is an abstract class and should not be instantiated directly</li>
 </ul>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/Specification">mtgo:Specification</a></p>
-<pre class="mermaid"><code>erDiagram
-Specification {
-    string constraint  
-    uriorcurie id  
-}
-NamedThing {
-    uriorcurie id  
-    string name  
-    string description  
-}
+<pre class="mermaid"><code> classDiagram
+    class Specification
+      Thing &lt;|-- Specification
 
-Specification ||--|o NamedThing : "intersection"
-Specification ||--|o NamedThing : "union"
+      Specification : constraint
+      Specification : id
+      Specification : intersection
+      Specification : union
+
+
+      Specification &lt;|-- ActionSpecification
+      Specification &lt;|-- ValueSpecification
+
+      Specification : constraint
+      Specification : id
+      Specification : intersection
+      Specification : union
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>

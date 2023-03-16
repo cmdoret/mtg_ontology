@@ -223,71 +223,14 @@
 <h1 id="class-abilitycollection">Class: AbilityCollection</h1>
 <p><em>A collection of abilities and associated concepts.</em></p>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/AbilityCollection">mtgo:AbilityCollection</a></p>
-<pre class="mermaid"><code>erDiagram
-AbilityCollection {
-
-}
-TimeSpecification {
-    TurnPhase turn_phase  
-    Player player  
-    uriorcurie id  
-}
-ActionSpecification {
-    Action action  
-    ActionConstraint constraint  
-    uriorcurie id  
-}
-ValueSpecification {
-    integer value  
-    string unit  
-    ValueConstraint constraint  
-    uriorcurie id  
-}
-ManaCost {
-    ColorList color  
-    boolean snow  
-    boolean phyrexian  
-    boolean hybrid  
-    integer value  
-    boolean variable_cost  
-    uriorcurie id  
-}
-Cost {
-    integer value  
-    boolean variable_cost  
-    uriorcurie id  
-}
-RuleStatement {
-    string source  
-    string target  
-    uriorcurie id  
-}
-ActivatedAbility {
-    stringList cost  
-    string rules_text  
-    string ability_keyword  
-    uriorcurie id  
-}
-
-AbilityCollection ||--}o ActivatedAbility : "activated_abilities"
-AbilityCollection ||--}o RuleStatement : "conditions"
-AbilityCollection ||--}o ManaCost : "mana_costs"
-AbilityCollection ||--}o ValueSpecification : "value_specifications"
-AbilityCollection ||--}o ActionSpecification : "action_specifications"
-AbilityCollection ||--}o TimeSpecification : "time_specifications"
-ActionSpecification ||--|o ActionSpecification : "intersection"
-ActionSpecification ||--|o ActionSpecification : "union"
-ValueSpecification ||--|o ValueSpecification : "intersection"
-ValueSpecification ||--|o ValueSpecification : "union"
-ManaCost ||--|o Cost : "intersection"
-ManaCost ||--|o Cost : "union"
-Cost ||--|o Cost : "intersection"
-Cost ||--|o Cost : "union"
-RuleStatement ||--}o ActionSpecification : "action_spec"
-RuleStatement ||--}o ValueSpecification : "value_spec"
-RuleStatement ||--}o TimeSpecification : "time_spec"
-ActivatedAbility ||--|o RuleStatement : "condition"
-ActivatedAbility ||--|o RuleStatement : "effect"
+<pre class="mermaid"><code> classDiagram
+    class AbilityCollection
+      AbilityCollection : action_specifications
+      AbilityCollection : activated_abilities
+      AbilityCollection : conditions
+      AbilityCollection : mana_costs
+      AbilityCollection : time_specifications
+      AbilityCollection : value_specifications
 </code></pre>
 <!-- no inheritance hierarchy -->
 <h2 id="slots">Slots</h2>

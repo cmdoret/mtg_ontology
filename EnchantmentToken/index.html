@@ -228,37 +228,24 @@
 <h1 id="class-enchantmenttoken">Class: EnchantmentToken</h1>
 <p><em>A token that represents an enchantment that can be placed onto the battlefield by other effects.</em></p>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/EnchantmentToken">mtgo:EnchantmentToken</a></p>
-<pre class="mermaid"><code>erDiagram
-EnchantmentToken {
-    ColorList color  
-    string card_set  
-    string artist  
-    string flavor_text  
-    string type_line  
-    string card_type  
-    stringList card_subtype  
-    stringList card_supertype  
-    string oracle_text  
-    uriorcurie id  
-    string name  
-    string description  
-}
-Ability {
-    string rules_text  
-    string ability_keyword  
-    uriorcurie id  
-}
-RuleStatement {
-    string source  
-    string target  
-    uriorcurie id  
-}
+<pre class="mermaid"><code> classDiagram
+    class EnchantmentToken
+      AnyEnchantment &lt;|-- EnchantmentToken
+      Token &lt;|-- EnchantmentToken
 
-EnchantmentToken ||--}o Ability : "ability"
-Ability ||--|o RuleStatement : "effect"
-RuleStatement ||--}o ActionSpecification : "action_spec"
-RuleStatement ||--}o ValueSpecification : "value_spec"
-RuleStatement ||--}o TimeSpecification : "time_spec"
+      EnchantmentToken : ability
+      EnchantmentToken : artist
+      EnchantmentToken : card_set
+      EnchantmentToken : card_subtype
+      EnchantmentToken : card_supertype
+      EnchantmentToken : card_type
+      EnchantmentToken : color
+      EnchantmentToken : description
+      EnchantmentToken : flavor_text
+      EnchantmentToken : id
+      EnchantmentToken : name
+      EnchantmentToken : oracle_text
+      EnchantmentToken : type_line
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>

@@ -236,14 +236,24 @@
 <li><strong>NOTE</strong>: this is an abstract class and should not be instantiated directly</li>
 </ul>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/Permanent">mtgo:Permanent</a></p>
-<pre class="mermaid"><code>erDiagram
-Permanent {
-    uriorcurie id  
-    string name  
-    string description  
-}
+<pre class="mermaid"><code> classDiagram
+    class Permanent
+      NamedThing &lt;|-- Permanent
+
+      Permanent : description
+      Permanent : id
+      Permanent : name
 
 
+      Permanent &lt;|-- Token
+      Permanent &lt;|-- AnyEnchantment
+      Permanent &lt;|-- AnyCreature
+      Permanent &lt;|-- AnyArtifact
+      Permanent &lt;|-- Land
+
+      Permanent : description
+      Permanent : id
+      Permanent : name
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>

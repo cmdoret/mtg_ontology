@@ -228,37 +228,24 @@
 <h1 id="class-artifacttoken">Class: ArtifactToken</h1>
 <p><em>A token that represents an artifact that can be placed onto the battlefield by other effects.</em></p>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/ArtifactToken">mtgo:ArtifactToken</a></p>
-<pre class="mermaid"><code>erDiagram
-ArtifactToken {
-    ColorList color  
-    string card_set  
-    string artist  
-    string flavor_text  
-    string type_line  
-    string card_type  
-    stringList card_subtype  
-    stringList card_supertype  
-    string oracle_text  
-    uriorcurie id  
-    string name  
-    string description  
-}
-Ability {
-    string rules_text  
-    string ability_keyword  
-    uriorcurie id  
-}
-RuleStatement {
-    string source  
-    string target  
-    uriorcurie id  
-}
+<pre class="mermaid"><code> classDiagram
+    class ArtifactToken
+      AnyArtifact &lt;|-- ArtifactToken
+      Token &lt;|-- ArtifactToken
 
-ArtifactToken ||--}o Ability : "ability"
-Ability ||--|o RuleStatement : "effect"
-RuleStatement ||--}o ActionSpecification : "action_spec"
-RuleStatement ||--}o ValueSpecification : "value_spec"
-RuleStatement ||--}o TimeSpecification : "time_spec"
+      ArtifactToken : ability
+      ArtifactToken : artist
+      ArtifactToken : card_set
+      ArtifactToken : card_subtype
+      ArtifactToken : card_supertype
+      ArtifactToken : card_type
+      ArtifactToken : color
+      ArtifactToken : description
+      ArtifactToken : flavor_text
+      ArtifactToken : id
+      ArtifactToken : name
+      ArtifactToken : oracle_text
+      ArtifactToken : type_line
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>

@@ -223,55 +223,10 @@
 <h1 id="class-cardcollection">Class: CardCollection</h1>
 <p><em>A collection of cards and associated costs.</em></p>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/CardCollection">mtgo:CardCollection</a></p>
-<pre class="mermaid"><code>erDiagram
-CardCollection {
-
-}
-Cost {
-    integer value  
-    boolean variable_cost  
-    uriorcurie id  
-}
-Card {
-    integer converted_mana_cost  
-    ColorList color  
-    string card_set  
-    string artist  
-    string flavor_text  
-    string type_line  
-    string card_type  
-    stringList card_subtype  
-    stringList card_supertype  
-    Rarity rarity  
-    string oracle_text  
-    uriorcurie id  
-    string name  
-    string description  
-}
-Ability {
-    string rules_text  
-    string ability_keyword  
-    uriorcurie id  
-}
-ManaCost {
-    ColorList color  
-    boolean snow  
-    boolean phyrexian  
-    boolean hybrid  
-    integer value  
-    boolean variable_cost  
-    uriorcurie id  
-}
-
-CardCollection ||--}o Card : "cards"
-CardCollection ||--}o Cost : "costs"
-Cost ||--|o Cost : "intersection"
-Cost ||--|o Cost : "union"
-Card ||--}o ManaCost : "mana_cost"
-Card ||--}o Ability : "ability"
-Ability ||--|o RuleStatement : "effect"
-ManaCost ||--|o Cost : "intersection"
-ManaCost ||--|o Cost : "union"
+<pre class="mermaid"><code> classDiagram
+    class CardCollection
+      CardCollection : cards
+      CardCollection : costs
 </code></pre>
 <!-- no inheritance hierarchy -->
 <h2 id="slots">Slots</h2>

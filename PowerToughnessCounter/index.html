@@ -228,14 +228,13 @@
 <h1 id="class-powertoughnesscounter">Class: PowerToughnessCounter</h1>
 <p><em>A counter that gives a power and toughness modifier to a creature.</em></p>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/PowerToughnessCounter">mtgo:PowerToughnessCounter</a></p>
-<pre class="mermaid"><code>erDiagram
-PowerToughnessCounter {
-    integer power_modifier  
-    integer toughness_modifier  
-    uriorcurie id  
-}
+<pre class="mermaid"><code> classDiagram
+    class PowerToughnessCounter
+      Counter &lt;|-- PowerToughnessCounter
 
-
+      PowerToughnessCounter : id
+      PowerToughnessCounter : power_modifier
+      PowerToughnessCounter : toughness_modifier
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>

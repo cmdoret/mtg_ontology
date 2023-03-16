@@ -231,14 +231,21 @@
 <li><strong>NOTE</strong>: this is an abstract class and should not be instantiated directly</li>
 </ul>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/AnyArtifact">mtgo:AnyArtifact</a></p>
-<pre class="mermaid"><code>erDiagram
-AnyArtifact {
-    uriorcurie id  
-    string name  
-    string description  
-}
+<pre class="mermaid"><code> classDiagram
+    class AnyArtifact
+      Permanent &lt;|-- AnyArtifact
+
+      AnyArtifact : description
+      AnyArtifact : id
+      AnyArtifact : name
 
 
+      AnyArtifact &lt;|-- Artifact
+      AnyArtifact &lt;|-- ArtifactToken
+
+      AnyArtifact : description
+      AnyArtifact : id
+      AnyArtifact : name
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>

@@ -309,15 +309,25 @@
 <h1 id="class-cost">Class: Cost</h1>
 <p><em>The cost of a card or ability.</em></p>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/Cost">mtgo:Cost</a></p>
-<pre class="mermaid"><code>erDiagram
-Cost {
-    integer value  
-    boolean variable_cost  
-    uriorcurie id  
-}
+<pre class="mermaid"><code> classDiagram
+    class Cost
+      Thing &lt;|-- Cost
 
-Cost ||--|o Cost : "intersection"
-Cost ||--|o Cost : "union"
+      Cost : id
+      Cost : intersection
+      Cost : union
+      Cost : value
+      Cost : variable_cost
+
+
+      Cost &lt;|-- ManaCost
+      Cost &lt;|-- LifeCost
+
+      Cost : id
+      Cost : intersection
+      Cost : union
+      Cost : value
+      Cost : variable_cost
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>

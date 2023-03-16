@@ -233,12 +233,17 @@
 <h1 id="class-counter">Class: Counter</h1>
 <p><em>A counter, such as a +1/+1 counter.</em></p>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/Counter">mtgo:Counter</a></p>
-<pre class="mermaid"><code>erDiagram
-Counter {
-    uriorcurie id  
-}
+<pre class="mermaid"><code> classDiagram
+    class Counter
+      Thing &lt;|-- Counter
+
+      Counter : id
 
 
+      Counter &lt;|-- PowerToughnessCounter
+      Counter &lt;|-- KeywordCounter
+
+      Counter : id
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>

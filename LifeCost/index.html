@@ -228,22 +228,15 @@
 <h1 id="class-lifecost">Class: LifeCost</h1>
 <p><em>The life cost of a card or ability.</em></p>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/LifeCost">mtgo:LifeCost</a></p>
-<pre class="mermaid"><code>erDiagram
-LifeCost {
-    integer value  
-    boolean variable_cost  
-    uriorcurie id  
-}
-Cost {
-    integer value  
-    boolean variable_cost  
-    uriorcurie id  
-}
+<pre class="mermaid"><code> classDiagram
+    class LifeCost
+      Cost &lt;|-- LifeCost
 
-LifeCost ||--|o Cost : "intersection"
-LifeCost ||--|o Cost : "union"
-Cost ||--|o Cost : "intersection"
-Cost ||--|o Cost : "union"
+      LifeCost : id
+      LifeCost : intersection
+      LifeCost : union
+      LifeCost : value
+      LifeCost : variable_cost
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>

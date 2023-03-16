@@ -233,14 +233,14 @@
 <h1 id="class-namedthing">Class: NamedThing</h1>
 <p><em>A generic grouping for any identifiable entity</em></p>
 <p>URI: <a href="http://schema.org/Thing">schema:Thing</a></p>
-<pre class="mermaid"><code>erDiagram
-NamedThing {
-    uriorcurie id  
-    string name  
-    string description  
-}
+<pre class="mermaid"><code> classDiagram
+    class NamedThing
+      NamedThing &lt;|-- Permanent
+      NamedThing &lt;|-- Card
 
-
+      NamedThing : description
+      NamedThing : id
+      NamedThing : name
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>

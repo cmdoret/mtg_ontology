@@ -231,14 +231,21 @@
 <li><strong>NOTE</strong>: this is an abstract class and should not be instantiated directly</li>
 </ul>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/AnyEnchantment">mtgo:AnyEnchantment</a></p>
-<pre class="mermaid"><code>erDiagram
-AnyEnchantment {
-    uriorcurie id  
-    string name  
-    string description  
-}
+<pre class="mermaid"><code> classDiagram
+    class AnyEnchantment
+      Permanent &lt;|-- AnyEnchantment
+
+      AnyEnchantment : description
+      AnyEnchantment : id
+      AnyEnchantment : name
 
 
+      AnyEnchantment &lt;|-- Enchantment
+      AnyEnchantment &lt;|-- EnchantmentToken
+
+      AnyEnchantment : description
+      AnyEnchantment : id
+      AnyEnchantment : name
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
