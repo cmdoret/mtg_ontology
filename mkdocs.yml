@@ -15,18 +15,10 @@ theme:
     - content.tabs.link
     - content.code.annotate
   palette:
-    - scheme: slate
-      primary: grey
-      accent: light blue
-      toggle:
-        icon: material/brightness-4
-        name: Switch to light mode
     - scheme: default
       primary: grey
       accent: light blue
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
+
 plugins:
   - search
   - mermaid2
