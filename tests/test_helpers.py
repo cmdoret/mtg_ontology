@@ -21,7 +21,7 @@ class TestSchema(unittest.TestCase):
         prefixmap = load_prefixmap()
 
         assert isinstance(prefixmap, dict)
-        assert 'mtgo' in prefixmap
+        assert "mtgo" in prefixmap
 
     def test_load_schema(self):
         schema = load_schema()
@@ -29,15 +29,13 @@ class TestSchema(unittest.TestCase):
     def test_instance_to_graph(self):
         card = Instant(
             id=str(MTGO.test_instant),
-            name='test-instant',
-            color='red',
-            type_line='instant',
-            card_type='instant'
+            name="test-instant",
+            color="red",
+            type_line="instant",
+            card_type="instant",
         )
         g = instance_to_graph(card)
         assert isinstance(g, Graph)
         type_triple = [x for x in g.triples((None, RDF.type, None))]
         assert len(type_triple) == 1
-        assert str(type_triple[0][2]) == 'mtg:Instant'
-
-        
+        assert type_triple[0][2] == MTGO.Instant
