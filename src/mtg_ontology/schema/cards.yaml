@@ -69,6 +69,8 @@ classes:
       - ability
       - artist
       - flavor_text
+      - front_face
+      - back_face
       - type_line
       - card_type
       - card_subtype
@@ -265,6 +267,16 @@ slots:
     range: string
     slot_uri: mtgo:flavor_text
     description: The lore text at the bottom of a card.
+  front_face:
+    range: Card
+    slot_uri: mtgo:front_face
+    description: Front face corresponding to this card (back) face.
+    inverse: back_face
+  back_face:
+    range: Card
+    slot_uri: mtgo:back_face
+    description: Back face corresponding to this card (front) face.
+    inverse: front_face
   oracle_text:
     range: string
     slot_uri: mtgo:oracle_text
