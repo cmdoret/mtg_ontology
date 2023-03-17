@@ -291,19 +291,27 @@ slots:
     slot_uri: mtgo:toughness
     description: The amount of damage needed to destroy a creature. This is the second number in the lower right corner of a creature card. 
     required: true
+  variable:
+    range: boolean
+    slot_uri: mtgo:variable
+    abstract: true
+    description: A variable quantity whose numeric values if set based on a condition or effect.
   variable_power:
     range: boolean
     slot_uri: mtgo:variable_power
     description: Whether a creature's power is variable. Denoted as * on cards.
+    is_a: variable
   variable_toughness:
     range: boolean
     slot_uri: mtgo:variable_toughness
     description: Whether a creature's toughness is variable. Denoted as * on cards.
+    is_a: variable
   variable_cost:
     range: boolean
     slot_uri: mtgo:variable_cost
     description: Whether a cost is variable. Denoted as X on cards.
     see_also: mtg:x
+    is_a: variable
   hybrid:
     range: boolean
     slot_uri: mtgo:hybrid
