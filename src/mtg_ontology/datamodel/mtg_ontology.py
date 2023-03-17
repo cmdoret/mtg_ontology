@@ -1,5 +1,5 @@
 # Auto generated from mtg_ontology.yaml by pythongen.py version: 0.9.0
-# Generation date: 2023-03-03T01:24:52
+# Generation date: 2023-03-17T03:19:51
 # Schema: mtgo
 #
 # id: https://cmdoret.net/mtg_ontology/
@@ -372,6 +372,8 @@ class Card(NamedThing):
     ability: Optional[Union[Union[str, AbilityId], List[Union[str, AbilityId]]]] = empty_list()
     artist: Optional[str] = None
     flavor_text: Optional[str] = None
+    front_face: Optional[Union[str, CardId]] = None
+    back_face: Optional[Union[str, CardId]] = None
     card_subtype: Optional[Union[str, List[str]]] = empty_list()
     card_supertype: Optional[Union[str, List[str]]] = empty_list()
     rarity: Optional[Union[str, "Rarity"]] = None
@@ -413,6 +415,12 @@ class Card(NamedThing):
 
         if self.flavor_text is not None and not isinstance(self.flavor_text, str):
             self.flavor_text = str(self.flavor_text)
+
+        if self.front_face is not None and not isinstance(self.front_face, CardId):
+            self.front_face = CardId(self.front_face)
+
+        if self.back_face is not None and not isinstance(self.back_face, CardId):
+            self.back_face = CardId(self.back_face)
 
         if not isinstance(self.card_subtype, list):
             self.card_subtype = [self.card_subtype] if self.card_subtype is not None else []
@@ -1786,6 +1794,12 @@ slots.artist = Slot(uri=MTGO.artist, name="artist", curie=MTGO.curie('artist'),
 slots.flavor_text = Slot(uri=MTGO.flavor_text, name="flavor_text", curie=MTGO.curie('flavor_text'),
                    model_uri=MTGO.flavor_text, domain=None, range=Optional[str])
 
+slots.front_face = Slot(uri=MTGO.front_face, name="front_face", curie=MTGO.curie('front_face'),
+                   model_uri=MTGO.front_face, domain=None, range=Optional[Union[str, CardId]])
+
+slots.back_face = Slot(uri=MTGO.back_face, name="back_face", curie=MTGO.curie('back_face'),
+                   model_uri=MTGO.back_face, domain=None, range=Optional[Union[str, CardId]])
+
 slots.oracle_text = Slot(uri=MTGO.oracle_text, name="oracle_text", curie=MTGO.curie('oracle_text'),
                    model_uri=MTGO.oracle_text, domain=None, range=Optional[str])
 
@@ -1794,6 +1808,9 @@ slots.power = Slot(uri=MTGO.power, name="power", curie=MTGO.curie('power'),
 
 slots.toughness = Slot(uri=MTGO.toughness, name="toughness", curie=MTGO.curie('toughness'),
                    model_uri=MTGO.toughness, domain=None, range=int)
+
+slots.variable = Slot(uri=MTGO.variable, name="variable", curie=MTGO.curie('variable'),
+                   model_uri=MTGO.variable, domain=None, range=Optional[Union[bool, Bool]])
 
 slots.variable_power = Slot(uri=MTGO.variable_power, name="variable_power", curie=MTGO.curie('variable_power'),
                    model_uri=MTGO.variable_power, domain=None, range=Optional[Union[bool, Bool]])

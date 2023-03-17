@@ -296,6 +296,10 @@
                     "description": "The artist who drew a card's illustration.",
                     "type": "string"
                 },
+                "back_face": {
+                    "description": "Back face corresponding to this card (front) face.",
+                    "type": "string"
+                },
                 "card_set": {
                     "description": "A pool of cards released together and designed for the same play environment.",
                     "type": "string"
@@ -335,6 +339,10 @@
                 },
                 "flavor_text": {
                     "description": "The lore text at the bottom of a card.",
+                    "type": "string"
+                },
+                "front_face": {
+                    "description": "Front face corresponding to this card (back) face.",
                     "type": "string"
                 },
                 "id": {
@@ -579,6 +587,10 @@
                     "description": "The artist who drew a card's illustration.",
                     "type": "string"
                 },
+                "back_face": {
+                    "description": "Back face corresponding to this card (front) face.",
+                    "type": "string"
+                },
                 "card_set": {
                     "description": "A pool of cards released together and designed for the same play environment.",
                     "type": "string"
@@ -618,6 +630,10 @@
                 },
                 "flavor_text": {
                     "description": "The lore text at the bottom of a card.",
+                    "type": "string"
+                },
+                "front_face": {
+                    "description": "Front face corresponding to this card (back) face.",
                     "type": "string"
                 },
                 "id": {
@@ -788,6 +804,10 @@
                     "description": "The artist who drew a card's illustration.",
                     "type": "string"
                 },
+                "back_face": {
+                    "description": "Back face corresponding to this card (front) face.",
+                    "type": "string"
+                },
                 "card_set": {
                     "description": "A pool of cards released together and designed for the same play environment.",
                     "type": "string"
@@ -827,6 +847,10 @@
                 },
                 "flavor_text": {
                     "description": "The lore text at the bottom of a card.",
+                    "type": "string"
+                },
+                "front_face": {
+                    "description": "Front face corresponding to this card (back) face.",
                     "type": "string"
                 },
                 "id": {
@@ -961,6 +985,10 @@
                     "description": "The artist who drew a card's illustration.",
                     "type": "string"
                 },
+                "back_face": {
+                    "description": "Back face corresponding to this card (front) face.",
+                    "type": "string"
+                },
                 "card_set": {
                     "description": "A pool of cards released together and designed for the same play environment.",
                     "type": "string"
@@ -1000,6 +1028,10 @@
                 },
                 "flavor_text": {
                     "description": "The lore text at the bottom of a card.",
+                    "type": "string"
+                },
+                "front_face": {
+                    "description": "Front face corresponding to this card (back) face.",
                     "type": "string"
                 },
                 "id": {
@@ -1088,6 +1120,10 @@
                     "description": "The artist who drew a card's illustration.",
                     "type": "string"
                 },
+                "back_face": {
+                    "description": "Back face corresponding to this card (front) face.",
+                    "type": "string"
+                },
                 "card_set": {
                     "description": "A pool of cards released together and designed for the same play environment.",
                     "type": "string"
@@ -1127,6 +1163,10 @@
                 },
                 "flavor_text": {
                     "description": "The lore text at the bottom of a card.",
+                    "type": "string"
+                },
+                "front_face": {
+                    "description": "Front face corresponding to this card (back) face.",
                     "type": "string"
                 },
                 "id": {
@@ -1538,6 +1578,10 @@
                     "description": "The artist who drew a card's illustration.",
                     "type": "string"
                 },
+                "back_face": {
+                    "description": "Back face corresponding to this card (front) face.",
+                    "type": "string"
+                },
                 "card_set": {
                     "description": "A pool of cards released together and designed for the same play environment.",
                     "type": "string"
@@ -1577,6 +1621,10 @@
                 },
                 "flavor_text": {
                     "description": "The lore text at the bottom of a card.",
+                    "type": "string"
+                },
+                "front_face": {
+                    "description": "Front face corresponding to this card (back) face.",
                     "type": "string"
                 },
                 "id": {

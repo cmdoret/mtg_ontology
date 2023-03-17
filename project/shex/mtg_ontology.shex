@@ -148,6 +148,8 @@ linkml:Nodeidentifier NONLITERAL
           <ability> @<Ability> * ;
           <artist> @linkml:String ? ;
           <flavor_text> @linkml:String ? ;
+          <front_face> @<Card> ? ;
+          <back_face> @<Card> ? ;
           <type_line> @linkml:String ;
           <card_type> @linkml:String ;
           <card_subtype> @linkml:String * ;

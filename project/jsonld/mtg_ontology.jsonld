@@ -1144,6 +1144,40 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "front_face",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/front_face",
+      "description": "Front face corresponding to this card (back) face.",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/front_face"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/front_face",
+      "owner": "Card",
+      "domain_of": [
+        "Card"
+      ],
+      "inverse": "back_face",
+      "range": "Card",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "back_face",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/back_face",
+      "description": "Back face corresponding to this card (front) face.",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/back_face"
+      ],
+      "slot_uri": "https://cmdoret.net/mtg_ontology/back_face",
+      "owner": "Card",
+      "domain_of": [
+        "Card"
+      ],
+      "inverse": "front_face",
+      "range": "Card",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "oracle_text",
       "definition_uri": "https://cmdoret.net/mtg_ontology/cards/oracle_text",
       "description": "The official wording for the card effects.",
@@ -1195,6 +1229,19 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "variable",
+      "definition_uri": "https://cmdoret.net/mtg_ontology/cards/variable",
+      "description": "A variable quantity whose numeric values if set based on a condition or effect.",
+      "from_schema": "https://cmdoret.net/mtg_ontology/cards",
+      "mappings": [
+        "https://cmdoret.net/mtg_ontology/variable"
+      ],
+      "abstract": true,
+      "slot_uri": "https://cmdoret.net/mtg_ontology/variable",
+      "range": "boolean",
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "variable_power",
       "definition_uri": "https://cmdoret.net/mtg_ontology/cards/variable_power",
       "description": "Whether a creature's power is variable. Denoted as * on cards.",
@@ -1202,6 +1249,7 @@
       "mappings": [
         "https://cmdoret.net/mtg_ontology/variable_power"
       ],
+      "is_a": "variable",
       "slot_uri": "https://cmdoret.net/mtg_ontology/variable_power",
       "owner": "AnyCreature",
       "domain_of": [
@@ -1218,6 +1266,7 @@
       "mappings": [
         "https://cmdoret.net/mtg_ontology/variable_toughness"
       ],
+      "is_a": "variable",
       "slot_uri": "https://cmdoret.net/mtg_ontology/variable_toughness",
       "owner": "AnyCreature",
       "domain_of": [
@@ -1237,6 +1286,7 @@
       "mappings": [
         "https://cmdoret.net/mtg_ontology/variable_cost"
       ],
+      "is_a": "variable",
       "slot_uri": "https://cmdoret.net/mtg_ontology/variable_cost",
       "owner": "Cost",
       "domain_of": [
@@ -2242,6 +2292,8 @@
         "ability",
         "artist",
         "flavor_text",
+        "front_face",
+        "back_face",
         "type_line",
         "card_type",
         "card_subtype",
@@ -2337,6 +2389,8 @@
         "ability",
         "artist",
         "flavor_text",
+        "front_face",
+        "back_face",
         "type_line",
         "card_type",
         "card_subtype",
@@ -2371,6 +2425,8 @@
         "ability",
         "artist",
         "flavor_text",
+        "front_face",
+        "back_face",
         "type_line",
         "card_type",
         "card_subtype",
@@ -2408,6 +2464,8 @@
         "ability",
         "artist",
         "flavor_text",
+        "front_face",
+        "back_face",
         "type_line",
         "card_type",
         "card_subtype",
@@ -2476,6 +2534,8 @@
         "ability",
         "artist",
         "flavor_text",
+        "front_face",
+        "back_face",
         "type_line",
         "card_type",
         "card_subtype",
@@ -2544,6 +2604,8 @@
         "ability",
         "artist",
         "flavor_text",
+        "front_face",
+        "back_face",
         "type_line",
         "card_type",
         "card_subtype",
@@ -2620,6 +2682,8 @@
         "ability",
         "artist",
         "flavor_text",
+        "front_face",
+        "back_face",
         "type_line",
         "card_type",
         "card_subtype",
@@ -3088,7 +3152,7 @@
   "source_file": "mtg_ontology.yaml",
   "source_file_date": "2023-03-02T05:41:05",
   "source_file_size": 1540,
-  "generation_date": "2023-03-03T01:24:31",
+  "generation_date": "2023-03-17T03:19:26",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/mtg_ontology.context.jsonld",

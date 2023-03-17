@@ -40,6 +40,8 @@ message Artifact
  repeated  ability ability = 0
   string artist = 0
   string flavorText = 0
+  card frontFace = 0
+  card backFace = 0
   string typeLine = 0
   string cardType = 0
  repeated  string cardSubtype = 0
@@ -97,6 +99,8 @@ message Creature
  repeated  ability ability = 0
   string artist = 0
   string flavorText = 0
+  card frontFace = 0
+  card backFace = 0
   string typeLine = 0
   string cardType = 0
  repeated  string cardSubtype = 0
@@ -142,6 +146,8 @@ message Enchantment
  repeated  ability ability = 0
   string artist = 0
   string flavorText = 0
+  card frontFace = 0
+  card backFace = 0
   string typeLine = 0
   string cardType = 0
  repeated  string cardSubtype = 0
@@ -179,6 +185,8 @@ message Instant
  repeated  ability ability = 0
   string artist = 0
   string flavorText = 0
+  card frontFace = 0
+  card backFace = 0
   string typeLine = 0
   string cardType = 0
  repeated  string cardSubtype = 0
@@ -206,6 +214,8 @@ message Land
  repeated  ability ability = 0
   string artist = 0
   string flavorText = 0
+  card frontFace = 0
+  card backFace = 0
   string typeLine = 0
   string cardType = 0
  repeated  string cardSubtype = 0
@@ -281,6 +291,8 @@ message Sorcery
  repeated  ability ability = 0
   string artist = 0
   string flavorText = 0
+  card frontFace = 0
+  card backFace = 0
   string typeLine = 0
   string cardType = 0
  repeated  string cardSubtype = 0
