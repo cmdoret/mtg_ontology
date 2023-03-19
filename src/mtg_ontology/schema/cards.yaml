@@ -347,6 +347,7 @@ slots:
     slot_uri: mtgo:card_type
     description: The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).
     required: true
+    multivalued: true
   value:
     range: integer
     slot_uri: mtgo:value
