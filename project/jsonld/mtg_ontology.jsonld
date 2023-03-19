@@ -1415,6 +1415,7 @@
         "https://cmdoret.net/mtg_ontology/card_type"
       ],
       "slot_uri": "https://cmdoret.net/mtg_ontology/card_type",
+      "multivalued": true,
       "owner": "Card",
       "domain_of": [
         "Token",
@@ -3152,7 +3153,7 @@
   "source_file": "mtg_ontology.yaml",
   "source_file_date": "2023-03-02T05:41:05",
   "source_file_size": 1540,
-  "generation_date": "2023-03-17T03:19:26",
+  "generation_date": "2023-03-19T02:09:25",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/mtg_ontology.context.jsonld",

@@ -1,5 +1,5 @@
 # Auto generated from mtg_ontology.yaml by pythongen.py version: 0.9.0
-# Generation date: 2023-03-17T03:19:51
+# Generation date: 2023-03-19T02:09:47
 # Schema: mtgo
 #
 # id: https://cmdoret.net/mtg_ontology/
@@ -291,7 +291,7 @@ class Token(Permanent):
     name: str = None
     color: Union[Union[str, "Color"], List[Union[str, "Color"]]] = None
     type_line: str = None
-    card_type: str = None
+    card_type: Union[str, List[str]] = None
     card_set: Optional[str] = None
     ability: Optional[Union[Union[str, AbilityId], List[Union[str, AbilityId]]]] = empty_list()
     artist: Optional[str] = None
@@ -319,8 +319,9 @@ class Token(Permanent):
 
         if self._is_empty(self.card_type):
             self.MissingRequiredField("card_type")
-        if not isinstance(self.card_type, str):
-            self.card_type = str(self.card_type)
+        if not isinstance(self.card_type, list):
+            self.card_type = [self.card_type] if self.card_type is not None else []
+        self.card_type = [v if isinstance(v, str) else str(v) for v in self.card_type]
 
         if self.card_set is not None and not isinstance(self.card_set, str):
             self.card_set = str(self.card_set)
@@ -365,7 +366,7 @@ class Card(NamedThing):
     name: str = None
     color: Union[Union[str, "Color"], List[Union[str, "Color"]]] = None
     type_line: str = None
-    card_type: str = None
+    card_type: Union[str, List[str]] = None
     mana_cost: Optional[Union[Union[str, ManaCostId], List[Union[str, ManaCostId]]]] = empty_list()
     converted_mana_cost: Optional[int] = None
     card_set: Optional[str] = None
@@ -393,8 +394,9 @@ class Card(NamedThing):
 
         if self._is_empty(self.card_type):
             self.MissingRequiredField("card_type")
-        if not isinstance(self.card_type, str):
-            self.card_type = str(self.card_type)
+        if not isinstance(self.card_type, list):
+            self.card_type = [self.card_type] if self.card_type is not None else []
+        self.card_type = [v if isinstance(v, str) else str(v) for v in self.card_type]
 
         if not isinstance(self.mana_cost, list):
             self.mana_cost = [self.mana_cost] if self.mana_cost is not None else []
@@ -524,7 +526,7 @@ class Sorcery(Card):
     name: str = None
     color: Union[Union[str, "Color"], List[Union[str, "Color"]]] = None
     type_line: str = None
-    card_type: str = None
+    card_type: Union[str, List[str]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -551,7 +553,7 @@ class Instant(Card):
     name: str = None
     color: Union[Union[str, "Color"], List[Union[str, "Color"]]] = None
     type_line: str = None
-    card_type: str = None
+    card_type: Union[str, List[str]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -578,7 +580,7 @@ class Enchantment(Card):
     name: str = None
     color: Union[Union[str, "Color"], List[Union[str, "Color"]]] = None
     type_line: str = None
-    card_type: str = None
+    card_type: Union[str, List[str]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -605,7 +607,7 @@ class EnchantmentToken(Token):
     name: str = None
     color: Union[Union[str, "Color"], List[Union[str, "Color"]]] = None
     type_line: str = None
-    card_type: str = None
+    card_type: Union[str, List[str]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -632,7 +634,7 @@ class Artifact(Card):
     name: str = None
     color: Union[Union[str, "Color"], List[Union[str, "Color"]]] = None
     type_line: str = None
-    card_type: str = None
+    card_type: Union[str, List[str]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -659,7 +661,7 @@ class ArtifactToken(Token):
     name: str = None
     color: Union[Union[str, "Color"], List[Union[str, "Color"]]] = None
     type_line: str = None
-    card_type: str = None
+    card_type: Union[str, List[str]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -686,7 +688,7 @@ class Creature(Card):
     name: str = None
     color: Union[Union[str, "Color"], List[Union[str, "Color"]]] = None
     type_line: str = None
-    card_type: str = None
+    card_type: Union[str, List[str]] = None
     power: int = None
     toughness: int = None
     variable_power: Optional[Union[bool, Bool]] = None
@@ -733,7 +735,7 @@ class CreatureToken(Token):
     name: str = None
     color: Union[Union[str, "Color"], List[Union[str, "Color"]]] = None
     type_line: str = None
-    card_type: str = None
+    card_type: Union[str, List[str]] = None
     power: int = None
     toughness: int = None
     variable_power: Optional[Union[bool, Bool]] = None
@@ -780,7 +782,7 @@ class Land(Card):
     name: str = None
     color: Union[Union[str, "Color"], List[Union[str, "Color"]]] = None
     type_line: str = None
-    card_type: str = None
+    card_type: Union[str, List[str]] = None
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
         if self._is_empty(self.id):
@@ -1840,7 +1842,7 @@ slots.card_supertype = Slot(uri=MTGO.card_supertype, name="card_supertype", curi
                    model_uri=MTGO.card_supertype, domain=None, range=Optional[Union[str, List[str]]])
 
 slots.card_type = Slot(uri=MTGO.card_type, name="card_type", curie=MTGO.curie('card_type'),
-                   model_uri=MTGO.card_type, domain=None, range=str)
+                   model_uri=MTGO.card_type, domain=None, range=Union[str, List[str]])
 
 slots.value = Slot(uri=MTGO.value, name="value", curie=MTGO.curie('value'),
                    model_uri=MTGO.value, domain=None, range=Optional[int])

@@ -33,7 +33,6 @@ CREATE TABLE "Artifact" (
 	front_face TEXT, 
 	back_face TEXT, 
 	type_line TEXT NOT NULL, 
-	card_type TEXT NOT NULL, 
 	rarity VARCHAR(8), 
 	oracle_text TEXT, 
 	PRIMARY KEY (id)
@@ -47,7 +46,6 @@ CREATE TABLE "ArtifactToken" (
 	artist TEXT, 
 	flavor_text TEXT, 
 	type_line TEXT NOT NULL, 
-	card_type TEXT NOT NULL, 
 	oracle_text TEXT, 
 	PRIMARY KEY (id)
 );
@@ -86,7 +84,6 @@ CREATE TABLE "Creature" (
 	front_face TEXT, 
 	back_face TEXT, 
 	type_line TEXT NOT NULL, 
-	card_type TEXT NOT NULL, 
 	rarity VARCHAR(8), 
 	oracle_text TEXT, 
 	power INTEGER NOT NULL, 
@@ -104,7 +101,6 @@ CREATE TABLE "CreatureToken" (
 	artist TEXT, 
 	flavor_text TEXT, 
 	type_line TEXT NOT NULL, 
-	card_type TEXT NOT NULL, 
 	oracle_text TEXT, 
 	power INTEGER NOT NULL, 
 	toughness INTEGER NOT NULL, 
@@ -125,7 +121,6 @@ CREATE TABLE "Enchantment" (
 	front_face TEXT, 
 	back_face TEXT, 
 	type_line TEXT NOT NULL, 
-	card_type TEXT NOT NULL, 
 	rarity VARCHAR(8), 
 	oracle_text TEXT, 
 	PRIMARY KEY (id)
@@ -139,7 +134,6 @@ CREATE TABLE "EnchantmentToken" (
 	artist TEXT, 
 	flavor_text TEXT, 
 	type_line TEXT NOT NULL, 
-	card_type TEXT NOT NULL, 
 	oracle_text TEXT, 
 	PRIMARY KEY (id)
 );
@@ -156,7 +150,6 @@ CREATE TABLE "Instant" (
 	front_face TEXT, 
 	back_face TEXT, 
 	type_line TEXT NOT NULL, 
-	card_type TEXT NOT NULL, 
 	rarity VARCHAR(8), 
 	oracle_text TEXT, 
 	PRIMARY KEY (id)
@@ -181,7 +174,6 @@ CREATE TABLE "Land" (
 	front_face TEXT, 
 	back_face TEXT, 
 	type_line TEXT NOT NULL, 
-	card_type TEXT NOT NULL, 
 	rarity VARCHAR(8), 
 	oracle_text TEXT, 
 	PRIMARY KEY (id)
@@ -231,7 +223,6 @@ CREATE TABLE "Sorcery" (
 	front_face TEXT, 
 	back_face TEXT, 
 	type_line TEXT NOT NULL, 
-	card_type TEXT NOT NULL, 
 	rarity VARCHAR(8), 
 	oracle_text TEXT, 
 	PRIMARY KEY (id)
@@ -267,7 +258,6 @@ CREATE TABLE "Token" (
 	artist TEXT, 
 	flavor_text TEXT, 
 	type_line TEXT NOT NULL, 
-	card_type TEXT NOT NULL, 
 	oracle_text TEXT, 
 	PRIMARY KEY (id)
 );
@@ -354,6 +344,13 @@ CREATE TABLE "Artifact_ability" (
 	FOREIGN KEY(backref_id) REFERENCES "Artifact" (id)
 );
 
+CREATE TABLE "Artifact_card_type" (
+	backref_id TEXT, 
+	card_type TEXT NOT NULL, 
+	PRIMARY KEY (backref_id, card_type), 
+	FOREIGN KEY(backref_id) REFERENCES "Artifact" (id)
+);
+
 CREATE TABLE "Artifact_card_subtype" (
 	backref_id TEXT, 
 	card_subtype TEXT, 
@@ -379,6 +376,13 @@ CREATE TABLE "ArtifactToken_ability" (
 	backref_id TEXT, 
 	ability TEXT, 
 	PRIMARY KEY (backref_id, ability), 
+	FOREIGN KEY(backref_id) REFERENCES "ArtifactToken" (id)
+);
+
+CREATE TABLE "ArtifactToken_card_type" (
+	backref_id TEXT, 
+	card_type TEXT NOT NULL, 
+	PRIMARY KEY (backref_id, card_type), 
 	FOREIGN KEY(backref_id) REFERENCES "ArtifactToken" (id)
 );
 
@@ -410,6 +414,13 @@ CREATE TABLE "Creature_ability" (
 	FOREIGN KEY(backref_id) REFERENCES "Creature" (id)
 );
 
+CREATE TABLE "Creature_card_type" (
+	backref_id TEXT, 
+	card_type TEXT NOT NULL, 
+	PRIMARY KEY (backref_id, card_type), 
+	FOREIGN KEY(backref_id) REFERENCES "Creature" (id)
+);
+
 CREATE TABLE "Creature_card_subtype" (
 	backref_id TEXT, 
 	card_subtype TEXT, 
@@ -435,6 +446,13 @@ CREATE TABLE "CreatureToken_ability" (
 	backref_id TEXT, 
 	ability TEXT, 
 	PRIMARY KEY (backref_id, ability), 
+	FOREIGN KEY(backref_id) REFERENCES "CreatureToken" (id)
+);
+
+CREATE TABLE "CreatureToken_card_type" (
+	backref_id TEXT, 
+	card_type TEXT NOT NULL, 
+	PRIMARY KEY (backref_id, card_type), 
 	FOREIGN KEY(backref_id) REFERENCES "CreatureToken" (id)
 );
 
@@ -466,6 +484,13 @@ CREATE TABLE "Enchantment_ability" (
 	FOREIGN KEY(backref_id) REFERENCES "Enchantment" (id)
 );
 
+CREATE TABLE "Enchantment_card_type" (
+	backref_id TEXT, 
+	card_type TEXT NOT NULL, 
+	PRIMARY KEY (backref_id, card_type), 
+	FOREIGN KEY(backref_id) REFERENCES "Enchantment" (id)
+);
+
 CREATE TABLE "Enchantment_card_subtype" (
 	backref_id TEXT, 
 	card_subtype TEXT, 
@@ -491,6 +516,13 @@ CREATE TABLE "EnchantmentToken_ability" (
 	backref_id TEXT, 
 	ability TEXT, 
 	PRIMARY KEY (backref_id, ability), 
+	FOREIGN KEY(backref_id) REFERENCES "EnchantmentToken" (id)
+);
+
+CREATE TABLE "EnchantmentToken_card_type" (
+	backref_id TEXT, 
+	card_type TEXT NOT NULL, 
+	PRIMARY KEY (backref_id, card_type), 
 	FOREIGN KEY(backref_id) REFERENCES "EnchantmentToken" (id)
 );
 
@@ -522,6 +554,13 @@ CREATE TABLE "Instant_ability" (
 	FOREIGN KEY(backref_id) REFERENCES "Instant" (id)
 );
 
+CREATE TABLE "Instant_card_type" (
+	backref_id TEXT, 
+	card_type TEXT NOT NULL, 
+	PRIMARY KEY (backref_id, card_type), 
+	FOREIGN KEY(backref_id) REFERENCES "Instant" (id)
+);
+
 CREATE TABLE "Instant_card_subtype" (
 	backref_id TEXT, 
 	card_subtype TEXT, 
@@ -547,6 +586,13 @@ CREATE TABLE "Land_ability" (
 	backref_id TEXT, 
 	ability TEXT, 
 	PRIMARY KEY (backref_id, ability), 
+	FOREIGN KEY(backref_id) REFERENCES "Land" (id)
+);
+
+CREATE TABLE "Land_card_type" (
+	backref_id TEXT, 
+	card_type TEXT NOT NULL, 
+	PRIMARY KEY (backref_id, card_type), 
 	FOREIGN KEY(backref_id) REFERENCES "Land" (id)
 );
 
@@ -585,6 +631,13 @@ CREATE TABLE "Sorcery_ability" (
 	FOREIGN KEY(backref_id) REFERENCES "Sorcery" (id)
 );
 
+CREATE TABLE "Sorcery_card_type" (
+	backref_id TEXT, 
+	card_type TEXT NOT NULL, 
+	PRIMARY KEY (backref_id, card_type), 
+	FOREIGN KEY(backref_id) REFERENCES "Sorcery" (id)
+);
+
 CREATE TABLE "Sorcery_card_subtype" (
 	backref_id TEXT, 
 	card_subtype TEXT, 
@@ -610,6 +663,13 @@ CREATE TABLE "Token_ability" (
 	backref_id TEXT, 
 	ability TEXT, 
 	PRIMARY KEY (backref_id, ability), 
+	FOREIGN KEY(backref_id) REFERENCES "Token" (id)
+);
+
+CREATE TABLE "Token_card_type" (
+	backref_id TEXT, 
+	card_type TEXT NOT NULL, 
+	PRIMARY KEY (backref_id, card_type), 
 	FOREIGN KEY(backref_id) REFERENCES "Token" (id)
 );
 

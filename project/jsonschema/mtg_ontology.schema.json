@@ -320,7 +320,10 @@
                 },
                 "card_type": {
                     "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
-                    "type": "string"
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "color": {
                     "description": "The color of a card.",
@@ -418,7 +421,10 @@
                 },
                 "card_type": {
                     "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
-                    "type": "string"
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "color": {
                     "description": "The color of a card.",
@@ -611,7 +617,10 @@
                 },
                 "card_type": {
                     "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
-                    "type": "string"
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "color": {
                     "description": "The color of a card.",
@@ -727,7 +736,10 @@
                 },
                 "card_type": {
                     "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
-                    "type": "string"
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "color": {
                     "description": "The color of a card.",
@@ -828,7 +840,10 @@
                 },
                 "card_type": {
                     "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
-                    "type": "string"
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "color": {
                     "description": "The color of a card.",
@@ -926,7 +941,10 @@
                 },
                 "card_type": {
                     "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
-                    "type": "string"
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "color": {
                     "description": "The color of a card.",
@@ -1009,7 +1027,10 @@
                 },
                 "card_type": {
                     "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
-                    "type": "string"
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "color": {
                     "description": "The color of a card.",
@@ -1144,7 +1165,10 @@
                 },
                 "card_type": {
                     "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
-                    "type": "string"
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "color": {
                     "description": "The color of a card.",
@@ -1602,7 +1626,10 @@
                 },
                 "card_type": {
                     "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
-                    "type": "string"
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "color": {
                     "description": "The color of a card.",
@@ -1822,7 +1849,10 @@
                 },
                 "card_type": {
                     "description": "The text line below a card's illustration containing the card's type, subtype and supertype (if applicable).",
-                    "type": "string"
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "color": {
                     "description": "The color of a card.",

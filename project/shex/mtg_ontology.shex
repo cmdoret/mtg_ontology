@@ -151,7 +151,7 @@ linkml:Nodeidentifier NONLITERAL
           <front_face> @<Card> ? ;
           <back_face> @<Card> ? ;
           <type_line> @linkml:String ;
-          <card_type> @linkml:String ;
+          <card_type> @linkml:String + ;
           <card_subtype> @linkml:String * ;
           <card_supertype> @linkml:String * ;
           <rarity> @<Rarity> ? ;
@@ -418,7 +418,7 @@ linkml:Nodeidentifier NONLITERAL
              <artist> @linkml:String ? ;
              <flavor_text> @linkml:String ? ;
              <type_line> @linkml:String ;
-             <card_type> @linkml:String ;
+             <card_type> @linkml:String + ;
              <card_subtype> @linkml:String * ;
              <card_supertype> @linkml:String * ;
              <oracle_text> @linkml:String ?

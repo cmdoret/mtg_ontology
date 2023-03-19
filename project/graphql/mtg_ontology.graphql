@@ -75,7 +75,7 @@ type Artifact implements AnyArtifact
     frontFace: Card
     backFace: Card
     typeLine: String!
-    cardType: String!
+    cardType: [String]!
     cardSubtype: [String]
     cardSupertype: [String]
     rarity: Rarity
@@ -93,7 +93,7 @@ type ArtifactToken implements AnyArtifact
     artist: String
     flavorText: String
     typeLine: String!
-    cardType: String!
+    cardType: [String]!
     cardSubtype: [String]
     cardSupertype: [String]
     oracleText: String
@@ -114,7 +114,7 @@ interface Card
     frontFace: Card
     backFace: Card
     typeLine: String!
-    cardType: String!
+    cardType: [String]!
     cardSubtype: [String]
     cardSupertype: [String]
     rarity: Rarity
@@ -156,7 +156,7 @@ type Creature implements AnyCreature
     frontFace: Card
     backFace: Card
     typeLine: String!
-    cardType: String!
+    cardType: [String]!
     cardSubtype: [String]
     cardSupertype: [String]
     rarity: Rarity
@@ -178,7 +178,7 @@ type CreatureToken implements AnyCreature
     artist: String
     flavorText: String
     typeLine: String!
-    cardType: String!
+    cardType: [String]!
     cardSubtype: [String]
     cardSupertype: [String]
     oracleText: String
@@ -203,7 +203,7 @@ type Enchantment implements AnyEnchantment
     frontFace: Card
     backFace: Card
     typeLine: String!
-    cardType: String!
+    cardType: [String]!
     cardSubtype: [String]
     cardSupertype: [String]
     rarity: Rarity
@@ -221,7 +221,7 @@ type EnchantmentToken implements AnyEnchantment
     artist: String
     flavorText: String
     typeLine: String!
-    cardType: String!
+    cardType: [String]!
     cardSubtype: [String]
     cardSupertype: [String]
     oracleText: String
@@ -242,7 +242,7 @@ type Instant
     frontFace: Card
     backFace: Card
     typeLine: String!
-    cardType: String!
+    cardType: [String]!
     cardSubtype: [String]
     cardSupertype: [String]
     rarity: Rarity
@@ -271,7 +271,7 @@ type Land implements Permanent
     frontFace: Card
     backFace: Card
     typeLine: String!
-    cardType: String!
+    cardType: [String]!
     cardSubtype: [String]
     cardSupertype: [String]
     rarity: Rarity
@@ -355,7 +355,7 @@ type Sorcery
     frontFace: Card
     backFace: Card
     typeLine: String!
-    cardType: String!
+    cardType: [String]!
     cardSubtype: [String]
     cardSupertype: [String]
     rarity: Rarity
@@ -409,7 +409,7 @@ type Token
     artist: String
     flavorText: String
     typeLine: String!
-    cardType: String!
+    cardType: [String]!
     cardSubtype: [String]
     cardSupertype: [String]
     oracleText: String
