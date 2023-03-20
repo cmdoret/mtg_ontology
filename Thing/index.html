@@ -228,18 +228,12 @@
 <h1 id="class-thing">Class: Thing</h1>
 <p><em>A generic grouping for any identifiable entity</em></p>
 <p>URI: <a href="http://schema.org/Thing">schema:Thing</a></p>
-<pre class="mermaid"><code> classDiagram
-    class Thing
-      Thing &lt;|-- Spell
-      Thing &lt;|-- Cost
-      Thing &lt;|-- Mana
-      Thing &lt;|-- Ability
-      Thing &lt;|-- RuleStatement
-      Thing &lt;|-- Specification
-      Thing &lt;|-- TimeSpecification
-      Thing &lt;|-- Counter
+<pre class="mermaid"><code>erDiagram
+Thing {
+    uriorcurie id  
+}
 
-      Thing : id
+
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
@@ -268,7 +262,7 @@
 <tbody>
 <tr>
 <td><a href="../id/">id</a></td>
-<td>1..1 <br/> <a href="xsd:anyURI">xsd:anyURI</a></td>
+<td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#anyURI">xsd:anyURI</a></td>
 <td>A unique identifier for a thing</td>
 <td>direct</td>
 </tr>
