@@ -391,16 +391,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://cmdoret.github.io/mtg_ontology/mtgoa/</loc>
-         <lastmod>2023-03-20</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://cmdoret.github.io/mtg_ontology/mtgoc/</loc>
-         <lastmod>2023-03-20</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://cmdoret.github.io/mtg_ontology/name/</loc>
          <lastmod>2023-03-20</lastmod>
          <changefreq>daily</changefreq>
