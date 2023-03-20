@@ -230,28 +230,28 @@
 <p>URI: <a href="http://schema.org/Thing">schema:Thing</a></p>
 <pre class="mermaid"><code> classDiagram
     class Thing
+      Thing &lt;|-- Spell
+      Thing &lt;|-- Cost
+      Thing &lt;|-- Mana
       Thing &lt;|-- Ability
       Thing &lt;|-- RuleStatement
       Thing &lt;|-- Specification
       Thing &lt;|-- TimeSpecification
       Thing &lt;|-- Counter
-      Thing &lt;|-- Spell
-      Thing &lt;|-- Cost
-      Thing &lt;|-- Mana
 
       Thing : id
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
 <li><strong>Thing</strong><ul>
+<li><a href="../Spell/">Spell</a></li>
+<li><a href="../Cost/">Cost</a></li>
+<li><a href="../Mana/">Mana</a></li>
 <li><a href="../Ability/">Ability</a></li>
 <li><a href="../RuleStatement/">RuleStatement</a></li>
 <li><a href="../Specification/">Specification</a></li>
 <li><a href="../TimeSpecification/">TimeSpecification</a></li>
 <li><a href="../Counter/">Counter</a></li>
-<li><a href="../Spell/">Spell</a></li>
-<li><a href="../Cost/">Cost</a></li>
-<li><a href="../Mana/">Mana</a></li>
 </ul>
 </li>
 </ul>
