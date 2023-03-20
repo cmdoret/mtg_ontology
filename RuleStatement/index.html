@@ -233,36 +233,16 @@
 <h1 id="class-rulestatement">Class: RuleStatement</h1>
 <p><em>A statement in the rules text of a card or ability. It consists of an action, with optional sources and targets (e.g. players or cards), and specifications constraining the action in time, quantity or otherwise.</em></p>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/RuleStatement">mtgo:RuleStatement</a></p>
-<pre class="mermaid"><code>erDiagram
-RuleStatement {
-    string source  
-    string target  
-    uriorcurie id  
-}
-TimeSpecification {
-    TurnPhase turn_phase  
-    Player player  
-    uriorcurie id  
-}
-ValueSpecification {
-    integer value  
-    string unit  
-    ValueConstraint constraint  
-    uriorcurie id  
-}
-ActionSpecification {
-    Action action  
-    ActionConstraint constraint  
-    uriorcurie id  
-}
+<pre class="mermaid"><code> classDiagram
+    class RuleStatement
+      Thing &lt;|-- RuleStatement
 
-RuleStatement ||--}o ActionSpecification : "action_spec"
-RuleStatement ||--}o ValueSpecification : "value_spec"
-RuleStatement ||--}o TimeSpecification : "time_spec"
-ValueSpecification ||--|o ValueSpecification : "intersection"
-ValueSpecification ||--|o ValueSpecification : "union"
-ActionSpecification ||--|o ActionSpecification : "intersection"
-ActionSpecification ||--|o ActionSpecification : "union"
+      RuleStatement : action_spec
+      RuleStatement : id
+      RuleStatement : source
+      RuleStatement : target
+      RuleStatement : time_spec
+      RuleStatement : value_spec
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
@@ -284,13 +264,13 @@ ActionSpecification ||--|o ActionSpecification : "union"
 <tbody>
 <tr>
 <td><a href="../source/">source</a></td>
-<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>The entity responsible for an action</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../target/">target</a></td>
-<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>The entity targeted by an action or constraint</td>
 <td>direct</td>
 </tr>
@@ -314,7 +294,7 @@ ActionSpecification ||--|o ActionSpecification : "union"
 </tr>
 <tr>
 <td><a href="../id/">id</a></td>
-<td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#anyURI">xsd:anyURI</a></td>
+<td>1..1 <br/> <a href="xsd:anyURI">xsd:anyURI</a></td>
 <td>A unique identifier for a thing</td>
 <td><a href="../Thing/">Thing</a></td>
 </tr>

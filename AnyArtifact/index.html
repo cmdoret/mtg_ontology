@@ -231,14 +231,21 @@
 <li><strong>NOTE</strong>: this is an abstract class and should not be instantiated directly</li>
 </ul>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/AnyArtifact">mtgo:AnyArtifact</a></p>
-<pre class="mermaid"><code>erDiagram
-AnyArtifact {
-    uriorcurie id  
-    string name  
-    string description  
-}
+<pre class="mermaid"><code> classDiagram
+    class AnyArtifact
+      Permanent &lt;|-- AnyArtifact
+
+      AnyArtifact : description
+      AnyArtifact : id
+      AnyArtifact : name
 
 
+      AnyArtifact &lt;|-- Artifact
+      AnyArtifact &lt;|-- ArtifactToken
+
+      AnyArtifact : description
+      AnyArtifact : id
+      AnyArtifact : name
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
@@ -263,19 +270,19 @@ AnyArtifact {
 <tbody>
 <tr>
 <td><a href="../id/">id</a></td>
-<td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#anyURI">xsd:anyURI</a></td>
+<td>1..1 <br/> <a href="xsd:anyURI">xsd:anyURI</a></td>
 <td>A unique identifier for a thing</td>
 <td><a href="../NamedThing/">NamedThing</a></td>
 </tr>
 <tr>
 <td><a href="../name/">name</a></td>
-<td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>1..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>A human-readable name for a thing</td>
 <td><a href="../NamedThing/">NamedThing</a></td>
 </tr>
 <tr>
 <td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>A human-readable description for a thing</td>
 <td><a href="../NamedThing/">NamedThing</a></td>
 </tr>

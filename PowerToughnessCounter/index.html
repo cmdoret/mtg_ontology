@@ -228,14 +228,13 @@
 <h1 id="class-powertoughnesscounter">Class: PowerToughnessCounter</h1>
 <p><em>A counter that gives a power and toughness modifier to a creature.</em></p>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/PowerToughnessCounter">mtgo:PowerToughnessCounter</a></p>
-<pre class="mermaid"><code>erDiagram
-PowerToughnessCounter {
-    integer power_modifier  
-    integer toughness_modifier  
-    uriorcurie id  
-}
+<pre class="mermaid"><code> classDiagram
+    class PowerToughnessCounter
+      Counter &lt;|-- PowerToughnessCounter
 
-
+      PowerToughnessCounter : id
+      PowerToughnessCounter : power_modifier
+      PowerToughnessCounter : toughness_modifier
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
@@ -260,19 +259,19 @@ PowerToughnessCounter {
 <tbody>
 <tr>
 <td><a href="../power_modifier/">power_modifier</a></td>
-<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#integer">xsd:integer</a></td>
+<td>0..1 <br/> <a href="xsd:integer">xsd:integer</a></td>
 <td>A numeric modifier to apply to a creature's power</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../toughness_modifier/">toughness_modifier</a></td>
-<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#integer">xsd:integer</a></td>
+<td>0..1 <br/> <a href="xsd:integer">xsd:integer</a></td>
 <td>A numeric modifier to apply to a creature's toughness</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../id/">id</a></td>
-<td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#anyURI">xsd:anyURI</a></td>
+<td>1..1 <br/> <a href="xsd:anyURI">xsd:anyURI</a></td>
 <td>A unique identifier for a thing</td>
 <td><a href="../Thing/">Thing</a></td>
 </tr>

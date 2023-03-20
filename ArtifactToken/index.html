@@ -228,37 +228,24 @@
 <h1 id="class-artifacttoken">Class: ArtifactToken</h1>
 <p><em>A token that represents an artifact that can be placed onto the battlefield by other effects.</em></p>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/ArtifactToken">mtgo:ArtifactToken</a></p>
-<pre class="mermaid"><code>erDiagram
-ArtifactToken {
-    ColorList color  
-    string card_set  
-    string artist  
-    string flavor_text  
-    string type_line  
-    stringList card_type  
-    stringList card_subtype  
-    stringList card_supertype  
-    string oracle_text  
-    uriorcurie id  
-    string name  
-    string description  
-}
-Ability {
-    string rules_text  
-    string ability_keyword  
-    uriorcurie id  
-}
-RuleStatement {
-    string source  
-    string target  
-    uriorcurie id  
-}
+<pre class="mermaid"><code> classDiagram
+    class ArtifactToken
+      AnyArtifact &lt;|-- ArtifactToken
+      Token &lt;|-- ArtifactToken
 
-ArtifactToken ||--}o Ability : "ability"
-Ability ||--|o RuleStatement : "effect"
-RuleStatement ||--}o ActionSpecification : "action_spec"
-RuleStatement ||--}o ValueSpecification : "value_spec"
-RuleStatement ||--}o TimeSpecification : "time_spec"
+      ArtifactToken : ability
+      ArtifactToken : artist
+      ArtifactToken : card_set
+      ArtifactToken : card_subtype
+      ArtifactToken : card_supertype
+      ArtifactToken : card_type
+      ArtifactToken : color
+      ArtifactToken : description
+      ArtifactToken : flavor_text
+      ArtifactToken : id
+      ArtifactToken : name
+      ArtifactToken : oracle_text
+      ArtifactToken : type_line
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
@@ -292,7 +279,7 @@ RuleStatement ||--}o TimeSpecification : "time_spec"
 </tr>
 <tr>
 <td><a href="../card_set/">card_set</a></td>
-<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>A pool of cards released together and designed for the same play environment</td>
 <td><a href="../Token/">Token</a></td>
 </tr>
@@ -304,61 +291,61 @@ RuleStatement ||--}o TimeSpecification : "time_spec"
 </tr>
 <tr>
 <td><a href="../artist/">artist</a></td>
-<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>The artist who drew a card's illustration</td>
 <td><a href="../Token/">Token</a></td>
 </tr>
 <tr>
 <td><a href="../flavor_text/">flavor_text</a></td>
-<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>The lore text at the bottom of a card</td>
 <td><a href="../Token/">Token</a></td>
 </tr>
 <tr>
 <td><a href="../type_line/">type_line</a></td>
-<td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>1..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>The text line below a card's illustration containing the card's type, subtype...</td>
 <td><a href="../Token/">Token</a></td>
 </tr>
 <tr>
 <td><a href="../card_type/">card_type</a></td>
-<td>1..* <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>1..* <br/> <a href="xsd:string">xsd:string</a></td>
 <td>The text line below a card's illustration containing the card's type, subtype...</td>
 <td><a href="../Token/">Token</a></td>
 </tr>
 <tr>
 <td><a href="../card_subtype/">card_subtype</a></td>
-<td>0..* <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>0..* <br/> <a href="xsd:string">xsd:string</a></td>
 <td>The subtype(s) of a card, such as Equipment, Cat or Warrior</td>
 <td><a href="../Token/">Token</a></td>
 </tr>
 <tr>
 <td><a href="../card_supertype/">card_supertype</a></td>
-<td>0..* <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>0..* <br/> <a href="xsd:string">xsd:string</a></td>
 <td>The supertype(s) of a card, such as Basic, Legendary or Snow</td>
 <td><a href="../Token/">Token</a></td>
 </tr>
 <tr>
 <td><a href="../oracle_text/">oracle_text</a></td>
-<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>The official wording for the card effects</td>
 <td><a href="../Token/">Token</a></td>
 </tr>
 <tr>
 <td><a href="../id/">id</a></td>
-<td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#anyURI">xsd:anyURI</a></td>
+<td>1..1 <br/> <a href="xsd:anyURI">xsd:anyURI</a></td>
 <td>A unique identifier for a thing</td>
 <td><a href="../NamedThing/">NamedThing</a></td>
 </tr>
 <tr>
 <td><a href="../name/">name</a></td>
-<td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>1..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>A human-readable name for a thing</td>
 <td><a href="../NamedThing/">NamedThing</a></td>
 </tr>
 <tr>
 <td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>A human-readable description for a thing</td>
 <td><a href="../NamedThing/">NamedThing</a></td>
 </tr>

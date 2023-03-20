@@ -233,16 +233,24 @@
 <h1 id="class-mana">Class: Mana</h1>
 <p><em>A mana in the pool.</em></p>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/Mana">mtgo:Mana</a></p>
-<pre class="mermaid"><code>erDiagram
-Mana {
-    ColorList color  
-    boolean snow  
-    boolean phyrexian  
-    boolean hybrid  
-    uriorcurie id  
-}
+<pre class="mermaid"><code> classDiagram
+    class Mana
+      Thing &lt;|-- Mana
+
+      Mana : color
+      Mana : hybrid
+      Mana : id
+      Mana : phyrexian
+      Mana : snow
 
 
+      Mana &lt;|-- ManaCost
+
+      Mana : color
+      Mana : hybrid
+      Mana : id
+      Mana : phyrexian
+      Mana : snow
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
@@ -270,25 +278,25 @@ Mana {
 </tr>
 <tr>
 <td><a href="../snow/">snow</a></td>
-<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#boolean">xsd:boolean</a></td>
+<td>0..1 <br/> <a href="xsd:boolean">xsd:boolean</a></td>
 <td>A snow mana cost can be paid with a snow source, regardless of its color</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../phyrexian/">phyrexian</a></td>
-<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#boolean">xsd:boolean</a></td>
+<td>0..1 <br/> <a href="xsd:boolean">xsd:boolean</a></td>
 <td>A phyrexian mana cost can be paid with either 2 life or 1 mana of its compone...</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../hybrid/">hybrid</a></td>
-<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#boolean">xsd:boolean</a></td>
+<td>0..1 <br/> <a href="xsd:boolean">xsd:boolean</a></td>
 <td>A hybrid mana cost can be paid with 1 mana of either of its component colors</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../id/">id</a></td>
-<td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#anyURI">xsd:anyURI</a></td>
+<td>1..1 <br/> <a href="xsd:anyURI">xsd:anyURI</a></td>
 <td>A unique identifier for a thing</td>
 <td><a href="../Thing/">Thing</a></td>
 </tr>

@@ -312,60 +312,55 @@
 <li><strong>NOTE</strong>: this is an abstract class and should not be instantiated directly</li>
 </ul>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/Card">mtgo:Card</a></p>
-<pre class="mermaid"><code>erDiagram
-Card {
-    integer converted_mana_cost  
-    ColorList color  
-    string card_set  
-    string artist  
-    string flavor_text  
-    string back_face  
-    string type_line  
-    stringList card_type  
-    stringList card_subtype  
-    stringList card_supertype  
-    Rarity rarity  
-    string oracle_text  
-    uriorcurie id  
-    string name  
-    string description  
-}
-Ability {
-    string rules_text  
-    string ability_keyword  
-    uriorcurie id  
-}
-RuleStatement {
-    string source  
-    string target  
-    uriorcurie id  
-}
-ManaCost {
-    ColorList color  
-    boolean snow  
-    boolean phyrexian  
-    boolean hybrid  
-    integer value  
-    boolean variable_cost  
-    uriorcurie id  
-}
-Cost {
-    integer value  
-    boolean variable_cost  
-    uriorcurie id  
-}
+<pre class="mermaid"><code> classDiagram
+    class Card
+      NamedThing &lt;|-- Card
 
-Card ||--}o ManaCost : "mana_cost"
-Card ||--}o Ability : "ability"
-Card ||--|o Card : "front_face"
-Ability ||--|o RuleStatement : "effect"
-RuleStatement ||--}o ActionSpecification : "action_spec"
-RuleStatement ||--}o ValueSpecification : "value_spec"
-RuleStatement ||--}o TimeSpecification : "time_spec"
-ManaCost ||--|o Cost : "intersection"
-ManaCost ||--|o Cost : "union"
-Cost ||--|o Cost : "intersection"
-Cost ||--|o Cost : "union"
+      Card : ability
+      Card : artist
+      Card : back_face
+      Card : card_set
+      Card : card_subtype
+      Card : card_supertype
+      Card : card_type
+      Card : color
+      Card : converted_mana_cost
+      Card : description
+      Card : flavor_text
+      Card : front_face
+      Card : id
+      Card : mana_cost
+      Card : name
+      Card : oracle_text
+      Card : rarity
+      Card : type_line
+
+
+      Card &lt;|-- Sorcery
+      Card &lt;|-- Instant
+      Card &lt;|-- Enchantment
+      Card &lt;|-- Artifact
+      Card &lt;|-- Creature
+      Card &lt;|-- Land
+
+      Card : ability
+      Card : artist
+      Card : back_face
+      Card : card_set
+      Card : card_subtype
+      Card : card_supertype
+      Card : card_type
+      Card : color
+      Card : converted_mana_cost
+      Card : description
+      Card : flavor_text
+      Card : front_face
+      Card : id
+      Card : mana_cost
+      Card : name
+      Card : oracle_text
+      Card : rarity
+      Card : type_line
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
@@ -401,7 +396,7 @@ Cost ||--|o Cost : "union"
 </tr>
 <tr>
 <td><a href="../converted_mana_cost/">converted_mana_cost</a></td>
-<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#integer">xsd:integer</a></td>
+<td>0..1 <br/> <a href="xsd:integer">xsd:integer</a></td>
 <td>The total mana cost for a card or ability, summed across all colors</td>
 <td>direct</td>
 </tr>
@@ -413,7 +408,7 @@ Cost ||--|o Cost : "union"
 </tr>
 <tr>
 <td><a href="../card_set/">card_set</a></td>
-<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>A pool of cards released together and designed for the same play environment</td>
 <td>direct</td>
 </tr>
@@ -425,13 +420,13 @@ Cost ||--|o Cost : "union"
 </tr>
 <tr>
 <td><a href="../artist/">artist</a></td>
-<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>The artist who drew a card's illustration</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../flavor_text/">flavor_text</a></td>
-<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>The lore text at the bottom of a card</td>
 <td>direct</td>
 </tr>
@@ -443,31 +438,31 @@ Cost ||--|o Cost : "union"
 </tr>
 <tr>
 <td><a href="../back_face/">back_face</a></td>
-<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>Back face corresponding to this card (front) face</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../type_line/">type_line</a></td>
-<td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>1..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>The text line below a card's illustration containing the card's type, subtype...</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../card_type/">card_type</a></td>
-<td>1..* <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>1..* <br/> <a href="xsd:string">xsd:string</a></td>
 <td>The text line below a card's illustration containing the card's type, subtype...</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../card_subtype/">card_subtype</a></td>
-<td>0..* <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>0..* <br/> <a href="xsd:string">xsd:string</a></td>
 <td>The subtype(s) of a card, such as Equipment, Cat or Warrior</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../card_supertype/">card_supertype</a></td>
-<td>0..* <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>0..* <br/> <a href="xsd:string">xsd:string</a></td>
 <td>The supertype(s) of a card, such as Basic, Legendary or Snow</td>
 <td>direct</td>
 </tr>
@@ -479,25 +474,25 @@ Cost ||--|o Cost : "union"
 </tr>
 <tr>
 <td><a href="../oracle_text/">oracle_text</a></td>
-<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>The official wording for the card effects</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../id/">id</a></td>
-<td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#anyURI">xsd:anyURI</a></td>
+<td>1..1 <br/> <a href="xsd:anyURI">xsd:anyURI</a></td>
 <td>A unique identifier for a thing</td>
 <td><a href="../NamedThing/">NamedThing</a></td>
 </tr>
 <tr>
 <td><a href="../name/">name</a></td>
-<td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>1..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>A human-readable name for a thing</td>
 <td><a href="../NamedThing/">NamedThing</a></td>
 </tr>
 <tr>
 <td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>A human-readable description for a thing</td>
 <td><a href="../NamedThing/">NamedThing</a></td>
 </tr>

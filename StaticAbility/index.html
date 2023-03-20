@@ -233,42 +233,14 @@
 <h1 id="class-staticability">Class: StaticAbility</h1>
 <p><em>A card ability which remains active until endgame once put into effect.</em></p>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/StaticAbility">mtgo:StaticAbility</a></p>
-<pre class="mermaid"><code>erDiagram
-StaticAbility {
-    string rules_text  
-    string ability_keyword  
-    uriorcurie id  
-}
-RuleStatement {
-    string source  
-    string target  
-    uriorcurie id  
-}
-TimeSpecification {
-    TurnPhase turn_phase  
-    Player player  
-    uriorcurie id  
-}
-ValueSpecification {
-    integer value  
-    string unit  
-    ValueConstraint constraint  
-    uriorcurie id  
-}
-ActionSpecification {
-    Action action  
-    ActionConstraint constraint  
-    uriorcurie id  
-}
+<pre class="mermaid"><code> classDiagram
+    class StaticAbility
+      Ability &lt;|-- StaticAbility
 
-StaticAbility ||--|o RuleStatement : "effect"
-RuleStatement ||--}o ActionSpecification : "action_spec"
-RuleStatement ||--}o ValueSpecification : "value_spec"
-RuleStatement ||--}o TimeSpecification : "time_spec"
-ValueSpecification ||--|o ValueSpecification : "intersection"
-ValueSpecification ||--|o ValueSpecification : "union"
-ActionSpecification ||--|o ActionSpecification : "intersection"
-ActionSpecification ||--|o ActionSpecification : "union"
+      StaticAbility : ability_keyword
+      StaticAbility : effect
+      StaticAbility : id
+      StaticAbility : rules_text
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
@@ -293,7 +265,7 @@ ActionSpecification ||--|o ActionSpecification : "union"
 <tbody>
 <tr>
 <td><a href="../rules_text/">rules_text</a></td>
-<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>The text describing what an ability does</td>
 <td><a href="../Ability/">Ability</a></td>
 </tr>
@@ -305,13 +277,13 @@ ActionSpecification ||--|o ActionSpecification : "union"
 </tr>
 <tr>
 <td><a href="../ability_keyword/">ability_keyword</a></td>
-<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>An ability keyword</td>
 <td><a href="../Ability/">Ability</a></td>
 </tr>
 <tr>
 <td><a href="../id/">id</a></td>
-<td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#anyURI">xsd:anyURI</a></td>
+<td>1..1 <br/> <a href="xsd:anyURI">xsd:anyURI</a></td>
 <td>A unique identifier for a thing</td>
 <td><a href="../Thing/">Thing</a></td>
 </tr>

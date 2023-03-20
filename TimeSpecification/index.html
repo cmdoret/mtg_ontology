@@ -233,14 +233,13 @@
 <h1 id="class-timespecification">Class: TimeSpecification</h1>
 <p><em>A specification for a time.</em></p>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/TimeSpecification">mtgo:TimeSpecification</a></p>
-<pre class="mermaid"><code>erDiagram
-TimeSpecification {
-    TurnPhase turn_phase  
-    Player player  
-    uriorcurie id  
-}
+<pre class="mermaid"><code> classDiagram
+    class TimeSpecification
+      Thing &lt;|-- TimeSpecification
 
-
+      TimeSpecification : id
+      TimeSpecification : player
+      TimeSpecification : turn_phase
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
@@ -274,7 +273,7 @@ TimeSpecification {
 </tr>
 <tr>
 <td><a href="../id/">id</a></td>
-<td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#anyURI">xsd:anyURI</a></td>
+<td>1..1 <br/> <a href="xsd:anyURI">xsd:anyURI</a></td>
 <td>A unique identifier for a thing</td>
 <td><a href="../Thing/">Thing</a></td>
 </tr>

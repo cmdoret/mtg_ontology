@@ -228,21 +228,13 @@
 <h1 id="class-keywordcounter">Class: KeywordCounter</h1>
 <p><em>A counter that gives a some ability to a permanent.</em></p>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/KeywordCounter">mtgo:KeywordCounter</a></p>
-<pre class="mermaid"><code>erDiagram
-KeywordCounter {
-    string ability_keyword  
-    uriorcurie id  
-}
-ValueSpecification {
-    integer value  
-    string unit  
-    ValueConstraint constraint  
-    uriorcurie id  
-}
+<pre class="mermaid"><code> classDiagram
+    class KeywordCounter
+      Counter &lt;|-- KeywordCounter
 
-KeywordCounter ||--}o ValueSpecification : "value_spec"
-ValueSpecification ||--|o ValueSpecification : "intersection"
-ValueSpecification ||--|o ValueSpecification : "union"
+      KeywordCounter : ability_keyword
+      KeywordCounter : id
+      KeywordCounter : value_spec
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
@@ -267,7 +259,7 @@ ValueSpecification ||--|o ValueSpecification : "union"
 <tbody>
 <tr>
 <td><a href="../ability_keyword/">ability_keyword</a></td>
-<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>An ability keyword</td>
 <td>direct</td>
 </tr>
@@ -279,7 +271,7 @@ ValueSpecification ||--|o ValueSpecification : "union"
 </tr>
 <tr>
 <td><a href="../id/">id</a></td>
-<td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#anyURI">xsd:anyURI</a></td>
+<td>1..1 <br/> <a href="xsd:anyURI">xsd:anyURI</a></td>
 <td>A unique identifier for a thing</td>
 <td><a href="../Thing/">Thing</a></td>
 </tr>

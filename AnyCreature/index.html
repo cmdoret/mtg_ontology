@@ -231,18 +231,29 @@
 <li><strong>NOTE</strong>: this is an abstract class and should not be instantiated directly</li>
 </ul>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/AnyCreature">mtgo:AnyCreature</a></p>
-<pre class="mermaid"><code>erDiagram
-AnyCreature {
-    integer power  
-    integer toughness  
-    boolean variable_power  
-    boolean variable_toughness  
-    uriorcurie id  
-    string name  
-    string description  
-}
+<pre class="mermaid"><code> classDiagram
+    class AnyCreature
+      Permanent &lt;|-- AnyCreature
+
+      AnyCreature : description
+      AnyCreature : id
+      AnyCreature : name
+      AnyCreature : power
+      AnyCreature : toughness
+      AnyCreature : variable_power
+      AnyCreature : variable_toughness
 
 
+      AnyCreature &lt;|-- Creature
+      AnyCreature &lt;|-- CreatureToken
+
+      AnyCreature : description
+      AnyCreature : id
+      AnyCreature : name
+      AnyCreature : power
+      AnyCreature : toughness
+      AnyCreature : variable_power
+      AnyCreature : variable_toughness
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
@@ -267,43 +278,43 @@ AnyCreature {
 <tbody>
 <tr>
 <td><a href="../power/">power</a></td>
-<td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#integer">xsd:integer</a></td>
+<td>1..1 <br/> <a href="xsd:integer">xsd:integer</a></td>
 <td>The amount of damage dealt in combat</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../toughness/">toughness</a></td>
-<td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#integer">xsd:integer</a></td>
+<td>1..1 <br/> <a href="xsd:integer">xsd:integer</a></td>
 <td>The amount of damage needed to destroy a creature</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../variable_power/">variable_power</a></td>
-<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#boolean">xsd:boolean</a></td>
+<td>0..1 <br/> <a href="xsd:boolean">xsd:boolean</a></td>
 <td>Whether a creature's power is variable</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../variable_toughness/">variable_toughness</a></td>
-<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#boolean">xsd:boolean</a></td>
+<td>0..1 <br/> <a href="xsd:boolean">xsd:boolean</a></td>
 <td>Whether a creature's toughness is variable</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../id/">id</a></td>
-<td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#anyURI">xsd:anyURI</a></td>
+<td>1..1 <br/> <a href="xsd:anyURI">xsd:anyURI</a></td>
 <td>A unique identifier for a thing</td>
 <td><a href="../NamedThing/">NamedThing</a></td>
 </tr>
 <tr>
 <td><a href="../name/">name</a></td>
-<td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>1..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>A human-readable name for a thing</td>
 <td><a href="../NamedThing/">NamedThing</a></td>
 </tr>
 <tr>
 <td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>A human-readable description for a thing</td>
 <td><a href="../NamedThing/">NamedThing</a></td>
 </tr>

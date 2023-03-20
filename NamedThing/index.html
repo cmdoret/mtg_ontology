@@ -233,14 +233,14 @@
 <h1 id="class-namedthing">Class: NamedThing</h1>
 <p><em>A generic grouping for any identifiable entity</em></p>
 <p>URI: <a href="http://schema.org/Thing">schema:Thing</a></p>
-<pre class="mermaid"><code>erDiagram
-NamedThing {
-    uriorcurie id  
-    string name  
-    string description  
-}
+<pre class="mermaid"><code> classDiagram
+    class NamedThing
+      NamedThing &lt;|-- Permanent
+      NamedThing &lt;|-- Card
 
-
+      NamedThing : description
+      NamedThing : id
+      NamedThing : name
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
@@ -263,19 +263,19 @@ NamedThing {
 <tbody>
 <tr>
 <td><a href="../id/">id</a></td>
-<td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#anyURI">xsd:anyURI</a></td>
+<td>1..1 <br/> <a href="xsd:anyURI">xsd:anyURI</a></td>
 <td>A unique identifier for a thing</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../name/">name</a></td>
-<td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>1..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>A human-readable name for a thing</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>A human-readable description for a thing</td>
 <td>direct</td>
 </tr>

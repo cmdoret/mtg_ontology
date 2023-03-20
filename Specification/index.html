@@ -231,19 +231,23 @@
 <li><strong>NOTE</strong>: this is an abstract class and should not be instantiated directly</li>
 </ul>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/Specification">mtgo:Specification</a></p>
-<pre class="mermaid"><code>erDiagram
-Specification {
-    string constraint  
-    uriorcurie id  
-}
-NamedThing {
-    uriorcurie id  
-    string name  
-    string description  
-}
+<pre class="mermaid"><code> classDiagram
+    class Specification
+      Thing &lt;|-- Specification
 
-Specification ||--|o NamedThing : "intersection"
-Specification ||--|o NamedThing : "union"
+      Specification : constraint
+      Specification : id
+      Specification : intersection
+      Specification : union
+
+
+      Specification &lt;|-- ActionSpecification
+      Specification &lt;|-- ValueSpecification
+
+      Specification : constraint
+      Specification : id
+      Specification : intersection
+      Specification : union
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
@@ -269,7 +273,7 @@ Specification ||--|o NamedThing : "union"
 <tbody>
 <tr>
 <td><a href="../constraint/">constraint</a></td>
-<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
+<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
 <td>A constraint on a time, quantity or action</td>
 <td>direct</td>
 </tr>
@@ -287,7 +291,7 @@ Specification ||--|o NamedThing : "union"
 </tr>
 <tr>
 <td><a href="../id/">id</a></td>
-<td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#anyURI">xsd:anyURI</a></td>
+<td>1..1 <br/> <a href="xsd:anyURI">xsd:anyURI</a></td>
 <td>A unique identifier for a thing</td>
 <td><a href="../Thing/">Thing</a></td>
 </tr>
