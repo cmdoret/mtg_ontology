@@ -19,10 +19,10 @@ mtgo: a owl:Ontology ;
     dcterms:license "GNU GPL v3.0" ;
     dcterms:title "Magic The Gathering Ontology." ;
     rdfs:seeAlso "https://cmdoret.github.io/mtg_ontology/" ;
-    linkml:generation_date "2023-03-20T16:11:29" ;
+    linkml:generation_date "2023-03-20T16:26:53" ;
     linkml:metamodel_version "1.7.0" ;
     linkml:source_file "mtg_ontology.yaml" ;
-    linkml:source_file_date "2023-03-20T16:11:12" ;
+    linkml:source_file_date "2023-03-20T16:26:36" ;
     linkml:source_file_size 30154 .
 
 linkml:SubsetDefinition a owl:Class ;
@@ -60,6 +60,10 @@ mtgo:Creature a owl:Class,
             owl:onProperty mtgo:power ;
             owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
+            owl:onClass linkml:Integer ;
+            owl:onProperty mtgo:toughness ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Boolean ;
             owl:onProperty mtgo:variable_power ],
@@ -67,10 +71,6 @@ mtgo:Creature a owl:Class,
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Boolean ;
             owl:onProperty mtgo:variable_toughness ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:Integer ;
-            owl:onProperty mtgo:toughness ;
-            owl:qualifiedCardinality 1 ],
         mtgo:AnyCreature,
         mtgo:Card ;
     skos:definition "A card that represents a creature that can be cast and put onto the battlefield." ;
@@ -80,9 +80,9 @@ mtgo:CreatureToken a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "CreatureToken" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass linkml:Integer ;
-            owl:onProperty mtgo:power ;
-            owl:qualifiedCardinality 1 ],
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Boolean ;
+            owl:onProperty mtgo:variable_toughness ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Boolean ;
@@ -92,9 +92,9 @@ mtgo:CreatureToken a owl:Class,
             owl:onProperty mtgo:toughness ;
             owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Boolean ;
-            owl:onProperty mtgo:variable_toughness ],
+            owl:onClass linkml:Integer ;
+            owl:onProperty mtgo:power ;
+            owl:qualifiedCardinality 1 ],
         mtgo:AnyCreature,
         mtgo:Token ;
     skos:definition "A token that represents a creature that can be placed onto the battlefield by other effects." ;
@@ -161,11 +161,11 @@ mtgo:PowerToughnessCounter a owl:Class,
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Integer ;
-            owl:onProperty mtgo:toughness_modifier ],
+            owl:onProperty mtgo:power_modifier ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Integer ;
-            owl:onProperty mtgo:power_modifier ],
+            owl:onProperty mtgo:toughness_modifier ],
         mtgo:Counter ;
     skos:definition "A counter that gives a power and toughness modifier to a creature." ;
     skos:exactMatch mtgo:PowerToughnessCounter .
@@ -272,23 +272,23 @@ mtgo:AbilityCollection a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "AbilityCollection" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom mtgo:RuleStatement ;
-            owl:onProperty mtgo:conditions ],
+            owl:allValuesFrom mtgo:ValueSpecification ;
+            owl:onProperty mtgo:value_specifications ],
         [ a owl:Restriction ;
             owl:allValuesFrom mtgo:ManaCost ;
             owl:onProperty mtgo:mana_costs ],
         [ a owl:Restriction ;
-            owl:allValuesFrom mtgo:ActionSpecification ;
-            owl:onProperty mtgo:action_specifications ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom mtgo:ValueSpecification ;
-            owl:onProperty mtgo:value_specifications ],
+            owl:allValuesFrom mtgo:RuleStatement ;
+            owl:onProperty mtgo:conditions ],
         [ a owl:Restriction ;
             owl:allValuesFrom mtgo:ActivatedAbility ;
             owl:onProperty mtgo:activated_abilities ],
         [ a owl:Restriction ;
             owl:allValuesFrom mtgo:TimeSpecification ;
-            owl:onProperty mtgo:time_specifications ] ;
+            owl:onProperty mtgo:time_specifications ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mtgo:ActionSpecification ;
+            owl:onProperty mtgo:action_specifications ] ;
     skos:definition "A collection of abilities and associated concepts." ;
     skos:exactMatch mtgo:AbilityCollection .
 
@@ -335,6 +335,14 @@ mtgo:Mana a owl:Class,
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Boolean ;
+            owl:onProperty mtgo:hybrid ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Boolean ;
+            owl:onProperty mtgo:phyrexian ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Boolean ;
             owl:onProperty mtgo:snow ],
         [ a owl:Class ;
             owl:intersectionOf ( [ a owl:Restriction ;
@@ -342,14 +350,6 @@ mtgo:Mana a owl:Class,
                         owl:onProperty mtgo:color ] [ a owl:Restriction ;
                         owl:onProperty mtgo:color ;
                         owl:someValuesFrom mtgo:Color ] ) ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Boolean ;
-            owl:onProperty mtgo:hybrid ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Boolean ;
-            owl:onProperty mtgo:phyrexian ],
         mtgo:Thing ;
     skos:definition "A mana in the pool." ;
     skos:exactMatch mtgo:Mana .
@@ -853,12 +853,12 @@ mtgo:ActivatedAbility a owl:Class,
     rdfs:label "ActivatedAbility" ;
     rdfs:seeAlso "mtg:Activated_ability" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty mtgo:cost ],
+        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass mtgo:RuleStatement ;
             owl:onProperty mtgo:condition ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty mtgo:cost ],
         mtgo:Ability ;
     skos:definition "A card ability which can be activated for a cost." ;
     skos:exactMatch mtgo:ActivatedAbility .
@@ -874,21 +874,21 @@ mtgo:AnyCreature a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "AnyCreature" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Boolean ;
-            owl:onProperty mtgo:variable_power ],
-        [ a owl:Restriction ;
             owl:onClass linkml:Integer ;
             owl:onProperty mtgo:power ;
             owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
-            owl:onClass linkml:Integer ;
-            owl:onProperty mtgo:toughness ;
-            owl:qualifiedCardinality 1 ],
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Boolean ;
+            owl:onProperty mtgo:variable_power ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Boolean ;
             owl:onProperty mtgo:variable_toughness ],
+        [ a owl:Restriction ;
+            owl:onClass linkml:Integer ;
+            owl:onProperty mtgo:toughness ;
+            owl:qualifiedCardinality 1 ],
         mtgo:Permanent ;
     skos:definition "A creature that can be summoned to the battlefield." ;
     skos:exactMatch mtgo:AnyCreature .
@@ -917,12 +917,12 @@ mtgo:Specification a owl:Class,
             owl:onProperty mtgo:union ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgo:constraint ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass mtgo:NamedThing ;
             owl:onProperty mtgo:intersection ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty mtgo:constraint ],
         mtgo:Thing ;
     skos:definition "A specification for a thing." ;
     skos:exactMatch mtgo:Specification .
@@ -1057,17 +1057,16 @@ mtgo:Token a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "Token" ;
     rdfs:seeAlso "mtg:Token" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgo:flavor_text ],
+    rdfs:subClassOf [ a owl:Class ;
+            owl:intersectionOf ( [ a owl:Restriction ;
+                        owl:allValuesFrom linkml:String ;
+                        owl:onProperty mtgo:card_type ] [ a owl:Restriction ;
+                        owl:onProperty mtgo:card_type ;
+                        owl:someValuesFrom linkml:String ] ) ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
-            owl:onProperty mtgo:oracle_text ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty mtgo:card_supertype ],
+            owl:onProperty mtgo:artist ],
         [ a owl:Restriction ;
             owl:allValuesFrom mtgo:Ability ;
             owl:onProperty mtgo:ability ],
@@ -1078,26 +1077,27 @@ mtgo:Token a owl:Class,
                         owl:onProperty mtgo:color ;
                         owl:someValuesFrom mtgo:Color ] ) ],
         [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty mtgo:card_supertype ],
+        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
             owl:onProperty mtgo:card_set ],
         [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgo:type_line ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
-            owl:onProperty mtgo:artist ],
+            owl:onProperty mtgo:flavor_text ],
         [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
             owl:onProperty mtgo:card_subtype ],
-        [ a owl:Class ;
-            owl:intersectionOf ( [ a owl:Restriction ;
-                        owl:allValuesFrom linkml:String ;
-                        owl:onProperty mtgo:card_type ] [ a owl:Restriction ;
-                        owl:onProperty mtgo:card_type ;
-                        owl:someValuesFrom linkml:String ] ) ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty mtgo:oracle_text ],
+        [ a owl:Restriction ;
+            owl:onClass linkml:String ;
+            owl:onProperty mtgo:type_line ;
+            owl:qualifiedCardinality 1 ],
         mtgo:Permanent ;
     skos:definition "A permanent that is not represented by a regular card and does not have a casting cost." ;
     skos:exactMatch mtgo:Token .
@@ -1161,21 +1161,21 @@ mtgo:ManaCost a owl:Class,
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Boolean ;
-            owl:onProperty mtgo:snow ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Boolean ;
             owl:onProperty mtgo:phyrexian ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Boolean ;
-            owl:onProperty mtgo:hybrid ],
         [ a owl:Class ;
             owl:intersectionOf ( [ a owl:Restriction ;
                         owl:allValuesFrom mtgo:Color ;
                         owl:onProperty mtgo:color ] [ a owl:Restriction ;
                         owl:onProperty mtgo:color ;
                         owl:someValuesFrom mtgo:Color ] ) ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Boolean ;
+            owl:onProperty mtgo:snow ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Boolean ;
+            owl:onProperty mtgo:hybrid ],
         mtgo:Cost,
         mtgo:Mana ;
     skos:definition "The mana cost of a card or ability." ;
@@ -1233,11 +1233,11 @@ mtgo:Ability a owl:Class,
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
-            owl:onProperty mtgo:rules_text ],
+            owl:onProperty mtgo:ability_keyword ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
-            owl:onProperty mtgo:ability_keyword ],
+            owl:onProperty mtgo:rules_text ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass mtgo:RuleStatement ;
@@ -1250,6 +1250,10 @@ mtgo:ActionSpecification a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "ActionSpecification" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:onClass mtgo:Action ;
+            owl:onProperty mtgo:action ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass mtgo:ActionConstraint ;
             owl:onProperty mtgo:constraint ],
@@ -1261,10 +1265,6 @@ mtgo:ActionSpecification a owl:Class,
             owl:maxQualifiedCardinality 1 ;
             owl:onClass mtgo:ActionSpecification ;
             owl:onProperty mtgo:union ],
-        [ a owl:Restriction ;
-            owl:onClass mtgo:Action ;
-            owl:onProperty mtgo:action ;
-            owl:qualifiedCardinality 1 ],
         mtgo:Specification ;
     skos:definition "A specification for an action." ;
     skos:exactMatch mtgo:ActionSpecification .
@@ -1276,19 +1276,19 @@ mtgo:Cost a owl:Class,
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass mtgo:Cost ;
-            owl:onProperty mtgo:union ],
+            owl:onProperty mtgo:intersection ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Boolean ;
             owl:onProperty mtgo:variable_cost ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Integer ;
-            owl:onProperty mtgo:value ],
+            owl:onClass mtgo:Cost ;
+            owl:onProperty mtgo:union ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgo:Cost ;
-            owl:onProperty mtgo:intersection ],
+            owl:onClass linkml:Integer ;
+            owl:onProperty mtgo:value ],
         mtgo:Thing ;
     skos:definition "The cost of a card or ability." ;
     skos:exactMatch mtgo:Cost .
@@ -1297,16 +1297,16 @@ mtgo:NamedThing a owl:Class,
         linkml:ClassDefinition ;
     rdfs:label "NamedThing" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:onClass linkml:Uriorcurie ;
+            owl:onProperty schema:identifier ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
             owl:onProperty schema:description ],
         [ a owl:Restriction ;
             owl:onClass linkml:String ;
             owl:onProperty schema:name ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:Uriorcurie ;
-            owl:onProperty schema:identifier ;
             owl:qualifiedCardinality 1 ] ;
     skos:definition "A generic grouping for any identifiable entity" ;
     skos:exactMatch schema:Thing .
@@ -1320,20 +1320,20 @@ mtgo:TimeSpecification a owl:Class,
             owl:onProperty mtgo:intersection ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgo:TimeConstraint ;
-            owl:onProperty mtgo:constraint ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgo:Player ;
-            owl:onProperty mtgo:player ],
+            owl:onClass mtgo:TimeSpecification ;
+            owl:onProperty mtgo:union ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass mtgo:TurnPhase ;
             owl:onProperty mtgo:turn_phase ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgo:TimeSpecification ;
-            owl:onProperty mtgo:union ],
+            owl:onClass mtgo:TimeConstraint ;
+            owl:onProperty mtgo:constraint ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass mtgo:Player ;
+            owl:onProperty mtgo:player ],
         mtgo:Thing ;
     skos:definition "A specification for a time." ;
     skos:exactMatch mtgo:TimeSpecification .
@@ -1346,18 +1346,18 @@ mtgo:RuleStatement a owl:Class,
             owl:onClass linkml:String ;
             owl:onProperty mtgo:source ],
         [ a owl:Restriction ;
+            owl:allValuesFrom mtgo:TimeSpecification ;
+            owl:onProperty mtgo:time_spec ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mtgo:ActionSpecification ;
+            owl:onProperty mtgo:action_spec ],
+        [ a owl:Restriction ;
             owl:allValuesFrom mtgo:ValueSpecification ;
             owl:onProperty mtgo:value_spec ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
             owl:onProperty mtgo:target ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom mtgo:TimeSpecification ;
-            owl:onProperty mtgo:time_spec ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom mtgo:ActionSpecification ;
-            owl:onProperty mtgo:action_spec ],
         mtgo:Thing ;
     skos:definition "A statement in the rules text of a card or ability. It consists of an action, with optional sources and targets (e.g. players or cards), and specifications constraining the action in time, quantity or otherwise." ;
     skos:exactMatch mtgo:RuleStatement .
@@ -1379,24 +1379,24 @@ mtgo:ValueSpecification a owl:Class,
     rdfs:label "ValueSpecification" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgo:ValueSpecification ;
-            owl:onProperty mtgo:union ],
+            owl:onClass mtgo:ValueConstraint ;
+            owl:onProperty mtgo:constraint ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:Integer ;
             owl:onProperty mtgo:value ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgo:ValueSpecification ;
-            owl:onProperty mtgo:intersection ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgo:ValueConstraint ;
-            owl:onProperty mtgo:constraint ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
             owl:onProperty mtgo:unit ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass mtgo:ValueSpecification ;
+            owl:onProperty mtgo:union ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass mtgo:ValueSpecification ;
+            owl:onProperty mtgo:intersection ],
         mtgo:Specification ;
     skos:definition "A specification for a quantitative value." ;
     skos:exactMatch mtgo:ValueSpecification .
@@ -1455,29 +1455,54 @@ mtgo:Card a owl:Class,
     rdfs:label "Card" ;
     rdfs:seeAlso "mtg:Card" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom mtgo:ManaCost ;
-            owl:onProperty mtgo:mana_cost ],
+            owl:allValuesFrom mtgo:Ability ;
+            owl:onProperty mtgo:ability ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
             owl:onProperty mtgo:card_set ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom linkml:String ;
+            owl:onProperty mtgo:card_subtype ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass mtgo:Card ;
+            owl:onProperty mtgo:back_face ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:String ;
+            owl:onProperty mtgo:oracle_text ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass mtgo:Card ;
             owl:onProperty mtgo:front_face ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgo:Card ;
-            owl:onProperty mtgo:back_face ],
+            owl:onClass mtgo:Rarity ;
+            owl:onProperty mtgo:rarity ],
+        [ a owl:Restriction ;
+            owl:onClass linkml:String ;
+            owl:onProperty mtgo:type_line ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Class ;
+            owl:intersectionOf ( [ a owl:Restriction ;
+                        owl:allValuesFrom linkml:String ;
+                        owl:onProperty mtgo:card_type ] [ a owl:Restriction ;
+                        owl:onProperty mtgo:card_type ;
+                        owl:someValuesFrom linkml:String ] ) ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom mtgo:ManaCost ;
+            owl:onProperty mtgo:mana_cost ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass linkml:Integer ;
+            owl:onProperty mtgo:converted_mana_cost ],
         [ a owl:Class ;
             owl:intersectionOf ( [ a owl:Restriction ;
                         owl:allValuesFrom mtgo:Color ;
                         owl:onProperty mtgo:color ] [ a owl:Restriction ;
                         owl:onProperty mtgo:color ;
                         owl:someValuesFrom mtgo:Color ] ) ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty mtgo:card_supertype ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onClass linkml:String ;
@@ -1487,33 +1512,8 @@ mtgo:Card a owl:Class,
             owl:onClass linkml:String ;
             owl:onProperty mtgo:artist ],
         [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Integer ;
-            owl:onProperty mtgo:converted_mana_cost ],
-        [ a owl:Restriction ;
             owl:allValuesFrom linkml:String ;
-            owl:onProperty mtgo:card_subtype ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom mtgo:Ability ;
-            owl:onProperty mtgo:ability ],
-        [ a owl:Class ;
-            owl:intersectionOf ( [ a owl:Restriction ;
-                        owl:allValuesFrom linkml:String ;
-                        owl:onProperty mtgo:card_type ] [ a owl:Restriction ;
-                        owl:onProperty mtgo:card_type ;
-                        owl:someValuesFrom linkml:String ] ) ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass mtgo:Rarity ;
-            owl:onProperty mtgo:rarity ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgo:oracle_text ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty mtgo:type_line ;
-            owl:qualifiedCardinality 1 ],
+            owl:onProperty mtgo:card_supertype ],
         mtgo:NamedThing ;
     skos:definition "A card in the Magic The Gathering game." ;
     skos:exactMatch mtgo:Card .
