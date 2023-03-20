@@ -1148,6 +1148,7 @@
       "mappings": [
         "https://cmdoret.net/mtg_ontology/front_face"
       ],
+      "domain": "Card",
       "slot_uri": "https://cmdoret.net/mtg_ontology/front_face",
       "owner": "Card",
       "domain_of": [
@@ -1165,6 +1166,7 @@
       "mappings": [
         "https://cmdoret.net/mtg_ontology/back_face"
       ],
+      "domain": "Card",
       "slot_uri": "https://cmdoret.net/mtg_ontology/back_face",
       "owner": "Card",
       "domain_of": [
@@ -3148,9 +3150,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "mtg_ontology.yaml",
-  "source_file_date": "2023-03-20T16:04:32",
-  "source_file_size": 30136,
-  "generation_date": "2023-03-20T16:04:39",
+  "source_file_date": "2023-03-20T16:11:12",
+  "source_file_size": 30154,
+  "generation_date": "2023-03-20T16:11:16",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/mtg_ontology.context.jsonld",

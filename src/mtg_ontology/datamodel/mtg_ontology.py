@@ -1,5 +1,5 @@
 # Auto generated from mtg_ontology.yaml by pythongen.py version: 0.9.0
-# Generation date: 2023-03-20T16:04:55
+# Generation date: 2023-03-20T16:11:32
 # Schema: mtgo
 #
 # id: https://cmdoret.net/mtg_ontology/
@@ -1797,10 +1797,10 @@ slots.flavor_text = Slot(uri=MTGO.flavor_text, name="flavor_text", curie=MTGO.cu
                    model_uri=MTGO.flavor_text, domain=None, range=Optional[str])
 
 slots.front_face = Slot(uri=MTGO.front_face, name="front_face", curie=MTGO.curie('front_face'),
-                   model_uri=MTGO.front_face, domain=None, range=Optional[Union[str, CardId]])
+                   model_uri=MTGO.front_face, domain=Card, range=Optional[Union[str, CardId]])
 
 slots.back_face = Slot(uri=MTGO.back_face, name="back_face", curie=MTGO.curie('back_face'),
-                   model_uri=MTGO.back_face, domain=None, range=Optional[Union[str, CardId]])
+                   model_uri=MTGO.back_face, domain=Card, range=Optional[Union[str, CardId]])
 
 slots.oracle_text = Slot(uri=MTGO.oracle_text, name="oracle_text", curie=MTGO.curie('oracle_text'),
                    model_uri=MTGO.oracle_text, domain=None, range=Optional[str])
