@@ -1,5 +1,5 @@
 # Auto generated from mtg_ontology.yaml by pythongen.py version: 0.9.0
-# Generation date: 2023-03-19T02:09:47
+# Generation date: 2023-03-20T16:04:55
 # Schema: mtgo
 #
 # id: https://cmdoret.net/mtg_ontology/
@@ -1745,7 +1745,7 @@ class AbilityKeyword(EnumDefinitionImpl):
                                          description="A creature with vigilance doesn't tap during your untap step.",
                                          meaning=MTG.vigilance)
     ward = PermissibleValue(text="ward",
-                               description="Whenever this creature becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays N. ",
+                               description="Whenever this creature becomes the target of a spell or ability an opponent controls, counter that spell or ability unless its controller pays N.",
                                meaning=MTG.ward)
 
     _defn = EnumDefinition(
