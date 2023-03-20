@@ -233,33 +233,69 @@
 <h1 id="class-creature">Class: Creature</h1>
 <p><em>A card that represents a creature that can be cast and put onto the battlefield.</em></p>
 <p>URI: <a href="https://cmdoret.net/mtg_ontology/Creature">mtgo:Creature</a></p>
-<pre class="mermaid"><code> classDiagram
-    class Creature
-      AnyCreature &lt;|-- Creature
-      Card &lt;|-- Creature
+<pre class="mermaid"><code>erDiagram
+Creature {
+    integer power  
+    integer toughness  
+    boolean variable_power  
+    boolean variable_toughness  
+    integer converted_mana_cost  
+    ColorList color  
+    string card_set  
+    string artist  
+    string flavor_text  
+    string back_face  
+    string type_line  
+    stringList card_type  
+    stringList card_subtype  
+    stringList card_supertype  
+    Rarity rarity  
+    string oracle_text  
+    uriorcurie id  
+    string name  
+    string description  
+}
+Card {
+    integer converted_mana_cost  
+    ColorList color  
+    string card_set  
+    string artist  
+    string flavor_text  
+    string back_face  
+    string type_line  
+    stringList card_type  
+    stringList card_subtype  
+    stringList card_supertype  
+    Rarity rarity  
+    string oracle_text  
+    uriorcurie id  
+    string name  
+    string description  
+}
+Ability {
+    string rules_text  
+    string ability_keyword  
+    uriorcurie id  
+}
+ManaCost {
+    ColorList color  
+    boolean snow  
+    boolean phyrexian  
+    boolean hybrid  
+    integer value  
+    boolean variable_cost  
+    uriorcurie id  
+}
 
-      Creature : ability
-      Creature : artist
-      Creature : back_face
-      Creature : card_set
-      Creature : card_subtype
-      Creature : card_supertype
-      Creature : card_type
-      Creature : color
-      Creature : converted_mana_cost
-      Creature : description
-      Creature : flavor_text
-      Creature : front_face
-      Creature : id
-      Creature : mana_cost
-      Creature : name
-      Creature : oracle_text
-      Creature : power
-      Creature : rarity
-      Creature : toughness
-      Creature : type_line
-      Creature : variable_power
-      Creature : variable_toughness
+Creature ||--}o ManaCost : "mana_cost"
+Creature ||--}o Ability : "ability"
+Creature ||--|o Card : "front_face"
+Card ||--}o ManaCost : "mana_cost"
+Card ||--}o Ability : "ability"
+Card ||--|o Card : "front_face"
+Ability ||--|o RuleStatement : "effect"
+ManaCost ||--|o Cost : "intersection"
+ManaCost ||--|o Cost : "union"
 </code></pre>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
@@ -284,25 +320,25 @@
 <tbody>
 <tr>
 <td><a href="../power/">power</a></td>
-<td>1..1 <br/> <a href="xsd:integer">xsd:integer</a></td>
+<td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#integer">xsd:integer</a></td>
 <td>The amount of damage dealt in combat</td>
 <td><a href="../AnyCreature/">AnyCreature</a></td>
 </tr>
 <tr>
 <td><a href="../toughness/">toughness</a></td>
-<td>1..1 <br/> <a href="xsd:integer">xsd:integer</a></td>
+<td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#integer">xsd:integer</a></td>
 <td>The amount of damage needed to destroy a creature</td>
 <td><a href="../AnyCreature/">AnyCreature</a></td>
 </tr>
 <tr>
 <td><a href="../variable_power/">variable_power</a></td>
-<td>0..1 <br/> <a href="xsd:boolean">xsd:boolean</a></td>
+<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#boolean">xsd:boolean</a></td>
 <td>Whether a creature's power is variable</td>
 <td><a href="../AnyCreature/">AnyCreature</a></td>
 </tr>
 <tr>
 <td><a href="../variable_toughness/">variable_toughness</a></td>
-<td>0..1 <br/> <a href="xsd:boolean">xsd:boolean</a></td>
+<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#boolean">xsd:boolean</a></td>
 <td>Whether a creature's toughness is variable</td>
 <td><a href="../AnyCreature/">AnyCreature</a></td>
 </tr>
@@ -314,7 +350,7 @@
 </tr>
 <tr>
 <td><a href="../converted_mana_cost/">converted_mana_cost</a></td>
-<td>0..1 <br/> <a href="xsd:integer">xsd:integer</a></td>
+<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#integer">xsd:integer</a></td>
 <td>The total mana cost for a card or ability, summed across all colors</td>
 <td><a href="../Card/">Card</a></td>
 </tr>
@@ -326,7 +362,7 @@
 </tr>
 <tr>
 <td><a href="../card_set/">card_set</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
 <td>A pool of cards released together and designed for the same play environment</td>
 <td><a href="../Card/">Card</a></td>
 </tr>
@@ -338,13 +374,13 @@
 </tr>
 <tr>
 <td><a href="../artist/">artist</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
 <td>The artist who drew a card's illustration</td>
 <td><a href="../Card/">Card</a></td>
 </tr>
 <tr>
 <td><a href="../flavor_text/">flavor_text</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
 <td>The lore text at the bottom of a card</td>
 <td><a href="../Card/">Card</a></td>
 </tr>
@@ -356,31 +392,31 @@
 </tr>
 <tr>
 <td><a href="../back_face/">back_face</a></td>
-<td>0..1 <br/> <a href="../Card/">Card</a></td>
+<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
 <td>Back face corresponding to this card (front) face</td>
 <td><a href="../Card/">Card</a></td>
 </tr>
 <tr>
 <td><a href="../type_line/">type_line</a></td>
-<td>1..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
 <td>The text line below a card's illustration containing the card's type, subtype...</td>
 <td><a href="../Card/">Card</a></td>
 </tr>
 <tr>
 <td><a href="../card_type/">card_type</a></td>
-<td>1..* <br/> <a href="xsd:string">xsd:string</a></td>
+<td>1..* <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
 <td>The text line below a card's illustration containing the card's type, subtype...</td>
 <td><a href="../Card/">Card</a></td>
 </tr>
 <tr>
 <td><a href="../card_subtype/">card_subtype</a></td>
-<td>0..* <br/> <a href="xsd:string">xsd:string</a></td>
+<td>0..* <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
 <td>The subtype(s) of a card, such as Equipment, Cat or Warrior</td>
 <td><a href="../Card/">Card</a></td>
 </tr>
 <tr>
 <td><a href="../card_supertype/">card_supertype</a></td>
-<td>0..* <br/> <a href="xsd:string">xsd:string</a></td>
+<td>0..* <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
 <td>The supertype(s) of a card, such as Basic, Legendary or Snow</td>
 <td><a href="../Card/">Card</a></td>
 </tr>
@@ -392,25 +428,25 @@
 </tr>
 <tr>
 <td><a href="../oracle_text/">oracle_text</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
 <td>The official wording for the card effects</td>
 <td><a href="../Card/">Card</a></td>
 </tr>
 <tr>
 <td><a href="../id/">id</a></td>
-<td>1..1 <br/> <a href="xsd:anyURI">xsd:anyURI</a></td>
+<td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#anyURI">xsd:anyURI</a></td>
 <td>A unique identifier for a thing</td>
 <td><a href="../NamedThing/">NamedThing</a></td>
 </tr>
 <tr>
 <td><a href="../name/">name</a></td>
-<td>1..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
 <td>A human-readable name for a thing</td>
 <td><a href="../NamedThing/">NamedThing</a></td>
 </tr>
 <tr>
 <td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="xsd:string">xsd:string</a></td>
+<td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
 <td>A human-readable description for a thing</td>
 <td><a href="../NamedThing/">NamedThing</a></td>
 </tr>
@@ -423,7 +459,7 @@
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://cmdoret.net/mtg_ontology/cards</li>
+<li>from schema: https://cmdoret.net/mtg_ontology/</li>
 </ul>
 <h2 id="mappings">Mappings</h2>
 <table>
@@ -450,7 +486,7 @@
 <details>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-0-1"><a href="#__codelineno-0-1" id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creature</span>
 </span><span id="__span-0-2"><a href="#__codelineno-0-2" id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A card that represents a creature that can be cast and put onto the battlefield.</span>
-</span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/cards</span>
+</span><span id="__span-0-3"><a href="#__codelineno-0-3" id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/</span>
 </span><span id="__span-0-4"><a href="#__codelineno-0-4" id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="nt">see_also</span><span class="p">:</span>
 </span><span id="__span-0-5"><a href="#__codelineno-0-5" id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtg:Creature</span>
 </span><span id="__span-0-6"><a href="#__codelineno-0-6" id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
@@ -464,7 +500,7 @@
 <details>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a href="#__codelineno-1-1" id="__codelineno-1-1" name="__codelineno-1-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creature</span>
 </span><span id="__span-1-2"><a href="#__codelineno-1-2" id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A card that represents a creature that can be cast and put onto the battlefield.</span>
-</span><span id="__span-1-3"><a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/cards</span>
+</span><span id="__span-1-3"><a href="#__codelineno-1-3" id="__codelineno-1-3" name="__codelineno-1-3"></a><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/</span>
 </span><span id="__span-1-4"><a href="#__codelineno-1-4" id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="nt">see_also</span><span class="p">:</span>
 </span><span id="__span-1-5"><a href="#__codelineno-1-5" id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtg:Creature</span>
 </span><span id="__span-1-6"><a href="#__codelineno-1-6" id="__codelineno-1-6" name="__codelineno-1-6"></a><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
@@ -476,7 +512,7 @@
 </span><span id="__span-1-12"><a href="#__codelineno-1-12" id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">power</span>
 </span><span id="__span-1-13"><a href="#__codelineno-1-13" id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The amount of damage dealt in combat. This is the first number in</span>
 </span><span id="__span-1-14"><a href="#__codelineno-1-14" id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">the lower right corner of a creature card.</span>
-</span><span id="__span-1-15"><a href="#__codelineno-1-15" id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/cards</span>
+</span><span id="__span-1-15"><a href="#__codelineno-1-15" id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/</span>
 </span><span id="__span-1-16"><a href="#__codelineno-1-16" id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 </span><span id="__span-1-17"><a href="#__codelineno-1-17" id="__codelineno-1-17" name="__codelineno-1-17"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtgo:power</span>
 </span><span id="__span-1-18"><a href="#__codelineno-1-18" id="__codelineno-1-18" name="__codelineno-1-18"></a><span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">power</span>
@@ -489,7 +525,7 @@
 </span><span id="__span-1-25"><a href="#__codelineno-1-25" id="__codelineno-1-25" name="__codelineno-1-25"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">toughness</span>
 </span><span id="__span-1-26"><a href="#__codelineno-1-26" id="__codelineno-1-26" name="__codelineno-1-26"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The amount of damage needed to destroy a creature. This is the second</span>
 </span><span id="__span-1-27"><a href="#__codelineno-1-27" id="__codelineno-1-27" name="__codelineno-1-27"></a><span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">number in the lower right corner of a creature card.</span>
-</span><span id="__span-1-28"><a href="#__codelineno-1-28" id="__codelineno-1-28" name="__codelineno-1-28"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/cards</span>
+</span><span id="__span-1-28"><a href="#__codelineno-1-28" id="__codelineno-1-28" name="__codelineno-1-28"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/</span>
 </span><span id="__span-1-29"><a href="#__codelineno-1-29" id="__codelineno-1-29" name="__codelineno-1-29"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 </span><span id="__span-1-30"><a href="#__codelineno-1-30" id="__codelineno-1-30" name="__codelineno-1-30"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtgo:toughness</span>
 </span><span id="__span-1-31"><a href="#__codelineno-1-31" id="__codelineno-1-31" name="__codelineno-1-31"></a><span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">toughness</span>
@@ -501,7 +537,7 @@
 </span><span id="__span-1-37"><a href="#__codelineno-1-37" id="__codelineno-1-37" name="__codelineno-1-37"></a><span class="w">  </span><span class="nt">variable_power</span><span class="p">:</span>
 </span><span id="__span-1-38"><a href="#__codelineno-1-38" id="__codelineno-1-38" name="__codelineno-1-38"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable_power</span>
 </span><span id="__span-1-39"><a href="#__codelineno-1-39" id="__codelineno-1-39" name="__codelineno-1-39"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Whether a creature's power is variable. Denoted as * on cards.</span>
-</span><span id="__span-1-40"><a href="#__codelineno-1-40" id="__codelineno-1-40" name="__codelineno-1-40"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/cards</span>
+</span><span id="__span-1-40"><a href="#__codelineno-1-40" id="__codelineno-1-40" name="__codelineno-1-40"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/</span>
 </span><span id="__span-1-41"><a href="#__codelineno-1-41" id="__codelineno-1-41" name="__codelineno-1-41"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 </span><span id="__span-1-42"><a href="#__codelineno-1-42" id="__codelineno-1-42" name="__codelineno-1-42"></a><span class="w">    </span><span class="nt">is_a</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable</span>
 </span><span id="__span-1-43"><a href="#__codelineno-1-43" id="__codelineno-1-43" name="__codelineno-1-43"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtgo:variable_power</span>
@@ -513,7 +549,7 @@
 </span><span id="__span-1-49"><a href="#__codelineno-1-49" id="__codelineno-1-49" name="__codelineno-1-49"></a><span class="w">  </span><span class="nt">variable_toughness</span><span class="p">:</span>
 </span><span id="__span-1-50"><a href="#__codelineno-1-50" id="__codelineno-1-50" name="__codelineno-1-50"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable_toughness</span>
 </span><span id="__span-1-51"><a href="#__codelineno-1-51" id="__codelineno-1-51" name="__codelineno-1-51"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Whether a creature's toughness is variable. Denoted as * on cards.</span>
-</span><span id="__span-1-52"><a href="#__codelineno-1-52" id="__codelineno-1-52" name="__codelineno-1-52"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/cards</span>
+</span><span id="__span-1-52"><a href="#__codelineno-1-52" id="__codelineno-1-52" name="__codelineno-1-52"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/</span>
 </span><span id="__span-1-53"><a href="#__codelineno-1-53" id="__codelineno-1-53" name="__codelineno-1-53"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 </span><span id="__span-1-54"><a href="#__codelineno-1-54" id="__codelineno-1-54" name="__codelineno-1-54"></a><span class="w">    </span><span class="nt">is_a</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">variable</span>
 </span><span id="__span-1-55"><a href="#__codelineno-1-55" id="__codelineno-1-55" name="__codelineno-1-55"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtgo:variable_toughness</span>
@@ -525,7 +561,7 @@
 </span><span id="__span-1-61"><a href="#__codelineno-1-61" id="__codelineno-1-61" name="__codelineno-1-61"></a><span class="w">  </span><span class="nt">mana_cost</span><span class="p">:</span>
 </span><span id="__span-1-62"><a href="#__codelineno-1-62" id="__codelineno-1-62" name="__codelineno-1-62"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mana_cost</span>
 </span><span id="__span-1-63"><a href="#__codelineno-1-63" id="__codelineno-1-63" name="__codelineno-1-63"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A mana cost for a card or ability.</span>
-</span><span id="__span-1-64"><a href="#__codelineno-1-64" id="__codelineno-1-64" name="__codelineno-1-64"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/cards</span>
+</span><span id="__span-1-64"><a href="#__codelineno-1-64" id="__codelineno-1-64" name="__codelineno-1-64"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/</span>
 </span><span id="__span-1-65"><a href="#__codelineno-1-65" id="__codelineno-1-65" name="__codelineno-1-65"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 </span><span id="__span-1-66"><a href="#__codelineno-1-66" id="__codelineno-1-66" name="__codelineno-1-66"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtgo:mana_cost</span>
 </span><span id="__span-1-67"><a href="#__codelineno-1-67" id="__codelineno-1-67" name="__codelineno-1-67"></a><span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
@@ -537,7 +573,7 @@
 </span><span id="__span-1-73"><a href="#__codelineno-1-73" id="__codelineno-1-73" name="__codelineno-1-73"></a><span class="w">  </span><span class="nt">converted_mana_cost</span><span class="p">:</span>
 </span><span id="__span-1-74"><a href="#__codelineno-1-74" id="__codelineno-1-74" name="__codelineno-1-74"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">converted_mana_cost</span>
 </span><span id="__span-1-75"><a href="#__codelineno-1-75" id="__codelineno-1-75" name="__codelineno-1-75"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The total mana cost for a card or ability, summed across all colors.</span>
-</span><span id="__span-1-76"><a href="#__codelineno-1-76" id="__codelineno-1-76" name="__codelineno-1-76"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/cards</span>
+</span><span id="__span-1-76"><a href="#__codelineno-1-76" id="__codelineno-1-76" name="__codelineno-1-76"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/</span>
 </span><span id="__span-1-77"><a href="#__codelineno-1-77" id="__codelineno-1-77" name="__codelineno-1-77"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 </span><span id="__span-1-78"><a href="#__codelineno-1-78" id="__codelineno-1-78" name="__codelineno-1-78"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtgo:converted_mana_cost</span>
 </span><span id="__span-1-79"><a href="#__codelineno-1-79" id="__codelineno-1-79" name="__codelineno-1-79"></a><span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">converted_mana_cost</span>
@@ -548,7 +584,7 @@
 </span><span id="__span-1-84"><a href="#__codelineno-1-84" id="__codelineno-1-84" name="__codelineno-1-84"></a><span class="w">  </span><span class="nt">color</span><span class="p">:</span>
 </span><span id="__span-1-85"><a href="#__codelineno-1-85" id="__codelineno-1-85" name="__codelineno-1-85"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">color</span>
 </span><span id="__span-1-86"><a href="#__codelineno-1-86" id="__codelineno-1-86" name="__codelineno-1-86"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The color of a card.</span>
-</span><span id="__span-1-87"><a href="#__codelineno-1-87" id="__codelineno-1-87" name="__codelineno-1-87"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/cards</span>
+</span><span id="__span-1-87"><a href="#__codelineno-1-87" id="__codelineno-1-87" name="__codelineno-1-87"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/</span>
 </span><span id="__span-1-88"><a href="#__codelineno-1-88" id="__codelineno-1-88" name="__codelineno-1-88"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 </span><span id="__span-1-89"><a href="#__codelineno-1-89" id="__codelineno-1-89" name="__codelineno-1-89"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtgo:color</span>
 </span><span id="__span-1-90"><a href="#__codelineno-1-90" id="__codelineno-1-90" name="__codelineno-1-90"></a><span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
@@ -564,7 +600,7 @@
 </span><span id="__span-1-100"><a href="#__codelineno-1-100" id="__codelineno-1-100" name="__codelineno-1-100"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">card_set</span>
 </span><span id="__span-1-101"><a href="#__codelineno-1-101" id="__codelineno-1-101" name="__codelineno-1-101"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A pool of cards released together and designed for the same play</span>
 </span><span id="__span-1-102"><a href="#__codelineno-1-102" id="__codelineno-1-102" name="__codelineno-1-102"></a><span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">environment.</span>
-</span><span id="__span-1-103"><a href="#__codelineno-1-103" id="__codelineno-1-103" name="__codelineno-1-103"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/cards</span>
+</span><span id="__span-1-103"><a href="#__codelineno-1-103" id="__codelineno-1-103" name="__codelineno-1-103"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/</span>
 </span><span id="__span-1-104"><a href="#__codelineno-1-104" id="__codelineno-1-104" name="__codelineno-1-104"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 </span><span id="__span-1-105"><a href="#__codelineno-1-105" id="__codelineno-1-105" name="__codelineno-1-105"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtgo:card_set</span>
 </span><span id="__span-1-106"><a href="#__codelineno-1-106" id="__codelineno-1-106" name="__codelineno-1-106"></a><span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">card_set</span>
@@ -576,7 +612,7 @@
 </span><span id="__span-1-112"><a href="#__codelineno-1-112" id="__codelineno-1-112" name="__codelineno-1-112"></a><span class="w">  </span><span class="nt">ability</span><span class="p">:</span>
 </span><span id="__span-1-113"><a href="#__codelineno-1-113" id="__codelineno-1-113" name="__codelineno-1-113"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ability</span>
 </span><span id="__span-1-114"><a href="#__codelineno-1-114" id="__codelineno-1-114" name="__codelineno-1-114"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">An ability associated with a card.</span>
-</span><span id="__span-1-115"><a href="#__codelineno-1-115" id="__codelineno-1-115" name="__codelineno-1-115"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/cards</span>
+</span><span id="__span-1-115"><a href="#__codelineno-1-115" id="__codelineno-1-115" name="__codelineno-1-115"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/</span>
 </span><span id="__span-1-116"><a href="#__codelineno-1-116" id="__codelineno-1-116" name="__codelineno-1-116"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 </span><span id="__span-1-117"><a href="#__codelineno-1-117" id="__codelineno-1-117" name="__codelineno-1-117"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtgo:ability</span>
 </span><span id="__span-1-118"><a href="#__codelineno-1-118" id="__codelineno-1-118" name="__codelineno-1-118"></a><span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
@@ -589,7 +625,7 @@
 </span><span id="__span-1-125"><a href="#__codelineno-1-125" id="__codelineno-1-125" name="__codelineno-1-125"></a><span class="w">  </span><span class="nt">artist</span><span class="p">:</span>
 </span><span id="__span-1-126"><a href="#__codelineno-1-126" id="__codelineno-1-126" name="__codelineno-1-126"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">artist</span>
 </span><span id="__span-1-127"><a href="#__codelineno-1-127" id="__codelineno-1-127" name="__codelineno-1-127"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The artist who drew a card's illustration.</span>
-</span><span id="__span-1-128"><a href="#__codelineno-1-128" id="__codelineno-1-128" name="__codelineno-1-128"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/cards</span>
+</span><span id="__span-1-128"><a href="#__codelineno-1-128" id="__codelineno-1-128" name="__codelineno-1-128"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/</span>
 </span><span id="__span-1-129"><a href="#__codelineno-1-129" id="__codelineno-1-129" name="__codelineno-1-129"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 </span><span id="__span-1-130"><a href="#__codelineno-1-130" id="__codelineno-1-130" name="__codelineno-1-130"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtgo:artist</span>
 </span><span id="__span-1-131"><a href="#__codelineno-1-131" id="__codelineno-1-131" name="__codelineno-1-131"></a><span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">artist</span>
@@ -601,7 +637,7 @@
 </span><span id="__span-1-137"><a href="#__codelineno-1-137" id="__codelineno-1-137" name="__codelineno-1-137"></a><span class="w">  </span><span class="nt">flavor_text</span><span class="p">:</span>
 </span><span id="__span-1-138"><a href="#__codelineno-1-138" id="__codelineno-1-138" name="__codelineno-1-138"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">flavor_text</span>
 </span><span id="__span-1-139"><a href="#__codelineno-1-139" id="__codelineno-1-139" name="__codelineno-1-139"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The lore text at the bottom of a card.</span>
-</span><span id="__span-1-140"><a href="#__codelineno-1-140" id="__codelineno-1-140" name="__codelineno-1-140"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/cards</span>
+</span><span id="__span-1-140"><a href="#__codelineno-1-140" id="__codelineno-1-140" name="__codelineno-1-140"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/</span>
 </span><span id="__span-1-141"><a href="#__codelineno-1-141" id="__codelineno-1-141" name="__codelineno-1-141"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 </span><span id="__span-1-142"><a href="#__codelineno-1-142" id="__codelineno-1-142" name="__codelineno-1-142"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtgo:flavor_text</span>
 </span><span id="__span-1-143"><a href="#__codelineno-1-143" id="__codelineno-1-143" name="__codelineno-1-143"></a><span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">flavor_text</span>
@@ -613,144 +649,146 @@
 </span><span id="__span-1-149"><a href="#__codelineno-1-149" id="__codelineno-1-149" name="__codelineno-1-149"></a><span class="w">  </span><span class="nt">front_face</span><span class="p">:</span>
 </span><span id="__span-1-150"><a href="#__codelineno-1-150" id="__codelineno-1-150" name="__codelineno-1-150"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">front_face</span>
 </span><span id="__span-1-151"><a href="#__codelineno-1-151" id="__codelineno-1-151" name="__codelineno-1-151"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Front face corresponding to this card (back) face.</span>
-</span><span id="__span-1-152"><a href="#__codelineno-1-152" id="__codelineno-1-152" name="__codelineno-1-152"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/cards</span>
+</span><span id="__span-1-152"><a href="#__codelineno-1-152" id="__codelineno-1-152" name="__codelineno-1-152"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/</span>
 </span><span id="__span-1-153"><a href="#__codelineno-1-153" id="__codelineno-1-153" name="__codelineno-1-153"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-</span><span id="__span-1-154"><a href="#__codelineno-1-154" id="__codelineno-1-154" name="__codelineno-1-154"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtgo:front_face</span>
-</span><span id="__span-1-155"><a href="#__codelineno-1-155" id="__codelineno-1-155" name="__codelineno-1-155"></a><span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">front_face</span>
-</span><span id="__span-1-156"><a href="#__codelineno-1-156" id="__codelineno-1-156" name="__codelineno-1-156"></a><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creature</span>
-</span><span id="__span-1-157"><a href="#__codelineno-1-157" id="__codelineno-1-157" name="__codelineno-1-157"></a><span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-</span><span id="__span-1-158"><a href="#__codelineno-1-158" id="__codelineno-1-158" name="__codelineno-1-158"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Card</span>
-</span><span id="__span-1-159"><a href="#__codelineno-1-159" id="__codelineno-1-159" name="__codelineno-1-159"></a><span class="w">    </span><span class="nt">inverse</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">back_face</span>
-</span><span id="__span-1-160"><a href="#__codelineno-1-160" id="__codelineno-1-160" name="__codelineno-1-160"></a><span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Card</span>
-</span><span id="__span-1-161"><a href="#__codelineno-1-161" id="__codelineno-1-161" name="__codelineno-1-161"></a><span class="w">  </span><span class="nt">back_face</span><span class="p">:</span>
-</span><span id="__span-1-162"><a href="#__codelineno-1-162" id="__codelineno-1-162" name="__codelineno-1-162"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">back_face</span>
-</span><span id="__span-1-163"><a href="#__codelineno-1-163" id="__codelineno-1-163" name="__codelineno-1-163"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Back face corresponding to this card (front) face.</span>
-</span><span id="__span-1-164"><a href="#__codelineno-1-164" id="__codelineno-1-164" name="__codelineno-1-164"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/cards</span>
-</span><span id="__span-1-165"><a href="#__codelineno-1-165" id="__codelineno-1-165" name="__codelineno-1-165"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-</span><span id="__span-1-166"><a href="#__codelineno-1-166" id="__codelineno-1-166" name="__codelineno-1-166"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtgo:back_face</span>
-</span><span id="__span-1-167"><a href="#__codelineno-1-167" id="__codelineno-1-167" name="__codelineno-1-167"></a><span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">back_face</span>
-</span><span id="__span-1-168"><a href="#__codelineno-1-168" id="__codelineno-1-168" name="__codelineno-1-168"></a><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creature</span>
-</span><span id="__span-1-169"><a href="#__codelineno-1-169" id="__codelineno-1-169" name="__codelineno-1-169"></a><span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-</span><span id="__span-1-170"><a href="#__codelineno-1-170" id="__codelineno-1-170" name="__codelineno-1-170"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Card</span>
-</span><span id="__span-1-171"><a href="#__codelineno-1-171" id="__codelineno-1-171" name="__codelineno-1-171"></a><span class="w">    </span><span class="nt">inverse</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">front_face</span>
-</span><span id="__span-1-172"><a href="#__codelineno-1-172" id="__codelineno-1-172" name="__codelineno-1-172"></a><span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Card</span>
-</span><span id="__span-1-173"><a href="#__codelineno-1-173" id="__codelineno-1-173" name="__codelineno-1-173"></a><span class="w">  </span><span class="nt">type_line</span><span class="p">:</span>
-</span><span id="__span-1-174"><a href="#__codelineno-1-174" id="__codelineno-1-174" name="__codelineno-1-174"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">type_line</span>
-</span><span id="__span-1-175"><a href="#__codelineno-1-175" id="__codelineno-1-175" name="__codelineno-1-175"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The text line below a card's illustration containing the card's type,</span>
-</span><span id="__span-1-176"><a href="#__codelineno-1-176" id="__codelineno-1-176" name="__codelineno-1-176"></a><span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">subtype and supertype (if applicable).</span>
-</span><span id="__span-1-177"><a href="#__codelineno-1-177" id="__codelineno-1-177" name="__codelineno-1-177"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/cards</span>
-</span><span id="__span-1-178"><a href="#__codelineno-1-178" id="__codelineno-1-178" name="__codelineno-1-178"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-</span><span id="__span-1-179"><a href="#__codelineno-1-179" id="__codelineno-1-179" name="__codelineno-1-179"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtgo:type_line</span>
-</span><span id="__span-1-180"><a href="#__codelineno-1-180" id="__codelineno-1-180" name="__codelineno-1-180"></a><span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">type_line</span>
-</span><span id="__span-1-181"><a href="#__codelineno-1-181" id="__codelineno-1-181" name="__codelineno-1-181"></a><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creature</span>
-</span><span id="__span-1-182"><a href="#__codelineno-1-182" id="__codelineno-1-182" name="__codelineno-1-182"></a><span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-</span><span id="__span-1-183"><a href="#__codelineno-1-183" id="__codelineno-1-183" name="__codelineno-1-183"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Token</span>
-</span><span id="__span-1-184"><a href="#__codelineno-1-184" id="__codelineno-1-184" name="__codelineno-1-184"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Card</span>
-</span><span id="__span-1-185"><a href="#__codelineno-1-185" id="__codelineno-1-185" name="__codelineno-1-185"></a><span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-</span><span id="__span-1-186"><a href="#__codelineno-1-186" id="__codelineno-1-186" name="__codelineno-1-186"></a><span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-1-187"><a href="#__codelineno-1-187" id="__codelineno-1-187" name="__codelineno-1-187"></a><span class="w">  </span><span class="nt">card_type</span><span class="p">:</span>
-</span><span id="__span-1-188"><a href="#__codelineno-1-188" id="__codelineno-1-188" name="__codelineno-1-188"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">card_type</span>
-</span><span id="__span-1-189"><a href="#__codelineno-1-189" id="__codelineno-1-189" name="__codelineno-1-189"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The text line below a card's illustration containing the card's type,</span>
-</span><span id="__span-1-190"><a href="#__codelineno-1-190" id="__codelineno-1-190" name="__codelineno-1-190"></a><span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">subtype and supertype (if applicable).</span>
-</span><span id="__span-1-191"><a href="#__codelineno-1-191" id="__codelineno-1-191" name="__codelineno-1-191"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/cards</span>
-</span><span id="__span-1-192"><a href="#__codelineno-1-192" id="__codelineno-1-192" name="__codelineno-1-192"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-</span><span id="__span-1-193"><a href="#__codelineno-1-193" id="__codelineno-1-193" name="__codelineno-1-193"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtgo:card_type</span>
-</span><span id="__span-1-194"><a href="#__codelineno-1-194" id="__codelineno-1-194" name="__codelineno-1-194"></a><span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-1-195"><a href="#__codelineno-1-195" id="__codelineno-1-195" name="__codelineno-1-195"></a><span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">card_type</span>
-</span><span id="__span-1-196"><a href="#__codelineno-1-196" id="__codelineno-1-196" name="__codelineno-1-196"></a><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creature</span>
-</span><span id="__span-1-197"><a href="#__codelineno-1-197" id="__codelineno-1-197" name="__codelineno-1-197"></a><span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-</span><span id="__span-1-198"><a href="#__codelineno-1-198" id="__codelineno-1-198" name="__codelineno-1-198"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Token</span>
-</span><span id="__span-1-199"><a href="#__codelineno-1-199" id="__codelineno-1-199" name="__codelineno-1-199"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Card</span>
-</span><span id="__span-1-200"><a href="#__codelineno-1-200" id="__codelineno-1-200" name="__codelineno-1-200"></a><span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-</span><span id="__span-1-201"><a href="#__codelineno-1-201" id="__codelineno-1-201" name="__codelineno-1-201"></a><span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-1-202"><a href="#__codelineno-1-202" id="__codelineno-1-202" name="__codelineno-1-202"></a><span class="w">  </span><span class="nt">card_subtype</span><span class="p">:</span>
-</span><span id="__span-1-203"><a href="#__codelineno-1-203" id="__codelineno-1-203" name="__codelineno-1-203"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">card_subtype</span>
-</span><span id="__span-1-204"><a href="#__codelineno-1-204" id="__codelineno-1-204" name="__codelineno-1-204"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears</span>
-</span><span id="__span-1-205"><a href="#__codelineno-1-205" id="__codelineno-1-205" name="__codelineno-1-205"></a><span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">on the right of the type line.</span>
-</span><span id="__span-1-206"><a href="#__codelineno-1-206" id="__codelineno-1-206" name="__codelineno-1-206"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/cards</span>
-</span><span id="__span-1-207"><a href="#__codelineno-1-207" id="__codelineno-1-207" name="__codelineno-1-207"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-</span><span id="__span-1-208"><a href="#__codelineno-1-208" id="__codelineno-1-208" name="__codelineno-1-208"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtgo:card_subtype</span>
-</span><span id="__span-1-209"><a href="#__codelineno-1-209" id="__codelineno-1-209" name="__codelineno-1-209"></a><span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-1-210"><a href="#__codelineno-1-210" id="__codelineno-1-210" name="__codelineno-1-210"></a><span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">card_subtype</span>
-</span><span id="__span-1-211"><a href="#__codelineno-1-211" id="__codelineno-1-211" name="__codelineno-1-211"></a><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creature</span>
-</span><span id="__span-1-212"><a href="#__codelineno-1-212" id="__codelineno-1-212" name="__codelineno-1-212"></a><span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-</span><span id="__span-1-213"><a href="#__codelineno-1-213" id="__codelineno-1-213" name="__codelineno-1-213"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Token</span>
-</span><span id="__span-1-214"><a href="#__codelineno-1-214" id="__codelineno-1-214" name="__codelineno-1-214"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Card</span>
-</span><span id="__span-1-215"><a href="#__codelineno-1-215" id="__codelineno-1-215" name="__codelineno-1-215"></a><span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-</span><span id="__span-1-216"><a href="#__codelineno-1-216" id="__codelineno-1-216" name="__codelineno-1-216"></a><span class="w">  </span><span class="nt">card_supertype</span><span class="p">:</span>
-</span><span id="__span-1-217"><a href="#__codelineno-1-217" id="__codelineno-1-217" name="__codelineno-1-217"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">card_supertype</span>
-</span><span id="__span-1-218"><a href="#__codelineno-1-218" id="__codelineno-1-218" name="__codelineno-1-218"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The supertype(s) of a card, such as Basic, Legendary or Snow. Appears</span>
-</span><span id="__span-1-219"><a href="#__codelineno-1-219" id="__codelineno-1-219" name="__codelineno-1-219"></a><span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">on the left of the type line, before the type.</span>
-</span><span id="__span-1-220"><a href="#__codelineno-1-220" id="__codelineno-1-220" name="__codelineno-1-220"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/cards</span>
-</span><span id="__span-1-221"><a href="#__codelineno-1-221" id="__codelineno-1-221" name="__codelineno-1-221"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-</span><span id="__span-1-222"><a href="#__codelineno-1-222" id="__codelineno-1-222" name="__codelineno-1-222"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtgo:card_supertype</span>
-</span><span id="__span-1-223"><a href="#__codelineno-1-223" id="__codelineno-1-223" name="__codelineno-1-223"></a><span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-1-224"><a href="#__codelineno-1-224" id="__codelineno-1-224" name="__codelineno-1-224"></a><span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">card_supertype</span>
-</span><span id="__span-1-225"><a href="#__codelineno-1-225" id="__codelineno-1-225" name="__codelineno-1-225"></a><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creature</span>
-</span><span id="__span-1-226"><a href="#__codelineno-1-226" id="__codelineno-1-226" name="__codelineno-1-226"></a><span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-</span><span id="__span-1-227"><a href="#__codelineno-1-227" id="__codelineno-1-227" name="__codelineno-1-227"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Token</span>
-</span><span id="__span-1-228"><a href="#__codelineno-1-228" id="__codelineno-1-228" name="__codelineno-1-228"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Card</span>
-</span><span id="__span-1-229"><a href="#__codelineno-1-229" id="__codelineno-1-229" name="__codelineno-1-229"></a><span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-</span><span id="__span-1-230"><a href="#__codelineno-1-230" id="__codelineno-1-230" name="__codelineno-1-230"></a><span class="w">  </span><span class="nt">rarity</span><span class="p">:</span>
-</span><span id="__span-1-231"><a href="#__codelineno-1-231" id="__codelineno-1-231" name="__codelineno-1-231"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rarity</span>
-</span><span id="__span-1-232"><a href="#__codelineno-1-232" id="__codelineno-1-232" name="__codelineno-1-232"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">An ability associated with a card.</span>
-</span><span id="__span-1-233"><a href="#__codelineno-1-233" id="__codelineno-1-233" name="__codelineno-1-233"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/cards</span>
-</span><span id="__span-1-234"><a href="#__codelineno-1-234" id="__codelineno-1-234" name="__codelineno-1-234"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-</span><span id="__span-1-235"><a href="#__codelineno-1-235" id="__codelineno-1-235" name="__codelineno-1-235"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtgo:rarity</span>
-</span><span id="__span-1-236"><a href="#__codelineno-1-236" id="__codelineno-1-236" name="__codelineno-1-236"></a><span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rarity</span>
-</span><span id="__span-1-237"><a href="#__codelineno-1-237" id="__codelineno-1-237" name="__codelineno-1-237"></a><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creature</span>
-</span><span id="__span-1-238"><a href="#__codelineno-1-238" id="__codelineno-1-238" name="__codelineno-1-238"></a><span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-</span><span id="__span-1-239"><a href="#__codelineno-1-239" id="__codelineno-1-239" name="__codelineno-1-239"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Card</span>
-</span><span id="__span-1-240"><a href="#__codelineno-1-240" id="__codelineno-1-240" name="__codelineno-1-240"></a><span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Rarity</span>
-</span><span id="__span-1-241"><a href="#__codelineno-1-241" id="__codelineno-1-241" name="__codelineno-1-241"></a><span class="w">  </span><span class="nt">oracle_text</span><span class="p">:</span>
-</span><span id="__span-1-242"><a href="#__codelineno-1-242" id="__codelineno-1-242" name="__codelineno-1-242"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">oracle_text</span>
-</span><span id="__span-1-243"><a href="#__codelineno-1-243" id="__codelineno-1-243" name="__codelineno-1-243"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The official wording for the card effects.</span>
-</span><span id="__span-1-244"><a href="#__codelineno-1-244" id="__codelineno-1-244" name="__codelineno-1-244"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/cards</span>
-</span><span id="__span-1-245"><a href="#__codelineno-1-245" id="__codelineno-1-245" name="__codelineno-1-245"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-</span><span id="__span-1-246"><a href="#__codelineno-1-246" id="__codelineno-1-246" name="__codelineno-1-246"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtgo:oracle_text</span>
-</span><span id="__span-1-247"><a href="#__codelineno-1-247" id="__codelineno-1-247" name="__codelineno-1-247"></a><span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">oracle_text</span>
-</span><span id="__span-1-248"><a href="#__codelineno-1-248" id="__codelineno-1-248" name="__codelineno-1-248"></a><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creature</span>
-</span><span id="__span-1-249"><a href="#__codelineno-1-249" id="__codelineno-1-249" name="__codelineno-1-249"></a><span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-</span><span id="__span-1-250"><a href="#__codelineno-1-250" id="__codelineno-1-250" name="__codelineno-1-250"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Token</span>
-</span><span id="__span-1-251"><a href="#__codelineno-1-251" id="__codelineno-1-251" name="__codelineno-1-251"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Card</span>
-</span><span id="__span-1-252"><a href="#__codelineno-1-252" id="__codelineno-1-252" name="__codelineno-1-252"></a><span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-</span><span id="__span-1-253"><a href="#__codelineno-1-253" id="__codelineno-1-253" name="__codelineno-1-253"></a><span class="w">  </span><span class="nt">id</span><span class="p">:</span>
-</span><span id="__span-1-254"><a href="#__codelineno-1-254" id="__codelineno-1-254" name="__codelineno-1-254"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">id</span>
-</span><span id="__span-1-255"><a href="#__codelineno-1-255" id="__codelineno-1-255" name="__codelineno-1-255"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A unique identifier for a thing</span>
-</span><span id="__span-1-256"><a href="#__codelineno-1-256" id="__codelineno-1-256" name="__codelineno-1-256"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/</span>
-</span><span id="__span-1-257"><a href="#__codelineno-1-257" id="__codelineno-1-257" name="__codelineno-1-257"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-</span><span id="__span-1-258"><a href="#__codelineno-1-258" id="__codelineno-1-258" name="__codelineno-1-258"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">schema:identifier</span>
-</span><span id="__span-1-259"><a href="#__codelineno-1-259" id="__codelineno-1-259" name="__codelineno-1-259"></a><span class="w">    </span><span class="nt">identifier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-1-260"><a href="#__codelineno-1-260" id="__codelineno-1-260" name="__codelineno-1-260"></a><span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">id</span>
-</span><span id="__span-1-261"><a href="#__codelineno-1-261" id="__codelineno-1-261" name="__codelineno-1-261"></a><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creature</span>
-</span><span id="__span-1-262"><a href="#__codelineno-1-262" id="__codelineno-1-262" name="__codelineno-1-262"></a><span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-</span><span id="__span-1-263"><a href="#__codelineno-1-263" id="__codelineno-1-263" name="__codelineno-1-263"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NamedThing</span>
-</span><span id="__span-1-264"><a href="#__codelineno-1-264" id="__codelineno-1-264" name="__codelineno-1-264"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Thing</span>
-</span><span id="__span-1-265"><a href="#__codelineno-1-265" id="__codelineno-1-265" name="__codelineno-1-265"></a><span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uriorcurie</span>
-</span><span id="__span-1-266"><a href="#__codelineno-1-266" id="__codelineno-1-266" name="__codelineno-1-266"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span>
-</span><span id="__span-1-267"><a href="#__codelineno-1-267" id="__codelineno-1-267" name="__codelineno-1-267"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">name</span>
-</span><span id="__span-1-268"><a href="#__codelineno-1-268" id="__codelineno-1-268" name="__codelineno-1-268"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A human-readable name for a thing</span>
-</span><span id="__span-1-269"><a href="#__codelineno-1-269" id="__codelineno-1-269" name="__codelineno-1-269"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/</span>
-</span><span id="__span-1-270"><a href="#__codelineno-1-270" id="__codelineno-1-270" name="__codelineno-1-270"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-</span><span id="__span-1-271"><a href="#__codelineno-1-271" id="__codelineno-1-271" name="__codelineno-1-271"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">schema:name</span>
-</span><span id="__span-1-272"><a href="#__codelineno-1-272" id="__codelineno-1-272" name="__codelineno-1-272"></a><span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">name</span>
-</span><span id="__span-1-273"><a href="#__codelineno-1-273" id="__codelineno-1-273" name="__codelineno-1-273"></a><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creature</span>
-</span><span id="__span-1-274"><a href="#__codelineno-1-274" id="__codelineno-1-274" name="__codelineno-1-274"></a><span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-</span><span id="__span-1-275"><a href="#__codelineno-1-275" id="__codelineno-1-275" name="__codelineno-1-275"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NamedThing</span>
-</span><span id="__span-1-276"><a href="#__codelineno-1-276" id="__codelineno-1-276" name="__codelineno-1-276"></a><span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-</span><span id="__span-1-277"><a href="#__codelineno-1-277" id="__codelineno-1-277" name="__codelineno-1-277"></a><span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-1-278"><a href="#__codelineno-1-278" id="__codelineno-1-278" name="__codelineno-1-278"></a><span class="w">  </span><span class="nt">description</span><span class="p">:</span>
-</span><span id="__span-1-279"><a href="#__codelineno-1-279" id="__codelineno-1-279" name="__codelineno-1-279"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">description</span>
-</span><span id="__span-1-280"><a href="#__codelineno-1-280" id="__codelineno-1-280" name="__codelineno-1-280"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A human-readable description for a thing</span>
-</span><span id="__span-1-281"><a href="#__codelineno-1-281" id="__codelineno-1-281" name="__codelineno-1-281"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/</span>
-</span><span id="__span-1-282"><a href="#__codelineno-1-282" id="__codelineno-1-282" name="__codelineno-1-282"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
-</span><span id="__span-1-283"><a href="#__codelineno-1-283" id="__codelineno-1-283" name="__codelineno-1-283"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">schema:description</span>
-</span><span id="__span-1-284"><a href="#__codelineno-1-284" id="__codelineno-1-284" name="__codelineno-1-284"></a><span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">description</span>
-</span><span id="__span-1-285"><a href="#__codelineno-1-285" id="__codelineno-1-285" name="__codelineno-1-285"></a><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creature</span>
-</span><span id="__span-1-286"><a href="#__codelineno-1-286" id="__codelineno-1-286" name="__codelineno-1-286"></a><span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
-</span><span id="__span-1-287"><a href="#__codelineno-1-287" id="__codelineno-1-287" name="__codelineno-1-287"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NamedThing</span>
-</span><span id="__span-1-288"><a href="#__codelineno-1-288" id="__codelineno-1-288" name="__codelineno-1-288"></a><span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
-</span><span id="__span-1-289"><a href="#__codelineno-1-289" id="__codelineno-1-289" name="__codelineno-1-289"></a><span class="nt">class_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtgo:Creature</span>
+</span><span id="__span-1-154"><a href="#__codelineno-1-154" id="__codelineno-1-154" name="__codelineno-1-154"></a><span class="w">    </span><span class="nt">domain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Card</span>
+</span><span id="__span-1-155"><a href="#__codelineno-1-155" id="__codelineno-1-155" name="__codelineno-1-155"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtgo:front_face</span>
+</span><span id="__span-1-156"><a href="#__codelineno-1-156" id="__codelineno-1-156" name="__codelineno-1-156"></a><span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">front_face</span>
+</span><span id="__span-1-157"><a href="#__codelineno-1-157" id="__codelineno-1-157" name="__codelineno-1-157"></a><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creature</span>
+</span><span id="__span-1-158"><a href="#__codelineno-1-158" id="__codelineno-1-158" name="__codelineno-1-158"></a><span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+</span><span id="__span-1-159"><a href="#__codelineno-1-159" id="__codelineno-1-159" name="__codelineno-1-159"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Card</span>
+</span><span id="__span-1-160"><a href="#__codelineno-1-160" id="__codelineno-1-160" name="__codelineno-1-160"></a><span class="w">    </span><span class="nt">inverse</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">back_face</span>
+</span><span id="__span-1-161"><a href="#__codelineno-1-161" id="__codelineno-1-161" name="__codelineno-1-161"></a><span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Card</span>
+</span><span id="__span-1-162"><a href="#__codelineno-1-162" id="__codelineno-1-162" name="__codelineno-1-162"></a><span class="w">  </span><span class="nt">back_face</span><span class="p">:</span>
+</span><span id="__span-1-163"><a href="#__codelineno-1-163" id="__codelineno-1-163" name="__codelineno-1-163"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">back_face</span>
+</span><span id="__span-1-164"><a href="#__codelineno-1-164" id="__codelineno-1-164" name="__codelineno-1-164"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Back face corresponding to this card (front) face.</span>
+</span><span id="__span-1-165"><a href="#__codelineno-1-165" id="__codelineno-1-165" name="__codelineno-1-165"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/</span>
+</span><span id="__span-1-166"><a href="#__codelineno-1-166" id="__codelineno-1-166" name="__codelineno-1-166"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+</span><span id="__span-1-167"><a href="#__codelineno-1-167" id="__codelineno-1-167" name="__codelineno-1-167"></a><span class="w">    </span><span class="nt">domain</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Card</span>
+</span><span id="__span-1-168"><a href="#__codelineno-1-168" id="__codelineno-1-168" name="__codelineno-1-168"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtgo:back_face</span>
+</span><span id="__span-1-169"><a href="#__codelineno-1-169" id="__codelineno-1-169" name="__codelineno-1-169"></a><span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">back_face</span>
+</span><span id="__span-1-170"><a href="#__codelineno-1-170" id="__codelineno-1-170" name="__codelineno-1-170"></a><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creature</span>
+</span><span id="__span-1-171"><a href="#__codelineno-1-171" id="__codelineno-1-171" name="__codelineno-1-171"></a><span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+</span><span id="__span-1-172"><a href="#__codelineno-1-172" id="__codelineno-1-172" name="__codelineno-1-172"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Card</span>
+</span><span id="__span-1-173"><a href="#__codelineno-1-173" id="__codelineno-1-173" name="__codelineno-1-173"></a><span class="w">    </span><span class="nt">inverse</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">front_face</span>
+</span><span id="__span-1-174"><a href="#__codelineno-1-174" id="__codelineno-1-174" name="__codelineno-1-174"></a><span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+</span><span id="__span-1-175"><a href="#__codelineno-1-175" id="__codelineno-1-175" name="__codelineno-1-175"></a><span class="w">  </span><span class="nt">type_line</span><span class="p">:</span>
+</span><span id="__span-1-176"><a href="#__codelineno-1-176" id="__codelineno-1-176" name="__codelineno-1-176"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">type_line</span>
+</span><span id="__span-1-177"><a href="#__codelineno-1-177" id="__codelineno-1-177" name="__codelineno-1-177"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The text line below a card's illustration containing the card's type,</span>
+</span><span id="__span-1-178"><a href="#__codelineno-1-178" id="__codelineno-1-178" name="__codelineno-1-178"></a><span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">subtype and supertype (if applicable).</span>
+</span><span id="__span-1-179"><a href="#__codelineno-1-179" id="__codelineno-1-179" name="__codelineno-1-179"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/</span>
+</span><span id="__span-1-180"><a href="#__codelineno-1-180" id="__codelineno-1-180" name="__codelineno-1-180"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+</span><span id="__span-1-181"><a href="#__codelineno-1-181" id="__codelineno-1-181" name="__codelineno-1-181"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtgo:type_line</span>
+</span><span id="__span-1-182"><a href="#__codelineno-1-182" id="__codelineno-1-182" name="__codelineno-1-182"></a><span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">type_line</span>
+</span><span id="__span-1-183"><a href="#__codelineno-1-183" id="__codelineno-1-183" name="__codelineno-1-183"></a><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creature</span>
+</span><span id="__span-1-184"><a href="#__codelineno-1-184" id="__codelineno-1-184" name="__codelineno-1-184"></a><span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+</span><span id="__span-1-185"><a href="#__codelineno-1-185" id="__codelineno-1-185" name="__codelineno-1-185"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Token</span>
+</span><span id="__span-1-186"><a href="#__codelineno-1-186" id="__codelineno-1-186" name="__codelineno-1-186"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Card</span>
+</span><span id="__span-1-187"><a href="#__codelineno-1-187" id="__codelineno-1-187" name="__codelineno-1-187"></a><span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+</span><span id="__span-1-188"><a href="#__codelineno-1-188" id="__codelineno-1-188" name="__codelineno-1-188"></a><span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-1-189"><a href="#__codelineno-1-189" id="__codelineno-1-189" name="__codelineno-1-189"></a><span class="w">  </span><span class="nt">card_type</span><span class="p">:</span>
+</span><span id="__span-1-190"><a href="#__codelineno-1-190" id="__codelineno-1-190" name="__codelineno-1-190"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">card_type</span>
+</span><span id="__span-1-191"><a href="#__codelineno-1-191" id="__codelineno-1-191" name="__codelineno-1-191"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The text line below a card's illustration containing the card's type,</span>
+</span><span id="__span-1-192"><a href="#__codelineno-1-192" id="__codelineno-1-192" name="__codelineno-1-192"></a><span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">subtype and supertype (if applicable).</span>
+</span><span id="__span-1-193"><a href="#__codelineno-1-193" id="__codelineno-1-193" name="__codelineno-1-193"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/</span>
+</span><span id="__span-1-194"><a href="#__codelineno-1-194" id="__codelineno-1-194" name="__codelineno-1-194"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+</span><span id="__span-1-195"><a href="#__codelineno-1-195" id="__codelineno-1-195" name="__codelineno-1-195"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtgo:card_type</span>
+</span><span id="__span-1-196"><a href="#__codelineno-1-196" id="__codelineno-1-196" name="__codelineno-1-196"></a><span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-1-197"><a href="#__codelineno-1-197" id="__codelineno-1-197" name="__codelineno-1-197"></a><span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">card_type</span>
+</span><span id="__span-1-198"><a href="#__codelineno-1-198" id="__codelineno-1-198" name="__codelineno-1-198"></a><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creature</span>
+</span><span id="__span-1-199"><a href="#__codelineno-1-199" id="__codelineno-1-199" name="__codelineno-1-199"></a><span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+</span><span id="__span-1-200"><a href="#__codelineno-1-200" id="__codelineno-1-200" name="__codelineno-1-200"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Token</span>
+</span><span id="__span-1-201"><a href="#__codelineno-1-201" id="__codelineno-1-201" name="__codelineno-1-201"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Card</span>
+</span><span id="__span-1-202"><a href="#__codelineno-1-202" id="__codelineno-1-202" name="__codelineno-1-202"></a><span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+</span><span id="__span-1-203"><a href="#__codelineno-1-203" id="__codelineno-1-203" name="__codelineno-1-203"></a><span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-1-204"><a href="#__codelineno-1-204" id="__codelineno-1-204" name="__codelineno-1-204"></a><span class="w">  </span><span class="nt">card_subtype</span><span class="p">:</span>
+</span><span id="__span-1-205"><a href="#__codelineno-1-205" id="__codelineno-1-205" name="__codelineno-1-205"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">card_subtype</span>
+</span><span id="__span-1-206"><a href="#__codelineno-1-206" id="__codelineno-1-206" name="__codelineno-1-206"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The subtype(s) of a card, such as Equipment, Cat or Warrior. Appears</span>
+</span><span id="__span-1-207"><a href="#__codelineno-1-207" id="__codelineno-1-207" name="__codelineno-1-207"></a><span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">on the right of the type line.</span>
+</span><span id="__span-1-208"><a href="#__codelineno-1-208" id="__codelineno-1-208" name="__codelineno-1-208"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/</span>
+</span><span id="__span-1-209"><a href="#__codelineno-1-209" id="__codelineno-1-209" name="__codelineno-1-209"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+</span><span id="__span-1-210"><a href="#__codelineno-1-210" id="__codelineno-1-210" name="__codelineno-1-210"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtgo:card_subtype</span>
+</span><span id="__span-1-211"><a href="#__codelineno-1-211" id="__codelineno-1-211" name="__codelineno-1-211"></a><span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-1-212"><a href="#__codelineno-1-212" id="__codelineno-1-212" name="__codelineno-1-212"></a><span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">card_subtype</span>
+</span><span id="__span-1-213"><a href="#__codelineno-1-213" id="__codelineno-1-213" name="__codelineno-1-213"></a><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creature</span>
+</span><span id="__span-1-214"><a href="#__codelineno-1-214" id="__codelineno-1-214" name="__codelineno-1-214"></a><span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+</span><span id="__span-1-215"><a href="#__codelineno-1-215" id="__codelineno-1-215" name="__codelineno-1-215"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Token</span>
+</span><span id="__span-1-216"><a href="#__codelineno-1-216" id="__codelineno-1-216" name="__codelineno-1-216"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Card</span>
+</span><span id="__span-1-217"><a href="#__codelineno-1-217" id="__codelineno-1-217" name="__codelineno-1-217"></a><span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+</span><span id="__span-1-218"><a href="#__codelineno-1-218" id="__codelineno-1-218" name="__codelineno-1-218"></a><span class="w">  </span><span class="nt">card_supertype</span><span class="p">:</span>
+</span><span id="__span-1-219"><a href="#__codelineno-1-219" id="__codelineno-1-219" name="__codelineno-1-219"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">card_supertype</span>
+</span><span id="__span-1-220"><a href="#__codelineno-1-220" id="__codelineno-1-220" name="__codelineno-1-220"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The supertype(s) of a card, such as Basic, Legendary or Snow. Appears</span>
+</span><span id="__span-1-221"><a href="#__codelineno-1-221" id="__codelineno-1-221" name="__codelineno-1-221"></a><span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">on the left of the type line, before the type.</span>
+</span><span id="__span-1-222"><a href="#__codelineno-1-222" id="__codelineno-1-222" name="__codelineno-1-222"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/</span>
+</span><span id="__span-1-223"><a href="#__codelineno-1-223" id="__codelineno-1-223" name="__codelineno-1-223"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+</span><span id="__span-1-224"><a href="#__codelineno-1-224" id="__codelineno-1-224" name="__codelineno-1-224"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtgo:card_supertype</span>
+</span><span id="__span-1-225"><a href="#__codelineno-1-225" id="__codelineno-1-225" name="__codelineno-1-225"></a><span class="w">    </span><span class="nt">multivalued</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-1-226"><a href="#__codelineno-1-226" id="__codelineno-1-226" name="__codelineno-1-226"></a><span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">card_supertype</span>
+</span><span id="__span-1-227"><a href="#__codelineno-1-227" id="__codelineno-1-227" name="__codelineno-1-227"></a><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creature</span>
+</span><span id="__span-1-228"><a href="#__codelineno-1-228" id="__codelineno-1-228" name="__codelineno-1-228"></a><span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+</span><span id="__span-1-229"><a href="#__codelineno-1-229" id="__codelineno-1-229" name="__codelineno-1-229"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Token</span>
+</span><span id="__span-1-230"><a href="#__codelineno-1-230" id="__codelineno-1-230" name="__codelineno-1-230"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Card</span>
+</span><span id="__span-1-231"><a href="#__codelineno-1-231" id="__codelineno-1-231" name="__codelineno-1-231"></a><span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+</span><span id="__span-1-232"><a href="#__codelineno-1-232" id="__codelineno-1-232" name="__codelineno-1-232"></a><span class="w">  </span><span class="nt">rarity</span><span class="p">:</span>
+</span><span id="__span-1-233"><a href="#__codelineno-1-233" id="__codelineno-1-233" name="__codelineno-1-233"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rarity</span>
+</span><span id="__span-1-234"><a href="#__codelineno-1-234" id="__codelineno-1-234" name="__codelineno-1-234"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">An ability associated with a card.</span>
+</span><span id="__span-1-235"><a href="#__codelineno-1-235" id="__codelineno-1-235" name="__codelineno-1-235"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/</span>
+</span><span id="__span-1-236"><a href="#__codelineno-1-236" id="__codelineno-1-236" name="__codelineno-1-236"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+</span><span id="__span-1-237"><a href="#__codelineno-1-237" id="__codelineno-1-237" name="__codelineno-1-237"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtgo:rarity</span>
+</span><span id="__span-1-238"><a href="#__codelineno-1-238" id="__codelineno-1-238" name="__codelineno-1-238"></a><span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rarity</span>
+</span><span id="__span-1-239"><a href="#__codelineno-1-239" id="__codelineno-1-239" name="__codelineno-1-239"></a><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creature</span>
+</span><span id="__span-1-240"><a href="#__codelineno-1-240" id="__codelineno-1-240" name="__codelineno-1-240"></a><span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+</span><span id="__span-1-241"><a href="#__codelineno-1-241" id="__codelineno-1-241" name="__codelineno-1-241"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Card</span>
+</span><span id="__span-1-242"><a href="#__codelineno-1-242" id="__codelineno-1-242" name="__codelineno-1-242"></a><span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Rarity</span>
+</span><span id="__span-1-243"><a href="#__codelineno-1-243" id="__codelineno-1-243" name="__codelineno-1-243"></a><span class="w">  </span><span class="nt">oracle_text</span><span class="p">:</span>
+</span><span id="__span-1-244"><a href="#__codelineno-1-244" id="__codelineno-1-244" name="__codelineno-1-244"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">oracle_text</span>
+</span><span id="__span-1-245"><a href="#__codelineno-1-245" id="__codelineno-1-245" name="__codelineno-1-245"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The official wording for the card effects.</span>
+</span><span id="__span-1-246"><a href="#__codelineno-1-246" id="__codelineno-1-246" name="__codelineno-1-246"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/</span>
+</span><span id="__span-1-247"><a href="#__codelineno-1-247" id="__codelineno-1-247" name="__codelineno-1-247"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+</span><span id="__span-1-248"><a href="#__codelineno-1-248" id="__codelineno-1-248" name="__codelineno-1-248"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtgo:oracle_text</span>
+</span><span id="__span-1-249"><a href="#__codelineno-1-249" id="__codelineno-1-249" name="__codelineno-1-249"></a><span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">oracle_text</span>
+</span><span id="__span-1-250"><a href="#__codelineno-1-250" id="__codelineno-1-250" name="__codelineno-1-250"></a><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creature</span>
+</span><span id="__span-1-251"><a href="#__codelineno-1-251" id="__codelineno-1-251" name="__codelineno-1-251"></a><span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+</span><span id="__span-1-252"><a href="#__codelineno-1-252" id="__codelineno-1-252" name="__codelineno-1-252"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Token</span>
+</span><span id="__span-1-253"><a href="#__codelineno-1-253" id="__codelineno-1-253" name="__codelineno-1-253"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Card</span>
+</span><span id="__span-1-254"><a href="#__codelineno-1-254" id="__codelineno-1-254" name="__codelineno-1-254"></a><span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+</span><span id="__span-1-255"><a href="#__codelineno-1-255" id="__codelineno-1-255" name="__codelineno-1-255"></a><span class="w">  </span><span class="nt">id</span><span class="p">:</span>
+</span><span id="__span-1-256"><a href="#__codelineno-1-256" id="__codelineno-1-256" name="__codelineno-1-256"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">id</span>
+</span><span id="__span-1-257"><a href="#__codelineno-1-257" id="__codelineno-1-257" name="__codelineno-1-257"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A unique identifier for a thing</span>
+</span><span id="__span-1-258"><a href="#__codelineno-1-258" id="__codelineno-1-258" name="__codelineno-1-258"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/</span>
+</span><span id="__span-1-259"><a href="#__codelineno-1-259" id="__codelineno-1-259" name="__codelineno-1-259"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+</span><span id="__span-1-260"><a href="#__codelineno-1-260" id="__codelineno-1-260" name="__codelineno-1-260"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">schema:identifier</span>
+</span><span id="__span-1-261"><a href="#__codelineno-1-261" id="__codelineno-1-261" name="__codelineno-1-261"></a><span class="w">    </span><span class="nt">identifier</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-1-262"><a href="#__codelineno-1-262" id="__codelineno-1-262" name="__codelineno-1-262"></a><span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">id</span>
+</span><span id="__span-1-263"><a href="#__codelineno-1-263" id="__codelineno-1-263" name="__codelineno-1-263"></a><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creature</span>
+</span><span id="__span-1-264"><a href="#__codelineno-1-264" id="__codelineno-1-264" name="__codelineno-1-264"></a><span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+</span><span id="__span-1-265"><a href="#__codelineno-1-265" id="__codelineno-1-265" name="__codelineno-1-265"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NamedThing</span>
+</span><span id="__span-1-266"><a href="#__codelineno-1-266" id="__codelineno-1-266" name="__codelineno-1-266"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Thing</span>
+</span><span id="__span-1-267"><a href="#__codelineno-1-267" id="__codelineno-1-267" name="__codelineno-1-267"></a><span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uriorcurie</span>
+</span><span id="__span-1-268"><a href="#__codelineno-1-268" id="__codelineno-1-268" name="__codelineno-1-268"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span>
+</span><span id="__span-1-269"><a href="#__codelineno-1-269" id="__codelineno-1-269" name="__codelineno-1-269"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">name</span>
+</span><span id="__span-1-270"><a href="#__codelineno-1-270" id="__codelineno-1-270" name="__codelineno-1-270"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A human-readable name for a thing</span>
+</span><span id="__span-1-271"><a href="#__codelineno-1-271" id="__codelineno-1-271" name="__codelineno-1-271"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/</span>
+</span><span id="__span-1-272"><a href="#__codelineno-1-272" id="__codelineno-1-272" name="__codelineno-1-272"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+</span><span id="__span-1-273"><a href="#__codelineno-1-273" id="__codelineno-1-273" name="__codelineno-1-273"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">schema:name</span>
+</span><span id="__span-1-274"><a href="#__codelineno-1-274" id="__codelineno-1-274" name="__codelineno-1-274"></a><span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">name</span>
+</span><span id="__span-1-275"><a href="#__codelineno-1-275" id="__codelineno-1-275" name="__codelineno-1-275"></a><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creature</span>
+</span><span id="__span-1-276"><a href="#__codelineno-1-276" id="__codelineno-1-276" name="__codelineno-1-276"></a><span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+</span><span id="__span-1-277"><a href="#__codelineno-1-277" id="__codelineno-1-277" name="__codelineno-1-277"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NamedThing</span>
+</span><span id="__span-1-278"><a href="#__codelineno-1-278" id="__codelineno-1-278" name="__codelineno-1-278"></a><span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+</span><span id="__span-1-279"><a href="#__codelineno-1-279" id="__codelineno-1-279" name="__codelineno-1-279"></a><span class="w">    </span><span class="nt">required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-1-280"><a href="#__codelineno-1-280" id="__codelineno-1-280" name="__codelineno-1-280"></a><span class="w">  </span><span class="nt">description</span><span class="p">:</span>
+</span><span id="__span-1-281"><a href="#__codelineno-1-281" id="__codelineno-1-281" name="__codelineno-1-281"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">description</span>
+</span><span id="__span-1-282"><a href="#__codelineno-1-282" id="__codelineno-1-282" name="__codelineno-1-282"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">A human-readable description for a thing</span>
+</span><span id="__span-1-283"><a href="#__codelineno-1-283" id="__codelineno-1-283" name="__codelineno-1-283"></a><span class="w">    </span><span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://cmdoret.net/mtg_ontology/</span>
+</span><span id="__span-1-284"><a href="#__codelineno-1-284" id="__codelineno-1-284" name="__codelineno-1-284"></a><span class="w">    </span><span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+</span><span id="__span-1-285"><a href="#__codelineno-1-285" id="__codelineno-1-285" name="__codelineno-1-285"></a><span class="w">    </span><span class="nt">slot_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">schema:description</span>
+</span><span id="__span-1-286"><a href="#__codelineno-1-286" id="__codelineno-1-286" name="__codelineno-1-286"></a><span class="w">    </span><span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">description</span>
+</span><span id="__span-1-287"><a href="#__codelineno-1-287" id="__codelineno-1-287" name="__codelineno-1-287"></a><span class="w">    </span><span class="nt">owner</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Creature</span>
+</span><span id="__span-1-288"><a href="#__codelineno-1-288" id="__codelineno-1-288" name="__codelineno-1-288"></a><span class="w">    </span><span class="nt">domain_of</span><span class="p">:</span>
+</span><span id="__span-1-289"><a href="#__codelineno-1-289" id="__codelineno-1-289" name="__codelineno-1-289"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NamedThing</span>
+</span><span id="__span-1-290"><a href="#__codelineno-1-290" id="__codelineno-1-290" name="__codelineno-1-290"></a><span class="w">    </span><span class="nt">range</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">string</span>
+</span><span id="__span-1-291"><a href="#__codelineno-1-291" id="__codelineno-1-291" name="__codelineno-1-291"></a><span class="nt">class_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mtgo:Creature</span>
 </span></code></pre></div>
 </details>
 </article>
